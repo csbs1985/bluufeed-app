@@ -44,7 +44,6 @@ class UsersFirestore {
     return user.doc(_user['id']).set(_user);
   }
 
-  ////////////
   getTokenOwner(String _user) {
     return user.where('id', isEqualTo: _user).get();
   }

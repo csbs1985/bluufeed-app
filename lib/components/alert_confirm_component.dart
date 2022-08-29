@@ -18,6 +18,7 @@ class AlertConfirmComponent extends StatefulWidget {
         _btnSecondaryLabel = btnSecondaryLabel;
 
   final Function _callback;
+
   final String _title;
   final String _text;
   final String? _btnPrimaryLabel;

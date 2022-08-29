@@ -17,9 +17,9 @@ dependencies:
   flutter_launcher_icons: ^0.9.2 # flutter pub run flutter_launcher_icons:main
   flutter_keyboard_visibility: ^5.1.1
   path_provider: ^2.0.9
-  loadmore: ^2.0.1
   no_context_navigation: ^2.1.2
   package_info_plus: ^1.4.2
+  logger: ^1.1.0
 
   # layout
   flutter_svg: ^1.0.0
@@ -31,6 +31,7 @@ dependencies:
   styled_text: ^4.0.0+1
   flutter_styled_toast: ^2.0.0
   button3d: ^0.1.1
+  webview_flutter: ^3.0.4
 
   # animation
   page_transition: ^2.0.4
