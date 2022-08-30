@@ -9,7 +9,6 @@ import 'package:universe_history_app/core/route.dart';
 import 'package:universe_history_app/pages/splash_page.dart';
 import 'package:universe_history_app/services/local_notification_service.dart';
 import 'package:universe_history_app/services/push_notification_service.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 
 Future<void> main() async {
@@ -38,18 +37,16 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: UiColor.comp_1,
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.light,
-        systemNavigationBarColor: UiColor.comp_1,
-        systemNavigationBarIconBrightness: Brightness.light));
-
-    return MaterialApp(
-        navigatorKey: NavigationService.navigationKey,
-        debugShowCheckedModeBanner: false,
-        theme: UiTheme.theme1,
-        onGenerateRoute: Routes.generateRoute,
-        home: const SplashPage());
+    return ValueListenableBuilder(
+      valueListenable: UiTheme.tema,
+      builder: (BuildContext context, Brightness tema, __) {
+        return MaterialApp(
+            navigatorKey: NavigationService.navigationKey,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(brightness: tema),
+            onGenerateRoute: Routes.generateRoute,
+            home: const SplashPage());
+      },
+    );
   }
 }

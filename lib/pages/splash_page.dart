@@ -8,6 +8,7 @@ import 'package:universe_history_app/firestore/users_firestore.dart';
 import 'package:universe_history_app/models/user_model.dart';
 import 'package:universe_history_app/services/auth_service.dart';
 import 'package:universe_history_app/theme/ui_svg.dart';
+import 'package:universe_history_app/theme/ui_theme.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class SplashPage extends StatefulWidget {
   _SplashPageState createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   final UserClass _userClass = UserClass();
   final UsersFirestore usersFirestore = UsersFirestore();
 
@@ -48,6 +49,25 @@ class _SplashPageState extends State<SplashPage> {
       }
       Navigator.of(context).pushNamed("/home");
     });
+
+    setTheme();
+  }
+
+  void setTheme() {
+    WidgetsBinding.instance!.addObserver(this);
+    UiTheme.setTheme();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    UiTheme.setTheme();
+    super.didChangePlatformBrightness();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
   }
 
   @override
