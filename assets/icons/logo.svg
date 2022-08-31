@@ -1,19 +1,8 @@
-<svg id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24.194" height="20"
-    viewBox="0 0 24.194 20">
-    <defs>
-        <linearGradient id="linear-gradient" x1="0.156" y1="0.154" x2="0.641" y2="0.692"
-            gradientUnits="objectBoundingBox">
-            <stop offset="0.12" stop-color="#2988c9" />
-            <stop offset="0.29" stop-color="#2586c8" />
-            <stop offset="0.46" stop-color="#1983c5" />
-            <stop offset="0.63" stop-color="#057ec2" />
-            <stop offset="0.67" stop-color="#007dc1" />
-        </linearGradient>
-    </defs>
+<svg id="logo" xmlns="http://www.w3.org/2000/svg" width="24.194" height="20" viewBox="0 0 24.194 20">
     <path id="Caminho_43" data-name="Caminho 43"
         d="M10.553,1.806,12.1,3.354,4.8,10.66a2.027,2.027,0,0,1-2.707.144c-.068-.061-.134-.122-.2-.185l-.073-.073a6.18,6.18,0,0,1,8.74-8.74Z"
-        transform="translate(-0.005 0.005)" fill="url(#linear-gradient)" />
+        transform="translate(-0.005 0.005)" fill="#8f939d" />
     <path id="Caminho_44" data-name="Caminho 44"
         d="M19.61,1.813l-8.852,8.855a2.027,2.027,0,0,1-2.707.144,1.787,1.787,0,0,1-.161-.144l8.74,8.74a2.027,2.027,0,0,0,2.868,0l8.852-8.852a6.18,6.18,0,0,0-8.74-8.74Zm5.8,5.8a2.028,2.028,0,1,1,0-2.868A2.027,2.027,0,0,1,25.414,7.617Z"
-        transform="translate(-5.967 -0.003)" fill="#3e94d1" />
+        transform="translate(-5.967 -0.003)" fill="#e4e6eb" />
 </svg>
