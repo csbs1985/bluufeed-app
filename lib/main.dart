@@ -1,50 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:universe_history_app/pages/home_page.dart';
+import 'package:universe_history_app/theme/ui_theme.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addObserver(this);
+    UiTheme.setTheme();
+    super.initState();
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
 
-class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void didChangePlatformBrightness() {
+    UiTheme.setTheme();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
-      ),
+    return ValueListenableBuilder(
+      valueListenable: currentTheme,
+      builder: (BuildContext context, Brightness theme, _) {
+        bool isDark = currentTheme.value == Brightness.dark;
+
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: isDark ? UiTheme.themeDark : UiTheme.theme,
+          home: const HomePage(),
+        );
+      },
     );
   }
 }
