@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-    <path id="message-circle"
-        d="M19,10.556a7.449,7.449,0,0,1-.8,3.378,7.556,7.556,0,0,1-6.756,4.178,7.449,7.449,0,0,1-3.378-.8L3,19l1.689-5.067a7.449,7.449,0,0,1-.8-3.378A7.556,7.556,0,0,1,8.067,3.8,7.449,7.449,0,0,1,11.444,3h.444A7.538,7.538,0,0,1,19,10.111Z"
-        transform="translate(-2 -2)" fill="none" stroke="#e4e6eb" stroke-linecap="round" stroke-linejoin="round"
-        stroke-width="1" />
-</svg>

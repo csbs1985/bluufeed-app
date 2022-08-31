@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="14.8" viewBox="0 0 18 14.8">
-    <g id="notification" transform="translate(-1 -3)">
-        <path id="Caminho_7" data-name="Caminho 7" d="M18,12H13.2l-1.6,2.4H8.4L6.8,12H2" transform="translate(0 -1.6)"
-            fill="none" stroke="#e4e6eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-        <path id="Caminho_8" data-name="Caminho 8"
-            d="M4.76,4.888,2,10.4v4.8a1.6,1.6,0,0,0,1.6,1.6H16.4A1.6,1.6,0,0,0,18,15.2V10.4L15.24,4.888A1.6,1.6,0,0,0,13.808,4H6.192A1.6,1.6,0,0,0,4.76,4.888Z"
-            fill="none" stroke="#e4e6eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-    </g>
-</svg>
