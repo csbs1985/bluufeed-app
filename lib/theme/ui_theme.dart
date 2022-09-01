@@ -31,6 +31,7 @@ class UiTheme {
 
   static ThemeData theme = ThemeData(
     scaffoldBackgroundColor: UiColor.main,
+
     fontFamily: 'nunito',
     textTheme: const TextTheme(
       headline1: UiText.headline1,
@@ -45,6 +46,7 @@ class UiTheme {
 
   static ThemeData themeDark = ThemeData(
     scaffoldBackgroundColor: UiColor.mainDark,
+    backgroundColor: Colors.amber,
     fontFamily: 'nunito',
     textTheme: const TextTheme(
       headline1: UiTextDark.headline1,

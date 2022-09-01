@@ -31,6 +31,6 @@ class UiColor {
   static const Color buttonDisabledBorder = Color(0xFF212324);
 
   //  static const Color bottomNavigation = Color(0xFFf9fafc);
-
-  static const Color border = Color(0xFF1d9bf0);
+  static const Color border = Color(0xFFF9FAFC);
+  static const Color borderDark = Color(0xFF181A20);
 }

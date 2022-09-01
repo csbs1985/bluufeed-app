@@ -3,8 +3,8 @@ import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 
-class BorderWidget extends StatelessWidget {
-  const BorderWidget({Key? key}) : super(key: key);
+class SeparatorWidget extends StatelessWidget {
+  const SeparatorWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class BorderWidget extends StatelessWidget {
 
         return Container(
           color: isDark ? UiColor.borderDark : UiColor.border,
-          height: UiSize.border,
+          height: UiSize.separator,
         );
       },
     );
