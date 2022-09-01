@@ -2,6 +2,7 @@ class UiIcon {
   static const String create = 'assets/icons/create.svg';
   static const String logo = 'assets/icons/logo.svg';
   static const String logoActived = 'assets/icons/logo_actived.svg';
+  static const String identity = 'assets/icons/identity.svg';
   static const String notification = 'assets/icons/notification.svg';
   static const String notificationActived =
       'assets/icons/notification_actived.svg';
