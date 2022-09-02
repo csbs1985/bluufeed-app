@@ -38,18 +38,22 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
         statusBarColor: UiColor.comp_1,
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.light,
         systemNavigationBarColor: UiColor.comp_1,
-        systemNavigationBarIconBrightness: Brightness.light));
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+    );
 
     return MaterialApp(
-        navigatorKey: NavigationService.navigationKey,
-        debugShowCheckedModeBanner: false,
-        theme: UiTheme.theme1,
-        onGenerateRoute: Routes.generateRoute,
-        home: const SplashPage());
+      navigatorKey: NavigationService.navigationKey,
+      debugShowCheckedModeBanner: false,
+      theme: UiTheme.theme1,
+      onGenerateRoute: Routes.generateRoute,
+      home: const SplashPage(),
+    );
   }
 }
