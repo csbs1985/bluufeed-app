@@ -53,59 +53,51 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
       builder: (BuildContext context, Brightness theme, _) {
         bool isDark = currentTheme.value == Brightness.dark;
 
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(
-            UiPadding.large,
-            UiPadding.medium,
-            UiPadding.large,
-            0,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SubtitleResumeWidget(
-                title: 'Assunto',
-                resume: 'Selecione ao menos uma categoria/tema.',
-              ),
-              const SizedBox(height: UiPadding.medium),
-              Wrap(
-                children: [
-                  for (var item in allCategories)
-                    if (item.isShowInput! && !item.isDisabled!)
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(
-                          0,
-                          0,
-                          UiPadding.medium,
-                          UiPadding.medium,
-                        ),
-                        child: SizedBox(
-                          height: 36,
-                          child: TextButton(
-                            onPressed: () => _setSelected(item.id!),
-                            child: Text(
-                              item.label!.toLowerCase(),
-                              style: _getSelected(item.id!)
-                                  ? UiText.button
-                                  : Theme.of(context).textTheme.headline2,
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                _getSelected(item.id!)
-                                    ? UiColor.tagActived
-                                    : isDark
-                                        ? UiColor.tagDark
-                                        : UiColor.tag,
-                              ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SubtitleResumeWidget(
+              title: 'Assunto',
+              resume: 'Selecione ao menos uma categoria/tema.',
+            ),
+            const SizedBox(height: UiPadding.medium),
+            Wrap(
+              children: [
+                for (var item in allCategories)
+                  if (item.isShowInput! && !item.isDisabled!)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(
+                        0,
+                        0,
+                        UiPadding.medium,
+                        UiPadding.medium,
+                      ),
+                      child: SizedBox(
+                        height: 36,
+                        child: TextButton(
+                          onPressed: () => _setSelected(item.id!),
+                          child: Text(
+                            item.label!.toLowerCase(),
+                            style: _getSelected(item.id!)
+                                ? UiText.button
+                                : Theme.of(context).textTheme.headline2,
+                          ),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              _getSelected(item.id!)
+                                  ? UiColor.actived
+                                  : isDark
+                                      ? UiColor.inativedDark
+                                      : UiColor.inatived,
                             ),
                           ),
                         ),
                       ),
-                ],
-              ),
-            ],
-          ),
+                    ),
+              ],
+            ),
+          ],
         );
       },
     );

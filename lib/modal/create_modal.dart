@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:universe_history_app/model/history_model.dart';
+import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/select_category_widget.dart';
+import 'package:universe_history_app/widget/select_toggle_widget.dart';
 
 class CreateModal extends StatefulWidget {
   const CreateModal({Key? key}) : super(key: key);
@@ -87,16 +89,32 @@ class _CreateModalState extends State<CreateModal> {
         callback: (value) => {},
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SelectCategoriesWidget(
-              selected: currentHistory.value.isNotEmpty
-                  ? currentHistory.value.first.categories
-                  : [],
-              callback: (value) => _setCategories(value),
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(
+            UiPadding.large,
+            UiPadding.medium,
+            UiPadding.large,
+            0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SelectToggleWidget(
+                title: 'Autorizado',
+                resume:
+                    'Ligado para marcar história como de terceiro com autorização para publicar. ',
+                value: _isAuthorized,
+                callback: (value) => _setAuthorized(),
+              ),
+              const SizedBox(height: UiPadding.xLarge),
+              SelectCategoriesWidget(
+                selected: currentHistory.value.isNotEmpty
+                    ? currentHistory.value.first.categories
+                    : [],
+                callback: (value) => _setCategories(value),
+              )
+            ],
+          ),
         ),
       ),
     );
