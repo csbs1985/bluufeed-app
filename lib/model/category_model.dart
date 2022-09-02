@@ -48,6 +48,13 @@ class CategoryModel {
       isDisabled: false,
     ),
     CategoryModel(
+      id: CategoriesEnum.ART.name,
+      label: 'arte',
+      isShowMenu: true,
+      isShowInput: true,
+      isDisabled: false,
+    ),
+    CategoryModel(
       id: CategoriesEnum.ASTROLOY.name,
       label: 'astrologia',
       isShowMenu: true,
@@ -297,6 +304,7 @@ class CategoriesClass {
 
 enum CategoriesEnum {
   ALL,
+  ART,
   ANIMALS,
   ASTROLOY,
   ASTRONOMY,

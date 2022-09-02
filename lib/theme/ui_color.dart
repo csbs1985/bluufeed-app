@@ -7,8 +7,6 @@ class UiColor {
   static const Color text = Color(0xFF8F939D);
   static const Color textDark = Color(0xFFffffff);
 
-  static const Color textButtonPrimary = Color(0xFFffffff);
-
   static const Color back = Color(0xFFf9fafc);
   static const Color backDark = Color(0xFF181A20);
 
@@ -19,18 +17,23 @@ class UiColor {
   static const Color bottomNavigationDark = Color(0xFF1F222A);
 
   static const Color button = UiColor.primary;
-  static const Color buttonLabel = Color(0xFF18191A);
-  static const Color buttonBorder = Color(0xFF5873a8);
+  static const Color buttonBorder = UiColor.secondary;
+  static const Color buttonText = Color(0xFFffffff);
 
-  static const Color buttonSecond = Color(0xFF2a2d2e);
-  static const Color buttonSecondLabel = UiColor.primary;
-  static const Color buttonSecondBorder = Color(0xFF212324);
+  static const Color buttonSecondary = Color(0xFF2a2d2e);
+  static const Color buttonSecondaryBorder = Color(0xFF212324);
+  static const Color buttonSecondarytext = Color(0xFF1a8bd8);
 
   static const Color buttonDisabled = Color(0xFF2a2d2e);
-  static const Color buttonDisabledLabel = UiColor.primary;
   static const Color buttonDisabledBorder = Color(0xFF212324);
+  static const Color buttonDisabledText = Color(0xFF2a2d2e);
 
-  //  static const Color bottomNavigation = Color(0xFFf9fafc);
   static const Color border = Color(0xFFF9FAFC);
   static const Color borderDark = Color(0xFF181A20);
+
+  static const Color overley = Color(0x901d9bf0);
+
+  static const Color tag = Color(0xFFE4E6EB);
+  static const Color tagDark = Color(0xFF262A34);
+  static const Color tagActived = Color(0xFF1d9bf0);
 }

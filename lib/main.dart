@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/pages/home_page.dart';
+import 'package:flutter/services.dart';
+import 'package:universe_history_app/page/home_page.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   runApp(const MyApp());
 }
 
@@ -41,8 +47,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: isDark ? UiTheme.themeDark : UiTheme.theme,
           home: const HomePage(),
+          theme: isDark ? UiTheme.themeDark : UiTheme.theme,
         );
       },
     );

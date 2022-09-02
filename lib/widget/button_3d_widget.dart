@@ -26,11 +26,10 @@ class Button3dWidget extends StatefulWidget {
 class _Button3dWidgetState extends State<Button3dWidget> {
   Color _backColor = UiColor.primary;
   Color _borderColor = UiColor.secondary;
-  TextStyle _styleText = UiText.button;
 
-  final double _borderSize = 4;
+  TextStyle _textStyle = UiText.button;
 
-  late double _position = _borderSize;
+  late double _position = UiSize.borderButton;
 
   @override
   initState() {
@@ -38,36 +37,36 @@ class _Button3dWidgetState extends State<Button3dWidget> {
     super.initState();
   }
 
-  _getStyle() {
+  void _getStyle() {
     if (widget._style == ButtonStyleEnum.PRIMARY.name) {
-      _backColor = UiColor.primary;
-      _borderColor = UiColor.secondary;
-      _styleText = UiText.button;
+      _backColor = UiColor.button;
+      _borderColor = UiColor.buttonBorder;
+      _textStyle = UiText.button;
     }
-    if (widget._style == ButtonStyleEnum.SECOND.name) {
-      _backColor = UiColor.buttonSecond;
-      _borderColor = UiColor.buttonSecondBorder;
-      _styleText = UiText.buttonSecond;
+    if (widget._style == ButtonStyleEnum.SECONDARY.name) {
+      _backColor = UiColor.buttonSecondary;
+      _borderColor = UiColor.buttonSecondaryBorder;
+      _textStyle = UiText.buttonSecondary;
     }
     if (widget._style == ButtonStyleEnum.DISABLED.name) {
       _backColor = UiColor.buttonDisabled;
       _borderColor = UiColor.buttonDisabledBorder;
-      _styleText = UiText.button;
+      _textStyle = UiText.buttonDisabled;
     }
   }
 
   double _getWidth() {
     if (widget._size == ButtonSizeEnum.MEDIUM.name) return 100;
-    if (widget._size == ButtonSizeEnum.LARGE.name) {
+    if (widget._size == ButtonSizeEnum.LARGE.name)
       return MediaQuery.of(context).size.width - UiSize.widthFullLessPadding;
-    }
     return 90;
   }
 
   double _getHeight() {
-    if (widget._size == ButtonSizeEnum.MEDIUM.name) return 42 - _borderSize;
-    if (widget._size == ButtonSizeEnum.LARGE.name) return 48 - _borderSize;
-    return 32 - _borderSize;
+    if (widget._size == ButtonSizeEnum.MEDIUM.name ||
+        widget._size == ButtonSizeEnum.LARGE.name)
+      return 42 - UiSize.borderButton;
+    return 32 - UiSize.borderButton;
   }
 
   @override
@@ -75,30 +74,43 @@ class _Button3dWidgetState extends State<Button3dWidget> {
     return GestureDetector(
       child: SizedBox(
         width: _getWidth(),
-        height: _getHeight() + _borderSize,
+        height: _getHeight() + UiSize.borderButton,
         child: Stack(
           children: [
             Positioned(
-                bottom: 0,
-                child: Container(
-                    width: _getWidth(),
-                    height: _getHeight(),
-                    decoration: BoxDecoration(
-                        color: _borderColor,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8))))),
+              bottom: 0,
+              child: Container(
+                width: _getWidth(),
+                height: _getHeight(),
+                decoration: BoxDecoration(
+                  color: _borderColor,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+              ),
+            ),
             AnimatedPositioned(
               curve: Curves.easeIn,
               bottom: _position,
               duration: const Duration(milliseconds: 10),
               child: Container(
-                  width: _getWidth(),
-                  height: _getHeight(),
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  decoration: BoxDecoration(
-                      color: _backColor,
-                      borderRadius: const BorderRadius.all(Radius.circular(8))),
-                  child: Center(child: Text(widget._label, style: _styleText))),
+                width: _getWidth(),
+                height: _getHeight(),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                  color: _backColor,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    widget._label,
+                    style: _textStyle,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -106,7 +118,7 @@ class _Button3dWidgetState extends State<Button3dWidget> {
       onTapUp: (_) {
         if (widget._style != ButtonStyleEnum.DISABLED.name) {
           setState(() {
-            _position = _borderSize;
+            _position = UiSize.borderButton;
             widget._callback(true);
           });
         }
@@ -121,7 +133,7 @@ class _Button3dWidgetState extends State<Button3dWidget> {
       onTapCancel: () {
         if (widget._style != ButtonStyleEnum.DISABLED.name) {
           setState(() {
-            _position = _borderSize;
+            _position = UiSize.borderButton;
           });
         }
       },
@@ -129,5 +141,5 @@ class _Button3dWidgetState extends State<Button3dWidget> {
   }
 }
 
-enum ButtonStyleEnum { DISABLED, SECOND, PRIMARY }
-enum ButtonSizeEnum { LARGE, SMALL, MEDIUM }
+enum ButtonStyleEnum { DISABLED, SECONDARY, PRIMARY }
+enum ButtonSizeEnum { LARGE, MEDIUM, SMALL }

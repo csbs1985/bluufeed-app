@@ -31,11 +31,14 @@ class UiTheme {
 
   static ThemeData theme = ThemeData(
     scaffoldBackgroundColor: UiColor.main,
-
     fontFamily: 'nunito',
     textTheme: const TextTheme(
-      headline1: UiText.headline1,
-      headline2: UiText.headline2,
+      headline1: UiTextLight.headline1,
+      headline2: UiTextLight.headline2,
+      headline3: UiTextLight.headline3,
+      headline4: UiTextLight.headline4,
+      headline5: UiTextLight.headline5,
+      headline6: UiTextLight.headline6,
     ),
     // appBarTheme:
     //     const AppBarTheme(backgroundColor: UiColor.primary, elevation: 0),
@@ -46,11 +49,14 @@ class UiTheme {
 
   static ThemeData themeDark = ThemeData(
     scaffoldBackgroundColor: UiColor.mainDark,
-    backgroundColor: Colors.amber,
     fontFamily: 'nunito',
     textTheme: const TextTheme(
       headline1: UiTextDark.headline1,
       headline2: UiTextDark.headline2,
+      headline3: UiTextDark.headline3,
+      headline4: UiTextDark.headline4,
+      headline5: UiTextDark.headline5,
+      headline6: UiTextDark.headline6,
     ),
   );
 }
