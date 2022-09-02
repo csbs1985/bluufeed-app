@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/widget/button_publish_widget.dart';
+import 'package:universe_history_app/widget/button_3d_widget.dart';
 
 class AppbarWidget extends StatefulWidget with PreferredSizeWidget {
   const AppbarWidget({
@@ -55,7 +55,10 @@ class _AppbarWidgetState extends State<AppbarWidget> {
               Center(
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  child: ButtonPublishWidget(
+                  child: Button3dWidget(
+                    label: 'publicar',
+                    style: ButtonStyleEnum.PRIMARY.name,
+                    size: ButtonSizeEnum.SMALL.name,
                     callback: (value) => _onPressed(context),
                   ),
                 ),

@@ -21,7 +21,7 @@ class UiColor {
 
   static const Color buttonSecondary = Color(0xFF2a2d2e);
   static const Color buttonSecondaryBorder = Color(0xFF212324);
-  static const Color buttonSecondarytext = Color(0xFF1a8bd8);
+  static const Color buttonSecondarytext = UiColor.secondary;
 
   static const Color buttonDisabled = Color(0xFF2a2d2e);
   static const Color buttonDisabledBorder = Color(0xFF212324);
@@ -37,6 +37,12 @@ class UiColor {
 
   static const Color subtitle = UiColor.primary;
 
+  static const Color success = Color(0xFFA1D151);
+
   static const Color text = Color(0xFF8F939D);
   static const Color textDark = Color(0xFFffffff);
+
+  static const Color toast = Color(0xFF2a2d2e);
+
+  static const Color warning = Color(0xFFE95750);
 }

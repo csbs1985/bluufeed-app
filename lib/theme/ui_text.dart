@@ -25,6 +25,12 @@ class UiText {
     fontWeight: FontWeight.bold,
     color: UiColor.subtitle,
   );
+
+  static const TextStyle toast = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: UiColor.toast,
+  );
 }
 
 class UiTextDark {

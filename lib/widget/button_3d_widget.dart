@@ -59,7 +59,7 @@ class _Button3dWidgetState extends State<Button3dWidget> {
     if (widget._size == ButtonSizeEnum.MEDIUM.name) return 100;
     if (widget._size == ButtonSizeEnum.LARGE.name)
       return MediaQuery.of(context).size.width - UiSize.widthFullLessPadding;
-    return 90;
+    return 70;
   }
 
   double _getHeight() {
