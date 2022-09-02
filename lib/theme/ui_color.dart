@@ -33,6 +33,8 @@ class UiColor {
 
   static const Color overley = Color(0x901d9bf0);
 
+  static const Color subtitle = UiColor.primary;
+
   static const Color tag = Color(0xFFE4E6EB);
   static const Color tagDark = Color(0xFF262A34);
   static const Color tagActived = Color(0xFF1d9bf0);

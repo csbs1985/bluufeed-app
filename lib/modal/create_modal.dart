@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/model/category_model.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/select_category_widget.dart';
@@ -18,7 +17,6 @@ class _CreateModalState extends State<CreateModal> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   List<String> _categories = [];
-  List<CategoryModel> allCategories = CategoryModel.allCategories;
 
   bool isEdit = false;
   bool _isSigned = true;
@@ -93,9 +91,6 @@ class _CreateModalState extends State<CreateModal> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SelectCategoriesWidget(
-              title: 'Assunto',
-              resume: 'Selecione ao menos uma categoria/tema.',
-              content: allCategories,
               selected: currentHistory.value.isNotEmpty
                   ? currentHistory.value.first.categories
                   : [],

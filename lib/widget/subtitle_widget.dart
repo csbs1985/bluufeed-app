@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:universe_history_app/theme/ui_text.dart';
 
-class ResumeWidget extends StatelessWidget {
-  const ResumeWidget({
+class SubtitleWidget extends StatelessWidget {
+  const SubtitleWidget({
     required String resume,
   }) : _resume = resume;
 
@@ -13,7 +14,7 @@ class ResumeWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Text(
         _resume,
-        style: Theme.of(context).textTheme.headline2,
+        style: UiText.subtitle,
       ),
     );
   }

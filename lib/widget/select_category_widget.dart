@@ -2,26 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:universe_history_app/model/category_model.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/theme/ui_text.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/widget/subtitle_resume_widget.dart';
 
 class SelectCategoriesWidget extends StatefulWidget {
   final Function? _callback;
-  final List<CategoryModel> _content;
+
   final List<String> _selected;
-  final String _resume;
-  final String _title;
 
   const SelectCategoriesWidget({
     required Function? callback,
-    required List<CategoryModel> content,
-    required String title,
-    required String resume,
     required List<String> selected,
   })  : _callback = callback,
-        _content = content,
-        _resume = resume,
-        _title = title,
         _selected = selected;
 
   @override
@@ -29,6 +22,7 @@ class SelectCategoriesWidget extends StatefulWidget {
 }
 
 class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
+  List<CategoryModel> allCategories = CategoryModel.allCategories;
   List<String> listSelect = [];
 
   @override
@@ -50,6 +44,8 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
     return listSelect.contains(id) ? true : false;
   }
 
+  getTagStyle() {}
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -57,59 +53,58 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
       builder: (BuildContext context, Brightness theme, _) {
         bool isDark = currentTheme.value == Brightness.dark;
 
-        return Container(
-          // color: Colors.amber,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-              UiPadding.large,
-              UiPadding.medium,
-              UiPadding.large,
-              0,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SubtitleResumeWidget(
-                  title: widget._title,
-                  resume: widget._resume,
-                ),
-                const SizedBox(height: UiPadding.medium),
-                Wrap(
-                  children: [
-                    for (var item in widget._content)
-                      if (item.isShowInput! && !item.isDisabled!)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                            0,
-                            0,
-                            UiPadding.medium,
-                            UiPadding.medium,
-                          ),
-                          child: SizedBox(
-                            height: 36,
-                            child: TextButton(
-                              onPressed: () => _setSelected(item.id!),
-                              child: Text(
-                                item.label!.toLowerCase(),
-                                style: _getSelected(item.id!)
-                                    ? Theme.of(context).textTheme.headline4
-                                    : Theme.of(context).textTheme.headline2,
-                              ),
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  _getSelected(item.id!)
-                                      ? UiColor.tagActived
-                                      : UiColor.tag,
-                                ),
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(
+            UiPadding.large,
+            UiPadding.medium,
+            UiPadding.large,
+            0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SubtitleResumeWidget(
+                title: 'Assunto',
+                resume: 'Selecione ao menos uma categoria/tema.',
+              ),
+              const SizedBox(height: UiPadding.medium),
+              Wrap(
+                children: [
+                  for (var item in allCategories)
+                    if (item.isShowInput! && !item.isDisabled!)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          0,
+                          0,
+                          UiPadding.medium,
+                          UiPadding.medium,
+                        ),
+                        child: SizedBox(
+                          height: 36,
+                          child: TextButton(
+                            onPressed: () => _setSelected(item.id!),
+                            child: Text(
+                              item.label!.toLowerCase(),
+                              style: _getSelected(item.id!)
+                                  ? UiText.button
+                                  : Theme.of(context).textTheme.headline2,
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                _getSelected(item.id!)
+                                    ? UiColor.tagActived
+                                    : isDark
+                                        ? UiColor.tagDark
+                                        : UiColor.tag,
                               ),
                             ),
                           ),
                         ),
-                  ],
-                ),
-              ],
-            ),
+                      ),
+                ],
+              ),
+            ],
           ),
         );
       },
