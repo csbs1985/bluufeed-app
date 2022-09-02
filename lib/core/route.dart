@@ -78,7 +78,6 @@ class Routes {
       //     type: PageTransitionType.rightToLeft,
       //     settings: settings,
       //   );
-      case '/':
       case '/home':
       default:
         return PageTransition(

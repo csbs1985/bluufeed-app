@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:universe_history_app/modal/create_modal.dart';
+import 'package:universe_history_app/modal/login_modal.dart';
 import 'package:universe_history_app/model/history_model.dart';
+import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
@@ -26,8 +28,8 @@ class _HomeHeaderWidgetState extends State<HomeHeaderWidget> {
       context: context,
       barrierColor: UiColor.overley,
       duration: const Duration(milliseconds: 300),
-      builder: (context) => const CreateModal(),
-      // currentUser.value.isEmpty ? const LoginModal(): const CreateHistoryModal(),
+      builder: (context) =>
+          currentUser.value.isEmpty ? const LoginWidget() : const CreateModal(),
     );
   }
 

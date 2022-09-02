@@ -123,6 +123,11 @@ class UserClass {
     }
   }
 
+  Future<String> readUser() async {
+    final file = await getFileUser();
+    return file.readAsString();
+  }
+
   Future<File> getFileUser() async {
     final directory = await getApplicationDocumentsDirectory();
     return File('${directory.path}/user.json');

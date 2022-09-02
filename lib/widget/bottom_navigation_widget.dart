@@ -13,8 +13,15 @@ class BottomNavigationWidget extends StatefulWidget {
 }
 
 class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
-  void changeIcon(String page) {
+  // final NavigationService navigationService = NavigationService();
+
+  void selectItem(String page) {
     currentPage.value = page;
+
+    // if(MnavigatorKey.currentState.pushNamed(routeName);)
+    // navigationService.navigatorKey.currentState;
+
+    Navigator.of(context).pushNamed('/');
   }
 
   @override
@@ -34,7 +41,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
                   currentPage == 'home' ? UiIcon.logoActived : UiIcon.logo,
                 ),
                 onPressed: () {
-                  changeIcon('home');
+                  selectItem('home');
                 },
               ),
               IconButton(
@@ -48,7 +55,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
                       : UiIcon.notification,
                 ),
                 onPressed: () {
-                  changeIcon('notification');
+                  selectItem('notification');
                 },
               ),
               IconButton(
@@ -58,7 +65,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
                       : UiIcon.options,
                 ),
                 onPressed: () {
-                  changeIcon('settings');
+                  selectItem('settings');
                 },
               ),
             ],
