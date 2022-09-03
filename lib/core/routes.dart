@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:universe_history_app/model/page_model.dart';
+import 'package:universe_history_app/page/create_page.dart';
 import 'package:universe_history_app/page/home_page.dart';
 import 'package:universe_history_app/page/notification_page.dart';
 import 'package:universe_history_app/page/settings_page.dart';
@@ -9,6 +10,10 @@ final routes = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: PageEnum.CREATE.value,
+      builder: (context, state) => const CreatePage(),
     ),
     GoRoute(
       path: PageEnum.HOME.value,

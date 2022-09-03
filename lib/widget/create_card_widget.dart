@@ -6,14 +6,14 @@ import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
 import 'package:universe_history_app/widget/title_widget.dart';
 
-class HomeHeaderWidget extends StatefulWidget {
-  const HomeHeaderWidget({Key? key}) : super(key: key);
+class CreateCardWidget extends StatefulWidget {
+  const CreateCardWidget({Key? key}) : super(key: key);
 
   @override
-  State<HomeHeaderWidget> createState() => _HomeHeaderWidgetState();
+  State<CreateCardWidget> createState() => _CreateCardWidgetState();
 }
 
-class _HomeHeaderWidgetState extends State<HomeHeaderWidget> {
+class _CreateCardWidgetState extends State<CreateCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
