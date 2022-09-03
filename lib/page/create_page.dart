@@ -4,9 +4,9 @@ import 'package:universe_history_app/firestore/histories_firestore.dart';
 import 'package:universe_history_app/firestore/users_firestore.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/services/auth_service.dart';
+import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/utils/activity_util.dart';
+import 'package:universe_history_app/util/activity_util.dart';
 import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/loader_widget.dart';
 import 'package:universe_history_app/widget/select_category_widget.dart';
@@ -14,14 +14,14 @@ import 'package:universe_history_app/widget/select_toggle_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 import 'package:uuid/uuid.dart';
 
-class CreateModal extends StatefulWidget {
-  const CreateModal({Key? key}) : super(key: key);
+class CreatePage extends StatefulWidget {
+  const CreatePage({Key? key}) : super(key: key);
 
   @override
-  State<CreateModal> createState() => _CreateModalState();
+  State<CreatePage> createState() => _CreatePageState();
 }
 
-class _CreateModalState extends State<CreateModal> {
+class _CreatePageState extends State<CreatePage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController textController = TextEditingController();
 
@@ -147,7 +147,7 @@ class _CreateModalState extends State<CreateModal> {
       _pathQtyHistoryUser();
       Navigator.of(context).pop();
     } on AuthException catch (error) {
-      debugPrint('ERROR => postNewHistory:' + error.toString());
+      debugPrint('ERROR => postNewHistory:$error');
       toast.toast(context, ToastEnum.WARNING.name,
           'Erro ao publicar história, tente novamente mais tarde.');
     }
@@ -174,7 +174,7 @@ class _CreateModalState extends State<CreateModal> {
               : 'Sua história foi publicada.');
       Navigator.of(context).pop();
     } on AuthException catch (error) {
-      debugPrint('ERROR => pathQtyHistoryUser:' + error.toString());
+      debugPrint('ERROR => pathQtyHistoryUser:$error');
     }
   }
 

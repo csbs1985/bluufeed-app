@@ -1,10 +1,30 @@
-import 'package:flutter/cupertino.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:go_router/go_router.dart';
+import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/page/home_page.dart';
+import 'package:universe_history_app/page/notification_page.dart';
+import 'package:universe_history_app/page/settings_page.dart';
 
-class Routes {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
+final routes = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: PageEnum.HOME.value,
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: PageEnum.NOTIFICATION.value,
+      builder: (context, state) => const SettingsPage(),
+    ),
+    GoRoute(
+      path: PageEnum.SETTINGS.value,
+      builder: (context, state) => const NotificationPage(),
+    )
+  ],
+);
+
       // case '/about':
       //   return PageTransition(
       //     child: const AboutPage(),
@@ -48,12 +68,7 @@ class Routes {
       //     type: PageTransitionType.rightToLeft,
       //     settings: settings,
       //   );
-      // case '/notification':
-      //   return PageTransition(
-      //     child: const NotificationPage(),
-      //     type: PageTransitionType.rightToLeft,
-      //     settings: settings,
-      //   );
+
       // case '/questions':
       //   return PageTransition(
       //     child: CommonQuestionsPage(),
@@ -66,27 +81,10 @@ class Routes {
       //     type: PageTransitionType.rightToLeft,
       //     settings: settings,
       //   );
-      // case '/settings':
-      //   return PageTransition(
-      //     child: const SettingsPage(),
-      //     type: PageTransitionType.rightToLeft,
-      //     settings: settings,
-      //   );
+
       // case '/terms':
       //   return PageTransition(
       //     child: const TermsPage(),
       //     type: PageTransitionType.rightToLeft,
       //     settings: settings,
       //   );
-      case '/home':
-      default:
-        return PageTransition(
-          child: const HomePage(),
-          type: PageTransitionType.fade,
-          settings: settings,
-        );
-    }
-  }
-
-  static GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
-}

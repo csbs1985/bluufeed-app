@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
 
-ValueNotifier<Brightness> currentTheme = ValueNotifier(Brightness.light);
+ValueNotifier<Brightness> currentTheme = ValueNotifier(
+    WidgetsBinding.instance.platformDispatcher.platformBrightness);
 
 class UiTheme {
   static setTheme() {
     currentTheme.value =
-        WidgetsBinding.instance!.platformDispatcher.platformBrightness;
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
     changeTheme();
   }
 
@@ -32,6 +33,8 @@ class UiTheme {
   static ThemeData theme = ThemeData(
     scaffoldBackgroundColor: UiColor.main,
     fontFamily: 'nunito',
+    bottomNavigationBarTheme:
+        const BottomNavigationBarThemeData(backgroundColor: UiColor.main),
     textTheme: const TextTheme(
       headline1: UiTextLight.headline1,
       headline2: UiTextLight.headline2,
@@ -50,6 +53,8 @@ class UiTheme {
   static ThemeData themeDark = ThemeData(
     scaffoldBackgroundColor: UiColor.mainDark,
     fontFamily: 'nunito',
+    bottomNavigationBarTheme:
+        const BottomNavigationBarThemeData(backgroundColor: UiColor.mainDark),
     textTheme: const TextTheme(
       headline1: UiTextDark.headline1,
       headline2: UiTextDark.headline2,

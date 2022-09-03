@@ -4,7 +4,7 @@ import 'package:universe_history_app/firestore/histories_firestore.dart';
 import 'package:universe_history_app/firestore/justifications_Firestore.dart';
 import 'package:universe_history_app/core/variables.dart';
 import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/services/auth_service.dart';
+import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/widget/loader_widget.dart';
 import 'package:uuid/uuid.dart';
 
@@ -18,7 +18,7 @@ class DeleteAccountUtil {
 
   late Map<String, dynamic> _form;
 
-  Future<void> deleteAccount(BuildContext context, _justifySelected) async {
+  Future<void> deleteAccount(BuildContext context, justifySelected) async {
     Navigator.of(context).pop();
 
     currentDialog.value = 'Iniciando...';
@@ -30,7 +30,7 @@ class DeleteAccountUtil {
           return const LoaderWidget();
         });
 
-    if (_justifySelected == null)
+    if (justifySelected == null)
       _deleteAllHistory(context);
     else
       _form = {
@@ -38,8 +38,8 @@ class DeleteAccountUtil {
         'date': DateTime.now().toString(),
         'userId': currentUser.value.first.id,
         'userName': currentUser.value.first.name,
-        'idJustify': _justifySelected!.id,
-        'titleJustify': _justifySelected!.title
+        'idJustify': justifySelected!.id,
+        'titleJustify': justifySelected!.title
       };
 
     try {
@@ -47,7 +47,7 @@ class DeleteAccountUtil {
       currentDialog.value = 'Justificando...';
       _deleteAllHistory(context);
     } on AuthException catch (error) {
-      debugPrint('ERROR => _deleteAllHistory: ' + error.toString());
+      debugPrint('ERROR => _deleteAllHistory: $error');
     }
   }
 

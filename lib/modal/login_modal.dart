@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key}) : super(key: key);
+class LoginModal extends StatefulWidget {
+  const LoginModal({Key? key}) : super(key: key);
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  State<LoginModal> createState() => _LoginModalState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginModalState extends State<LoginModal> {
   @override
   Widget build(BuildContext context) {
     return Container();

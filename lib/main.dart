@@ -2,12 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:no_context_navigation/no_context_navigation.dart';
-import 'package:universe_history_app/core/route.dart';
+import 'package:universe_history_app/core/routes.dart';
 import 'package:universe_history_app/firestore/users_firestore.dart';
 import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/page/home_page.dart';
-import 'package:universe_history_app/services/auth_service.dart';
+import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 
 Future<void> main() async {
@@ -35,7 +33,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     UiTheme.setTheme;
     identify;
     super.initState;
@@ -43,7 +41,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -57,9 +55,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       if (user != null) {
         try {
           await _userClass.readUser();
-          await _usersFirestore
-              .getUserEmail(user.email)
-              .then((result) => _userClass.add({
+          await _usersFirestore.getUserEmail(user.email).then(
+                (result) => _userClass.add(
+                  {
                     'id': result.docs[0]['id'],
                     'date': result.docs[0]['date'],
                     'name': result.docs[0]['name'],
@@ -70,9 +68,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                     'isNotification': result.docs[0]['isNotification'],
                     'qtyHistory': result.docs[0]['qtyHistory'],
                     'qtyComment': result.docs[0]['qtyComment'],
-                  }));
+                  },
+                ),
+              );
         } on AuthException catch (error) {
-          debugPrint('ERROR => getUserEmail: ' + error.toString());
+          debugPrint('ERROR => getUserEmail: $error');
         }
       }
     });
@@ -85,11 +85,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       builder: (BuildContext context, Brightness theme, _) {
         bool isDark = currentTheme.value == Brightness.dark;
 
-        return MaterialApp(
+        return MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          home: const HomePage(),
-          navigatorKey: NavigationService.navigationKey,
-          onGenerateRoute: Routes.generateRoute,
+          routeInformationParser: routes.routeInformationParser,
+          routeInformationProvider: routes.routeInformationProvider,
+          routerDelegate: routes.routerDelegate,
           theme: isDark ? UiTheme.themeDark : UiTheme.theme,
         );
       },

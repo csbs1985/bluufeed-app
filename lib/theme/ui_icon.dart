@@ -1,5 +1,6 @@
 class UiIcon {
   static const String create = 'assets/icons/create.svg';
+  static const String createActived = 'assets/icons/create_actived.svg';
   static const String closed = 'assets/icons/closed.svg';
   static const String logo = 'assets/icons/logo.svg';
   static const String logoActived = 'assets/icons/logo_actived.svg';

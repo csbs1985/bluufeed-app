@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
-import 'package:universe_history_app/services/auth_service.dart';
+import 'package:universe_history_app/service/auth_service.dart';
 
 ValueNotifier<List<HistoryModel>> currentHistory =
     ValueNotifier<List<HistoryModel>>([]);

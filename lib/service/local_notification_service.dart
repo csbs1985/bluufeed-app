@@ -3,7 +3,7 @@ import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:universe_history_app/model/history_model.dart';
 
 class LocalNotificationService {
-  final HistoryClass historyClass = HistoryClass();
+  late HistoryClass historyClass = HistoryClass();
 
   late AndroidNotificationDetails androidDetails;
   late FlutterLocalNotificationsPlugin localNotificationsPlugin;

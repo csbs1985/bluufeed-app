@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:universe_history_app/modal/create_modal.dart';
-import 'package:universe_history_app/modal/login_modal.dart';
-import 'package:universe_history_app/model/history_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
+import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
@@ -18,19 +13,8 @@ class HomeHeaderWidget extends StatefulWidget {
 }
 
 class _HomeHeaderWidgetState extends State<HomeHeaderWidget> {
-  void _pressedButton(BuildContext context) {
-    currentHistory.value = [];
-
-    // if (currentUser.value.isEmpty) loginClass.clean();
-
-    showCupertinoModalBottomSheet(
-      expand: true,
-      context: context,
-      barrierColor: UiColor.overley,
-      duration: const Duration(milliseconds: 300),
-      builder: (context) =>
-          currentUser.value.isEmpty ? const LoginWidget() : const CreateModal(),
-    );
+  void onPressed(BuildContext context) {
+    Navigator.of(context).pushNamed(PageEnum.CREATE.value);
   }
 
   @override
@@ -50,7 +34,7 @@ class _HomeHeaderWidgetState extends State<HomeHeaderWidget> {
             label: 'escrever',
             style: ButtonStyleEnum.PRIMARY.name,
             size: ButtonSizeEnum.MEDIUM.name,
-            callback: (value) => _pressedButton(context),
+            callback: (value) => onPressed(context),
           )
         ],
       ),

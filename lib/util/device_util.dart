@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:universe_history_app/utils/capitalize_util.dart';
+import 'package:universe_history_app/util/capitalize_util.dart';
 
 ValueNotifier currentDevice = ValueNotifier(null);
 

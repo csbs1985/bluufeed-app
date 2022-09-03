@@ -10,9 +10,9 @@ class AuthException implements Exception {
 }
 
 class AuthService extends ChangeNotifier {
-  final TokenFirestore tokenFirestore = TokenFirestore();
-  final UserClass userClass = UserClass();
-  final UsersFirestore usersFirestore = UsersFirestore();
+  late TokenFirestore tokenFirestore = TokenFirestore();
+  late UserClass userClass = UserClass();
+  late UsersFirestore usersFirestore = UsersFirestore();
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -58,18 +58,18 @@ class AuthService extends ChangeNotifier {
     await getToken();
     await usersFirestore
         .getUserEmail(auth.currentUser!.email!)
-        .then((_user) async => {
+        .then((user) async => {
               userClass.add({
-                'id': _user.docs[0]['id'],
-                'date': _user.docs[0]['date'],
-                'name': _user.docs[0]['name'],
-                'upDateName': _user.docs[0]['upDateName'],
+                'id': user.docs[0]['id'],
+                'date': user.docs[0]['date'],
+                'name': user.docs[0]['name'],
+                'upDateName': user.docs[0]['upDateName'],
                 'status': UserStatus.ACTIVE.name,
-                'email': _user.docs[0]['email'],
+                'email': user.docs[0]['email'],
                 'token': token,
-                'isNotification': _user.docs[0]['isNotification'],
-                'qtyHistory': _user.docs[0]['qtyHistory'],
-                'qtyComment': _user.docs[0]['qtyComment'],
+                'isNotification': user.docs[0]['isNotification'],
+                'qtyHistory': user.docs[0]['qtyHistory'],
+                'qtyComment': user.docs[0]['qtyComment'],
               }),
               if (token != null && currentUser.value.isNotEmpty)
                 await usersFirestore.pathLoginLogout(

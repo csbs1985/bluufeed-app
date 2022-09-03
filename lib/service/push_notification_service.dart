@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:universe_history_app/firestore/users_firestore.dart';
 import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/services/local_notification_service.dart';
+import 'package:universe_history_app/service/local_notification_service.dart';
 import 'package:http/http.dart' as http;
 
 ValueNotifier<bool> currentNotification = ValueNotifier<bool>(false);
@@ -53,13 +53,13 @@ class PushNotificationService {
   }
 
   _goToPageAfterMessage(message) {
-    final String _route = message.data['payload'].isNotEmpty ?? '';
-    navService.pushNamed('/history', args: message.data[_route]);
+    final String route = message.data['payload'].isNotEmpty ?? '';
+    navService.pushNamed('/history', args: message.data[route]);
   }
 
   Future<void> sendNotification(
-      String title, String body, String idHistory, String _user) async {
-    await _usersFirestore.getTokenOwner(_user).then((result) async {
+      String title, String body, String idHistory, String user) async {
+    await _usersFirestore.getTokenOwner(user).then((result) async {
       try {
         await http.post(
           Uri.parse('https://fcm.googleapis.com/fcm/send'),
@@ -89,8 +89,8 @@ class PushNotificationService {
           ),
         );
       } catch (error) {
-        debugPrint("ERROR:" + error.toString());
+        debugPrint("ERROR:$error");
       }
-    }).catchError((error) => debugPrint('ERROR:' + error.toString()));
+    }).catchError((error) => debugPrint('ERROR:$error'));
   }
 }
