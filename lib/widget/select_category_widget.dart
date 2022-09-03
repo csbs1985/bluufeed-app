@@ -33,15 +33,15 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
     super.initState();
   }
 
+  bool _getSelected(String id) {
+    return listSelect.contains(id) ? true : false;
+  }
+
   void _setSelected(String id) {
     setState(() {
       listSelect.contains(id) ? listSelect.remove(id) : listSelect.add(id);
       if (widget._callback != null) widget._callback!(listSelect);
     });
-  }
-
-  bool _getSelected(String id) {
-    return listSelect.contains(id) ? true : false;
   }
 
   getTagStyle() {}
@@ -77,12 +77,6 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
                         height: 36,
                         child: TextButton(
                           onPressed: () => _setSelected(item.id!),
-                          child: Text(
-                            item.label!.toLowerCase(),
-                            style: _getSelected(item.id!)
-                                ? UiText.button
-                                : Theme.of(context).textTheme.headline2,
-                          ),
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                               _getSelected(item.id!)
@@ -91,6 +85,12 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
                                       ? UiColor.inativedDark
                                       : UiColor.inatived,
                             ),
+                          ),
+                          child: Text(
+                            item.label!.toLowerCase(),
+                            style: _getSelected(item.id!)
+                                ? UiText.button
+                                : Theme.of(context).textTheme.headline2,
                           ),
                         ),
                       ),

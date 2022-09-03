@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:universe_history_app/theme/ui_button.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
 
@@ -37,9 +38,9 @@ class UiTheme {
     ),
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(backgroundColor: UiColor.main),
-
     fontFamily: 'nunito',
     scaffoldBackgroundColor: UiColor.main,
+    textButtonTheme: TextButtonThemeData(style: UiButton.button),
     textTheme: const TextTheme(
       headline1: UiTextLight.headline1,
       headline2: UiTextLight.headline2,
@@ -58,6 +59,7 @@ class UiTheme {
     fontFamily: 'nunito',
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(backgroundColor: UiColor.mainDark),
+    textButtonTheme: TextButtonThemeData(style: UiButton.buttonDark),
     textTheme: const TextTheme(
       headline1: UiTextDark.headline1,
       headline2: UiTextDark.headline2,

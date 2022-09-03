@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:universe_history_app/widget/app_bar_home_widget.dart';
 import 'package:universe_history_app/widget/create_card_widget.dart';
+import 'package:universe_history_app/widget/menu_widget.dart';
 import 'package:universe_history_app/widget/separator_widget.dart';
 
 class FeedPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _FeedPageState extends State<FeedPage> {
             AppBarHomeWidget(),
             SeparatorWidget(),
             CreateCardWidget(),
-            SeparatorWidget(),
+            MenuWidget(),
           ],
         ),
       ),
