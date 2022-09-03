@@ -43,8 +43,7 @@ class UiTheme {
       headline5: UiTextLight.headline5,
       headline6: UiTextLight.headline6,
     ),
-    // appBarTheme:
-    //     const AppBarTheme(backgroundColor: UiColor.primary, elevation: 0),
+    // appBarTheme: const AppBarTheme(backgroundColor: UiColor.main, elevation: 0),
     // // inputDecorationTheme: UiTextFormField.primary,
     // textSelectionTheme:
     //     const TextSelectionThemeData(cursorColor: UiColor.primary),

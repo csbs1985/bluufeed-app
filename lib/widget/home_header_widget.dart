@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
@@ -13,10 +14,6 @@ class HomeHeaderWidget extends StatefulWidget {
 }
 
 class _HomeHeaderWidgetState extends State<HomeHeaderWidget> {
-  void onPressed(BuildContext context) {
-    Navigator.of(context).pushNamed(PageEnum.CREATE.value);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +31,7 @@ class _HomeHeaderWidgetState extends State<HomeHeaderWidget> {
             label: 'escrever',
             style: ButtonStyleEnum.PRIMARY.name,
             size: ButtonSizeEnum.MEDIUM.name,
-            callback: (value) => onPressed(context),
+            callback: (value) => context.push(PageEnum.CREATE.value),
           )
         ],
       ),

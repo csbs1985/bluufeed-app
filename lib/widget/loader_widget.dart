@@ -20,34 +20,31 @@ class _LoaderWidgetState extends State<LoaderWidget> {
     return ValueListenableBuilder(
       valueListenable: currentTheme,
       builder: (BuildContext context, Brightness theme, _) {
-        return WillPopScope(
-          onWillPop: () async => false,
-          child: AlertDialog(
-            backgroundColor: UiColor.main,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(UiBorder.rounded),
-            ),
-            content: SizedBox(
-              height: 140,
-              child: Column(
-                children: [
-                  LoadingAnimationWidget.newtonCradle(
-                    size: 80,
-                    color: UiColor.primary,
-                  ),
-                  const TextWidget(text: 'Aguarde...'),
-                  if (currentDialog.value != '')
-                    Padding(
-                      padding: const EdgeInsets.only(top: UiPadding.medium),
-                      child: ValueListenableBuilder(
-                        valueListenable: currentDialog,
-                        builder: (context, value, __) {
-                          return TextWidget(text: currentDialog.value);
-                        },
-                      ),
+        return AlertDialog(
+          backgroundColor: UiColor.main,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(UiBorder.rounded),
+          ),
+          content: SizedBox(
+            height: 140,
+            child: Column(
+              children: [
+                LoadingAnimationWidget.newtonCradle(
+                  size: 80,
+                  color: UiColor.primary,
+                ),
+                const TextWidget(text: 'Aguarde...'),
+                if (currentDialog.value != '')
+                  Padding(
+                    padding: const EdgeInsets.only(top: UiPadding.medium),
+                    child: ValueListenableBuilder(
+                      valueListenable: currentDialog,
+                      builder: (context, value, __) {
+                        return TextWidget(text: currentDialog.value);
+                      },
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
           ),
         );

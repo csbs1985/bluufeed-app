@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -80,19 +82,22 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: currentTheme,
-      builder: (BuildContext context, Brightness theme, _) {
-        bool isDark = currentTheme.value == Brightness.dark;
+    return WillPopScope(
+      onWillPop: () => exit(0),
+      child: ValueListenableBuilder(
+        valueListenable: currentTheme,
+        builder: (BuildContext context, Brightness theme, _) {
+          bool isDark = currentTheme.value == Brightness.dark;
 
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          routeInformationParser: routes.routeInformationParser,
-          routeInformationProvider: routes.routeInformationProvider,
-          routerDelegate: routes.routerDelegate,
-          theme: isDark ? UiTheme.themeDark : UiTheme.theme,
-        );
-      },
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routeInformationParser: routes.routeInformationParser,
+            routeInformationProvider: routes.routeInformationProvider,
+            routerDelegate: routes.routerDelegate,
+            theme: isDark ? UiTheme.themeDark : UiTheme.theme,
+          );
+        },
+      ),
     );
   }
 }

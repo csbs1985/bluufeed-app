@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:universe_history_app/widget/home_header_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
 
 class FeedPage extends StatefulWidget {
@@ -11,8 +12,16 @@ class FeedPage extends StatefulWidget {
 class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: const TextWidget(text: 'feed'),
+    return Scaffold(
+      // appBar: AppBar(toolbarHeight: 0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            HomeHeaderWidget(),
+            TextWidget(text: 'feed'),
+          ],
+        ),
+      ),
     );
   }
 }

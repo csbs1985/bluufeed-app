@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:universe_history_app/page/create_page.dart';
@@ -26,69 +25,65 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _setCurrentPage(page) {
-    setState(() {
-      _currentPage = page;
-    });
+    setState(() => _currentPage = page);
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => exit(0),
-      child: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: _setCurrentPage,
-          children: const [
-            FeedPage(),
-            CreatePage(),
-            NotificationPage(),
-            SettingsPage(),
-          ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentPage,
-          // showSelectedLabels: false,
-          // showUnselectedLabels: false,
-          selectedFontSize: 0,
-          unselectedFontSize: 0,
-          elevation: 0,
-          items: [
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                _currentPage == 0 ? UiIcon.logoActived : UiIcon.logo,
-              ),
-              label: '',
+    return Scaffold(
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: _setCurrentPage,
+        children: const [
+          FeedPage(),
+          CreatePage(),
+          NotificationPage(),
+          SettingsPage(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentPage,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedFontSize: 0,
+        unselectedFontSize: 0,
+        elevation: 0,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _currentPage == 0 ? UiIcon.logoActived : UiIcon.logo,
             ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                _currentPage == 1 ? UiIcon.createActived : UiIcon.create,
-              ),
-              label: '',
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _currentPage == 1 ? UiIcon.createActived : UiIcon.create,
             ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                _currentPage == 2
-                    ? UiIcon.notificationActived
-                    : UiIcon.notification,
-              ),
-              label: '',
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _currentPage == 2
+                  ? UiIcon.notificationActived
+                  : UiIcon.notification,
             ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                _currentPage == 3 ? UiIcon.optionsActived : UiIcon.options,
-              ),
-              label: '',
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _currentPage == 3 ? UiIcon.optionsActived : UiIcon.options,
             ),
-          ],
-          onTap: (page) => {
-            _pageController.animateToPage(
-              page,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.ease,
-            ),
-          },
-        ),
+            label: '',
+          ),
+        ],
+        onTap: (page) => {
+          _pageController.animateToPage(
+            page,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.ease,
+          ),
+        },
       ),
     );
   }
