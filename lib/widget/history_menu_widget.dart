@@ -1,8 +1,11 @@
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
+import 'package:universe_history_app/modal/comment_modal.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
+import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
@@ -46,19 +49,20 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   }
 
   void _showModal(BuildContext context, String type) {
-    // showCupertinoModalBottomSheet(
-    //   expand: true,
-    //   context: context,
-    //   barrierColor: Colors.black87,
-    //   duration: const Duration(milliseconds: 300),
-    //   builder: (context) => type == 'inputCommentary'
-    //       ? const InputCommmentModal()
-    //       : CommentModal(),
-    // );
+    showCupertinoModalBottomSheet(
+      expand: true,
+      context: context,
+      barrierColor: UiColor.overley,
+      duration: const Duration(milliseconds: 300),
+      builder: (context) => const CommentModal(),
+      // builder: (context) => type == 'inputCommentary'
+      //     ? const InputCommmentModal()
+      //     : CommentModal(),
+    );
   }
 
   void _showModalOptions(BuildContext context, dynamic content) {
-    historyClass.add(content);
+    // historyClass.add(content);
 
     // showCupertinoModalBottomSheet(
     //   expand: false,
@@ -97,16 +101,23 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   }
 
   String _showComment(history) {
-    if (!history['isComment']) return 'comentário desabilidato';
+    if (!history['isComment']) return 'comentário desabilitado';
     if (history['qtyComment'] == 1) return ' comentário';
     if (history['qtyComment'] > 1) return ' comentários';
-    return 'seja o primeiro à comentar';
+    return 'seja o primeiro a comentar';
   }
 
-  void _onTapCommment() {
+  void _openComment() {
     if (widget._type == 'HOMEPAGE') {
       _selectHistory(widget._history);
-      _showModal(context, 'listCommentary');
+
+      showCupertinoModalBottomSheet(
+        expand: true,
+        context: context,
+        barrierColor: UiColor.overley,
+        duration: const Duration(milliseconds: 300),
+        builder: (context) => const CommentModal(),
+      );
     }
   }
 
@@ -119,7 +130,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: () => _onTapCommment(),
+            onTap: () => _openComment(),
             child: Row(
               children: [
                 if (widget._history['qtyComment'] > 0)

@@ -4,7 +4,7 @@ import 'package:flutterfire_ui/firestore.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
 import 'package:universe_history_app/model/category_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/skeleton/skeleton_history_item_component.dart';
+import 'package:universe_history_app/skeleton/history_item_skeleton.dart';
 import 'package:universe_history_app/widget/history_item_widget.dart';
 import 'package:universe_history_app/widget/no_result_widget.dart';
 

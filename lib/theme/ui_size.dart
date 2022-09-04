@@ -6,6 +6,7 @@ class UiSize {
   static const double borderButton = 4;
   static const double bottomNavigation = 56;
   static const double historyMenu = 36;
+  static const double modalHeight = 42;
   static const double separator = 8;
   static const double widthFullLessPadding = UiPadding.large * 2;
 }

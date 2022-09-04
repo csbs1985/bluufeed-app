@@ -72,9 +72,9 @@ class UserClass {
   final ToastWidget toast = ToastWidget();
   final UsersFirestore usersFirestore = UsersFirestore();
 
-  void add(Map<String, dynamic> _user) {
+  void add(Map<String, dynamic> user) {
     currentUser.value = [];
-    currentUser.value.add(UserModel.fromJson(_user));
+    currentUser.value.add(UserModel.fromJson(user));
     saveUser();
   }
 
@@ -84,7 +84,7 @@ class UserClass {
     return file.writeAsString(data);
   }
 
-  Future<void> clean(BuildContext context, String _status) async {
+  Future<void> clean(BuildContext context, String status) async {
     try {
       await usersFirestore.pathLoginLogout(UserStatus.INACTIVE.name);
       await authService.logout();
@@ -100,7 +100,7 @@ class UserClass {
         'espero que isso não seja um adeus!',
       );
     } catch (error) {
-      debugPrint('ERROR => _setUpQtyHistoryUser:' + error.toString());
+      debugPrint('ERROR => _setUpQtyHistoryUser:$error');
       toast.toast(context, ToastEnum.WARNING.name,
           'não foi possível sair da aplicação no momento, tente novamente mais tarde.');
     }
@@ -113,7 +113,7 @@ class UserClass {
       await authService.delete();
       currentUser.value = [];
     } on AuthException catch (error) {
-      debugPrint('ERROR => deleteUser: ' + error.toString());
+      debugPrint('ERROR => deleteUser: $error');
       Navigator.of(context).pop();
       toast.toast(
         context,
@@ -131,6 +131,10 @@ class UserClass {
   Future<File> getFileUser() async {
     final directory = await getApplicationDocumentsDirectory();
     return File('${directory.path}/user.json');
+  }
+
+  bool isLogin() {
+    return currentUser.value.isNotEmpty ? true : false;
   }
 }
 
