@@ -35,6 +35,9 @@ class UiColor {
 
   static const Color overley = Color(0x901d9bf0);
 
+  static const Color skeleton = Color(0xFFF8F9F9);
+  static const Color skeletonDark = Color(0xFF181A20);
+
   static const Color subtitle = UiColor.primary;
 
   static const Color success = Color(0xFFA1D151);
