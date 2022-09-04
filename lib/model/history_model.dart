@@ -58,20 +58,20 @@ class HistoryModel {
 class HistoryClass {
   final HistoriesFirestore historiesFirestore = HistoriesFirestore();
 
-  void add(Map<String, dynamic> _history) {
+  void add(Map<String, dynamic> history) {
     currentHistory.value = [];
-    currentHistory.value.add(HistoryModel.fromJson(_history));
+    currentHistory.value.add(HistoryModel.fromJson(history));
   }
 
-  Future<void> getHistory(String _historyId) async {
+  Future<void> getHistory(String historyId) async {
     try {
       await historiesFirestore
-          .getHistoryNotification(_historyId)
+          .getHistoryNotification(historyId)
           .then((result) => {
                 add(result.docs[0].data()),
               });
     } on AuthException catch (error) {
-      debugPrint('ERROR => _getHistory: ' + error.toString());
+      debugPrint('ERROR => _getHistory: $error');
     }
   }
 }

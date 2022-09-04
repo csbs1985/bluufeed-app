@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              _currentPage == 3 ? UiIcon.optionsActived : UiIcon.options,
+              _currentPage == 3 ? UiIcon.moreActived : UiIcon.more,
             ),
             label: '',
           ),

@@ -7,21 +7,21 @@ import 'package:universe_history_app/theme/ui_text.dart';
 
 class ToastWidget {
   void toast(BuildContext context, String? type, String text) {
-    Color _style = UiColor.primary;
+    Color style = UiColor.primary;
 
     if (type == ToastEnum.SUCCESS.name)
-      _style = UiColor.success;
+      style = UiColor.success;
     else if (type == ToastEnum.WARNING.name)
-      _style = UiColor.warning;
+      style = UiColor.warning;
     else
-      _style = UiColor.primary;
+      style = UiColor.primary;
 
     showToast(
       text,
       context: context,
       position: StyledToastPosition.center,
       textStyle: UiText.toast,
-      backgroundColor: _style,
+      backgroundColor: style,
       animation: StyledToastAnimation.slideToBottomFade,
       reverseAnimation: StyledToastAnimation.slideFromBottomFade,
       borderRadius: BorderRadius.circular(UiBorder.rounded),
@@ -29,4 +29,11 @@ class ToastWidget {
   }
 }
 
-enum ToastEnum { INFO, SUCCESS, WARNING }
+enum ToastEnum {
+  INFO('info'),
+  SUCCESS('success'),
+  WARNING('warning');
+
+  final String value;
+  const ToastEnum(this.value);
+}

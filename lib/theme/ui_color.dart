@@ -6,10 +6,10 @@ class UiColor {
 
   static const Color actived = UiColor.primary;
 
-  static const Color back = Color(0xFFf9fafc);
+  static const Color back = Color(0xFFF8F9F9);
   static const Color backDark = Color(0xFF181A20);
 
-  static const Color border = Color(0xFFF9FAFC);
+  static const Color border = Color(0xFFF8F9F9);
   static const Color borderDark = Color(0xFF181A20);
 
   static const Color bottomNavigation = Color(0xFFffffff);
@@ -27,7 +27,7 @@ class UiColor {
   static const Color buttonDisabledBorder = Color(0xFF212324);
   static const Color buttonDisabledText = Color(0xFF2a2d2e);
 
-  static const Color inatived = Color(0xFFE4E6EB);
+  static const Color inatived = Color(0xFFDBE7F2);
   static const Color inativedDark = Color(0xFF262A34);
 
   static const Color main = Color(0xffffffff);
@@ -39,7 +39,7 @@ class UiColor {
 
   static const Color success = Color(0xFFA1D151);
 
-  static const Color text = Color(0xFF8F939D);
+  static const Color text = Color(0xFF476282);
   static const Color textDark = Color(0xFFffffff);
 
   static const Color toast = Color(0xFF2a2d2e);
