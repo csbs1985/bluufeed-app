@@ -8,7 +8,10 @@ class UiSize {
   static const double bottomLarge = 42;
   static const double bottomSmall = 32;
   static const double historyMenu = 36;
+  static const double menuHeight =
+      UiSize.bottomSmall + UiPadding.large + UiPadding.large;
   static const double modalHeight = 42;
   static const double separator = 8;
+  static const double tag = 36;
   static const double widthFullLessPadding = UiPadding.large * 2;
 }

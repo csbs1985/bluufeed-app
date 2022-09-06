@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:universe_history_app/model/category_model.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/widget/subtitle_resume_widget.dart';
@@ -65,7 +66,7 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
             Wrap(
               children: [
                 for (var item in allCategories)
-                  if (item.isShowInput! && !item.isDisabled!)
+                  if (!item.isDisabled!)
                     Padding(
                       padding: const EdgeInsets.fromLTRB(
                         0,
@@ -74,7 +75,7 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
                         UiPadding.medium,
                       ),
                       child: SizedBox(
-                        height: 36,
+                        height: UiSize.tag,
                         child: TextButton(
                           onPressed: () => _setSelected(item.id!),
                           style: ButtonStyle(

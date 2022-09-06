@@ -26,23 +26,23 @@ class _HistoryListWidgetState extends State<HistoryListWidget> {
   }
 
   _getContent() {
-    String value = currentCategory.value.id!;
+    String _category = currentCategory.value.id!;
 
-    if (value != CategoriesEnum.ALL.name &&
-        value != CategoriesEnum.MY.name &&
-        value != CategoriesEnum.SAVE.name) {
+    if (_category != CategoryEnum.ALL.value &&
+        _category != CategoryEnum.MY.value &&
+        _category != CategoryEnum.SAVE.value) {
       return historiesFirestore.histories
           .orderBy('date')
-          .where('categories', arrayContainsAny: [value]);
+          .where('categories', arrayContainsAny: [_category]);
     }
 
-    if (value == CategoriesEnum.MY.name) {
+    if (_category == CategoryEnum.MY.value) {
       return historiesFirestore.histories
           .orderBy('date')
           .where('userId', isEqualTo: currentUser.value.first.id);
     }
 
-    if (value == CategoriesEnum.SAVE.name) {
+    if (_category == CategoryEnum.SAVE.value) {
       return historiesFirestore.histories
           .orderBy('date')
           .where('bookmarks', arrayContainsAny: [currentUser.value.first.id]);
@@ -65,8 +65,7 @@ class _HistoryListWidgetState extends State<HistoryListWidget> {
               reverse: true,
               physics: const NeverScrollableScrollPhysics(),
               loadingBuilder: (context) => HistoryItemSkeleton(),
-              errorBuilder: (context, error, _) =>
-                  const NoResultWidget(text: 'Isso é tudo por enquanto.'),
+              errorBuilder: (context, error, _) => HistoryItemSkeleton(),
               itemBuilder: (BuildContext context,
                   QueryDocumentSnapshot<dynamic> snapshot) {
                 return HistoryItemWidget(snapshot: snapshot.data());

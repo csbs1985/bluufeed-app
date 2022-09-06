@@ -4,6 +4,7 @@ import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/theme/ui_button.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 
@@ -19,12 +20,10 @@ class _MenuWidgetState extends State<MenuWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool canShow(String? item) {
-      return (item == CategoriesEnum.MY.name ||
-                  item == CategoriesEnum.SAVE.name) &&
-              currentUser.value.isEmpty
-          ? false
-          : true;
+    bool canShow(CategoryModel item) {
+      if (item.isDisabled!) return false;
+      if (item.isLogin! && currentUser.value.isNotEmpty) return true;
+      return true;
     }
 
     bool _getSelected(CategoryModel item) {
@@ -42,33 +41,40 @@ class _MenuWidgetState extends State<MenuWidget> {
 
         return Container(
           color: isDark ? UiColor.borderDark : UiColor.border,
-          height: 68,
+          height: UiSize.menuHeight,
           child: ListView.builder(
             itemCount: CategoryModel.allCategories.length,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
-              return canShow(allCategories[index].id)
-                  ? Row(
-                      children: [
-                        TextButton(
-                          onPressed: () => _select(allCategories[index]),
-                          style: _getSelected(allCategories[index])
-                              ? UiButton.buttonActived
-                              : isDark
-                                  ? UiButton.buttonDark
-                                  : UiButton.button,
-                          child: Text(
-                            allCategories[index].label!.toLowerCase(),
+              return ValueListenableBuilder(
+                valueListenable: currentUser,
+                builder: (BuildContext context, value, _) {
+                  return Row(
+                    children: [
+                      if (canShow(allCategories[index]))
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(right: UiPadding.medium),
+                          child: TextButton(
+                            onPressed: () => _select(allCategories[index]),
                             style: _getSelected(allCategories[index])
-                                ? UiText.button
-                                : Theme.of(context).textTheme.headline2,
+                                ? UiButton.buttonActived
+                                : isDark
+                                    ? UiButton.buttonDark
+                                    : UiButton.button,
+                            child: Text(
+                              allCategories[index].label!.toLowerCase(),
+                              style: _getSelected(allCategories[index])
+                                  ? UiText.button
+                                  : Theme.of(context).textTheme.headline2,
+                            ),
                           ),
                         ),
-                        const SizedBox(width: UiPadding.medium)
-                      ],
-                    )
-                  : const SizedBox();
+                    ],
+                  );
+                },
+              );
             },
           ),
         );
