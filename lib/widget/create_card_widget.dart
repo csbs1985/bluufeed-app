@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:universe_history_app/model/page_model.dart';
+import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
@@ -29,9 +30,11 @@ class _CreateCardWidgetState extends State<CreateCardWidget> {
           const SizedBox(height: UiPadding.large),
           Button3dWidget(
             label: 'escrever',
-            style: ButtonStyleEnum.PRIMARY.name,
-            size: ButtonSizeEnum.MEDIUM.name,
-            callback: (value) => context.push(PageEnum.CREATE.value),
+            style: ButtonStyleEnum.PRIMARY.value,
+            size: ButtonSizeEnum.MEDIUM.value,
+            callback: (value) => currentUser.value.isNotEmpty
+                ? context.push(PageEnum.CREATE.value)
+                : context.push(PageEnum.LOGIN.value),
           )
         ],
       ),

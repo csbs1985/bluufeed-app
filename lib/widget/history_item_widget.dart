@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:universe_history_app/model/category_model.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/widget/border_widget.dart';
 import 'package:universe_history_app/widget/history_menu_widget.dart';
 import 'package:universe_history_app/widget/info_widget.dart';
 import 'package:universe_history_app/widget/separator_widget.dart';
@@ -28,7 +29,12 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
       children: [
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(UiPadding.large),
+          padding: const EdgeInsets.fromLTRB(
+            UiPadding.large,
+            UiPadding.large,
+            UiPadding.large,
+            UiPadding.medium,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -51,13 +57,17 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
                     Padding(
                       padding: const EdgeInsets.only(right: UiPadding.small),
                       child: Text(
-                        '#' + categoriesClass.getCategoryLabel(item),
+                        '#${categoriesClass.getCategoryLabel(item)}',
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ),
                 ],
               ),
               const SizedBox(height: UiPadding.small),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: UiPadding.medium),
+                child: BorderWidget(),
+              ),
               HistoryMenuWidget(
                 history: widget._snapshot,
                 type: 'HOMEPAGE',

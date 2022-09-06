@@ -9,9 +9,9 @@ class ToastWidget {
   void toast(BuildContext context, String? type, String text) {
     Color style = UiColor.primary;
 
-    if (type == ToastEnum.SUCCESS.name)
+    if (type == ToastEnum.SUCCESS.value)
       style = UiColor.success;
-    else if (type == ToastEnum.WARNING.name)
+    else if (type == ToastEnum.WARNING.value)
       style = UiColor.warning;
     else
       style = UiColor.primary;
@@ -25,6 +25,7 @@ class ToastWidget {
       animation: StyledToastAnimation.slideToBottomFade,
       reverseAnimation: StyledToastAnimation.slideFromBottomFade,
       borderRadius: BorderRadius.circular(UiBorder.rounded),
+      animDuration: const Duration(milliseconds: 1),
     );
   }
 }

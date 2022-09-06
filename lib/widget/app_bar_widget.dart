@@ -57,8 +57,8 @@ class _AppbarWidgetState extends State<AppbarWidget> {
                   padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: Button3dWidget(
                     label: 'publicar',
-                    style: ButtonStyleEnum.PRIMARY.name,
-                    size: ButtonSizeEnum.SMALL.name,
+                    style: ButtonStyleEnum.PRIMARY.value,
+                    size: ButtonSizeEnum.SMALL.value,
                     callback: (value) => _onPressed(context),
                   ),
                 ),

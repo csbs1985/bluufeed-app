@@ -50,7 +50,7 @@ class AuthService extends ChangeNotifier {
   getToken() async {
     await tokenFirestore
         .getToken()
-        .then((String result) => token = result)
+        .then((String? result) => token = result)
         .catchError((error) => debugPrint('ERROR => getToken:' + error));
   }
 

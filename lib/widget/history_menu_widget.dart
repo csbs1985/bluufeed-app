@@ -36,7 +36,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     //     ? true
     //     : false;
 
-    return true;
+    return false;
   }
 
   bool _showBookmark() {
@@ -107,8 +107,8 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     return 'seja o primeiro a comentar';
   }
 
-  void _openComment() {
-    if (widget._type == 'HOMEPAGE') {
+  void _openComment(history) {
+    if (history['isComment']) {
       _selectHistory(widget._history);
 
       showCupertinoModalBottomSheet(
@@ -124,13 +124,13 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: UiSize.historyMenu,
       // color: Colors.amber,
+      height: UiSize.historyMenu,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: () => _openComment(),
+            onTap: () => _openComment(widget._history),
             child: Row(
               children: [
                 if (widget._history['qtyComment'] > 0)

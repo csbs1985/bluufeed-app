@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:universe_history_app/theme/ui_button.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
+import 'package:universe_history_app/theme/ui_text_form_field.dart';
 
 ValueNotifier<Brightness> currentTheme = ValueNotifier(
     WidgetsBinding.instance.platformDispatcher.platformBrightness);
@@ -41,6 +42,7 @@ class UiTheme {
     fontFamily: 'nunito',
     scaffoldBackgroundColor: UiColor.main,
     textButtonTheme: TextButtonThemeData(style: UiButton.button),
+    inputDecorationTheme: UiTextFormField.textFormField,
     textTheme: const TextTheme(
       headline1: UiTextLight.headline1,
       headline2: UiTextLight.headline2,
@@ -49,9 +51,6 @@ class UiTheme {
       headline5: UiTextLight.headline5,
       headline6: UiTextLight.headline6,
     ),
-    // // inputDecorationTheme: UiTextFormField.primary,
-    // textSelectionTheme:
-    //     const TextSelectionThemeData(cursorColor: UiColor.primary),
   );
 
   static ThemeData themeDark = ThemeData(
@@ -60,6 +59,7 @@ class UiTheme {
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(backgroundColor: UiColor.mainDark),
     textButtonTheme: TextButtonThemeData(style: UiButton.buttonDark),
+    inputDecorationTheme: UiTextFormField.textFormFieldDark,
     textTheme: const TextTheme(
       headline1: UiTextDark.headline1,
       headline2: UiTextDark.headline2,

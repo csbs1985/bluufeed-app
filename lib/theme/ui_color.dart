@@ -20,8 +20,8 @@ class UiColor {
   static const Color buttonText = Color(0xFFffffff);
 
   static const Color buttonSecondary = Color(0xFF2a2d2e);
-  static const Color buttonSecondaryBorder = Color(0xFF212324);
-  static const Color buttonSecondarytext = UiColor.secondary;
+  static const Color buttonSecondaryBorder = Color(0xFF181A20);
+  static const Color buttonSecondarytext = Color(0xFFffffff);
 
   static const Color buttonDisabled = Color(0xFF2a2d2e);
   static const Color buttonDisabledBorder = Color(0xFF212324);

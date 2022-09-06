@@ -7,10 +7,12 @@ enum PageEnum {
   JUSTIFY('/justify'),
   HISTORY('/history'),
   HOME('/home'),
+  LOGIN('/login'),
   NAME('/name'),
   NOTIFICATION('/notification'),
   QUESTIONS('/questions'),
   PRIVACY('/privacy'),
+  REGISTER('/register'),
   SETTINGS('/settings'),
   TERMS('/terms');
 
