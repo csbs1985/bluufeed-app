@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             const SizedBox(height: UiPadding.large),
-            TextFormField(
+            TextField(
               autofocus: true,
               controller: _emailController,
               style: Theme.of(context).textTheme.headline2,
@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: UiPadding.large),
-            TextFormField(
+            TextField(
               autofocus: true,
               controller: _passwordController,
               style: Theme.of(context).textTheme.headline2,

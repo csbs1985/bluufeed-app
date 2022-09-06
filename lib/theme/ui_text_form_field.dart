@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:universe_history_app/theme/ui_border.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 
-class UiTextFormField {
-  static InputDecorationTheme textFormField = InputDecorationTheme(
-    // hintStyle: Theme.of(context).textTheme.headline2,
-    // labelStyle: Theme.of(context).textTheme.headline2,
+class UiTextField {
+  static InputDecorationTheme textField = InputDecorationTheme(
     border: const OutlineInputBorder(),
     filled: true,
     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -28,9 +26,7 @@ class UiTextFormField {
     ),
   );
 
-  static InputDecorationTheme textFormFieldDark = InputDecorationTheme(
-    // hintStyle: Theme.of(context).textTheme.headline2,
-    // labelStyle: Theme.of(context).textTheme.headline2,
+  static InputDecorationTheme textFieldDark = InputDecorationTheme(
     border: const OutlineInputBorder(),
     filled: true,
     floatingLabelBehavior: FloatingLabelBehavior.never,

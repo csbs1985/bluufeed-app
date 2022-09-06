@@ -42,7 +42,7 @@ class UiTheme {
     fontFamily: 'nunito',
     scaffoldBackgroundColor: UiColor.main,
     textButtonTheme: TextButtonThemeData(style: UiButton.button),
-    inputDecorationTheme: UiTextFormField.textFormField,
+    inputDecorationTheme: UiTextField.textField,
     textTheme: const TextTheme(
       headline1: UiTextLight.headline1,
       headline2: UiTextLight.headline2,
@@ -59,7 +59,7 @@ class UiTheme {
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(backgroundColor: UiColor.mainDark),
     textButtonTheme: TextButtonThemeData(style: UiButton.buttonDark),
-    inputDecorationTheme: UiTextFormField.textFormFieldDark,
+    inputDecorationTheme: UiTextField.textFieldDark,
     textTheme: const TextTheme(
       headline1: UiTextDark.headline1,
       headline2: UiTextDark.headline2,

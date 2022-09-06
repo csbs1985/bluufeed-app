@@ -5,7 +5,9 @@ import 'package:universe_history_app/firestore/users_firestore.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/service/auth_service.dart';
+import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/util/activity_util.dart';
 import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/loader_widget.dart';
@@ -180,96 +182,105 @@ class _CreatePageState extends State<CreatePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppbarWidget(
-        btnBack: true,
-        btnPublish: _btnPublish,
-        callback: (value) => _postHistory(context),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(
-            UiPadding.large,
-            0,
-            UiPadding.large,
-            UiPadding.medium,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextField(
-                controller: titleController,
-                keyboardType: TextInputType.multiline,
-                minLines: 1,
-                maxLines: 2,
-                maxLength: 60,
-                style: Theme.of(context).textTheme.headline1,
-                onChanged: (value) => _canPublish(),
-                decoration: InputDecoration(
-                  counterText: "",
-                  hintText: 'Título',
-                  hintStyle: Theme.of(context).textTheme.headline1,
-                  enabledBorder:
-                      const UnderlineInputBorder(borderSide: BorderSide.none),
-                  focusedBorder:
-                      const UnderlineInputBorder(borderSide: BorderSide.none),
+    return ValueListenableBuilder(
+        valueListenable: currentTheme,
+        builder: (BuildContext context, Brightness theme, _) {
+          bool isDark = currentTheme.value == Brightness.dark;
+
+          return Scaffold(
+            key: scaffoldKey,
+            appBar: AppbarWidget(
+              btnBack: true,
+              btnPublish: _btnPublish,
+              callback: (value) => _postHistory(context),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  UiPadding.large,
+                  0,
+                  UiPadding.large,
+                  UiPadding.medium,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextField(
+                      controller: titleController,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: 2,
+                      maxLength: 60,
+                      style: Theme.of(context).textTheme.headline1,
+                      onChanged: (value) => _canPublish(),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(0),
+                        counterText: "",
+                        fillColor: isDark ? UiColor.mainDark : UiColor.main,
+                        hintText: 'Título',
+                        hintStyle: Theme.of(context).textTheme.headline1,
+                        enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide.none),
+                        focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide.none),
+                      ),
+                    ),
+                    TextField(
+                      controller: textController,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: null,
+                      style: Theme.of(context).textTheme.headline2,
+                      onChanged: (value) => _canPublish(),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(0),
+                        fillColor: isDark ? UiColor.mainDark : UiColor.main,
+                        hintText: 'História',
+                        hintStyle: Theme.of(context).textTheme.headline2,
+                        enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide.none),
+                        focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide.none),
+                      ),
+                    ),
+                    const SizedBox(height: UiPadding.xLarge),
+                    SelectToggleWidget(
+                      title: 'Assinatura',
+                      // resume:
+                      //     'Ligado para assinar como ${currentUser.value.first.name} ou desligado para anônimo.',
+                      resume:
+                          'Ligado para assinar como nome ou desligado para anônimo.',
+                      value: _isSigned,
+                      callback: (value) => _setPrivacy(),
+                    ),
+                    const SizedBox(height: UiPadding.xLarge),
+                    SelectToggleWidget(
+                      title: 'Comentários',
+                      resume:
+                          'Ligado para habilitar ou desligado para desabilitar os comentários na história.',
+                      value: _isComment,
+                      callback: (value) => _setComment(),
+                    ),
+                    const SizedBox(height: UiPadding.xLarge),
+                    SelectToggleWidget(
+                      title: 'Autorizado',
+                      resume:
+                          'Ligado para marcar história como de terceiro com autorização para publicar.',
+                      value: _isAuthorized,
+                      callback: (value) => _setAuthorized(),
+                    ),
+                    const SizedBox(height: UiPadding.xLarge),
+                    SelectCategoriesWidget(
+                      selected: currentHistory.value.isNotEmpty
+                          ? currentHistory.value.first.categories
+                          : [],
+                      callback: (value) => _setCategories(value),
+                    )
+                  ],
                 ),
               ),
-              const SizedBox(height: UiPadding.xLarge),
-              TextField(
-                controller: textController,
-                keyboardType: TextInputType.multiline,
-                minLines: 1,
-                maxLines: null,
-                style: Theme.of(context).textTheme.headline2,
-                onChanged: (value) => _canPublish(),
-                decoration: InputDecoration(
-                  hintText: 'História',
-                  hintStyle: Theme.of(context).textTheme.headline2,
-                  enabledBorder:
-                      const UnderlineInputBorder(borderSide: BorderSide.none),
-                  focusedBorder:
-                      const UnderlineInputBorder(borderSide: BorderSide.none),
-                ),
-              ),
-              const SizedBox(height: UiPadding.xLarge),
-              SelectToggleWidget(
-                title: 'Assinatura',
-                // resume:
-                //     'Ligado para assinar como ${currentUser.value.first.name} ou desligado para anônimo.',
-                resume:
-                    'Ligado para assinar como nome ou desligado para anônimo.',
-                value: _isSigned,
-                callback: (value) => _setPrivacy(),
-              ),
-              const SizedBox(height: UiPadding.xLarge),
-              SelectToggleWidget(
-                title: 'Comentários',
-                resume:
-                    'Ligado para habilitar ou desligado para desabilitar os comentários na história.',
-                value: _isComment,
-                callback: (value) => _setComment(),
-              ),
-              const SizedBox(height: UiPadding.xLarge),
-              SelectToggleWidget(
-                title: 'Autorizado',
-                resume:
-                    'Ligado para marcar história como de terceiro com autorização para publicar.',
-                value: _isAuthorized,
-                callback: (value) => _setAuthorized(),
-              ),
-              const SizedBox(height: UiPadding.xLarge),
-              SelectCategoriesWidget(
-                selected: currentHistory.value.isNotEmpty
-                    ? currentHistory.value.first.categories
-                    : [],
-                callback: (value) => _setCategories(value),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 }

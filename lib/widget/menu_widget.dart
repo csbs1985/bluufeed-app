@@ -28,11 +28,11 @@ class _MenuWidgetState extends State<MenuWidget> {
     }
 
     bool _getSelected(CategoryModel item) {
-      return currentMenuSelected.value.id == item.id ? true : false;
+      return currentCategory.value.id == item.id ? true : false;
     }
 
     void _select(CategoryModel item) {
-      setState(() => currentMenuSelected.value = item);
+      setState(() => currentCategory.value = item);
     }
 
     return ValueListenableBuilder(

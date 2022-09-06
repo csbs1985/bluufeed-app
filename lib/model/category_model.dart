@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-ValueNotifier<CategoryModel> currentMenuSelected =
+ValueNotifier<CategoryModel> currentCategory =
     ValueNotifier<CategoryModel>(CategoryModel.allCategories.first);
 
 class CategoryModel {

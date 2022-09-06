@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:universe_history_app/firestore/users_firestore.dart';
+import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/page/create_page.dart';
 import 'package:universe_history_app/page/feed_page.dart';
+import 'package:universe_history_app/page/login_page.dart';
 import 'package:universe_history_app/page/notification_page.dart';
 import 'package:universe_history_app/page/settings_page.dart';
+import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,14 +19,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final UserClass _userClass = UserClass();
+  final UsersFirestore _usersFirestore = UsersFirestore();
+
   PageController _pageController = PageController();
 
   int _currentPage = 0;
 
   @override
   void initState() {
-    super.initState();
+    identify();
     _pageController = PageController(initialPage: _currentPage);
+    super.initState();
+  }
+
+  void identify() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
+      if (user != null) {
+        try {
+          await _userClass.readUser();
+          await _usersFirestore.getUserEmail(user.email).then(
+                (result) => _userClass.add(
+                  {
+                    'id': result.docs[0]['id'],
+                    'date': result.docs[0]['date'],
+                    'name': result.docs[0]['name'],
+                    'upDateName': result.docs[0]['upDateName'],
+                    'status': result.docs[0]['status'],
+                    'email': result.docs[0]['email'],
+                    'token': result.docs[0]['token'],
+                    'isNotification': result.docs[0]['isNotification'],
+                    'qtyHistory': result.docs[0]['qtyHistory'],
+                    'qtyComment': result.docs[0]['qtyComment'],
+                  },
+                ),
+              );
+        } on AuthException catch (error) {
+          debugPrint('ERROR => getUserEmail: $error');
+        }
+      }
+    });
   }
 
   void _setCurrentPage(page) {
@@ -34,11 +71,11 @@ class _HomePageState extends State<HomePage> {
       body: PageView(
         controller: _pageController,
         onPageChanged: _setCurrentPage,
-        children: const [
-          FeedPage(),
-          CreatePage(),
-          NotificationPage(),
-          SettingsPage(),
+        children: [
+          const FeedPage(),
+          const CreatePage(),
+          const NotificationPage(),
+          currentUser.value.isEmpty ? const LoginPage() : const SettingsPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

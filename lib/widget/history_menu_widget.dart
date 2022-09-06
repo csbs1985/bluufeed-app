@@ -32,16 +32,13 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   final ToastWidget toast = ToastWidget();
 
   bool _getBookmark(history) {
-    // return history['bookmarks'].contains(currentUser.value.first.id)
-    //     ? true
-    //     : false;
-
-    return false;
+    return history['bookmarks'].contains(currentUser.value.first.id)
+        ? true
+        : false;
   }
 
   bool _showBookmark() {
-    // return currentUser.value.isNotEmpty ? true : false;
-    return true;
+    return currentUser.value.isNotEmpty ? true : false;
   }
 
   void _selectHistory(history) {
@@ -139,8 +136,10 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                     value: widget._history['qtyComment'],
                     textStyle: Theme.of(context).textTheme.headline4,
                   ),
-                Text(_showComment(widget._history),
-                    style: Theme.of(context).textTheme.headline4),
+                Text(
+                  _showComment(widget._history),
+                  style: Theme.of(context).textTheme.headline4,
+                ),
               ],
             ),
           ),

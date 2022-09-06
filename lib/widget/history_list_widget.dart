@@ -26,7 +26,7 @@ class _HistoryListWidgetState extends State<HistoryListWidget> {
   }
 
   _getContent() {
-    String value = currentMenuSelected.value.id!;
+    String value = currentCategory.value.id!;
 
     if (value != CategoriesEnum.ALL.name &&
         value != CategoriesEnum.MY.name &&
@@ -54,7 +54,7 @@ class _HistoryListWidgetState extends State<HistoryListWidget> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<CategoryModel>(
-      valueListenable: currentMenuSelected,
+      valueListenable: currentCategory,
       builder: (BuildContext context, value, __) {
         return Column(
           children: [
