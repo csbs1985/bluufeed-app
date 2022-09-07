@@ -64,7 +64,7 @@ class AuthService extends ChangeNotifier {
                 'date': user.docs[0]['date'],
                 'name': user.docs[0]['name'],
                 'upDateName': user.docs[0]['upDateName'],
-                'status': UserStatus.ACTIVE.name,
+                'status': UserStatusEnum.ACTIVE.name,
                 'email': user.docs[0]['email'],
                 'token': token,
                 'isNotification': user.docs[0]['isNotification'],
@@ -73,7 +73,7 @@ class AuthService extends ChangeNotifier {
               }),
               if (token != null && currentUser.value.isNotEmpty)
                 await usersFirestore.pathLoginLogout(
-                  UserStatus.ACTIVE.name,
+                  UserStatusEnum.ACTIVE.name,
                   token: token,
                 )
             })

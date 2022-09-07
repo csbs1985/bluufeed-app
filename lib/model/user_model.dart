@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:universe_history_app/firestore/users_firestore.dart';
 import 'package:universe_history_app/service/auth_service.dart';
-import 'package:universe_history_app/util/activity_util.dart';
+import 'package:universe_history_app/model/activity_model.dart';
 import 'package:universe_history_app/util/device_util.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 
@@ -68,6 +68,7 @@ class UserModel {
 }
 
 class UserClass {
+  final ActivityClass activityClass = ActivityClass();
   final AuthService authService = AuthService();
   final ToastWidget toast = ToastWidget();
   final UsersFirestore usersFirestore = UsersFirestore();
@@ -86,10 +87,10 @@ class UserClass {
 
   Future<void> clean(BuildContext context, String status) async {
     try {
-      await usersFirestore.pathLoginLogout(UserStatus.INACTIVE.name);
+      await usersFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.name);
       await authService.logout();
-      ActivityUtil(
-        ActivitiesEnum.LOGOUT.name,
+      activityClass.save(
+        ActivityEnum.LOGOUT.value,
         DeviceModel(),
         '',
       );
@@ -108,7 +109,7 @@ class UserClass {
 
   Future<void> delete(BuildContext context) async {
     try {
-      await usersFirestore.pathLoginLogout(UserStatus.DELETED.name);
+      await usersFirestore.pathLoginLogout(UserStatusEnum.DELETED.name);
       await usersFirestore.deleteUser();
       await authService.delete();
       currentUser.value = [];
@@ -138,4 +139,12 @@ class UserClass {
   }
 }
 
-enum UserStatus { ACTIVE, INACTIVE, DISABLED, DELETED }
+enum UserStatusEnum {
+  ACTIVE('active'),
+  INACTIVE('inactive'),
+  DISABLED('disabled'),
+  DELETED('deleted');
+
+  final String value;
+  const UserStatusEnum(this.value);
+}

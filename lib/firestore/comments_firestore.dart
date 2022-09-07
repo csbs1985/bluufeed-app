@@ -32,6 +32,8 @@ class CommentsFirestore {
   }
 
   upStatusUserComment(String _id) {
-    return comments.doc(_id).update({'userStatus': UserStatus.DELETED.name});
+    return comments
+        .doc(_id)
+        .update({'userStatus': UserStatusEnum.DELETED.name});
   }
 }

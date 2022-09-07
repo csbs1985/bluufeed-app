@@ -21,11 +21,11 @@ String resumeUitl(item, {String? type}) {
     userStatus = item is CommentModel ? item.userStatus : item['userStatus'];
   }
 
-  userStatus == UserStatus.DELETED.name
+  userStatus == UserStatusEnum.DELETED.name
       ? author = 'usuário deletado'
       : author = isSigned! ? userName! : 'anônimo';
 
-  var temp = time + ' · ' + author;
+  var temp = '$time · $author';
   return isEdit! ? '$temp · editado' : temp;
 }
 

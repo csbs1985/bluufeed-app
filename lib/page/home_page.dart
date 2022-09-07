@@ -73,9 +73,9 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: _setCurrentPage,
         children: [
           const FeedPage(),
-          const CreatePage(),
+          currentUser.value.isEmpty ? const LoginPage() : const CreatePage(),
           const NotificationPage(),
-          currentUser.value.isEmpty ? const LoginPage() : const SettingsPage(),
+          const SettingsPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
