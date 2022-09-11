@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
-import 'package:universe_history_app/firestore/users_firestore.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/service/local_notification_service.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +11,7 @@ ValueNotifier<bool> currentNotification = ValueNotifier<bool>(false);
 
 class PushNotificationService {
   final LocalNotificationService _notificationService;
-  final UsersFirestore _usersFirestore = UsersFirestore();
+  final UserFirestore _UserFirestore = UserFirestore();
 
   PushNotificationService(this._notificationService);
 
@@ -59,7 +59,7 @@ class PushNotificationService {
 
   Future<void> sendNotification(
       String title, String body, String idHistory, String user) async {
-    await _usersFirestore.getTokenOwner(user).then((result) async {
+    await _UserFirestore.getTokenOwner(user).then((result) async {
       try {
         await http.post(
           Uri.parse('https://fcm.googleapis.com/fcm/send'),

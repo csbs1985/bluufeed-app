@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
-import 'package:universe_history_app/firestore/users_firestore.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/service/auth_service.dart';
@@ -8,7 +8,8 @@ import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/model/activity_model.dart';
-import 'package:universe_history_app/widget/app_bar_widget.dart';
+import 'package:universe_history_app/widget/app_bar_null_widget%20.dart';
+import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/select_category_widget.dart';
 import 'package:universe_history_app/widget/select_toggle_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
@@ -28,7 +29,7 @@ class _CreatePageState extends State<CreatePage> {
   final ActivityClass activityClass = ActivityClass();
   final HistoriesFirestore historiesFirestore = HistoriesFirestore();
   final ToastWidget toast = ToastWidget();
-  final UsersFirestore usersFirestore = UsersFirestore();
+  final UserFirestore userFirestore = UserFirestore();
   final Uuid uuid = const Uuid();
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -149,7 +150,7 @@ class _CreatePageState extends State<CreatePage> {
     if (!_isEdit) currentUser.value.first.qtyHistory++;
 
     try {
-      await usersFirestore.pathQtyHistoryUser(currentUser.value.first);
+      await userFirestore.pathQtyHistoryUser(currentUser.value.first);
       activityClass.save(
         _isEdit
             ? ActivityEnum.NEW_HISTORY.value
@@ -178,11 +179,7 @@ class _CreatePageState extends State<CreatePage> {
 
         return Scaffold(
           key: scaffoldKey,
-          appBar: AppbarWidget(
-            btnBack: true,
-            btnPublish: _btnPublish,
-            callback: (value) => _postHistory(context),
-          ),
+          appBar: const AppbarNullWidget(title: 'Escrever'),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(
@@ -262,6 +259,16 @@ class _CreatePageState extends State<CreatePage> {
                         ? currentHistory.value.first.categories
                         : [],
                     callback: (value) => _setCategories(value),
+                  ),
+                  const SizedBox(height: UiPadding.xLarge),
+                  Button3dWidget(
+                    callback: () => _postHistory,
+                    label: 'publicar',
+                    style: _btnPublish
+                        ? ButtonStyleEnum.PRIMARY.value
+                        : ButtonStyleEnum.DISABLED.value,
+                    size: ButtonSizeEnum.LARGE.value,
+                    padding: UiPadding.large * 2,
                   )
                 ],
               ),

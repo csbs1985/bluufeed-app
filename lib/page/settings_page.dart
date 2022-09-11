@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:universe_history_app/firestore/users_firestore.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
@@ -25,8 +25,9 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final ActivityClass activityClass = ActivityClass();
+  final AuthService authService = AuthService();
   final UserClass userClass = UserClass();
-  final UsersFirestore usersFirestore = UsersFirestore();
+  final UserFirestore userFirestore = UserFirestore();
 
   void _login(BuildContext context) {
     currentHistory.value = [];
@@ -51,22 +52,22 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> _pathNotification() async {
     try {
-      await usersFirestore.pathNotification();
+      await userFirestore.pathNotification();
     } on AuthException catch (error) {
       debugPrint('ERROR => pathNotification: $error');
     }
   }
 
-  Future<void> goLogout(bool value) async {
-    value
-        ? userClass.clean(context, UserStatusEnum.INACTIVE.value)
-        : Navigator.of(context).pop();
+  Future<void> goLogout(BuildContext context, bool value) async {
+    // userClass.clean(context);
+    await authService.logout();
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarNullWidget(),
+      appBar: const AppbarNullWidget(title: 'Configurações'),
       body: SingleChildScrollView(
         child: ValueListenableBuilder(
           valueListenable: currentUser,
@@ -186,7 +187,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           link: PageEnum.HOME.value,
                           text:
                               'Dar uma tempo e manter seu conteúdo no History. Sua conta volta a ficar ativa quando entrar novamente com sua conta cadastrada.',
-                          callback: (value) => goLogout(value),
+                          callback: (value) => goLogout(context, value),
                         ),
                         ButtonLinkWidget(
                           label: 'Deletar conta',

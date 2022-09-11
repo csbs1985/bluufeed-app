@@ -27,8 +27,8 @@ dependencies:
 
   # firebase
   cloud_firestore: ^3.4.6
-  firebase_auth: ^3.4.2
-  firebase_core: ^1.21.1
+  firebase_auth: ^3.8.0
+  firebase_core: ^1.22.0
 
   # layout
   flutter_launcher_icons: ^0.10.0
@@ -51,6 +51,7 @@ dependencies:
   flutter_switch: ^0.3.2
   flutterfire_ui: ^0.4.3+7
   uuid: ^3.0.6
+  load: ^1.0.0
 
 dev_dependencies:
   flutter_test:

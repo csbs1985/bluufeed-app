@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:universe_history_app/widget/text_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:universe_history_app/widget/app_bar_null_widget%20.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -11,8 +11,8 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: const TextWidget(text: 'notificação'),
+    return const Scaffold(
+      appBar: AppbarNullWidget(title: 'Notificações'),
     );
   }
 }

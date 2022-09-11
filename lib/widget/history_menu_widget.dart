@@ -1,9 +1,11 @@
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
 import 'package:universe_history_app/modal/comment_modal.dart';
 import 'package:universe_history_app/model/history_model.dart';
+import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
@@ -182,8 +184,8 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                       icon: UiIcon.read,
                       callback: (value) {
                         _selectHistory(widget._history);
-                        Navigator.pushNamed(context, '/history',
-                            arguments: widget._history['id']);
+                        context.push(
+                            PageEnum.HISTORY.value + widget._history['id']);
                       },
                     ),
                   const SizedBox(width: UiPadding.xLarge),

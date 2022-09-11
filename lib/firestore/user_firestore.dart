@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:universe_history_app/model/user_model.dart';
 
-class UsersFirestore {
+class UserFirestore {
   CollectionReference user = FirebaseFirestore.instance.collection('users');
 
   deleteUser() {

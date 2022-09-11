@@ -1,9 +1,10 @@
 import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:universe_history_app/core/routes.dart';
+import 'package:provider/provider.dart';
+import 'package:universe_history_app/service/auth_check_service.dart';
+import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 
 Future<void> main() async {
@@ -15,7 +16,14 @@ Future<void> main() async {
 
   await Firebase.initializeApp();
 
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthService()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -53,11 +61,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         builder: (BuildContext context, Brightness theme, _) {
           bool isDark = currentTheme.value == Brightness.dark;
 
-          return MaterialApp.router(
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
-            routeInformationParser: routes.routeInformationParser,
-            routeInformationProvider: routes.routeInformationProvider,
-            routerDelegate: routes.routerDelegate,
+            home: const AuthCheckService(),
             theme: isDark ? UiTheme.themeDark : UiTheme.theme,
           );
         },

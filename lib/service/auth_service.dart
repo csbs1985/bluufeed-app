@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:universe_history_app/firestore/token_firestore.dart';
-import 'package:universe_history_app/firestore/users_firestore.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/user_model.dart';
 
 class AuthException implements Exception {
@@ -12,9 +12,9 @@ class AuthException implements Exception {
 class AuthService extends ChangeNotifier {
   late TokenFirestore tokenFirestore = TokenFirestore();
   late UserClass userClass = UserClass();
-  late UsersFirestore usersFirestore = UsersFirestore();
+  late UserFirestore userFirestore = UserFirestore();
 
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   User? user;
   String? token;
@@ -25,25 +25,25 @@ class AuthService extends ChangeNotifier {
   }
 
   _authCheck() {
-    auth.authStateChanges().listen((User? user) {
-      user = (user == null) ? null : user;
+    _auth.authStateChanges().listen((User? _user) {
+      user = (_user == null) ? null : _user;
       isLoading = false;
       notifyListeners();
     });
   }
 
   getUser() {
-    user = auth.currentUser;
+    user = _auth.currentUser;
     notifyListeners();
   }
 
   logout() async {
-    await auth.signOut();
+    await _auth.signOut();
     getUser();
   }
 
   delete() async {
-    auth.currentUser!.delete();
+    _auth.currentUser!.delete();
     getUser();
   }
 
@@ -56,8 +56,8 @@ class AuthService extends ChangeNotifier {
 
   setToken() async {
     await getToken();
-    await usersFirestore
-        .getUserEmail(auth.currentUser!.email!)
+    await userFirestore
+        .getUserEmail(_auth.currentUser!.email!)
         .then((user) async => {
               userClass.add({
                 'id': user.docs[0]['id'],
@@ -72,7 +72,7 @@ class AuthService extends ChangeNotifier {
                 'qtyComment': user.docs[0]['qtyComment'],
               }),
               if (token != null && currentUser.value.isNotEmpty)
-                await usersFirestore.pathLoginLogout(
+                await userFirestore.pathLoginLogout(
                   UserStatusEnum.ACTIVE.name,
                   token: token,
                 )
@@ -82,7 +82,7 @@ class AuthService extends ChangeNotifier {
 
   registerAuthentication(String email, String senha) async {
     try {
-      await auth.createUserWithEmailAndPassword(email: email, password: senha);
+      await _auth.createUserWithEmailAndPassword(email: email, password: senha);
       await getUser();
       await getToken();
     } on FirebaseAuthException catch (e) {
@@ -96,14 +96,14 @@ class AuthService extends ChangeNotifier {
 
   loginAuthentication(String email, String senha) async {
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: senha);
+      await _auth.signInWithEmailAndPassword(email: email, password: senha);
       await getUser();
       await setToken();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        throw AuthException('email não encontrado. Cadastre-se.');
+        throw AuthException('email não encontrado. cadastre-se');
       } else if (e.code == 'wrong-password') {
-        throw AuthException('senha incorreta. Tente novamente');
+        throw AuthException('senha incorreta. tente novamente');
       }
     }
   }

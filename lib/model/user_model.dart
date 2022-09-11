@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:universe_history_app/firestore/users_firestore.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/model/activity_model.dart';
 import 'package:universe_history_app/util/device_util.dart';
@@ -71,7 +71,7 @@ class UserClass {
   final ActivityClass activityClass = ActivityClass();
   final AuthService authService = AuthService();
   final ToastWidget toast = ToastWidget();
-  final UsersFirestore usersFirestore = UsersFirestore();
+  final UserFirestore userFirestore = UserFirestore();
 
   void add(Map<String, dynamic> user) {
     currentUser.value = [];
@@ -85,9 +85,9 @@ class UserClass {
     return file.writeAsString(data);
   }
 
-  Future<void> clean(BuildContext context, String status) async {
+  Future<void> clean(BuildContext context) async {
     try {
-      await usersFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.name);
+      // await userFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.name);
       await authService.logout();
       activityClass.save(
         ActivityEnum.LOGOUT.value,
@@ -109,8 +109,8 @@ class UserClass {
 
   Future<void> delete(BuildContext context) async {
     try {
-      await usersFirestore.pathLoginLogout(UserStatusEnum.DELETED.name);
-      await usersFirestore.deleteUser();
+      await userFirestore.pathLoginLogout(UserStatusEnum.DELETED.name);
+      await userFirestore.deleteUser();
       await authService.delete();
       currentUser.value = [];
     } on AuthException catch (error) {
