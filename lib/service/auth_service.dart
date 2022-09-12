@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:universe_history_app/firestore/token_firestore.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/user_model.dart';
-
-class AuthException implements Exception {
-  String message;
-  AuthException(this.message);
-}
+import 'package:universe_history_app/widget/toast_widget.dart';
 
 class AuthService extends ChangeNotifier {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final ToastWidget _toast = ToastWidget();
+
   late TokenFirestore tokenFirestore = TokenFirestore();
   late UserClass userClass = UserClass();
   late UserFirestore userFirestore = UserFirestore();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String message = 'erro não classificado, tente novamente';
 
   User? user;
   String? token;
@@ -80,31 +79,41 @@ class AuthService extends ChangeNotifier {
         .catchError((error) => debugPrint('ERROR => setToken:' + error));
   }
 
-  registerAuthentication(String email, String senha) async {
+  register(BuildContext context, String email, String senha) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: senha);
       await getUser();
-      await getToken();
+      // await getToken();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        throw AuthException('a senha é muito fraca');
-      } else if (e.code == 'email-already-in-use') {
-        throw AuthException('este email já está cadastrado');
+      switch (e.code) {
+        case 'weak-password':
+          message = 'a senha é muito fraca';
+          break;
+        case 'email-already-in-use':
+          message = 'este email já está cadastrado';
+          break;
       }
+
+      _toast.toast(context, ToastEnum.WARNING.value, message);
     }
   }
 
-  loginAuthentication(String email, String senha) async {
+  login(BuildContext context, String email, String senha) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
-      await getUser();
-      await setToken();
+      getUser();
+      // setToken();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        throw AuthException('email não encontrado. cadastre-se');
-      } else if (e.code == 'wrong-password') {
-        throw AuthException('senha incorreta. tente novamente');
+      switch (e.code) {
+        case 'user-not-found':
+          message = 'email informado não encontrado';
+          break;
+        case 'wrong-password':
+          message = 'senha informada incorreta';
+          break;
       }
+
+      _toast.toast(context, ToastEnum.WARNING.value, message);
     }
   }
 }

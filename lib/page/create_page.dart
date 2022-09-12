@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
@@ -139,7 +139,7 @@ class _CreatePageState extends State<CreatePage> {
     try {
       await historiesFirestore.postHistory(_history);
       _pathQtyHistoryUser();
-    } on AuthException catch (error) {
+    } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => postNewHistory:$error');
       toast.toast(context, ToastEnum.WARNING.value,
           'Erro ao publicar história, tente novamente mais tarde.');
@@ -165,7 +165,7 @@ class _CreatePageState extends State<CreatePage> {
         _isEdit ? 'História foi alterada!' : 'História  publicada!',
       );
       Navigator.of(context).pop();
-    } on AuthException catch (error) {
+    } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => pathQtyHistoryUser:$error');
     }
   }

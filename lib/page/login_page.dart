@@ -41,14 +41,13 @@ class _LoginPageState extends State<LoginPage> {
     return null;
   }
 
-  void _login() {
+  void _login(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      try {
-        authService.loginAuthentication(
-            _emailController.text, _passwordController.text);
-      } on AuthException catch (e) {
-        toast.toast(context, ToastEnum.WARNING.value, e.message);
-      }
+      authService.login(
+        context,
+        _emailController.text,
+        _passwordController.text,
+      );
     }
   }
 
@@ -112,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 Button3dWidget(
-                  callback: (value) => _login(),
+                  callback: (value) => _login(context),
                   label: 'entrar',
                   style: ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,

@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
-import 'package:universe_history_app/service/auth_service.dart';
 
 ValueNotifier<List<HistoryModel>> currentHistory =
     ValueNotifier<List<HistoryModel>>([]);
@@ -70,7 +70,7 @@ class HistoryClass {
           .then((result) => {
                 add(result.docs[0].data()),
               });
-    } on AuthException catch (error) {
+    } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => _getHistory: $error');
     }
   }

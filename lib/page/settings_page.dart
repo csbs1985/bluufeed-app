@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
@@ -53,14 +54,13 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> _pathNotification() async {
     try {
       await userFirestore.pathNotification();
-    } on AuthException catch (error) {
+    } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => pathNotification: $error');
     }
   }
 
   Future<void> goLogout(BuildContext context, bool value) async {
-    // userClass.clean(context);
-    await authService.logout();
+    userClass.clean(context);
     Navigator.pop(context);
   }
 

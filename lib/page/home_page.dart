@@ -9,7 +9,6 @@ import 'package:universe_history_app/page/create_page.dart';
 import 'package:universe_history_app/page/feed_page.dart';
 import 'package:universe_history_app/page/notification_page.dart';
 import 'package:universe_history_app/page/settings_page.dart';
-import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,7 +54,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           );
-        } on AuthException catch (error) {
+        } on FirebaseAuthException catch (error) {
           debugPrint('ERROR => getUserEmail: $error');
         }
       } else {

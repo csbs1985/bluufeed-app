@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
@@ -113,7 +114,7 @@ class UserClass {
       await userFirestore.deleteUser();
       await authService.delete();
       currentUser.value = [];
-    } on AuthException catch (error) {
+    } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => deleteUser: $error');
       Navigator.of(context).pop();
       toast.toast(
