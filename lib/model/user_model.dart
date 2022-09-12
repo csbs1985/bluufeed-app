@@ -6,7 +6,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/model/activity_model.dart';
-import 'package:universe_history_app/util/device_util.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 
 ValueNotifier<List<UserModel>> currentUser = ValueNotifier<List<UserModel>>([]);
@@ -90,11 +89,11 @@ class UserClass {
     try {
       // await userFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.name);
       await authService.logout();
-      activityClass.save(
-        ActivityEnum.LOGOUT.value,
-        DeviceModel(),
-        '',
-      );
+      // activityClass.save(
+      //   ActivityEnum.LOGOUT.value,
+      //   DeviceModel(),
+      //   '',
+      // );
       currentUser.value = [];
       toast.toast(
         context,

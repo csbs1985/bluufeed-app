@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:universe_history_app/firestore/token_firestore.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
+import 'package:universe_history_app/model/activity_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 
 class AuthService extends ChangeNotifier {
+  final ActivityClass activityClass = ActivityClass();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final ToastWidget _toast = ToastWidget();
 
@@ -53,37 +55,37 @@ class AuthService extends ChangeNotifier {
         .catchError((error) => debugPrint('ERROR => getToken:' + error));
   }
 
-  setToken() async {
+  getCurrentUser(String _activity) async {
     await getToken();
     await userFirestore
         .getUserEmail(_auth.currentUser!.email!)
-        .then((user) async => {
-              userClass.add({
+        .then(
+          (user) async => {
+            userClass.add(
+              {
                 'id': user.docs[0]['id'],
                 'date': user.docs[0]['date'],
                 'name': user.docs[0]['name'],
                 'upDateName': user.docs[0]['upDateName'],
-                'status': UserStatusEnum.ACTIVE.name,
+                'status': UserStatusEnum.ACTIVE.value,
                 'email': user.docs[0]['email'],
                 'token': token,
                 'isNotification': user.docs[0]['isNotification'],
                 'qtyHistory': user.docs[0]['qtyHistory'],
                 'qtyComment': user.docs[0]['qtyComment'],
-              }),
-              if (token != null && currentUser.value.isNotEmpty)
-                await userFirestore.pathLoginLogout(
-                  UserStatusEnum.ACTIVE.name,
-                  token: token,
-                )
-            })
+              },
+            ),
+            await activityClass.save(type: _activity),
+          },
+        )
         .catchError((error) => debugPrint('ERROR => setToken:' + error));
   }
 
   register(BuildContext context, String email, String senha) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: senha);
-      await getUser();
-      // await getToken();
+      // await getUser();
+      await getCurrentUser(ActivityEnum.NEW_ACCOUNT.name);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'weak-password':
@@ -101,12 +103,12 @@ class AuthService extends ChangeNotifier {
   login(BuildContext context, String email, String senha) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
-      getUser();
-      setToken();
+      // await getUser();
+      await getCurrentUser(ActivityEnum.LOGIN.name);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'too-many-requests':
-          message = 'tente novamente mais tarde';
+          message = 'erro na requisição, tente novamente mais tarde';
           break;
         case 'user-not-found':
           message = 'email informado não encontrado';

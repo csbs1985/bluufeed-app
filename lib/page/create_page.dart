@@ -151,13 +151,13 @@ class _CreatePageState extends State<CreatePage> {
 
     try {
       await userFirestore.pathQtyHistoryUser(currentUser.value.first);
-      activityClass.save(
-        _isEdit
-            ? ActivityEnum.NEW_HISTORY.value
-            : ActivityEnum.UP_HISTORY.value,
-        titleController.text,
-        _history['id'],
-      );
+      // activityClass.save(
+      //   _isEdit
+      //       ? ActivityEnum.NEW_HISTORY.value
+      //       : ActivityEnum.UP_HISTORY.value,
+      //   titleController.text,
+      //   _history['id'],
+      // );
       if (currentHistory.value.isNotEmpty) Navigator.of(context).pop();
       toast.toast(
         context,

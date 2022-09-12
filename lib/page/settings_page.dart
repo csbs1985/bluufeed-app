@@ -42,11 +42,11 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() {
       currentUser.value.first.isNotification =
           !currentUser.value.first.isNotification;
-      activityClass.save(
-        ActivityEnum.UP_NOTIFICATION.name,
-        currentUser.value.first.isNotification.toString(),
-        '',
-      );
+      // activityClass.save(
+      //   ActivityEnum.UP_NOTIFICATION.name,
+      //   currentUser.value.first.isNotification.toString(),
+      //   '',
+      // );
       _pathNotification();
     });
   }

@@ -29,6 +29,7 @@ linter:
     must_be_immutable: false
     no_leading_underscores_for_local_identifiers: false
     non_constant_identifier_names: false
+    prefer_interpolation_to_compose_strings: false
     unrelated_type_equality_checks: false
     use_build_context_synchronously: false
     use_key_in_widget_constructors: false
