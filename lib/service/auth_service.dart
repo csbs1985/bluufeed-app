@@ -102,9 +102,12 @@ class AuthService extends ChangeNotifier {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
       getUser();
-      // setToken();
+      setToken();
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
+        case 'too-many-requests':
+          message = 'tente novamente mais tarde';
+          break;
         case 'user-not-found':
           message = 'email informado não encontrado';
           break;

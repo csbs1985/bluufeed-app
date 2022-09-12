@@ -8,6 +8,7 @@ import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
+import 'package:universe_history_app/widget/input_password_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -28,16 +29,15 @@ class _LoginPageState extends State<LoginPage> {
   final String _regx =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
+  @override
+  dispose() {
+    _emailController.dispose();
+  }
+
   _validateEmail(value) {
     if (value!.isEmpty) return 'informe seu email';
     if (!RegExp(_regx).hasMatch(_emailController.text))
       return 'email informado não é válido';
-    return null;
-  }
-
-  _validatePassword(value) {
-    if (value!.isEmpty) return 'informe sua senha';
-    if (value!.length < 6) return 'a senha deve ter no mínimo 6 caracteres';
     return null;
   }
 
@@ -93,21 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: UiPadding.large),
-                TextFormField(
-                  autofocus: true,
-                  controller: _passwordController,
-                  obscureText: true,
-                  style: Theme.of(context).textTheme.headline2,
-                  keyboardType: TextInputType.text,
-                  validator: (value) => _validatePassword(value),
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: UiPadding.large,
-                      vertical: UiPadding.small,
-                    ),
-                    hintText: 'senha',
-                    hintStyle: Theme.of(context).textTheme.headline2,
-                  ),
+                InputPasswordWidget(
+                  callback: (value) => _passwordController.text = value,
                 ),
                 const SizedBox(height: UiPadding.large),
                 Button3dWidget(

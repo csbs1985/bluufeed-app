@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
 
 class ButtonTextWidget extends StatefulWidget {
   const ButtonTextWidget({
@@ -20,22 +18,15 @@ class ButtonTextWidget extends StatefulWidget {
 class _ButtonTextWidgetState extends State<ButtonTextWidget> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: currentTheme,
-      builder: (BuildContext context, Brightness theme, _) {
-        bool isDark = currentTheme.value == Brightness.dark;
-
-        return GestureDetector(
-          child: Container(
-            color: isDark ? UiColor.mainDark : UiColor.main,
-            child: Text(
-              widget._label,
-              style: UiText.subtitle,
-            ),
-          ),
-          onTap: () => widget._callback(true),
-        );
-      },
+    return GestureDetector(
+      child: Container(
+        color: Colors.transparent,
+        child: Text(
+          widget._label,
+          style: UiText.subtitle,
+        ),
+      ),
+      onTap: () => widget._callback(true),
     );
   }
 }
