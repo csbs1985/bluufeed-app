@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:universe_history_app/service/auth_service.dart';
+import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/theme/ui_border.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
@@ -23,6 +24,7 @@ class CodePage extends StatefulWidget {
 
 class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   final AuthService authService = AuthService();
+  final EmailService _emailService = EmailService();
   final ToastWidget _toast = ToastWidget();
 
   final TextEditingController _codeController = TextEditingController();
@@ -50,7 +52,20 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
     _sendEmail();
   }
 
-  _sendEmail() {}
+  _sendEmail() async {
+    try {
+      _emailService.sendEmail(
+        name: 'charles.sbs1',
+        email: _user,
+        subject: 'subject',
+        message: 'message',
+        code: _code.toString(),
+      );
+      print('código enviado para sua caixa de entrada');
+    } catch (e) {
+      print('não foi possivél enviar o código.');
+    }
+  }
 
   _endTimer() {
     _toast.toast(context, ToastEnum.WARNING.value,
@@ -63,6 +78,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
     } else {
       _toast.toast(
           context, ToastEnum.WARNING.value, 'código informado incorreto');
+      Navigator.pop(context);
     }
   }
 
@@ -78,7 +94,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
               TextWidget(
                 text:
                     'Enviamos um código de verificação com quatro digitos numéricos para o email $_user cadastrado. '
-                    'Caso não confirme abaixo com o código em até 3 (três) minutos a operação é cancelada e deve ser reiniciada. '
+                    'Caso não confirme abaixo com o código em até 5 (cinco) minutos a operação é cancelada e deve ser reiniciada. '
                     'Se precisar bastar solicitar um novo código de verificação. ',
               ),
               const SizedBox(height: UiPadding.large),
@@ -104,7 +120,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                     spacerWidth: 1,
                     endTime: DateTime.now().add(
                       const Duration(
-                        minutes: 3,
+                        minutes: 5,
                         seconds: 0,
                       ),
                     ),

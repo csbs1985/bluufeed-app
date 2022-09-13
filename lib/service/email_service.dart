@@ -1,43 +1,38 @@
-import 'package:flutter/cupertino.dart';
-import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/widget/toast_widget.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class EmailService {
-  final UserFirestore userFirestore = UserFirestore();
-  final ToastWidget toast = ToastWidget();
+  Future sendEmail({
+    required String name,
+    required String email,
+    required String subject,
+    required String message,
+    required String code,
+  }) async {
+    const serviceId = 'service_18ko0dn';
+    const templateId = 'template_mfblzo6';
+    const userId = 'zEFXfZTMn6WsFLO0U';
 
-  late String _toastMessage = '';
-
-  final String _emailRegx =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-  Future<bool> validateEmail(BuildContext context, String _email) async {
-    _toastMessage = '';
-
-    if (_email.isEmpty)
-      _toastMessage = 'informe seu email';
-    else if (!RegExp(_emailRegx).hasMatch(_email))
-      _toastMessage = 'email informado não é válido.';
-    else
-      await _validateEmailDb(context, _email);
-
-    if (_toastMessage.isNotEmpty)
-      toast.toast(
-        context,
-        ToastEnum.WARNING.value,
-        _toastMessage,
-      );
-
-    return _toastMessage.isEmpty ? true : false;
-  }
-
-  _validateEmailDb(BuildContext context, String _email) async {
-    await userFirestore
-        .getUserEmail(_email)
-        .then((result) => {
-              if (result.size <= 0)
-                _toastMessage = 'email informado não cadastrato.'
-            })
-        .catchError((error) => debugPrint('ERROR => _checkEmailDb: $error'));
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    await http.post(
+      url,
+      headers: {
+        'origin': 'http://localhost',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'service_id': serviceId,
+        'template_id': templateId,
+        'user_id': userId,
+        'template_params': {
+          'user_name': name,
+          'user_email': email,
+          'user_subject': 'History - Código de verificação',
+          'user_message': 'message',
+          'to_email': email,
+          'code': code,
+        }
+      }),
+    );
   }
 }
