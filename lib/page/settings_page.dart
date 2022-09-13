@@ -8,7 +8,7 @@ import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/model/activity_model.dart';
 import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/widget/app_bar_null_widget%20.dart';
+import 'package:universe_history_app/widget/app_bar_widget%20.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_confirm_widget.dart';
 import 'package:universe_history_app/widget/button_link_widget.dart';
@@ -67,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarNullWidget(title: 'Configurações'),
+      appBar: const AppbarWidget(title: 'Configurações'),
       body: SingleChildScrollView(
         child: ValueListenableBuilder(
           valueListenable: currentUser,

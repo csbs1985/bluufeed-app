@@ -84,7 +84,7 @@ class AuthService extends ChangeNotifier {
   register(BuildContext context, String email, String senha) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: senha);
-      // await getUser();
+      await getUser();
       await getCurrentUser(ActivityEnum.NEW_ACCOUNT.name);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -104,7 +104,7 @@ class AuthService extends ChangeNotifier {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
       // await getUser();
-      await getCurrentUser(ActivityEnum.LOGIN.name);
+      // await getCurrentUser(ActivityEnum.LOGIN.name);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'too-many-requests':

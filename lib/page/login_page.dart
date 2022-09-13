@@ -29,11 +29,6 @@ class _LoginPageState extends State<LoginPage> {
   final String _regx =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
-  // @override
-  // dispose() {
-  //   _emailController.dispose();
-  // }
-
   _validateEmail(value) {
     if (value!.isEmpty) return 'informe seu email';
     if (!RegExp(_regx).hasMatch(_emailController.text))
@@ -41,13 +36,15 @@ class _LoginPageState extends State<LoginPage> {
     return null;
   }
 
-  void _login(BuildContext context) {
+  _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      authService.login(
+      await authService.login(
         context,
         _emailController.text,
         _passwordController.text,
       );
+
+      Navigator.of(context).pushNamed(PageEnum.CODE.value);
     }
   }
 
