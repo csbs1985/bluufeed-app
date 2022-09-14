@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 
 class EmailService {
   Future sendEmail({
-    required String name,
     required String email,
     required String subject,
     required String message,
@@ -25,9 +24,8 @@ class EmailService {
         'template_id': templateId,
         'user_id': userId,
         'template_params': {
-          'user_name': name,
           'user_email': email,
-          'user_subject': 'History - Código de verificação',
+          'user_subject': 'Código de verificação',
           'user_message': 'message',
           'to_email': email,
           'code': code,

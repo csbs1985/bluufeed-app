@@ -35,41 +35,36 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    authService;
-
-    _sendCode();
     super.initState();
+    authService;
+    _sendCode();
   }
 
   _sendCode() {
-    _random();
-  }
-
-  _random() {
-    var rng = Random();
-    _code = rng.nextInt(9999) + 1000;
-
+    _code = Random().nextInt(999) + 1000;
     _sendEmail();
   }
 
   _sendEmail() async {
     try {
       _emailService.sendEmail(
-        name: 'charles.sbs1',
         email: _user,
         subject: 'subject',
         message: 'message',
         code: _code.toString(),
       );
-      print('código enviado para sua caixa de entrada');
-    } catch (e) {
-      print('não foi possivél enviar o código.');
+    } catch (error) {
+      debugPrint('não foi possivél enviar o código.');
     }
   }
 
   _endTimer() {
-    _toast.toast(context, ToastEnum.WARNING.value,
-        'tempo encerrado, reinicie o processo');
+    _toast.toast(
+      context,
+      ToastEnum.WARNING.value,
+      'tempo encerrado, enviamos um novo código',
+    );
+    _sendCode();
   }
 
   _validateCode() {
@@ -78,7 +73,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
     } else {
       _toast.toast(
           context, ToastEnum.WARNING.value, 'código informado incorreto');
-      Navigator.pop(context);
+      // Navigator.pop(context);
     }
   }
 
@@ -94,7 +89,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
               TextWidget(
                 text:
                     'Enviamos um código de verificação com quatro digitos numéricos para o email $_user cadastrado. '
-                    'Caso não confirme abaixo com o código em até 5 (cinco) minutos a operação é cancelada e deve ser reiniciada. '
+                    'Caso não confirme abaixo com o código em até 5 (cinco) minutos a operação é cancelada e enviamos um novo código para validação. '
                     'Se precisar bastar solicitar um novo código de verificação. ',
               ),
               const SizedBox(height: UiPadding.large),
@@ -107,9 +102,10 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    width: 94,
+                    width: 291,
                     child: TextWidget(
-                      text: 'Tempo restante ',
+                      text:
+                          'Por favor, insira o código de validação recebido em ',
                     ),
                   ),
                   TimerCountdown(
@@ -125,6 +121,12 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                       ),
                     ),
                     onEnd: () => _endTimer(),
+                  ),
+                  const SizedBox(
+                    width: 1,
+                    child: TextWidget(
+                      text: '.',
+                    ),
                   ),
                 ],
               ),

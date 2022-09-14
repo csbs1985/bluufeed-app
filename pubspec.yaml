@@ -54,7 +54,6 @@ dependencies:
   uuid: ^3.0.6
   load: ^1.0.0
   pin_code_fields: ^7.4.0
-  flutter_email_sender: ^5.1.0
 
 dev_dependencies:
   flutter_test:
