@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
+import 'package:universe_history_app/model/form_model.dart';
 import 'package:universe_history_app/model/page_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
+import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
@@ -22,19 +23,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
+  final EmailClass _emailClass = EmailClass();
   final TextEditingController _emailController = TextEditingController();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
-
-  final String _regx =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-  _validateEmail(value) {
-    if (value!.isEmpty) return 'informe seu email';
-    if (!RegExp(_regx).hasMatch(_emailController.text))
-      return 'email informado não é válido';
-    return null;
-  }
 
   _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
@@ -45,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                   if (result.size > 0)
                     {
                       currentEmail.value = _emailController.text,
+                      currentForm.value = FormEnum.LOGIN.value,
                       Navigator.pushNamed(context, PageEnum.CODE.value)
                     }
                   else
@@ -62,6 +55,12 @@ class _LoginPageState extends State<LoginPage> {
         debugPrint('ERROR => _checkEmail: ' + error.toString());
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
   }
 
   @override
@@ -91,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _emailController,
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.emailAddress,
-                  validator: (value) => _validateEmail(value),
+                  validator: (value) => _emailClass.validateEmail(value),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: UiPadding.large,

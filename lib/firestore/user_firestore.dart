@@ -48,10 +48,6 @@ class UserFirestore {
     return user.where('id', isEqualTo: _user).get();
   }
 
-  getUser(String? _email) {
-    return user.where('email', isEqualTo: _email).get();
-  }
-
   getName(String _nickname) {
     return user.where('name', isEqualTo: _nickname).get();
   }

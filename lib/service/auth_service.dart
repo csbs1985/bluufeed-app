@@ -4,6 +4,8 @@ import 'package:universe_history_app/firestore/token_firestore.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/activity_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
+import 'package:universe_history_app/service/email_service.dart';
+import 'package:universe_history_app/service/name_service.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 
 class AuthService extends ChangeNotifier {
@@ -20,6 +22,8 @@ class AuthService extends ChangeNotifier {
   User? user;
   String? token;
   bool isLoading = true;
+
+  late Map<String, dynamic> _user;
 
   AuthService() {
     _authCheck();
@@ -81,11 +85,33 @@ class AuthService extends ChangeNotifier {
         .catchError((error) => debugPrint('ERROR => setToken:' + error));
   }
 
+  setCurrentUser(BuildContext context, String _activity) async {
+    await getToken();
+
+    _user = {
+      'id': _auth.currentUser!.uid,
+      'date': DateTime.now().toString(),
+      'name': currentName.value,
+      'upDateName': '',
+      'status': UserStatusEnum.ACTIVE.value,
+      'email': currentEmail.value,
+      'token': token,
+      'isNotification': true,
+      'qtyHistory': 0,
+      'qtyComment': 0,
+    };
+
+    userFirestore.postUser(_user).then((result) => {
+          userClass.add(_user),
+          Navigator.pushNamed(context, '/'),
+        });
+  }
+
   register(BuildContext context, String email, String senha) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: senha);
       await getUser();
-      await getCurrentUser(ActivityEnum.NEW_ACCOUNT.name);
+      await setCurrentUser(context, ActivityEnum.NEW_ACCOUNT.name);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'weak-password':

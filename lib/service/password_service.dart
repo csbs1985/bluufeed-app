@@ -23,3 +23,11 @@ class PasswordService {
     return _toastMessage.isEmpty ? true : false;
   }
 }
+
+class PasswordClass {
+  validatePassword(value) {
+    if (value!.isEmpty) return 'informe sua senha';
+    if (value!.length < 6) return 'a senha deve ter no mínimo 6 caracteres';
+    return null;
+  }
+}

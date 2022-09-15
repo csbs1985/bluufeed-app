@@ -2,8 +2,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:universe_history_app/model/form_model.dart';
 import 'package:universe_history_app/model/page_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/theme/ui_border.dart';
@@ -70,11 +70,22 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   _validateCode() {
     if (_codeController.text == _code.toString()) {
       _code = 0;
-      Navigator.pushNamed(context, PageEnum.PASSWORD.value);
+
+      if (currentForm.value == FormEnum.LOGIN.value)
+        Navigator.pushNamed(context, PageEnum.PASSWORD.value);
+      else
+        Navigator.pushNamed(context, PageEnum.PASSWORD_CREATE.value);
     } else {
+      _codeController.text = '';
       _toast.toast(
           context, ToastEnum.WARNING.value, 'código informado incorreto');
     }
+  }
+
+  @override
+  void dispose() {
+    _codeController.dispose();
+    super.dispose();
   }
 
   @override

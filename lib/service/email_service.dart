@@ -1,5 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:universe_history_app/firestore/user_firestore.dart';
+
+ValueNotifier<String> currentEmail = ValueNotifier<String>('');
 
 class EmailService {
   Future sendEmail({
@@ -32,5 +36,30 @@ class EmailService {
         }
       }),
     );
+  }
+}
+
+class EmailClass {
+  final UserFirestore userFirestore = UserFirestore();
+  final String _regx =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+  late bool alreadyEmail;
+
+  validateEmail(value) {
+    if (value!.isEmpty) return 'informe seu email';
+    if (!RegExp(_regx).hasMatch(value)) return 'email informado não é válido';
+    return null;
+  }
+
+  getEmail(value) async {
+    await userFirestore
+        .getUserEmail(value)
+        .then((result) => {
+              alreadyEmail = result.size > 0 ? true : false,
+            })
+        .catchError((error) => debugPrint('ERROR => _checkEmail: ' + error));
+
+    return alreadyEmail;
   }
 }

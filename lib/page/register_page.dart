@@ -1,12 +1,15 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
+import 'package:universe_history_app/model/form_model.dart';
 import 'package:universe_history_app/model/page_model.dart';
-import 'package:universe_history_app/theme/ui_icon.dart';
+import 'package:universe_history_app/service/email_service.dart';
+import 'package:universe_history_app/service/name_service.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/widget/app_bar_widget%20.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
+import 'package:universe_history_app/widget/text_animation_widget.dart';
+import 'package:universe_history_app/widget/text_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -17,113 +20,138 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _userController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
+  final EmailClass _emailClass = EmailClass();
+  final NameClass _nameClass = NameClass();
   final ToastWidget toast = ToastWidget();
+  final UserFirestore userFirestore = UserFirestore();
 
-  final String _emailRegx =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
-  _validateEmail(BuildContext context) {
-    if (_emailController.text.isEmpty) {
-      toast.toast(
-        context,
-        ToastEnum.WARNING.value,
-        'informe seu email',
-      );
-    } else if (!RegExp(_emailRegx).hasMatch(_emailController.text)) {
-      toast.toast(
-        context,
-        ToastEnum.WARNING.value,
-        'email informado não é válido.',
-      );
+  _login(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      _getEmail();
+      try {} on Exception catch (error) {
+        debugPrint('ERROR => _checkEmail: ' + error.toString());
+      }
     }
-    // else      _checkEmailDb();
+  }
+
+  _getEmail() {
+    _emailClass.getEmail(_emailController.text).then((result) {
+      if (!result)
+        _getName();
+      else {
+        toast.toast(
+          context,
+          ToastEnum.WARNING.value,
+          'este email já está cadastrado',
+        );
+      }
+    });
+  }
+
+  _getName() {
+    _nameClass.getName(_nameController.text).then((result) {
+      if (!result) {
+        currentEmail.value = _emailController.text;
+        currentForm.value = FormEnum.REGISTER.value;
+        currentName.value = _nameController.text;
+        Navigator.pushNamed(context, PageEnum.CODE.value);
+      } else {
+        toast.toast(
+          context,
+          ToastEnum.WARNING.value,
+          'nome de usuário indisponível',
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _nameController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(UiPadding.xLarge),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(UiIcon.identity),
-            const SizedBox(height: UiPadding.large),
-            AnimatedTextKit(
-              isRepeatingAnimation: true,
-              totalRepeatCount: 3,
-              animatedTexts: [
-                TypewriterAnimatedText(
-                  'Vamos criar sua conta...',
-                  textStyle: Theme.of(context).textTheme.headline2,
+      appBar: const AppbarWidget(isBack: true, title: 'Criar conta'),
+      body: SingleChildScrollView(
+        child: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(UiPadding.large),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const TextAnimationWidget(
+                    text: 'espero que venha pra ficar...'),
+                const SizedBox(height: UiPadding.large),
+                const TextWidget(
+                  text:
+                      'Ólá, vamos fazer seu cadastro. Para isso, precisamos de alguns dados pessoais.'
+                      '\n\n'
+                      'Digite seu email e nome de usuário e veremos a a disponibilidade.',
+                ),
+                const SizedBox(height: UiPadding.large),
+                TextFormField(
+                  autofocus: true,
+                  controller: _emailController,
+                  style: Theme.of(context).textTheme.headline2,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) => _emailClass.validateEmail(value),
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: UiPadding.large,
+                      vertical: UiPadding.small,
+                    ),
+                    hintText: 'email',
+                    hintStyle: Theme.of(context).textTheme.headline2,
+                  ),
+                ),
+                const SizedBox(height: UiPadding.large),
+                TextFormField(
+                  autofocus: true,
+                  controller: _nameController,
+                  style: Theme.of(context).textTheme.headline2,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) => _nameClass.validateName(value),
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: UiPadding.large,
+                      vertical: UiPadding.small,
+                    ),
+                    hintText: 'usuário',
+                    hintStyle: Theme.of(context).textTheme.headline2,
+                  ),
+                ),
+                const SizedBox(height: UiPadding.large),
+                Button3dWidget(
+                  callback: (value) => _login(context),
+                  label: 'próximo',
+                  style: ButtonStyleEnum.PRIMARY.value,
+                  size: ButtonSizeEnum.LARGE.value,
+                  padding: UiPadding.large * 2,
+                ),
+                const SizedBox(height: UiPadding.large),
+                ButtonTextWidget(
+                  callback: (value) => Navigator.pop(context),
+                  label: 'já tenha conta, voltar',
+                ),
+                ButtonTextWidget(
+                  callback: (value) => Navigator.pushNamed(
+                      context, PageEnum.FORGOT_PASSWORD.value),
+                  label: 'preciso de ajuda',
                 ),
               ],
             ),
-            const SizedBox(height: UiPadding.large),
-            TextField(
-              autofocus: true,
-              controller: _emailController,
-              style: Theme.of(context).textTheme.headline2,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: UiPadding.large,
-                  vertical: UiPadding.small,
-                ),
-                hintText: 'email',
-                hintStyle: Theme.of(context).textTheme.headline2,
-              ),
-            ),
-            const SizedBox(height: UiPadding.large),
-            TextField(
-              autofocus: true,
-              controller: _passwordController,
-              style: Theme.of(context).textTheme.headline2,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: UiPadding.large,
-                  vertical: UiPadding.small,
-                ),
-                hintText: 'senha',
-                hintStyle: Theme.of(context).textTheme.headline2,
-              ),
-            ),
-            const SizedBox(height: UiPadding.large),
-            TextField(
-              autofocus: true,
-              controller: _passwordController,
-              style: Theme.of(context).textTheme.headline2,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: UiPadding.large,
-                  vertical: UiPadding.small,
-                ),
-                hintText: 'usuário',
-                hintStyle: Theme.of(context).textTheme.headline2,
-              ),
-            ),
-            const SizedBox(height: UiPadding.large),
-            Button3dWidget(
-              callback: (value) => _validateEmail(context),
-              label: 'criar conta',
-              style: ButtonStyleEnum.PRIMARY.value,
-              size: ButtonSizeEnum.LARGE.value,
-              padding: UiPadding.xLarge * 2,
-            ),
-            const SizedBox(height: UiPadding.large),
-            ButtonTextWidget(
-              callback: (value) =>
-                  GoRouter.of(context).push(PageEnum.LOGIN.value),
-              label: 'voltar e tentar entrar',
-            )
-          ],
+          ),
         ),
       ),
     );
