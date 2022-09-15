@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:universe_history_app/core/routes.dart';
 import 'package:universe_history_app/service/auth_check_service.dart';
 import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
@@ -65,6 +66,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             debugShowCheckedModeBanner: false,
             home: const AuthCheckService(),
             theme: isDark ? UiTheme.themeDark : UiTheme.theme,
+            onGenerateRoute: Routes.generateRoute,
           );
         },
       ),

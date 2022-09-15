@@ -1,14 +1,15 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/page_model.dart';
-import 'package:universe_history_app/service/auth_service.dart';
+import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
-import 'package:universe_history_app/widget/input_password_widget.dart';
+import 'package:universe_history_app/widget/text_animation_widget.dart';
+import 'package:universe_history_app/widget/text_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,11 +21,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
-  final AuthService authService = AuthService();
+  final TextEditingController _emailController = TextEditingController();
   final ToastWidget toast = ToastWidget();
+  final UserFirestore userFirestore = UserFirestore();
 
   final String _regx =
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -38,13 +38,29 @@ class _LoginPageState extends State<LoginPage> {
 
   _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      await authService.login(
-        context,
-        _emailController.text,
-        _passwordController.text,
-      );
-
-      Navigator.of(context).pushNamed(PageEnum.CODE.value);
+      try {
+        await userFirestore
+            .getUserEmail(_emailController.text)
+            .then((result) => {
+                  if (result.size > 0)
+                    {
+                      currentEmail.value = _emailController.text,
+                      Navigator.pushNamed(context, PageEnum.CODE.value)
+                    }
+                  else
+                    {
+                      toast.toast(
+                        context,
+                        ToastEnum.WARNING.value,
+                        'email informado não encontrado',
+                      )
+                    }
+                })
+            .catchError((error) =>
+                debugPrint('ERROR => _checkEmail: ' + error.toString()));
+      } on Exception catch (error) {
+        debugPrint('ERROR => _checkEmail: ' + error.toString());
+      }
     }
   }
 
@@ -53,26 +69,22 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          alignment: Alignment.center,
           padding: const EdgeInsets.all(UiPadding.large),
           child: Form(
             key: _formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: UiSize.appBar),
                 SvgPicture.asset(UiIcon.identity),
                 const SizedBox(height: UiPadding.large),
-                AnimatedTextKit(
-                  isRepeatingAnimation: true,
-                  totalRepeatCount: 3,
-                  animatedTexts: [
-                    TypewriterAnimatedText(
-                      'Seja bem vindo de volta... 😅😍',
-                      textStyle: Theme.of(context).textTheme.headline2,
-                    ),
-                  ],
-                ),
+                const TextAnimationWidget(
+                    text: 'é bom ter você de volta... 😅😍'),
+                const SizedBox(height: UiPadding.large),
+                const TextWidget(
+                    text:
+                        'Informe seu email cadastrado e clique em "próximo" para continuar.'),
                 const SizedBox(height: UiPadding.large),
                 TextFormField(
                   autofocus: true,
@@ -90,32 +102,23 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: UiPadding.large),
-                InputPasswordWidget(
-                  callback: (value) => _passwordController.text = value,
-                ),
-                const SizedBox(height: UiPadding.large),
                 Button3dWidget(
                   callback: (value) => _login(context),
-                  label: 'entrar',
+                  label: 'próximo',
                   style: ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
                   padding: UiPadding.large * 2,
                 ),
                 const SizedBox(height: UiPadding.large),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ButtonTextWidget(
-                      callback: (value) => Navigator.of(context)
-                          .pushReplacementNamed(PageEnum.REGISTER.value),
-                      label: 'ainda não tenho conta',
-                    ),
-                    ButtonTextWidget(
-                      callback: (value) => Navigator.of(context)
-                          .pushReplacementNamed(PageEnum.FORGOT_PASSWORD.value),
-                      label: 'esqueci a senha',
-                    ),
-                  ],
+                ButtonTextWidget(
+                  callback: (value) =>
+                      Navigator.pushNamed(context, PageEnum.REGISTER.value),
+                  label: 'sou novo aqui, cadastrar',
+                ),
+                ButtonTextWidget(
+                  callback: (value) => Navigator.pushNamed(
+                      context, PageEnum.FORGOT_PASSWORD.value),
+                  label: 'preciso de ajuda',
                 ),
               ],
             ),

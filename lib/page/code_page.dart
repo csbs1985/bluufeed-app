@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:universe_history_app/model/page_model.dart';
+import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/theme/ui_border.dart';
@@ -29,8 +31,6 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
 
   final TextEditingController _codeController = TextEditingController();
 
-  final _user = 'csbs.conta@outlook.com';
-
   late int _code;
 
   @override
@@ -48,7 +48,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   _sendEmail() async {
     try {
       _emailService.sendEmail(
-        email: _user,
+        email: currentEmail.value,
         subject: 'subject',
         message: 'message',
         code: _code.toString(),
@@ -69,11 +69,11 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
 
   _validateCode() {
     if (_codeController.text == _code.toString()) {
-      _toast.toast(context, ToastEnum.SUCCESS.value, 'certo, seja bem vindo!');
+      _code = 0;
+      Navigator.pushNamed(context, PageEnum.PASSWORD.value);
     } else {
       _toast.toast(
           context, ToastEnum.WARNING.value, 'código informado incorreto');
-      // Navigator.pop(context);
     }
   }
 
@@ -88,8 +88,8 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
             children: [
               TextWidget(
                 text:
-                    'Enviamos um código de verificação com quatro digitos numéricos para o email $_user cadastrado. '
-                    'Caso não confirme abaixo com o código em até 5 (cinco) minutos a operação é cancelada e enviamos um novo código para validação. '
+                    'Enviamos um código de verificação com quatro digitos numéricos para o email ${currentEmail.value} cadastrado. '
+                    'Caso não confirme abaixo com o código em até 10 (cinco) minutos a operação é cancelada e você deverá reinicar o precesso. '
                     'Se precisar bastar solicitar um novo código de verificação. ',
               ),
               const SizedBox(height: UiPadding.large),
@@ -116,7 +116,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                     spacerWidth: 1,
                     endTime: DateTime.now().add(
                       const Duration(
-                        minutes: 5,
+                        minutes: 10,
                         seconds: 0,
                       ),
                     ),

@@ -13,6 +13,7 @@ enum PageEnum {
   NAME('/name'),
   NOTIFICATION('/notification'),
   QUESTIONS('/questions'),
+  PASSWORD('/password'),
   PRIVACY('/privacy'),
   REGISTER('/register'),
   SETTINGS('/settings'),

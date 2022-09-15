@@ -103,8 +103,8 @@ class AuthService extends ChangeNotifier {
   login(BuildContext context, String email, String senha) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
-      // await getUser();
-      // await getCurrentUser(ActivityEnum.LOGIN.name);
+      await getUser();
+      await getCurrentUser(ActivityEnum.LOGIN.name);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'too-many-requests':

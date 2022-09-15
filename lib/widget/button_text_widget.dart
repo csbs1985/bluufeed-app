@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
 
 class ButtonTextWidget extends StatefulWidget {
@@ -20,7 +21,9 @@ class _ButtonTextWidgetState extends State<ButtonTextWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
+        alignment: Alignment.center,
         color: Colors.transparent,
+        height: UiSize.bottomLarge,
         child: Text(
           widget._label,
           style: UiText.subtitle,
