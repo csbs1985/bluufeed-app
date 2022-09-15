@@ -6,7 +6,9 @@ import 'package:universe_history_app/page/forgot_password_page.dart';
 import 'package:universe_history_app/page/home_page.dart';
 import 'package:universe_history_app/page/password_create_page.dart';
 import 'package:universe_history_app/page/password_page.dart';
+import 'package:universe_history_app/page/privacy_page.dart';
 import 'package:universe_history_app/page/register_page.dart';
+import 'package:universe_history_app/page/terms_page.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -35,6 +37,20 @@ class Routes {
     if (settings.name == PageEnum.PASSWORD_CREATE.value) {
       return PageTransition(
         child: const PasswordCreatePage(),
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+      );
+    }
+    if (settings.name == PageEnum.PRIVACY.value) {
+      return PageTransition(
+        child: const PrivacyPage(),
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+      );
+    }
+    if (settings.name == PageEnum.TERMS.value) {
+      return PageTransition(
+        child: const TermsPage(),
         type: PageTransitionType.rightToLeft,
         settings: settings,
       );

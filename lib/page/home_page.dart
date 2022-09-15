@@ -1,12 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/page/feed_page.dart';
 import 'package:universe_history_app/page/settings_page.dart';
+import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,48 +15,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final AuthService _authService = AuthService();
   final UserClass _userClass = UserClass();
-  final UserFirestore _UserFirestore = UserFirestore();
+  final UserFirestore _userFirestore = UserFirestore();
 
   PageController _pageController = PageController();
 
   int _currentPage = 0;
 
+  late Map<String, dynamic> _user;
+
   @override
   void initState() {
-    // identify();
+    identify();
     _pageController = PageController(initialPage: _currentPage);
     super.initState();
   }
 
-  void identify() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
-      if (user != null) {
-        try {
-          await _userClass.readUser();
-          await _UserFirestore.getUserEmail(user.email).then(
-            (result) => _userClass.add(
-              {
-                'id': result.docs[0]['id'],
-                'date': result.docs[0]['date'],
-                'name': result.docs[0]['name'],
-                'upDateName': result.docs[0]['upDateName'],
-                'status': result.docs[0]['status'],
-                'email': result.docs[0]['email'],
-                'token': result.docs[0]['token'],
-                'isNotification': result.docs[0]['isNotification'],
-                'qtyHistory': result.docs[0]['qtyHistory'],
-                'qtyComment': result.docs[0]['qtyComment'],
-              },
-            ),
-          );
-        } on FirebaseAuthException catch (error) {
-          debugPrint('ERROR => getUserEmail: $error');
-        }
-      } else {
-        GoRouter.of(context).push(PageEnum.LOGIN.value);
-      }
-    });
+  Future<void> identify() async {
+    if (_authService.isLoading) {
+      await _userFirestore
+          .getUserEmail(_authService.auth.currentUser!.email)
+          .then(
+        (result) {
+          _user = {
+            'id': result.docs[0]['id'],
+            'date': result.docs[0]['date'],
+            'name': result.docs[0]['name'],
+            'upDateName': result.docs[0]['upDateName'],
+            'status': result.docs[0]['status'],
+            'email': result.docs[0]['email'],
+            'token': result.docs[0]['token'],
+            'isNotification': result.docs[0]['isNotification'],
+            'qtyHistory': result.docs[0]['qtyHistory'],
+            'qtyComment': result.docs[0]['qtyComment'],
+          };
+
+          _userClass.add(_user);
+        },
+      );
+    }
   }
 
   void _setCurrentPage(page) {

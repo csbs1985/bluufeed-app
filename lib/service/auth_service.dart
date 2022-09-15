@@ -10,7 +10,7 @@ import 'package:universe_history_app/widget/toast_widget.dart';
 
 class AuthService extends ChangeNotifier {
   final ActivityClass activityClass = ActivityClass();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   final ToastWidget _toast = ToastWidget();
 
   late TokenFirestore tokenFirestore = TokenFirestore();
@@ -30,7 +30,7 @@ class AuthService extends ChangeNotifier {
   }
 
   _authCheck() {
-    _auth.authStateChanges().listen((User? _user) {
+    auth.authStateChanges().listen((User? _user) {
       user = (_user == null) ? null : _user;
       isLoading = false;
       notifyListeners();
@@ -38,17 +38,17 @@ class AuthService extends ChangeNotifier {
   }
 
   getUser() {
-    user = _auth.currentUser;
+    user = auth.currentUser;
     notifyListeners();
   }
 
   logout() async {
-    await _auth.signOut();
+    await auth.signOut();
     getUser();
   }
 
   delete() async {
-    _auth.currentUser!.delete();
+    auth.currentUser!.delete();
     getUser();
   }
 
@@ -62,7 +62,7 @@ class AuthService extends ChangeNotifier {
   getCurrentUser(String _activity) async {
     await getToken();
     await userFirestore
-        .getUserEmail(_auth.currentUser!.email!)
+        .getUserEmail(auth.currentUser!.email!)
         .then(
           (user) async => {
             userClass.add(
@@ -89,7 +89,7 @@ class AuthService extends ChangeNotifier {
     await getToken();
 
     _user = {
-      'id': _auth.currentUser!.uid,
+      'id': auth.currentUser!.uid,
       'date': DateTime.now().toString(),
       'name': currentName.value,
       'upDateName': '',
@@ -109,7 +109,7 @@ class AuthService extends ChangeNotifier {
 
   register(BuildContext context, String email, String senha) async {
     try {
-      await _auth.createUserWithEmailAndPassword(email: email, password: senha);
+      await auth.createUserWithEmailAndPassword(email: email, password: senha);
       await getUser();
       await setCurrentUser(context, ActivityEnum.NEW_ACCOUNT.name);
     } on FirebaseAuthException catch (e) {
@@ -128,7 +128,7 @@ class AuthService extends ChangeNotifier {
 
   login(BuildContext context, String email, String senha) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: senha);
+      await auth.signInWithEmailAndPassword(email: email, password: senha);
       await getUser();
       await getCurrentUser(ActivityEnum.LOGIN.name);
     } on FirebaseAuthException catch (e) {

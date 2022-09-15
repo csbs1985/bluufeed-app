@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
@@ -36,7 +35,7 @@ class _ButtonLinkWidgetState extends State<ButtonLinkWidget> {
                 alignment: Alignment.centerLeft,
                 child: TextWidget(text: widget._label),
               ),
-              onTap: () => context.pushNamed(widget._link),
+              onTap: () => Navigator.of(context).pushNamed(widget._link),
             ),
           ),
         );
