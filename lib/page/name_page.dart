@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/widget/app_bar_widget%20.dart';
+import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/text_animation_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
@@ -22,7 +22,7 @@ class _NamePageState extends State<NamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(isBack: true, title: 'Nome de usuário'),
+      appBar: const AppbarWidget(title: 'Nome de usuário'),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,

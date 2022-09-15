@@ -8,7 +8,7 @@ import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/model/activity_model.dart';
-import 'package:universe_history_app/widget/app_bar_widget%20.dart';
+import 'package:universe_history_app/widget/app_bar_not_back_widget.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/select_category_widget.dart';
 import 'package:universe_history_app/widget/select_toggle_widget.dart';
@@ -179,7 +179,7 @@ class _CreatePageState extends State<CreatePage> {
 
         return Scaffold(
           key: scaffoldKey,
-          appBar: const AppbarWidget(title: 'Escrever'),
+          appBar: const AppBarNotBackWidget(title: 'Escrever'),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(

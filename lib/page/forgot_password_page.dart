@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/widget/app_bar_widget%20.dart';
+import 'package:universe_history_app/widget/app_bar_widget.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -16,7 +16,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(isBack: true, title: 'Problemas ao entrar'),
+      appBar: const AppbarWidget(title: 'Problemas ao entrar'),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,

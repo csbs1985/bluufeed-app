@@ -11,7 +11,7 @@ import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
-import 'package:universe_history_app/widget/app_bar_widget%20.dart';
+import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
@@ -91,7 +91,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(isBack: true, title: 'Código de verificação'),
+      appBar: const AppbarWidget(title: 'Código de verificação'),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),

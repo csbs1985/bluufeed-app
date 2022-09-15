@@ -5,7 +5,7 @@ import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/service/password_service.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/widget/app_bar_widget%20.dart';
+import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
 import 'package:universe_history_app/widget/input_password_widget.dart';
@@ -78,7 +78,7 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(isBack: true, title: 'Criar senha'),
+      appBar: const AppbarWidget(title: 'Criar senha'),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
