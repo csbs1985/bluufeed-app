@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
+import 'package:universe_history_app/model/page_model.dart';
+import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/widget/app_bar_widget.dart';
+import 'package:universe_history_app/widget/button_3d_widget.dart';
+import 'package:universe_history_app/widget/space_x_large.widget.dart';
+import 'package:universe_history_app/widget/text_animation_widget.dart';
+import 'package:universe_history_app/widget/text_widget.dart';
+import 'package:universe_history_app/widget/toast_widget.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -13,20 +22,127 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _valueController = TextEditingController();
+  final ToastWidget toast = ToastWidget();
+  final UserFirestore _userFirestore = UserFirestore();
+
+  _validateValue(String? value) {
+    if (value!.isEmpty) return 'favor insira seu email ou nome de usuário';
+    return null;
+  }
+
+  _retrieveAccount() {
+    if (_formKey.currentState!.validate()) {
+      try {
+        _getEmail();
+      } on Exception catch (error) {
+        debugPrint('ERROR => _checkEmail: ' + error.toString());
+      }
+    }
+  }
+
+  _getEmail() async {
+    await _userFirestore
+        .getUserEmail(_valueController.text)
+        .then((result) => {
+              if (result.size > 0)
+                {
+                  toast.toast(
+                    context,
+                    ToastEnum.SUCCESS.value,
+                    'pronto, enviamos uma senha temporária para seu email cadastrado',
+                  ),
+                  Navigator.pushNamed(context, PageEnum.LOGIN.value),
+                }
+              else
+                _getName(),
+            })
+        .catchError((error) => debugPrint('ERROR => _getEmail: ' + error));
+  }
+
+  _getName() async {
+    await _userFirestore
+        .getName(_valueController.text)
+        .then((result) => {
+              if (result.size > 0)
+                {
+                  toast.toast(
+                    context,
+                    ToastEnum.SUCCESS.value,
+                    'pronto, enviamos uma mensagem para seu email cadastrado',
+                  ),
+                  Navigator.pushNamed(context, PageEnum.LOGIN.value),
+                }
+              else
+                {
+                  toast.toast(
+                    context,
+                    ToastEnum.WARNING.value,
+                    'hum, não conseguimos identifica-ló',
+                  ),
+                }
+            })
+        .catchError((error) => debugPrint('ERROR => _getName: ' + error));
+  }
+
+  @override
+  void dispose() {
+    _valueController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppbarWidget(title: 'Problemas ao entrar'),
       body: SingleChildScrollView(
         child: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(UiPadding.large),
+          padding: const EdgeInsets.all(UiPadding.xLarge),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                SizedBox(height: UiSize.appBar),
+              children: [
+                SvgPicture.asset(UiIcon.identity),
+                const SpaceXLargeWidget(),
+                const TextAnimationWidget(text: 'vou te ajudar...'),
+                const SizedBox(height: UiPadding.large),
+                const TextWidget(
+                  text: '- Como lembra minha senha?'
+                      '\n'
+                      'R: Digite seu email que enviaremos uma senha temporária, não esqueça de alterar-lá o mais breve possível.'
+                      '\n\n'
+                      '- Como lembrar meu email cadastrado?'
+                      '\n'
+                      'R: Digite seu nome de usuário que enviaremos uma mensagem para o email cadastrado.'
+                      '\n\n'
+                      '- Não lembro meu email, senha e nome de usuário, o que faço?'
+                      '\n'
+                      'R: Infelizmente para nós dois não temos o que fazer para recuperar sua conta. Como vai provar que você é você.',
+                ),
+                const SpaceXLargeWidget(),
+                TextFormField(
+                  controller: _valueController,
+                  style: Theme.of(context).textTheme.headline2,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) => _validateValue(value),
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: UiPadding.large,
+                      vertical: UiPadding.small,
+                    ),
+                    hintText: 'email ou nome de usuário',
+                    hintStyle: Theme.of(context).textTheme.headline2,
+                  ),
+                ),
+                const SizedBox(height: UiPadding.large),
+                Button3dWidget(
+                  callback: (value) => _retrieveAccount(),
+                  label: 'próximo',
+                  style: ButtonStyleEnum.PRIMARY.value,
+                  size: ButtonSizeEnum.LARGE.value,
+                  padding: UiSize.paddingPageSmall,
+                ),
               ],
             ),
           ),

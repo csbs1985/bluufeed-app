@@ -5,6 +5,7 @@ import 'package:universe_history_app/page/code_page.dart';
 import 'package:universe_history_app/page/forgot_password_page.dart';
 import 'package:universe_history_app/page/history_page.dart';
 import 'package:universe_history_app/page/home_page.dart';
+import 'package:universe_history_app/page/login_page.dart';
 import 'package:universe_history_app/page/password_create_page.dart';
 import 'package:universe_history_app/page/password_page.dart';
 import 'package:universe_history_app/page/privacy_page.dart';
@@ -30,6 +31,13 @@ class Routes {
     if (settings.name == PageEnum.HISTORY.value) {
       return PageTransition(
         child: const HistoryPage(),
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+      );
+    }
+    if (settings.name == PageEnum.LOGIN.value) {
+      return PageTransition(
+        child: const LoginPage(),
         type: PageTransitionType.rightToLeft,
         settings: settings,
       );

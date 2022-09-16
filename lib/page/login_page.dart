@@ -23,7 +23,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-
   final EmailClass _emailClass = EmailClass();
   final TextEditingController _emailController = TextEditingController();
   final ToastWidget toast = ToastWidget();
@@ -42,13 +41,11 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.pushNamed(context, PageEnum.CODE.value)
                     }
                   else
-                    {
-                      toast.toast(
-                        context,
-                        ToastEnum.WARNING.value,
-                        'email informado não encontrado',
-                      )
-                    }
+                    toast.toast(
+                      context,
+                      ToastEnum.WARNING.value,
+                      'email informado não encontrado',
+                    )
                 })
             .catchError((error) =>
                 debugPrint('ERROR => _checkEmail: ' + error.toString()));

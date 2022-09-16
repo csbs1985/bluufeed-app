@@ -7,6 +7,7 @@ enum FormEnum {
   EDIT('edit'),
   LOGIN('login'),
   REGISTER('register'),
+  FORGOT('forgot'),
   NULL('');
 
   final String value;

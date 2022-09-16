@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/service/password_service.dart';
@@ -10,7 +9,6 @@ import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
-import 'package:universe_history_app/widget/button_text_widget.dart';
 import 'package:universe_history_app/widget/input_password_widget.dart';
 import 'package:universe_history_app/widget/space_x_large.widget.dart';
 import 'package:universe_history_app/widget/text_animation_widget.dart';
@@ -119,12 +117,6 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
                   style: ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
                   padding: UiSize.paddingPageSmall,
-                ),
-                const SizedBox(height: UiPadding.large),
-                ButtonTextWidget(
-                  callback: (value) => Navigator.pushNamed(
-                      context, PageEnum.FORGOT_PASSWORD.value),
-                  label: 'esqueci a senha',
                 ),
               ],
             ),

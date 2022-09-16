@@ -19,6 +19,7 @@ class ToastWidget {
     showToast(
       text,
       context: context,
+      duration: const Duration(seconds: 3),
       position: StyledToastPosition.center,
       textStyle: UiText.toast,
       backgroundColor: style,

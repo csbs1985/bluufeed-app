@@ -51,7 +51,6 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
                     buttonSize -
                     UiSize.paddingPageSmall,
                 child: TextField(
-                  autofocus: true,
                   onChanged: (value) => _changeValue(value),
                   obscureText: _show,
                   style: Theme.of(context).textTheme.headline2,
