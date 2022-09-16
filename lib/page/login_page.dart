@@ -9,6 +9,7 @@ import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
+import 'package:universe_history_app/widget/space_x_large.widget.dart';
 import 'package:universe_history_app/widget/text_animation_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
@@ -67,9 +68,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(UiPadding.large),
+        child: Padding(
+          padding: const EdgeInsets.all(UiPadding.xLarge),
           child: Form(
             key: _formKey,
             child: Column(
@@ -77,9 +77,8 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const SizedBox(height: UiSize.appBar),
                 SvgPicture.asset(UiIcon.identity),
-                const SizedBox(height: UiPadding.large),
-                const TextAnimationWidget(
-                    text: 'é bom ter você de volta... 😅😍'),
+                const SpaceXLargeWidget(),
+                const TextAnimationWidget(text: 'é bom ter você de volta...'),
                 const SizedBox(height: UiPadding.large),
                 const TextWidget(
                     text:
@@ -106,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                   label: 'próximo',
                   style: ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
-                  padding: UiPadding.large * 2,
+                  padding: UiSize.paddingPageSmall,
                 ),
                 const SizedBox(height: UiPadding.large),
                 ButtonTextWidget(
@@ -116,7 +115,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 ButtonTextWidget(
                   callback: (value) => Navigator.pushNamed(
-                      context, PageEnum.FORGOT_PASSWORD.value),
+                    context,
+                    PageEnum.FORGOT_PASSWORD.value,
+                  ),
                   label: 'preciso de ajuda',
                 ),
               ],

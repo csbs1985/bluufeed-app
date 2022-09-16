@@ -5,6 +5,8 @@ import 'package:universe_history_app/firestore/histories_firestore.dart';
 ValueNotifier<List<HistoryModel>> currentHistory =
     ValueNotifier<List<HistoryModel>>([]);
 
+ValueNotifier<String> currentHistoryId = ValueNotifier<String>('');
+
 class HistoryModel {
   late String id;
   late String title;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:universe_history_app/theme/ui_border.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
 
@@ -19,6 +20,8 @@ class InputPasswordWidget extends StatefulWidget {
 
 class _InputPasswordWidgetState extends State<InputPasswordWidget> {
   bool _show = true;
+
+  final double buttonSize = 68;
 
   _showPassword() {
     setState(() => _show = !_show);
@@ -44,7 +47,9 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width - 100,
+                width: MediaQuery.of(context).size.width -
+                    buttonSize -
+                    UiSize.paddingPageSmall,
                 child: TextField(
                   autofocus: true,
                   onChanged: (value) => _changeValue(value),
@@ -64,7 +69,7 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
               Container(
                 alignment: Alignment.center,
                 color: isDark ? UiColor.backDark : UiColor.back,
-                width: 68,
+                width: buttonSize,
                 child: ButtonTextWidget(
                   label: _show ? 'mostrar' : 'ocultar',
                   callback: (value) => _showPassword(),

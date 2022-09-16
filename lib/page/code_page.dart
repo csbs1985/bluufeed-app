@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:universe_history_app/model/form_model.dart';
@@ -8,6 +9,7 @@ import 'package:universe_history_app/service/auth_service.dart';
 import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/theme/ui_border.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
+import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/theme/ui_text.dart';
@@ -54,6 +56,8 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
         message: 'message',
         code: _code.toString(),
       );
+      _toast.toast(context, ToastEnum.SUCCESS.value,
+          'código enviado para o email ${currentEmail.value}');
     } catch (error) {
       debugPrint('não foi possivél enviar o código.');
     }
@@ -95,9 +99,12 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
       appBar: const AppbarWidget(title: 'Código de verificação'),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
+          padding: const EdgeInsets.all(UiPadding.xLarge),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SvgPicture.asset(UiIcon.identity),
+              const SpaceXLargeWidget(),
               TextWidget(
                 text:
                     'Enviamos um código de verificação com quatro digitos numéricos para o email ${currentEmail.value} cadastrado. '
@@ -143,8 +150,8 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                 ],
               ),
               const SpaceXLargeWidget(),
-              SizedBox(
-                width: 260,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 56),
                 child: PinCodeTextField(
                   controller: _codeController,
                   length: 4,
@@ -169,7 +176,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                 label: 'validar',
                 style: ButtonStyleEnum.PRIMARY.value,
                 size: ButtonSizeEnum.LARGE.value,
-                padding: UiPadding.large * 2,
+                padding: UiSize.paddingPageSmall,
               ),
               const SizedBox(height: UiPadding.large),
               ButtonTextWidget(

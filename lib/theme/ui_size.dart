@@ -12,6 +12,7 @@ class UiSize {
   static const double menuHeight =
       UiSize.bottomSmall + UiPadding.large + UiPadding.large;
   static const double modalHeight = 42;
+  static const double paddingPageSmall = 48;
   static const double separator = 8;
   static const double tag = 36;
   static const double widthFullLessPadding = UiPadding.large * 2;

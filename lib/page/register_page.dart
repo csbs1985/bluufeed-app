@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/form_model.dart';
 import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/service/name_service.dart';
+import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
+import 'package:universe_history_app/widget/space_x_large.widget.dart';
 import 'package:universe_history_app/widget/text_animation_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
@@ -32,8 +36,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      _getEmail();
-      try {} on Exception catch (error) {
+      try {
+        _getEmail();
+      } on Exception catch (error) {
         debugPrint('ERROR => _checkEmail: ' + error.toString());
       }
     }
@@ -84,24 +89,24 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.all(UiPadding.large),
+          padding: const EdgeInsets.all(UiPadding.xLarge),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SvgPicture.asset(UiIcon.identity),
+                const SpaceXLargeWidget(),
                 const TextAnimationWidget(
                     text: 'espero que venha pra ficar...'),
                 const SizedBox(height: UiPadding.large),
                 const TextWidget(
                   text:
-                      'Ólá, vamos fazer seu cadastro. Para isso, precisamos de alguns dados pessoais.'
-                      '\n\n'
-                      'Digite seu email e nome de usuário e veremos a a disponibilidade.',
+                      'Ólá, vamos fazer seu cadastro. Para isso, precisamos de alguns dados pessoais. '
+                      'Digite seu email e nome de usuário e veremos a disponibilidade.',
                 ),
                 const SizedBox(height: UiPadding.large),
                 TextFormField(
-                  autofocus: true,
                   controller: _emailController,
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.emailAddress,
@@ -117,7 +122,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 TextFormField(
-                  autofocus: true,
                   controller: _nameController,
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.emailAddress,
@@ -137,7 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   label: 'próximo',
                   style: ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
-                  padding: UiPadding.large * 2,
+                  padding: UiSize.paddingPageSmall,
                 ),
                 const SizedBox(height: UiPadding.large),
                 ButtonTextWidget(

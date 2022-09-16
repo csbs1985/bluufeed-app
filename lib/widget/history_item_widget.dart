@@ -68,10 +68,7 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
                 padding: EdgeInsets.symmetric(vertical: UiPadding.medium),
                 child: BorderWidget(),
               ),
-              HistoryMenuWidget(
-                history: widget._snapshot,
-                type: 'HOMEPAGE',
-              )
+              HistoryMenuWidget(history: widget._snapshot)
             ],
           ),
         ),
