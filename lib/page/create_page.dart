@@ -260,16 +260,20 @@ class _CreatePageState extends State<CreatePage> {
                         : [],
                     callback: (value) => _setCategories(value),
                   ),
-                  const SizedBox(height: UiPadding.xLarge),
-                  Button3dWidget(
-                    callback: () => _postHistory,
-                    label: 'publicar',
-                    style: _btnPublish
-                        ? ButtonStyleEnum.PRIMARY.value
-                        : ButtonStyleEnum.DISABLED.value,
-                    size: ButtonSizeEnum.LARGE.value,
-                    padding: UiPadding.large * 2,
-                  )
+                  const SizedBox(height: UiPadding.large),
+                  if (_btnPublish)
+                    Column(
+                      children: [
+                        Button3dWidget(
+                          callback: () => _postHistory,
+                          label: 'publicar',
+                          style: ButtonStyleEnum.PRIMARY.value,
+                          size: ButtonSizeEnum.LARGE.value,
+                          padding: UiPadding.large * 2,
+                        ),
+                        const SizedBox(height: UiPadding.large),
+                      ],
+                    )
                 ],
               ),
             ),
