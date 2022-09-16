@@ -5,9 +5,9 @@ import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 
 class AppbarWidget extends StatefulWidget with PreferredSizeWidget {
-  const AppbarWidget({String? title}) : _title = title;
+  const AppbarWidget({required String title}) : _title = title;
 
-  final String? _title;
+  final String _title;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -28,7 +28,7 @@ class _AppbarBackWidgetState extends State<AppbarWidget> {
           backgroundColor: isDark ? UiColor.mainDark : UiColor.main,
           elevation: 0,
           title: Text(
-            widget._title!,
+            widget._title,
             style: Theme.of(context).textTheme.headline1,
           ),
           titleSpacing: 0,

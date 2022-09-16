@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/page/create_page.dart';
 import 'package:universe_history_app/page/feed_page.dart';
 import 'package:universe_history_app/page/notification_page.dart';
 import 'package:universe_history_app/page/settings_page.dart';
@@ -71,7 +70,6 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: _setCurrentPage,
         children: const [
           FeedPage(),
-          CreatePage(),
           NotificationPage(),
           SettingsPage(),
         ],
@@ -88,12 +86,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               _currentPage == 0 ? UiIcon.logoActived : UiIcon.logo,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              _currentPage == 1 ? UiIcon.createActived : UiIcon.create,
             ),
             label: '',
           ),

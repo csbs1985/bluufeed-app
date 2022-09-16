@@ -1,28 +1,29 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
+import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/model/activity_model.dart';
-import 'package:universe_history_app/widget/app_bar_not_back_widget.dart';
-import 'package:universe_history_app/widget/button_3d_widget.dart';
+import 'package:universe_history_app/widget/space_x_large.widget.dart';
 import 'package:universe_history_app/widget/select_category_widget.dart';
 import 'package:universe_history_app/widget/select_toggle_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 import 'package:uuid/uuid.dart';
 
-class CreatePage extends StatefulWidget {
-  const CreatePage({Key? key}) : super(key: key);
+class CreateModal extends StatefulWidget {
+  const CreateModal({Key? key}) : super(key: key);
 
   @override
-  State<CreatePage> createState() => _CreatePageState();
+  State<CreateModal> createState() => _CreatePageState();
 }
 
-class _CreatePageState extends State<CreatePage> {
+class _CreatePageState extends State<CreateModal> {
   TextEditingController titleController = TextEditingController();
   TextEditingController textController = TextEditingController();
 
@@ -36,7 +37,7 @@ class _CreatePageState extends State<CreatePage> {
 
   List<String> _categories = [];
 
-  bool _isEdit = false;
+  final bool _isEdit = false;
   bool _isSigned = true;
   bool _isComment = true;
   bool _btnPublish = false;
@@ -47,16 +48,16 @@ class _CreatePageState extends State<CreatePage> {
 
   @override
   void initState() {
-    if (currentHistory.value.isNotEmpty) {
-      titleController.text = currentHistory.value.first.title;
-      textController.text = currentHistory.value.first.text;
-      _isEdit = true;
-      _btnPublish = true;
-      _isSigned = currentHistory.value.first.isSigned;
-      _isComment = currentHistory.value.first.isComment;
-      _isAuthorized = currentHistory.value.first.isAuthorized;
-      _categories = currentHistory.value.first.categories;
-    }
+    // if (currentHistory.value.isNotEmpty) {
+    //   titleController.text = currentHistory.value.first.title;
+    //   textController.text = currentHistory.value.first.text;
+    //   _isEdit = true;
+    //   _btnPublish = true;
+    //   _isSigned = currentHistory.value.first.isSigned;
+    //   _isComment = currentHistory.value.first.isComment;
+    //   _isAuthorized = currentHistory.value.first.isAuthorized;
+    //   _categories = currentHistory.value.first.categories;
+    // }
 
     super.initState();
   }
@@ -68,7 +69,7 @@ class _CreatePageState extends State<CreatePage> {
     });
   }
 
-  void _setComment() {
+  void _setContent() {
     setState(() {
       _isComment = !_isComment;
       _canPublish();
@@ -82,7 +83,7 @@ class _CreatePageState extends State<CreatePage> {
     });
   }
 
-  void _setCategories(List<String> value) {
+  void _setCategory(List<String> value) {
     setState(() {
       _categories = value;
       _canPublish();
@@ -140,9 +141,12 @@ class _CreatePageState extends State<CreatePage> {
       await historiesFirestore.postHistory(_history);
       _pathQtyHistoryUser();
     } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => postNewHistory:$error');
-      toast.toast(context, ToastEnum.WARNING.value,
-          'Erro ao publicar história, tente novamente mais tarde.');
+      debugPrint('ERROR => postNewHistory: $error');
+      toast.toast(
+        context,
+        ToastEnum.WARNING.value,
+        'Erro ao publicar história, tente novamente mais tarde.',
+      );
     }
   }
 
@@ -151,22 +155,22 @@ class _CreatePageState extends State<CreatePage> {
 
     try {
       await userFirestore.pathQtyHistoryUser(currentUser.value.first);
-      // activityClass.save(
-      //   _isEdit
-      //       ? ActivityEnum.NEW_HISTORY.value
-      //       : ActivityEnum.UP_HISTORY.value,
-      //   titleController.text,
-      //   _history['id'],
-      // );
+      activityClass.save(
+        type: _isEdit
+            ? ActivityEnum.NEW_HISTORY.value
+            : ActivityEnum.UP_HISTORY.value,
+        content: titleController.text,
+        elementId: _history['id'],
+      );
       if (currentHistory.value.isNotEmpty) Navigator.of(context).pop();
       toast.toast(
         context,
         ToastEnum.SUCCESS.value,
-        _isEdit ? 'História foi alterada!' : 'História  publicada!',
+        _isEdit ? 'História alterada!' : 'História publicada!',
       );
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => pathQtyHistoryUser:$error');
+      debugPrint('ERROR => pathQtyHistoryUser: $error');
     }
   }
 
@@ -179,7 +183,27 @@ class _CreatePageState extends State<CreatePage> {
 
         return Scaffold(
           key: scaffoldKey,
-          appBar: const AppBarNotBackWidget(title: 'Escrever'),
+          appBar: AppBar(
+            backgroundColor: isDark ? UiColor.mainDark : UiColor.main,
+            elevation: 0,
+            titleSpacing: 0,
+            leading: IconButton(
+              icon: SvgPicture.asset(UiIcon.closed),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            actions: [
+              if (_btnPublish)
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.only(right: UiPadding.large),
+                    child: TextButton(
+                      child: const Text('publicar'),
+                      onPressed: () => _postHistory(context),
+                    ),
+                  ),
+                ),
+            ],
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(
@@ -229,7 +253,7 @@ class _CreatePageState extends State<CreatePage> {
                           borderSide: BorderSide.none),
                     ),
                   ),
-                  const SizedBox(height: UiPadding.xLarge),
+                  const SpaceXLargeWidget(),
                   SelectToggleWidget(
                     title: 'Assinatura',
                     resume:
@@ -237,15 +261,15 @@ class _CreatePageState extends State<CreatePage> {
                     value: _isSigned,
                     callback: (value) => _setPrivacy(),
                   ),
-                  const SizedBox(height: UiPadding.xLarge),
+                  const SpaceXLargeWidget(),
                   SelectToggleWidget(
                     title: 'Comentários',
                     resume:
                         'Ligado para habilitar ou desligado para desabilitar os comentários na história.',
                     value: _isComment,
-                    callback: (value) => _setComment(),
+                    callback: (value) => _setContent(),
                   ),
-                  const SizedBox(height: UiPadding.xLarge),
+                  const SpaceXLargeWidget(),
                   SelectToggleWidget(
                     title: 'Autorizado',
                     resume:
@@ -253,27 +277,13 @@ class _CreatePageState extends State<CreatePage> {
                     value: _isAuthorized,
                     callback: (value) => _setAuthorized(),
                   ),
-                  const SizedBox(height: UiPadding.xLarge),
+                  const SpaceXLargeWidget(),
                   SelectCategoriesWidget(
                     selected: currentHistory.value.isNotEmpty
                         ? currentHistory.value.first.categories
                         : [],
-                    callback: (value) => _setCategories(value),
+                    callback: (value) => _setCategory(value),
                   ),
-                  const SizedBox(height: UiPadding.large),
-                  if (_btnPublish)
-                    Column(
-                      children: [
-                        Button3dWidget(
-                          callback: () => _postHistory,
-                          label: 'publicar',
-                          style: ButtonStyleEnum.PRIMARY.value,
-                          size: ButtonSizeEnum.LARGE.value,
-                          padding: UiPadding.large * 2,
-                        ),
-                        const SizedBox(height: UiPadding.large),
-                      ],
-                    )
                 ],
               ),
             ),

@@ -1,1 +1,1 @@
-class LoginModel {}
+class LoginClass {}

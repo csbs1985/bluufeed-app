@@ -14,6 +14,7 @@ import 'package:universe_history_app/theme/ui_text.dart';
 import 'package:universe_history_app/widget/app_bar_widget.dart';
 import 'package:universe_history_app/widget/button_3d_widget.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
+import 'package:universe_history_app/widget/space_x_large.widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
 import 'package:universe_history_app/widget/toast_widget.dart';
 
@@ -141,7 +142,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              const SizedBox(height: UiPadding.xLarge),
+              const SpaceXLargeWidget(),
               SizedBox(
                 width: 260,
                 child: PinCodeTextField(
@@ -162,7 +163,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              const SizedBox(height: UiPadding.xLarge),
+              const SpaceXLargeWidget(),
               Button3dWidget(
                 callback: (value) => _validateCode(),
                 label: 'validar',
