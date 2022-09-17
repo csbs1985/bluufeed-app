@@ -16,4 +16,5 @@ class UiIcon {
   static const String moreActived = 'assets/icons/more_actived.svg';
   static const String option = 'assets/icons/option.svg';
   static const String read = 'assets/icons/read.svg';
+  static const String send = 'assets/icons/send.svg';
 }
