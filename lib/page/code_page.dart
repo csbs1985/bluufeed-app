@@ -52,12 +52,16 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
     try {
       _emailService.sendEmail(
         email: currentEmail.value,
-        subject: 'subject',
-        message: 'message',
+        subject: 'Código de verificação',
+        name: '',
         code: _code.toString(),
+        template: EmailJsEnum.CODE.value,
       );
-      _toast.toast(context, ToastEnum.SUCCESS.value,
-          'código enviado para o email ${currentEmail.value}');
+      _toast.toast(
+        context,
+        ToastEnum.SUCCESS.value,
+        'código enviado para o email ${currentEmail.value}',
+      );
     } catch (error) {
       debugPrint('não foi possivél enviar o código.');
     }

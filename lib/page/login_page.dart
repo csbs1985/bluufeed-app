@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                     context,
                     PageEnum.FORGOT_PASSWORD.value,
                   ),
-                  label: 'preciso de ajuda',
+                  label: 'problema ao entrar',
                 ),
               ],
             ),

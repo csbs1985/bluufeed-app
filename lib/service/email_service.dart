@@ -9,11 +9,11 @@ class EmailService {
   Future sendEmail({
     required String email,
     required String subject,
-    required String message,
     required String code,
+    required String name,
+    required String template,
   }) async {
     const serviceId = 'service_18ko0dn';
-    const templateId = 'template_mfblzo6';
     const userId = 'zEFXfZTMn6WsFLO0U';
 
     final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
@@ -25,12 +25,12 @@ class EmailService {
       },
       body: json.encode({
         'service_id': serviceId,
-        'template_id': templateId,
+        'template_id': template,
         'user_id': userId,
         'template_params': {
           'user_email': email,
-          'user_subject': 'Código de verificação',
-          'user_message': 'message',
+          'user_subject': subject,
+          'user_name': name,
           'to_email': email,
           'code': code,
         }
@@ -62,4 +62,12 @@ class EmailClass {
 
     return alreadyEmail;
   }
+}
+
+enum EmailJsEnum {
+  CODE('template_mfblzo6'),
+  EMAIL('template_c0ch3cl');
+
+  final String value;
+  const EmailJsEnum(this.value);
 }

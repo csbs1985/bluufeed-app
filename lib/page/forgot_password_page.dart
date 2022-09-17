@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
 import 'package:universe_history_app/model/page_model.dart';
+import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
@@ -22,6 +23,7 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
 
+  final EmailService _emailService = EmailService();
   final TextEditingController _valueController = TextEditingController();
   final ToastWidget toast = ToastWidget();
   final UserFirestore _userFirestore = UserFirestore();
@@ -63,26 +65,37 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   _getName() async {
     await _userFirestore
         .getName(_valueController.text)
-        .then((result) => {
-              if (result.size > 0)
-                {
-                  toast.toast(
-                    context,
-                    ToastEnum.SUCCESS.value,
-                    'pronto, enviamos uma mensagem para seu email cadastrado',
-                  ),
-                  Navigator.pushNamed(context, PageEnum.LOGIN.value),
-                }
-              else
-                {
-                  toast.toast(
-                    context,
-                    ToastEnum.WARNING.value,
-                    'hum, não conseguimos identifica-ló',
-                  ),
-                }
-            })
+        .then(
+          (result) async => {
+            if (result.size > 0)
+              {
+                await _sendEmail(result.docs[0]['email']),
+                toast.toast(
+                  context,
+                  ToastEnum.SUCCESS.value,
+                  'pronto, enviamos uma mensagem para seu email cadastrado',
+                ),
+                Navigator.pushNamed(context, PageEnum.LOGIN.value),
+              }
+            else
+              toast.toast(
+                context,
+                ToastEnum.WARNING.value,
+                'hum, não conseguimos identifica-ló',
+              ),
+          },
+        )
         .catchError((error) => debugPrint('ERROR => _getName: ' + error));
+  }
+
+  _sendEmail(String _email) async {
+    _emailService.sendEmail(
+      email: _email,
+      subject: 'Recurepação de email',
+      name: _valueController.text,
+      code: '',
+      template: EmailJsEnum.EMAIL.value,
+    );
   }
 
   @override

@@ -151,7 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ButtonTextWidget(
                   callback: (value) => Navigator.pushNamed(
                       context, PageEnum.FORGOT_PASSWORD.value),
-                  label: 'preciso de ajuda',
+                  label: 'problema ao entrar',
                 ),
               ],
             ),

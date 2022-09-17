@@ -5,6 +5,7 @@
     font-family: Arial, sans-serif;
     font-size: 14px;
     color: #fff;
+    text-decoration: none;
   "
   border="0"
   cellpadding="0"
@@ -26,20 +27,19 @@
   <tbody>
     <tr style="background-color: #1f222a; width: 300px">
       <td style="padding: 40px; width: 300px">
-        <span style="font-size: 28px">Código de verificação de conta</span
+        <span style="font-size: 28px">Mensagem de verificação de email</span
         ><br /><br />
-        Utilize o código abaixo para validar sua conta Bluuapp. <br />
-        <br />Este código é válido por 10 minutos, além de ser pessoal,
-        intransferível e não deve ser compartilhado com terceiros.
+        {{user_name}} utilize este email para sua identificação no Bluuapp.
         <br />
+        <br />Se você recebeu esta mensagem neste email é porque esta registrado
+        em seu cadastro no Bluuapp.
         <br />
-        Se você não solicitou este código, pode ignorar com segurança este
-        e-mail. Outra pessoa pode ter digitado seu endereço de e-mail por
-        engano.
+        <br />Dica: você sempre receberá o código de validação de dois fatores
+        em seu email cadastrado.
       </td>
     </tr>
     <tr bgcolor="#1d9bf0" align="center" style="padding: 40px">
-      <td style="font-size: 40px; padding: 40px">{{code}}</td>
+      <td style="font-size: 28px; padding: 40px">{{user_email}}</td>
     </tr>
     <tr height="20px" bgcolor="#1f222a" align="center" style="padding: 40px">
       <td style="padding: 20px">bluuapp.com</td>
