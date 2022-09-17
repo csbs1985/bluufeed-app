@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:universe_history_app/firestore/user_firestore.dart';
+import 'package:universe_history_app/model/form_model.dart';
 import 'package:universe_history_app/model/page_model.dart';
 import 'package:universe_history_app/service/email_service.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
@@ -54,7 +55,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     ToastEnum.SUCCESS.value,
                     'pronto, enviamos uma senha temporária para seu email cadastrado',
                   ),
-                  Navigator.pushNamed(context, PageEnum.LOGIN.value),
+                  currentEmail.value = _valueController.text,
+                  currentForm.value = FormEnum.FORGOT.value,
+                  Navigator.pushNamed(context, PageEnum.CODE.value),
                 }
               else
                 _getName(),
@@ -123,7 +126,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 const TextWidget(
                   text: '- Como lembra minha senha?'
                       '\n'
-                      'R: Digite seu email que enviaremos uma senha temporária, não esqueça de alterar-lá o mais breve possível.'
+                      'R: Digite seu email cadastrado no Bluuapp que enviaremos um código para validação, e depois poderá alterar sua senha.'
                       '\n\n'
                       '- Como lembrar meu email cadastrado?'
                       '\n'

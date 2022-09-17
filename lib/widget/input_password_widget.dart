@@ -7,12 +7,10 @@ import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/widget/button_text_widget.dart';
 
 class InputPasswordWidget extends StatefulWidget {
-  const InputPasswordWidget({required Function callback, bool? confirm = false})
-      : _callback = callback,
-        _confirm = confirm;
+  const InputPasswordWidget({required Function callback})
+      : _callback = callback;
 
   final Function _callback;
-  final bool? _confirm;
 
   @override
   State<InputPasswordWidget> createState() => _InputPasswordWidgetState();
@@ -60,7 +58,7 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
                       horizontal: UiPadding.large,
                       vertical: UiPadding.small,
                     ),
-                    hintText: widget._confirm! ? 'confirmar senha' : 'senha',
+                    hintText: 'senha',
                     hintStyle: Theme.of(context).textTheme.headline2,
                   ),
                 ),

@@ -147,4 +147,19 @@ class AuthService extends ChangeNotifier {
       _toast.toast(context, ToastEnum.WARNING.value, message);
     }
   }
+
+  changePassword(BuildContext context, String password) async {
+    try {
+      await auth.confirmPasswordReset(code: 'code', newPassword: password).then(
+            (_) => _toast.toast(
+              context,
+              ToastEnum.SUCCESS.value,
+              'senha redefinida com sucesso',
+            ),
+          );
+    } catch (e) {
+      _toast.toast(
+          context, ToastEnum.WARNING.value, 'não foi possivél alterar a senha');
+    }
+  }
 }
