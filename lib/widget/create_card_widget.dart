@@ -16,6 +16,8 @@ class CreateCardWidget extends StatefulWidget {
 }
 
 class _CreateCardWidgetState extends State<CreateCardWidget> {
+  String _user = '';
+
   void _openCreateModal() {
     currentHistory.value = [];
 
@@ -29,6 +31,13 @@ class _CreateCardWidgetState extends State<CreateCardWidget> {
   }
 
   @override
+  void initState() {
+    _user = currentUser.value.isNotEmpty ? currentUser.value.first.name : '';
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(UiPadding.large),
@@ -38,7 +47,7 @@ class _CreateCardWidgetState extends State<CreateCardWidget> {
           const TitleWidget(title: 'Escrever nova história'),
           TextWidget(
             text:
-                'O melhor jeito de lembrar é registrando. ${currentUser.value.first.name} escreva, conte sua história.',
+                'O melhor jeito de lembrar é registrando. $_user escreva, conte sua história.',
           ),
           const SizedBox(height: UiPadding.large),
           Button3dWidget(

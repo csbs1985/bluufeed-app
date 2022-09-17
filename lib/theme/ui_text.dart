@@ -59,9 +59,9 @@ class UiTextDark {
   );
 
   static const TextStyle headline5 = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w700,
-    color: UiColor.secondary,
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: UiColor.textDark,
   );
 
   static const TextStyle headline6 = TextStyle(
@@ -97,9 +97,9 @@ class UiTextLight {
   );
 
   static const TextStyle headline5 = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w700,
-    color: UiColor.secondary,
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: UiColor.text,
   );
 
   static const TextStyle headline6 = TextStyle(

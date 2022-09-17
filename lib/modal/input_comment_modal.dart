@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
 import 'package:universe_history_app/firestore/comments_firestore.dart';
+import 'package:universe_history_app/modal/comment_modal.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/skeleton/comment_skeleton.dart';
@@ -11,8 +12,8 @@ import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_size.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/util/resume_util.dart';
 import 'package:universe_history_app/widget/button_comment_widget.dart';
+import 'package:universe_history_app/widget/date_widget.dart';
 import 'package:universe_history_app/widget/no_result_widget.dart';
 
 class InputCommentModal extends StatefulWidget with PreferredSizeWidget {
@@ -163,15 +164,11 @@ class _InputCommentModalState extends State<InputCommentModal> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(2, 4, 0, 16),
-            child: Text(
-              resumeUitl(
-                item,
-                type: ContentType.COMMENT.name,
-              ),
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          )
+              padding: const EdgeInsets.fromLTRB(2, 4, 0, 16),
+              child: DateWidget(
+                item: item,
+                type: CommentTypeEnum.COMMENT.name,
+              ))
         ],
       ),
     );

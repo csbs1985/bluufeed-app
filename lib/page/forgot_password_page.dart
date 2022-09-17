@@ -118,7 +118,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       '\n\n'
                       '- Não lembro meu email, senha e nome de usuário, o que faço?'
                       '\n'
-                      'R: Infelizmente para nós dois não temos o que fazer para recuperar sua conta. Como vai provar que você é você.',
+                      'R: Infelizmente para nós dois não temos o que fazer para recuperar sua conta.',
                 ),
                 const SpaceXLargeWidget(),
                 TextFormField(

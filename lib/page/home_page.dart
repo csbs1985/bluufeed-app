@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> identify() async {
-    if (_authService.isLoading) {
+    if (currentUser.value.isEmpty) {
       await _userFirestore
           .getUserEmail(_authService.auth.currentUser!.email)
           .then(

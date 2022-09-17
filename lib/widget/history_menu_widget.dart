@@ -39,7 +39,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
 
   void _openComment() {
     if (widget._history['isComment']) {
-      currentHistoryId.value = widget._history['id'];
+      historyClass.add(widget._history);
       _showModal(context, ModalEnum.COMMENT.value);
     }
   }
@@ -80,74 +80,65 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var _item = widget._history;
     return SizedBox(
       height: UiSize.historyMenu,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: UiPadding.medium),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GestureDetector(
-              onTap: () => _openComment(),
-              child: Row(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GestureDetector(
+            onTap: () => _openComment(),
+            child: Row(
+              children: [
+                if (widget._history['qtyComment'] > 0)
+                  NumberAnimationWidget(number: widget._history['qtyComment']),
+                Text(
+                  _showComment(),
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
+          ),
+          ValueListenableBuilder(
+            valueListenable: currentUser,
+            builder: (BuildContext context, value, __) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (_item['qtyComment'] > 0)
-                    NumberAnimationWidget(number: _item['qtyComment']),
-                  Text(
-                    _showComment(),
-                    style: Theme.of(context).textTheme.headline4,
+                  if (widget._history['isComment'])
+                    IconWidget(
+                      icon: UiIcon.comment,
+                      callback: (value) {
+                        historyClass.add(widget._history);
+                        _showModal(context, ModalEnum.INPUT_COMMENT.value);
+                      },
+                    ),
+                  const SizedBox(width: UiPadding.xLarge),
+                  ValueListenableBuilder(
+                    valueListenable: currentHistory,
+                    builder: (BuildContext context, value, __) {
+                      return IconWidget(
+                        icon: _getBookmark(widget._history)
+                            ? UiIcon.favoriteActived
+                            : UiIcon.favorite,
+                        callback: (value) {
+                          _toggleBookmark(widget._history);
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(width: UiPadding.xLarge),
+                  IconWidget(
+                    icon: UiIcon.read,
+                    callback: (value) {
+                      historyClass.add(widget._history);
+                      Navigator.pushNamed(context, PageEnum.HISTORY.value);
+                    },
                   ),
                 ],
-              ),
-            ),
-            ValueListenableBuilder(
-              valueListenable: currentUser,
-              builder: (BuildContext context, value, __) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (_item['isComment'])
-                      IconWidget(
-                        icon: UiIcon.comment,
-                        callback: (value) {
-                          setState(
-                            () {
-                              currentHistoryId.value = _item['id'];
-                              _showModal(
-                                  context, ModalEnum.INPUT_COMMENT.value);
-                            },
-                          );
-                        },
-                      ),
-                    const SizedBox(width: UiPadding.xLarge),
-                    ValueListenableBuilder(
-                      valueListenable: currentHistory,
-                      builder: (BuildContext context, value, __) {
-                        return IconWidget(
-                          icon: _getBookmark(_item)
-                              ? UiIcon.favoriteActived
-                              : UiIcon.favorite,
-                          callback: (value) {
-                            _toggleBookmark(_item);
-                          },
-                        );
-                      },
-                    ),
-                    const SizedBox(width: UiPadding.xLarge),
-                    IconWidget(
-                      icon: UiIcon.read,
-                      callback: (value) {
-                        currentHistoryId.value = _item['id'];
-                        Navigator.pushNamed(context, PageEnum.HISTORY.value);
-                      },
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

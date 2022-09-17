@@ -55,6 +55,22 @@ class HistoryModel {
         categories: json['categories'].cast<String>(),
         bookmarks: json['categories'].cast<String>(),
       );
+
+  static Map<String, dynamic> toMap(history) => {
+        'id': history['id'],
+        'title': history['title'],
+        'text': history['text'],
+        'date': history['date'],
+        'isComment': history['isComment'],
+        'isSigned': history['isSigned'],
+        'isEdit': history['isEdit'],
+        'isAuthorized': history['isAuthorized'],
+        'userId': history['userId'],
+        'userName': history['userName'],
+        'qtyComment': history['qtyComment'],
+        'categories': history['categories'],
+        'bookmarks': history['bookmarks'],
+      };
 }
 
 class HistoryClass {
