@@ -29,8 +29,8 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       physics: const NeverScrollableScrollPhysics(),
       loadingBuilder: (context) => CommentSkeleton(),
       errorBuilder: (context, error, _) => const NoResultWidget(
-          text:
-              'Nenhum comentário ainda, ou os comentários foram desativados.'),
+        text: 'Nenhum comentário ainda, ou os comentários foram desativados.',
+      ),
       itemBuilder:
           (BuildContext context, QueryDocumentSnapshot<dynamic> snapshot) {
         return CommentItemWidget(item: snapshot.data());

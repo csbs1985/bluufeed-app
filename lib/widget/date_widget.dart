@@ -82,7 +82,7 @@ class DateWidget extends StatelessWidget {
       return isEdit! ? '$temp · editado' : temp;
     }
 
-    return Row(
+    return Wrap(
       children: [
         if (_type == CommentTypeEnum.HISTORY.value && _item['isAuthorized'])
           SvgPicture.asset(UiIcon.authorized),

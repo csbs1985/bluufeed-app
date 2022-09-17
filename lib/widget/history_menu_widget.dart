@@ -66,12 +66,12 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     setState(() {
       if (history['bookmarks'].contains(currentUser.value.first.id)) {
         history['bookmarks'].remove(currentUser.value.first.id);
-        toast.toast(context, ToastEnum.SUCCESS.value,
-            'História removida dos favoritos');
+        toast.toast(
+            context, ToastEnum.SUCCESS.value, 'história removida da lista');
       } else {
         history['bookmarks'].add(currentUser.value.first.id);
         toast.toast(context, ToastEnum.SUCCESS.value,
-            'História adicionada aos favoritos');
+            'história adicionada à lista para ler mais tarde');
       }
 
       historiesFirestore.pathBookmark(history);

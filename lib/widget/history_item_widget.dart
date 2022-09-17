@@ -48,7 +48,9 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
               if (widget._item['title'] != "")
                 TitleWidget(title: widget._item['title']),
               DateWidget(
-                  type: CommentTypeEnum.HISTORY.value, item: widget._item),
+                type: CommentTypeEnum.HISTORY.value,
+                item: widget._item,
+              ),
               const SizedBox(height: UiPadding.medium),
               if (_route != PageEnum.HISTORY.value)
                 ExpandableText(
@@ -68,7 +70,8 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
                     Padding(
                       padding: const EdgeInsets.only(right: UiPadding.small),
                       child: LabelWidget(
-                          label: '#${categoriesClass.getCategoryLabel(item)}'),
+                        label: '#${categoriesClass.getCategoryLabel(item)}',
+                      ),
                     ),
                 ],
               ),
@@ -85,7 +88,11 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
         if (_route == PageEnum.HISTORY.value)
           Container(
             padding: const EdgeInsets.fromLTRB(
-                UiPadding.large, 0, UiPadding.large, UiPadding.xLarge),
+              UiPadding.large,
+              0,
+              UiPadding.large,
+              UiPadding.large,
+            ),
             child: const BorderWidget(),
           ),
       ],

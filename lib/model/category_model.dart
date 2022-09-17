@@ -31,7 +31,7 @@ class CategoryModel {
     ),
     CategoryModel(
       id: CategoryEnum.SAVE.value,
-      label: 'salvas',
+      label: 'ler mais tarde',
       isLogin: true,
       isDisabled: false,
     ),

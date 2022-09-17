@@ -42,7 +42,7 @@ class UiColor {
 
   static const Color success = Color(0xFFA1D151);
 
-  static const Color text = Color(0xFF476282);
+  static const Color text = Color(0xFF282949);
   static const Color textDark = Color(0xFFffffff);
 
   static const Color toast = Color(0xFF2a2d2e);
