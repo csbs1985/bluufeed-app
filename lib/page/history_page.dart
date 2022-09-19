@@ -21,7 +21,7 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  final HistoriesFirestore historiesFirestore = HistoriesFirestore();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 child: Column(
                   children: [
                     StreamBuilder<QuerySnapshot>(
-                      stream: historiesFirestore
+                      stream: historyFirestore
                           .getHistory(currentHistory.value.first.id),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {

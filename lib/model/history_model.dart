@@ -74,7 +74,7 @@ class HistoryModel {
 }
 
 class HistoryClass {
-  final HistoriesFirestore historiesFirestore = HistoriesFirestore();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
 
   void add(Map<String, dynamic> history) {
     currentHistory.value = [];
@@ -83,7 +83,7 @@ class HistoryClass {
 
   Future<void> getHistory(String historyId) async {
     try {
-      await historiesFirestore
+      await historyFirestore
           .getHistoryNotification(historyId)
           .then((result) => {
                 add(result.docs[0].data()),

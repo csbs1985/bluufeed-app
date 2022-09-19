@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:universe_history_app/model/comment_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
 
-class CommentsFirestore {
+class CommentFirestore {
   CollectionReference comments =
       FirebaseFirestore.instance.collection('comments');
 

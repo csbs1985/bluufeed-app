@@ -9,8 +9,8 @@ import 'package:universe_history_app/widget/loader_widget.dart';
 import 'package:uuid/uuid.dart';
 
 class DeleteAccountUtil {
-  final CommentsFirestore commentsFirestore = CommentsFirestore();
-  final HistoriesFirestore historiesFirestore = HistoriesFirestore();
+  final CommentFirestore commentFirestore = CommentFirestore();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
   final JustificationsFirestore justificationsFirestore =
       JustificationsFirestore();
   final UserClass userClass = UserClass();
@@ -52,26 +52,26 @@ class DeleteAccountUtil {
   }
 
   Future<void> _deleteAllHistory(BuildContext context) async {
-    await historiesFirestore
+    await historyFirestore
         .getAllHistoryUser()
         .then((result) async => {
               if (result.size > 0)
                 currentDialog.value = 'Deletando histórias...',
               for (var item in result.docs)
-                await historiesFirestore.deleteHistory(item['id']),
+                await historyFirestore.deleteHistory(item['id']),
               _deleteAllComment(context)
             })
         .catchError((error) => debugPrint('ERROR:' + error));
   }
 
   _deleteAllComment(BuildContext context) async {
-    await commentsFirestore
+    await commentFirestore
         .getAllCommentUser()
         .then((result) async => {
               if (result.size > 0)
                 currentDialog.value = 'Atualizando comentários...',
               for (var item in result.docs)
-                await commentsFirestore.upStatusUserComment(item['id']),
+                await commentFirestore.upStatusUserComment(item['id']),
               userClass.delete(context)
             })
         .catchError((error) => debugPrint('ERROR:' + error));

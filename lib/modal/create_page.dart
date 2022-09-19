@@ -10,6 +10,7 @@ import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/model/activity_model.dart';
+import 'package:universe_history_app/widget/button_publish_widget.dart';
 import 'package:universe_history_app/widget/space_x_large.widget.dart';
 import 'package:universe_history_app/widget/select_category_widget.dart';
 import 'package:universe_history_app/widget/select_toggle_widget.dart';
@@ -28,7 +29,7 @@ class _CreatePageState extends State<CreateModal> {
   TextEditingController textController = TextEditingController();
 
   final ActivityClass activityClass = ActivityClass();
-  final HistoriesFirestore historiesFirestore = HistoriesFirestore();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
   final Uuid uuid = const Uuid();
@@ -138,7 +139,7 @@ class _CreatePageState extends State<CreateModal> {
     });
 
     try {
-      await historiesFirestore.postHistory(_history);
+      await historyFirestore.postHistory(_history);
       _pathQtyHistoryUser();
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => postNewHistory: $error');
@@ -193,13 +194,10 @@ class _CreatePageState extends State<CreateModal> {
             ),
             actions: [
               if (_btnPublish)
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.only(right: UiPadding.large),
-                    child: TextButton(
-                      child: const Text('publicar'),
-                      onPressed: () => _postHistory(context),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(right: UiPadding.large),
+                  child: ButtonPublishWidget(
+                    callback: () => _postHistory(context),
                   ),
                 ),
             ],

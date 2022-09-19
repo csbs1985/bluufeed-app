@@ -41,6 +41,7 @@ class _ButtonCommentWidgetState extends State<ButtonCommentWidget> {
             children: [
               const BorderWidget(),
               GestureDetector(
+                onTapDown: (TapTop) => _showModal(context, 'index', true),
                 child: Container(
                   alignment: Alignment.centerLeft,
                   color: isDark ? UiColor.mainDark : UiColor.main,
@@ -48,11 +49,6 @@ class _ButtonCommentWidgetState extends State<ButtonCommentWidget> {
                   height: UiSize.bottomNavigation,
                   padding: const EdgeInsets.only(left: UiPadding.large),
                   child: const TextWidget(text: "Escrever comentário..."),
-                ),
-                onTap: () => _showModal(
-                  context,
-                  'index',
-                  true,
                 ),
               ),
             ],

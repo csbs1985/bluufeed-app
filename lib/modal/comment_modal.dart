@@ -20,7 +20,7 @@ class CommentModal extends StatefulWidget with PreferredSizeWidget {
 }
 
 class _CommentModalState extends State<CommentModal> {
-  final CommentsFirestore commentsFirestore = CommentsFirestore();
+  final CommentFirestore commentFirestore = CommentFirestore();
 
   String _showComment(history) {
     if (!history.isComment) return 'comentário desabilitado';

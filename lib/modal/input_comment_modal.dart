@@ -1,4 +1,27 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:universe_history_app/firestore/comments_firestore.dart';
+import 'package:universe_history_app/firestore/histories_firestore.dart';
+import 'package:universe_history_app/firestore/notifications_firestore.dart';
+import 'package:universe_history_app/firestore/user_firestore.dart';
+import 'package:universe_history_app/model/activity_model.dart';
+import 'package:universe_history_app/model/history_model.dart';
+import 'package:universe_history_app/model/notification_model.dart';
+import 'package:universe_history_app/model/user_model.dart';
+import 'package:universe_history_app/service/push_notification_service.dart';
+import 'package:universe_history_app/theme/ui_color.dart';
+import 'package:universe_history_app/theme/ui_icon.dart';
+import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:universe_history_app/theme/ui_size.dart';
+import 'package:universe_history_app/theme/ui_theme.dart';
+import 'package:universe_history_app/widget/border_widget.dart';
+import 'package:universe_history_app/widget/button_publish_widget.dart';
+import 'package:universe_history_app/widget/icon_widget.dart';
+import 'package:universe_history_app/widget/text_widget.dart';
+import 'package:universe_history_app/widget/toast_widget.dart';
+import 'package:universe_history_app/widget/toggle_widget.dart';
+import 'package:uuid/uuid.dart';
 
 class InputCommentModal extends StatefulWidget {
   const InputCommentModal({super.key});
@@ -8,8 +31,251 @@ class InputCommentModal extends StatefulWidget {
 }
 
 class _InputCommentModalState extends State<InputCommentModal> {
+  final TextEditingController _commentController = TextEditingController();
+
+  final ActivityClass activityClass = ActivityClass();
+  final CommentFirestore commentFirestore = CommentFirestore();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
+  final NotificatonFirestore notificatonFirestore = NotificatonFirestore();
+  final ToastWidget toast = ToastWidget();
+  final UserFirestore userFirestore = UserFirestore();
+  final Uuid uuid = const Uuid();
+
+  bool _isInputEmpty = true;
+  bool _textSigned = true;
+
+  late Map<String, dynamic> _form;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void keyUp(String _text) {
+    setState(() => _isInputEmpty = _text.isEmpty ? true : false);
+  }
+
+  void _clean() {
+    if (_commentController.text.isEmpty)
+      Navigator.of(context).pop();
+    else
+      setState(() {
+        _commentController.clear();
+        _isInputEmpty = false;
+      });
+  }
+
+  _toggleAnonimous() => setState(() => _textSigned = !_textSigned);
+
+  Future<void> _postComment(BuildContext context) async {
+    _form = {
+      'date': DateTime.now().toString(),
+      'historyId': currentHistory.value.first.id,
+      'id': uuid.v4(),
+      'isDelete': false,
+      'isEdit': false,
+      'isSigned': _textSigned,
+      'text': _commentController.text.trim(),
+      'userId': currentUser.value.first.id,
+      'userName': currentUser.value.first.name,
+      'userStatus': currentUser.value.first.status
+    };
+
+    try {
+      await commentFirestore.postComment(_form);
+      _pathQtyCommentHistory(context);
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR => postNewComment: ' + error.toString());
+    }
+  }
+
+  Future<void> _pathQtyCommentHistory(BuildContext context) async {
+    currentHistory.value.first.qtyComment++;
+
+    try {
+      await historyFirestore.pathQtyCommentHistory(currentHistory.value.first);
+      activityClass.save(
+        type: ActivityEnum.NEW_COMMENT.value,
+        content: currentHistory.value.first.title,
+        elementId: currentHistory.value.first.id,
+      );
+      _pathQtyCommentUser(context);
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR => pathQtyCommentHistory: ' + error.toString());
+    }
+  }
+
+  Future<void> _pathQtyCommentUser(BuildContext context) async {
+    currentUser.value.first.qtyComment++;
+
+    try {
+      await userFirestore.pathQtyCommentUser(currentUser.value.first);
+      _postNotification(context);
+
+      // if (_isEdit) Navigator.of(context).pop();
+      toast.toast(
+        context,
+        ToastEnum.SUCCESS.value,
+        'Seu comentário foi publicado.',
+      );
+      Navigator.of(context).pop();
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR => pathQtyCommentUser: ' + error.toString());
+    }
+  }
+
+  Future<void> _postNotification(BuildContext context) async {
+    _form = {
+      'content': currentHistory.value.first.title,
+      'date': DateTime.now().toString(),
+      'id': uuid.v4(),
+      'contentId': currentHistory.value.first.id,
+      'userId': currentHistory.value.first.userId,
+      'userName': _textSigned ? currentUser.value.first.name : 'anônimo',
+      'status': _textSigned
+          ? NotificationEnum.COMMENT_SIGNED.value
+          : NotificationEnum.COMMENT_ANONYMOUS.value,
+      'view': false,
+    };
+
+    try {
+      await notificatonFirestore.postNotification(_form);
+      _setPushNotificationOnwer(context, currentHistory.value.first.userId);
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR => postNotification: ' + error.toString());
+    }
+  }
+
+  void _setPushNotificationOnwer(BuildContext context, String _user) {
+    var history = currentHistory.value.first;
+    var title = '';
+    var body = '';
+
+    title = _textSigned
+        ? (currentUser.value.first.name +
+            ' fez um comentário na história "' +
+            history.title +
+            '"')
+        : ('Sua história "' +
+            history.title +
+            '" recebeu um comentário anônimo.');
+
+    body = _textSigned
+        ? currentUser.value.first.name +
+            ': "' +
+            _commentController.text.trim() +
+            '"'
+        : '"' + _commentController.text.trim() + '"';
+
+    _sendNotification(context, title, body, _user);
+  }
+
+  Future<void> _sendNotification(
+    BuildContext context,
+    String _title,
+    String _body,
+    String _user,
+  ) async {
+    await Provider.of<PushNotificationService>(context, listen: false)
+        .sendNotification(
+      _title,
+      _body,
+      currentHistory.value.first.id,
+      _user,
+    );
+  }
+
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ValueListenableBuilder(
+      valueListenable: currentTheme,
+      builder: (BuildContext context, Brightness theme, _) {
+        bool isDark = currentTheme.value == Brightness.dark;
+
+        return Material(
+          color: isDark ? UiColor.mainDark : UiColor.main,
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom +
+                          UiSize.input),
+                  child: TextField(
+                    controller: _commentController,
+                    autofocus: true,
+                    maxLines: null,
+                    onChanged: (value) => keyUp(value),
+                    style: Theme.of(context).textTheme.headline2,
+                    decoration: InputDecoration(
+                      fillColor: Colors.transparent,
+                      hintMaxLines: 100,
+                      hintText:
+                          "Escreva seu comentário, ele pode ajudar alguém em um momento difícil, escolha bem as palavras...",
+                      hintStyle: Theme.of(context).textTheme.headline2,
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+                left: 0,
+                right: 0,
+                child: Column(
+                  children: [
+                    const BorderWidget(),
+                    Container(
+                      height: UiSize.input,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: UiPadding.large,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              IconWidget(
+                                icon: UiIcon.closed,
+                                callback: (value) => _clean(),
+                              ),
+                              const SizedBox(width: UiPadding.xLarge),
+                              ToggleWidget(
+                                value: _textSigned,
+                                callback: (value) => _toggleAnonimous(),
+                              ),
+                              const SizedBox(width: UiPadding.medium),
+                              TextWidget(
+                                text: _textSigned
+                                    ? currentUser.value.first.name
+                                    : 'anônimo',
+                              ),
+                            ],
+                          ),
+                          if (!_isInputEmpty)
+                            ButtonPublishWidget(
+                              callback: (value) => _postComment(context),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

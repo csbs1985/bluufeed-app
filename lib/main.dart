@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:universe_history_app/core/routes.dart';
 import 'package:universe_history_app/service/auth_check_service.dart';
 import 'package:universe_history_app/service/auth_service.dart';
+import 'package:universe_history_app/service/local_notification_service.dart';
+import 'package:universe_history_app/service/push_notification_service.dart';
 import 'package:universe_history_app/theme/ui_theme.dart';
 
 Future<void> main() async {
@@ -21,6 +23,12 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
+        Provider<LocalNotificationService>(
+            create: (context) => LocalNotificationService()),
+        Provider<PushNotificationService>(
+          create: (context) =>
+              PushNotificationService(context.read<LocalNotificationService>()),
+        )
       ],
       child: const MyApp(),
     ),

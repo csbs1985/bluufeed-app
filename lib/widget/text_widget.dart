@@ -7,12 +7,9 @@ class TextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Text(
-        _text,
-        style: Theme.of(context).textTheme.headline2,
-      ),
+    return Text(
+      _text,
+      style: Theme.of(context).textTheme.headline2,
     );
   }
 }

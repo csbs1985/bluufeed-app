@@ -16,7 +16,7 @@ class HistoryListWidget extends StatefulWidget {
 }
 
 class _HistoryListWidgetState extends State<HistoryListWidget> {
-  final HistoriesFirestore historiesFirestore = HistoriesFirestore();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
 
   @override
   void initState() {
@@ -31,24 +31,24 @@ class _HistoryListWidgetState extends State<HistoryListWidget> {
     if (_category != CategoryEnum.ALL.value &&
         _category != CategoryEnum.MY.value &&
         _category != CategoryEnum.SAVE.value) {
-      return historiesFirestore.histories
+      return historyFirestore.histories
           .orderBy('date')
           .where('categories', arrayContainsAny: [_category]);
     }
 
     if (_category == CategoryEnum.MY.value) {
-      return historiesFirestore.histories
+      return historyFirestore.histories
           .orderBy('date')
           .where('userId', isEqualTo: currentUser.value.first.id);
     }
 
     if (_category == CategoryEnum.SAVE.value) {
-      return historiesFirestore.histories
+      return historyFirestore.histories
           .orderBy('date')
           .where('bookmarks', arrayContainsAny: [currentUser.value.first.id]);
     }
 
-    return historiesFirestore.histories.orderBy('date');
+    return historyFirestore.histories.orderBy('date');
   }
 
   @override

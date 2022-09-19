@@ -26,7 +26,7 @@ class HistoryMenuWidget extends StatefulWidget {
 }
 
 class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
-  final HistoriesFirestore historiesFirestore = HistoriesFirestore();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
   final HistoryClass historyClass = HistoryClass();
   final ToastWidget toast = ToastWidget();
 
@@ -80,7 +80,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
             'história adicionada à lista para ler mais tarde');
       }
 
-      historiesFirestore.pathBookmark(history);
+      historyFirestore.pathBookmark(history);
     });
   }
 
@@ -88,7 +88,8 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   Widget build(BuildContext context) {
     var _route = ModalRoute.of(context)?.settings.name;
 
-    return SizedBox(
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: UiPadding.medium),
       height: UiSize.historyMenu,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,20 +137,20 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                   ),
                   const SizedBox(width: UiPadding.xLarge),
                   IconWidget(
-                    icon: UiIcon.read,
+                    icon: UiIcon.send,
                     callback: (value) {
                       historyClass.add(widget._history);
-                      Navigator.pushNamed(context, PageEnum.HISTORY.value);
+                      _showModal(context, ModalEnum.INPUT_COMMENT.value);
                     },
                   ),
                   if (_route != PageEnum.HISTORY.value)
                     const SizedBox(width: UiPadding.xLarge),
                   if (_route != PageEnum.HISTORY.value)
                     IconWidget(
-                      icon: UiIcon.send,
+                      icon: UiIcon.read,
                       callback: (value) {
                         historyClass.add(widget._history);
-                        _showModal(context, ModalEnum.INPUT_COMMENT.value);
+                        Navigator.pushNamed(context, PageEnum.HISTORY.value);
                       },
                     ),
                 ],

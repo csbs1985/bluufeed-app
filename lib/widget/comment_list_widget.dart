@@ -15,12 +15,12 @@ class CommentListWidget extends StatefulWidget {
 }
 
 class _CommentListWidgetState extends State<CommentListWidget> {
-  final CommentsFirestore commentsFirestore = CommentsFirestore();
+  final CommentFirestore commentFirestore = CommentFirestore();
 
   @override
   Widget build(BuildContext context) {
     return FirestoreListView(
-      query: commentsFirestore.comments
+      query: commentFirestore.comments
           .orderBy('date')
           .where('historyId', isEqualTo: currentHistory.value.first.id),
       pageSize: 20,
