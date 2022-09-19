@@ -1,48 +1,136 @@
 <table
-  style="
-    margin: 0 auto;
-    max-width: 600px;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: #fff;
-    text-decoration: none;
-  "
+  bgcolor="#121212"
   border="0"
   cellpadding="0"
   cellspacing="0"
   width="100%"
   margin="0"
+  style="
+    margin: 0 auto;
+    max-width: 600px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #a3a3a3;
+    border-radius: 8px;
+  "
 >
   <thead>
-    <tr>
-      <th style="background-color: #181a20; padding: 20px">
+    <tr widht="100%">
+      <th colspan="3">
         <img
-          height="50"
-          src="https://raw.githubusercontent.com/csbs1985/universe_history_app/2dd12b828501dfcfbeecd5cf86eabff74a5788e8/assets/icons/logo-3.svg"
+          style="margin: 20px auto"
+          height="32"
+          src="https://raw.githubusercontent.com/csbs1985/universe_history_app/version-2/assets/icons/ic_email.svg"
           alt="history.png"
         />
       </th>
     </tr>
   </thead>
-  <tbody>
-    <tr style="background-color: #1f222a; width: 300px">
-      <td style="padding: 40px; width: 300px">
+  <tbody width="100%">
+    <tr>
+      <td width="20px"></td>
+      <td
+        bgcolor="#282828"
+        style="
+          padding: 40px;
+          padding-bottom: 20px;
+          width: 300px;
+          border-radius: 8px;
+        "
+      >
         <span style="font-size: 28px">Mensagem de verificação de email</span
         ><br /><br />
-        {{user_name}} utilize este email para sua identificação no Bluufeed.
+        {{user_name}} utilize este email para sua identificação no Bluufeed.<br />
+
         <br />
-        <br />Se você recebeu esta mensagem neste email é porque esta registrado
-        em seu cadastro no Bluufeed.
         <br />
-        <br />Dica: você sempre receberá o código de validação de dois fatores
-        em seu email cadastrado.
+
+        <div style="text-align: center">
+          <span style="color: #1d9bf0; font-size: 40px">{{user_email}}</span>
+        </div>
+
+        <br />
+        <br />
+
+        Dica: você sempre receberá o código de validação de dois fatores em seu
+        email cadastrado.
+
+        <br />
+        <br />
+
+        Esta mensagem foi enviada para
+        <span style="color: #1d9bf0; text-decoration: none"
+          >{{user_email}}</span
+        >
+        e se você não solicitou este código, pode ignorar com segurança à este
+        e-mail.
+
+        <br />
+
+        Outra pessoa pode ter digitado seu endereço de e-mail por engano.
+
+        <br />
+        <br />
+        <br />
+
+        <div style="text-align: center">
+          <p style="font-size: 12px">Siga o bluufeed nas redes sociais.</p>
+
+          <a
+            href="https://www.instagram.com/bluufeed/"
+            target="_blank"
+            style="margin-right: 8px"
+            ><img
+              height="16"
+              src="https://raw.githubusercontent.com/csbs1985/universe_history_app/version-2/assets/icons/instagram.svg"
+              alt="instagram"
+          /></a>
+
+          <a
+            href="https://twitter.com/bluufeed"
+            target="_blank"
+            title="fica por "
+            ><img
+              height="16"
+              src="https://raw.githubusercontent.com/csbs1985/universe_history_app/version-2/assets/icons/twitter.svg"
+              alt="twitter"
+          /></a>
+
+          <p style="font-size: 12px">Baixe o app bluufeed</p>
+
+          <a
+            href=""
+            target="_blank"
+            title="baixe nosso aplicativo no play store"
+            style="margin-right: 8px"
+            ><img
+              height="16"
+              src="https://raw.githubusercontent.com/csbs1985/universe_history_app/version-2/assets/icons/android.svg"
+              alt="android"
+          /></a>
+
+          <a
+            href=""
+            target="_blank"
+            title="baixe nosso aplicativo no apple store"
+            ><img
+              height="16"
+              src="https://raw.githubusercontent.com/csbs1985/universe_history_app/version-2/assets/icons/apple.svg"
+              alt="apple"
+          /></a>
+        </div>
       </td>
+      <td width="20px"></td>
     </tr>
-    <tr bgcolor="#1d9bf0" align="center" style="padding: 40px">
-      <td style="font-size: 28px; padding: 40px">{{user_email}}</td>
-    </tr>
-    <tr height="20px" bgcolor="#1f222a" align="center" style="padding: 40px">
-      <td style="padding: 20px">bluufeed.com</td>
+    <tr>
+      <td colspan="3" height="50" style="text-align: center; font-size: 12px">
+        2022 ·
+        <a
+          style="color: #a3a3a3; text-decoration: none"
+          href="http://bluufeed.com"
+          >bluufeed.com</a
+        >
+      </td>
     </tr>
   </tbody>
 </table>
