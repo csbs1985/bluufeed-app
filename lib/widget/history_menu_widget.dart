@@ -142,14 +142,16 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                       Navigator.pushNamed(context, PageEnum.HISTORY.value);
                     },
                   ),
-                  const SizedBox(width: UiPadding.xLarge),
-                  IconWidget(
-                    icon: UiIcon.send,
-                    callback: (value) {
-                      historyClass.add(widget._history);
-                      // Navigator.pushNamed(context, PageEnum.HISTORY.value);
-                    },
-                  ),
+                  if (_route != PageEnum.HISTORY.value)
+                    const SizedBox(width: UiPadding.xLarge),
+                  if (_route != PageEnum.HISTORY.value)
+                    IconWidget(
+                      icon: UiIcon.send,
+                      callback: (value) {
+                        historyClass.add(widget._history);
+                        _showModal(context, ModalEnum.INPUT_COMMENT.value);
+                      },
+                    ),
                 ],
               );
             },

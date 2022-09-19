@@ -113,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       const SubtitleResumeWidget(
                         title: 'Informações',
                         resume:
-                            'Sobre o BluuApp, perguntas, políticas e termos.',
+                            'Sobre o Bluufeed, perguntas, políticas e termos.',
                       ),
                       const SizedBox(height: UiPadding.medium),
                       // const ButtonLinkWidget('Avaliação', '/questions'), TODO: adicionar feedback nas lojas de aplicativos.
@@ -146,7 +146,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         const SubtitleResumeWidget(
                           title: 'Finalizar',
                           resume:
-                              'Sair temporariamente ou deletar a conta BluuApp.',
+                              'Sair temporariamente ou deletar a conta Bluufeed.',
                         ),
                         const SizedBox(height: UiPadding.medium),
                         ButtonConfirmWidget(
@@ -155,7 +155,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           btnSecondaryLabel: 'Sair',
                           link: PageEnum.HOME.value,
                           text:
-                              'Dar uma tempo e manter seu conteúdo no BluuApp. Sua conta volta a ficar ativa quando entrar novamente com sua conta cadastrada.',
+                              'Dar uma tempo e manter seu conteúdo no Bluufeed. Sua conta volta a ficar ativa quando entrar novamente com sua conta cadastrada.',
                           callback: (value) => goLogout(context, value),
                         ),
                         ButtonLinkWidget(
