@@ -30,7 +30,13 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   final HistoryClass historyClass = HistoryClass();
   final ToastWidget toast = ToastWidget();
 
-  String _showComment() {
+  bool _isComment(String _route, Map<String, dynamic> _history) {
+    if (_route == PageEnum.HISTORY.value) return false;
+    if (_history['isComment']) return true;
+    return false;
+  }
+
+  String _textComment() {
     if (!widget._history['isComment']) return 'comentário desabilitado';
     if (widget._history['qtyComment'] == 1) return ' comentário';
     if (widget._history['qtyComment'] > 1) return ' comentários';
@@ -80,6 +86,8 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var _route = ModalRoute.of(context)?.settings.name;
+
     return SizedBox(
       height: UiSize.historyMenu,
       child: Row(
@@ -92,7 +100,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                 if (widget._history['qtyComment'] > 0)
                   NumberAnimationWidget(number: widget._history['qtyComment']),
                 Text(
-                  _showComment(),
+                  _textComment(),
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ],
@@ -104,7 +112,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (widget._history['isComment'])
+                  if (_isComment(_route!, widget._history))
                     IconWidget(
                       icon: UiIcon.comment,
                       callback: (value) {

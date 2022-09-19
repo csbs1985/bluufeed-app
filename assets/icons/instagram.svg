@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g fill="none" stroke="#282828" stroke-linecap="round" stroke-linejoin="round" data-name="&lt;Group&gt;">
+        <rect width="21" height="21" x="1.5" y="1.5" data-name="&lt;Path&gt;" rx="5.48" ry="5.48" />
+        <circle cx="12" cy="12" r="5.5" data-name="&lt;Path&gt;" />
+        <circle cx="18" cy="5" r=".5" data-name="&lt;Path&gt;" />
+    </g>
+</svg>
