@@ -3,6 +3,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
 import 'package:universe_history_app/modal/comment_modal.dart';
 import 'package:universe_history_app/modal/input_comment_modal.dart';
+import 'package:universe_history_app/modal/send_modal.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/modal_model.dart';
 import 'package:universe_history_app/model/page_model.dart';
@@ -56,9 +57,13 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
       context: context,
       barrierColor: UiColor.overley,
       duration: const Duration(milliseconds: 300),
-      builder: (context) => modalEnum == ModalEnum.COMMENT.value
-          ? const CommentModal()
-          : const InputCommentModal(),
+      builder: (context) {
+        if (modalEnum == ModalEnum.SEND.value) return const SendModal();
+        if (modalEnum == ModalEnum.INPUT_COMMENT.value)
+          return const InputCommentModal();
+        else
+          return const CommentModal();
+      },
     );
   }
 
@@ -140,7 +145,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                     icon: UiIcon.send,
                     callback: (value) {
                       historyClass.add(widget._history);
-                      _showModal(context, ModalEnum.INPUT_COMMENT.value);
+                      _showModal(context, ModalEnum.SEND.value);
                     },
                   ),
                   if (_route != PageEnum.HISTORY.value)
