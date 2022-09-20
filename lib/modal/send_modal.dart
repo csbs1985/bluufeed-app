@@ -1,5 +1,9 @@
 import 'package:algolia/algolia.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:universe_history_app/model/history_model.dart';
+import 'package:universe_history_app/model/notification_model.dart';
+import 'package:universe_history_app/model/user_model.dart';
 import 'package:universe_history_app/model/user_recent_model.dart';
 import 'package:universe_history_app/service/algolia_service.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
@@ -9,6 +13,8 @@ import 'package:universe_history_app/theme/ui_theme.dart';
 import 'package:universe_history_app/widget/button_publish_widget.dart';
 import 'package:universe_history_app/widget/subtitle_widget.dart';
 import 'package:universe_history_app/widget/text_widget.dart';
+import 'package:universe_history_app/widget/toast_widget.dart';
+import 'package:uuid/uuid.dart';
 
 class SendModal extends StatefulWidget {
   const SendModal({super.key});
@@ -18,14 +24,20 @@ class SendModal extends StatefulWidget {
 }
 
 class _SendModalState extends State<SendModal> {
+  final NotificationClass notificationClass = NotificationClass();
   final TextEditingController _commentController = TextEditingController();
-  final UserClass userClass = UserClass();
+  final ToastWidget toast = ToastWidget();
+  final UserRecentClass userRecentClass = UserRecentClass();
+  final Uuid uuid = const Uuid();
 
   Algolia? algolia;
   AlgoliaQuery? algoliaQuery;
   List<AlgoliaObjectSnapshot>? _snapshot;
 
   bool isInputEmpty = true;
+
+  late Map<String, dynamic> _form;
+  late Map<String, dynamic> _currentRecent;
 
   @override
   initState() {
@@ -47,6 +59,44 @@ class _SendModalState extends State<SendModal> {
 
     if (_snap.hits.isNotEmpty) setState(() => _snapshot = _snap.hits);
     if (_commentController.text.isEmpty) _snapshot = null;
+  }
+
+  _postSend(_user) {
+    _currentRecent = {
+      'id': _user.data['objectID'],
+      'name': _user.data['name'],
+    };
+
+    userRecentClass.add(_currentRecent);
+
+    try {
+      _form = {
+        'content': '',
+        'date': DateTime.now().toString(),
+        'id': uuid.v4(),
+        'contentId': currentHistory.value.first.id,
+        'userId': _user.data['objectID'],
+        'userName': currentUser.value.first.name,
+        'status': NotificationEnum.SEND_HISTORY.value,
+        'view': false,
+      };
+
+      notificationClass.postNotification(context, _form);
+      notificationClass.setNotificationSendHistory(context, _form);
+
+      toast.toast(
+        context,
+        ToastEnum.SUCCESS.value,
+        'história compartilhada',
+      );
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR => _postSend: ' + error.toString());
+      toast.toast(
+        context,
+        ToastEnum.WARNING.value,
+        'não foi possivél compartilhar história',
+      );
+    }
   }
 
   @override
@@ -122,15 +172,20 @@ class _SendModalState extends State<SendModal> {
     return Column(
       children: [
         const SubtitleWidget(resume: 'recente'),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const TextWidget(text: 'name'),
-            ButtonPublishWidget(
-              label: 'enviar',
-              callback: () {},
-            ),
-          ],
+        ListView.builder(
+          shrinkWrap: true,
+          reverse: true,
+          itemCount: currentUserRecent.value.length,
+          itemBuilder: (BuildContext context, int index) => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextWidget(text: currentUserRecent.value[index].name),
+              ButtonPublishWidget(
+                label: 'enviar',
+                callback: (value) => _postSend(currentUserRecent.value[index]),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -160,7 +215,7 @@ class _SendModalState extends State<SendModal> {
           TextWidget(text: _snapshot![index].data['name']),
           ButtonPublishWidget(
             label: 'enviar',
-            callback: () {},
+            callback: (value) => _postSend(_snapshot![index]),
           ),
         ],
       ),

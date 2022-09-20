@@ -11,8 +11,20 @@ class UserRecentModel {
     required this.id,
     required this.name,
   });
+
+  factory UserRecentModel.fromJson(Map<String, dynamic> json) =>
+      UserRecentModel.fromMap(json);
+
+  factory UserRecentModel.fromMap(Map<String, dynamic> json) => UserRecentModel(
+        id: json['id'],
+        name: json['name'],
+      );
 }
 
-class UserClass {
-  add() {}
+class UserRecentClass {
+  void add(Map<String, dynamic> user) {
+    currentUserRecent.value.contains(user['id'])
+        ? null
+        : currentUserRecent.value.add(UserRecentModel.fromJson(user));
+  }
 }

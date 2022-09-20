@@ -58,7 +58,11 @@ class PushNotificationService {
   }
 
   Future<void> sendNotification(
-      String title, String body, String idHistory, String user) async {
+    String title,
+    String body,
+    String contentId,
+    String user,
+  ) async {
     await _UserFirestore.getTokenOwner(user).then((result) async {
       try {
         await http.post(
@@ -80,7 +84,7 @@ class PushNotificationService {
                 'ios': '',
               },
               'data': {
-                'id': idHistory,
+                'id': contentId,
               },
               "android": {
                 "direct_boot_ok": true,

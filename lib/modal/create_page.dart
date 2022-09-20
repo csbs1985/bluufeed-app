@@ -197,7 +197,7 @@ class _CreatePageState extends State<CreateModal> {
                 Padding(
                   padding: const EdgeInsets.only(right: UiPadding.large),
                   child: ButtonPublishWidget(
-                    callback: () => _postHistory(context),
+                    callback: (value) => _postHistory(context),
                   ),
                 ),
             ],

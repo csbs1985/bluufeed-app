@@ -36,6 +36,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
   final ActivityClass activityClass = ActivityClass();
   final CommentFirestore commentFirestore = CommentFirestore();
   final HistoryFirestore historyFirestore = HistoryFirestore();
+  final NotificationClass notificationClass = NotificationClass();
   final NotificatonFirestore notificatonFirestore = NotificatonFirestore();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
@@ -110,7 +111,20 @@ class _InputCommentModalState extends State<InputCommentModal> {
 
     try {
       await userFirestore.pathQtyCommentUser(currentUser.value.first);
-      _postNotification(context);
+      _form = {
+        'content': currentHistory.value.first.title,
+        'date': DateTime.now().toString(),
+        'id': uuid.v4(),
+        'contentId': currentHistory.value.first.id,
+        'userId': currentHistory.value.first.userId,
+        'userName': _textSigned ? currentUser.value.first.name : 'anônimo',
+        'status': _textSigned
+            ? NotificationEnum.COMMENT_SIGNED.value
+            : NotificationEnum.COMMENT_ANONYMOUS.value,
+        'view': false,
+      };
+      notificationClass.postNotification(context, _form);
+      _setPushNotificationOnwer(context, currentHistory.value.first.userId);
 
       // if (_isEdit) Navigator.of(context).pop();
       toast.toast(
@@ -121,28 +135,6 @@ class _InputCommentModalState extends State<InputCommentModal> {
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => pathQtyCommentUser: ' + error.toString());
-    }
-  }
-
-  Future<void> _postNotification(BuildContext context) async {
-    _form = {
-      'content': currentHistory.value.first.title,
-      'date': DateTime.now().toString(),
-      'id': uuid.v4(),
-      'contentId': currentHistory.value.first.id,
-      'userId': currentHistory.value.first.userId,
-      'userName': _textSigned ? currentUser.value.first.name : 'anônimo',
-      'status': _textSigned
-          ? NotificationEnum.COMMENT_SIGNED.value
-          : NotificationEnum.COMMENT_ANONYMOUS.value,
-      'view': false,
-    };
-
-    try {
-      await notificatonFirestore.postNotification(_form);
-      _setPushNotificationOnwer(context, currentHistory.value.first.userId);
-    } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => postNotification: ' + error.toString());
     }
   }
 
