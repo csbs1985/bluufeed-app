@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:universe_history_app/firestore/comments_firestore.dart';
 import 'package:universe_history_app/firestore/histories_firestore.dart';
 import 'package:universe_history_app/firestore/notifications_firestore.dart';
@@ -9,7 +8,6 @@ import 'package:universe_history_app/model/activity_model.dart';
 import 'package:universe_history_app/model/history_model.dart';
 import 'package:universe_history_app/model/notification_model.dart';
 import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/service/push_notification_service.dart';
 import 'package:universe_history_app/theme/ui_color.dart';
 import 'package:universe_history_app/theme/ui_icon.dart';
 import 'package:universe_history_app/theme/ui_padding.dart';
@@ -124,7 +122,8 @@ class _InputCommentModalState extends State<InputCommentModal> {
         'view': false,
       };
       notificationClass.postNotification(context, _form);
-      _setPushNotificationOnwer(context, currentHistory.value.first.userId);
+      notificationClass.setNotificationOnwer(
+          context, _form, _textSigned, _commentController.text);
 
       // if (_isEdit) Navigator.of(context).pop();
       toast.toast(
@@ -136,45 +135,6 @@ class _InputCommentModalState extends State<InputCommentModal> {
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => pathQtyCommentUser: ' + error.toString());
     }
-  }
-
-  void _setPushNotificationOnwer(BuildContext context, String _user) {
-    var history = currentHistory.value.first;
-    var title = '';
-    var body = '';
-
-    title = _textSigned
-        ? (currentUser.value.first.name +
-            ' fez um comentário na história "' +
-            history.title +
-            '"')
-        : ('Sua história "' +
-            history.title +
-            '" recebeu um comentário anônimo.');
-
-    body = _textSigned
-        ? currentUser.value.first.name +
-            ': "' +
-            _commentController.text.trim() +
-            '"'
-        : '"' + _commentController.text.trim() + '"';
-
-    _sendNotification(context, title, body, _user);
-  }
-
-  Future<void> _sendNotification(
-    BuildContext context,
-    String _title,
-    String _body,
-    String _user,
-  ) async {
-    await Provider.of<PushNotificationService>(context, listen: false)
-        .sendNotification(
-      _title,
-      _body,
-      currentHistory.value.first.id,
-      _user,
-    );
   }
 
   @override
