@@ -17,9 +17,9 @@ class NotificationClass {
   }
 
   setNotificationSendHistory(BuildContext context, _form) {
-    var _title =
-        'O usuário ${currentUser.value.first.name} compartilhou uma história com você.';
     var _body =
+        'O usuário ${currentUser.value.first.name} compartilhou uma história com você. Clique aqui para ver.';
+    var _title =
         '${currentUser.value.first.name} compartilhou uma história com você.';
 
     _sendNotification(

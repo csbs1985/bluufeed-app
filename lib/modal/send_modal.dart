@@ -61,12 +61,25 @@ class _SendModalState extends State<SendModal> {
     if (_commentController.text.isEmpty) _snapshot = null;
   }
 
-  _postSend(_user) {
+  _formatAlgolia(_user) {
     _currentRecent = {
       'id': _user.data['objectID'],
       'name': _user.data['name'],
     };
 
+    _postSend(_currentRecent);
+  }
+
+  _formatRecent(_user) {
+    _currentRecent = {
+      'id': _user.id,
+      'name': _user.name,
+    };
+
+    _postSend(_currentRecent);
+  }
+
+  _postSend(_user) {
     userRecentClass.add(_currentRecent);
 
     try {
@@ -75,7 +88,7 @@ class _SendModalState extends State<SendModal> {
         'date': DateTime.now().toString(),
         'id': uuid.v4(),
         'contentId': currentHistory.value.first.id,
-        'userId': _user.data['objectID'],
+        'userId': _user['id'] ?? _user.data['objectID'],
         'userName': currentUser.value.first.name,
         'status': NotificationEnum.SEND_HISTORY.value,
         'view': false,
@@ -169,25 +182,35 @@ class _SendModalState extends State<SendModal> {
   }
 
   Widget _userRecent() {
-    return Column(
-      children: [
-        const SubtitleWidget(resume: 'recente'),
-        ListView.builder(
-          shrinkWrap: true,
-          reverse: true,
-          itemCount: currentUserRecent.value.length,
-          itemBuilder: (BuildContext context, int index) => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextWidget(text: currentUserRecent.value[index].name),
-              ButtonPublishWidget(
-                label: 'enviar',
-                callback: (value) => _postSend(currentUserRecent.value[index]),
-              ),
-            ],
-          ),
-        ),
-      ],
+    return ValueListenableBuilder(
+      valueListenable: currentUserRecent,
+      builder: (BuildContext context, value, _) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SubtitleWidget(resume: 'recente'),
+            const SizedBox(height: UiPadding.medium),
+            currentUserRecent.value.isEmpty
+                ? const TextWidget(text: 'você não compartilhou história ainda')
+                : ListView.builder(
+                    shrinkWrap: true,
+                    reverse: true,
+                    itemCount: currentUserRecent.value.length,
+                    itemBuilder: (BuildContext context, int index) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextWidget(text: currentUserRecent.value[index].name),
+                        ButtonPublishWidget(
+                          label: 'enviar',
+                          callback: (value) =>
+                              _formatRecent(currentUserRecent.value[index]),
+                        ),
+                      ],
+                    ),
+                  ),
+          ],
+        );
+      },
     );
   }
 
@@ -215,7 +238,7 @@ class _SendModalState extends State<SendModal> {
           TextWidget(text: _snapshot![index].data['name']),
           ButtonPublishWidget(
             label: 'enviar',
-            callback: (value) => _postSend(_snapshot![index]),
+            callback: (value) => _formatAlgolia(_snapshot![index]),
           ),
         ],
       ),

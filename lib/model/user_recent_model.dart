@@ -22,9 +22,12 @@ class UserRecentModel {
 }
 
 class UserRecentClass {
-  void add(Map<String, dynamic> user) {
-    currentUserRecent.value.contains(user['id'])
-        ? null
-        : currentUserRecent.value.add(UserRecentModel.fromJson(user));
+  add(Map<String, dynamic> user) {
+    bool _contain = false;
+
+    for (var item in currentUserRecent.value)
+      _contain = (item.id == user['id']) ? true : false;
+
+    if (!_contain) currentUserRecent.value.add(UserRecentModel.fromJson(user));
   }
 }
