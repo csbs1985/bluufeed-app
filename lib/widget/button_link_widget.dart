@@ -35,7 +35,8 @@ class _ButtonLinkWidgetState extends State<ButtonLinkWidget> {
                 alignment: Alignment.centerLeft,
                 child: TextWidget(text: widget._label),
               ),
-              onTap: () => Navigator.of(context).pushNamed(widget._link),
+              onTapDown: (TapTop) =>
+                  Navigator.of(context).pushNamed(widget._link),
             ),
           ),
         );

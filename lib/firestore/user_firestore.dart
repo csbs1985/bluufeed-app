@@ -18,10 +18,10 @@ class UserFirestore {
         .update({'isNotification': currentUser.value.first.isNotification});
   }
 
-  pathName() {
+  pathName(String _name, String _now) {
     return user.doc(currentUser.value.first.id).update({
-      'name': currentUser.value.first.name,
-      'upDateName': currentUser.value.first.upDateName
+      'name': _name,
+      'upDateName': _now,
     });
   }
 

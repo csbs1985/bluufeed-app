@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              _currentPage == 2
+              _currentPage == 1
                   ? UiIcon.notificationActived
                   : UiIcon.notification,
             ),
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              _currentPage == 3 ? UiIcon.moreActived : UiIcon.more,
+              _currentPage == 2 ? UiIcon.moreActived : UiIcon.more,
             ),
             label: '',
           ),

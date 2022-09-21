@@ -24,6 +24,7 @@ dependencies:
   no_context_navigation: ^2.1.2
   path_provider: ^2.0.11
   provider: ^6.0.3
+  webview_flutter: ^3.0.4
 
   # firebase
   cloud_firestore: ^3.4.6
@@ -37,6 +38,7 @@ dependencies:
   flutter_svg: ^1.0.3
   flutter_timer_countdown: ^1.0.4
   modal_bottom_sheet: ^2.1.0
+  ndialog: ^4.1.1+1
   skeleton_animation: ^0.1.4
 
   # native
@@ -54,7 +56,6 @@ dependencies:
   uuid: ^3.0.6
   load: ^1.0.0
   pin_code_fields: ^7.4.0
-  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

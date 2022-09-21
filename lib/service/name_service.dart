@@ -11,18 +11,26 @@ class NameClass {
 
   validateName(value) {
     if (value!.isEmpty) return 'informe seu nome de usuário';
+    if (value!.length < 6 || value!.length > 20)
+      return 'deve ter de 6 à 20 caracteres';
     if (!RegExp(_regx).hasMatch(value)) return 'node de usuário não é válido';
     return null;
   }
 
-  getName(value) async {
+  getName(String _name) async {
     await _userFirestore
-        .getName(value)
+        .getName(_name)
         .then((result) => {
               alreadyName = result.size > 0 ? true : false,
             })
         .catchError((error) => debugPrint('ERROR => getName: ' + error));
 
     return alreadyName;
+  }
+
+  nameChange(String _name, String _now) {
+    _userFirestore
+        .pathName(_name, _now)
+        .catchError((error) => debugPrint('ERROR: ' + error));
   }
 }

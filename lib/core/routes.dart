@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/page/name_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:bluuffed_app/model/page_model.dart';
@@ -38,6 +39,13 @@ class Routes {
     if (settings.name == PageEnum.LOGIN.value) {
       return PageTransition(
         child: const LoginPage(),
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+      );
+    }
+    if (settings.name == PageEnum.NAME.value) {
+      return PageTransition(
+        child: const NamePage(),
         type: PageTransitionType.rightToLeft,
         settings: settings,
       );

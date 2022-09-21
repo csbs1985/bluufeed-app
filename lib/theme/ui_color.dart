@@ -25,7 +25,7 @@ class UiColor {
 
   static const Color buttonDisabled = Color(0xFF2a2d2e);
   static const Color buttonDisabledBorder = Color(0xFF212324);
-  static const Color buttonDisabledText = Color(0xFF2a2d2e);
+  static const Color buttonDisabledText = Color(0xFF181A20);
 
   static const Color inatived = Color(0xFFDBE7F2);
   static const Color inativedDark = Color(0xFF262A34);
