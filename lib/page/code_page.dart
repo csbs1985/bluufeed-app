@@ -71,9 +71,9 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
     _toast.toast(
       context,
       ToastEnum.WARNING.value,
-      'tempo encerrado, enviamos um novo código',
+      'tempo encerrado, vamos reiniciar o processo',
     );
-    _sendCode();
+    Navigator.pop(context);
   }
 
   _validateCode() {

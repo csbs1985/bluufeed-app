@@ -1,4 +1,5 @@
 import 'package:bluuffed_app/page/activity_page.dart';
+import 'package:bluuffed_app/page/common_questions_page.dart';
 import 'package:bluuffed_app/page/name_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -70,6 +71,13 @@ class Routes {
         child: const PasswordCreatePage(),
         type: PageTransitionType.rightToLeft,
         settings: settings,
+      );
+    }
+    if (settings.name == PageEnum.QUESTIONS.value) {
+      return PageTransition(
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        child: CommonQuestionsPage(),
       );
     }
     if (settings.name == PageEnum.PRIVACY.value) {
