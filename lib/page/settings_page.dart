@@ -81,13 +81,13 @@ class _SettingsPageState extends State<SettingsPage> {
                             label: 'Nome de usuário',
                             link: PageEnum.NAME.value,
                           ),
-                          ButtonLinkWidget(
-                            label: 'Senha',
-                            link: PageEnum.NAME.value,
-                          ),
+                          // ButtonLinkWidget(
+                          //   label: 'Senha',
+                          //   link: PageEnum.NAME.value,
+                          // ),
                           ButtonLinkWidget(
                             label: 'Suas atividades',
-                            link: PageEnum.ACTIVITES.value,
+                            link: PageEnum.ACTIVITY.value,
                           ),
                         ],
                       ),

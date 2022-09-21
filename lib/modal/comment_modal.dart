@@ -85,6 +85,7 @@ class _CommentModalState extends State<CommentModal> {
 }
 
 enum CommentTypeEnum {
+  ACTIVITY('activity'),
   COMMENT('comment'),
   HISTORY('history');
 

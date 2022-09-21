@@ -31,6 +31,12 @@ class UiText {
     fontWeight: FontWeight.bold,
     color: UiColor.toast,
   );
+
+  static const TextStyle icon = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: UiColor.buttonText,
+  );
 }
 
 class UiTextDark {

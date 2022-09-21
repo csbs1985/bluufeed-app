@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/page/activity_page.dart';
 import 'package:bluuffed_app/page/name_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -15,6 +16,13 @@ import 'package:bluuffed_app/page/terms_page.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    if (settings.name == PageEnum.ACTIVITY.value) {
+      return PageTransition(
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        child: const ActivityPage(),
+      );
+    }
     if (settings.name == PageEnum.CODE.value) {
       return PageTransition(
         type: PageTransitionType.rightToLeft,

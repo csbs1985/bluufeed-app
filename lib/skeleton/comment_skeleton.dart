@@ -6,21 +6,15 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 
 class CommentSkeleton extends StatelessWidget {
-  CommentSkeleton({Key? key}) : super(key: key);
-
-  Color color = UiColor.border;
-
-  void _getColor() {
-    bool isDark = currentTheme.value == Brightness.dark;
-    color = isDark ? UiColor.skeletonDark : UiColor.skeleton;
-  }
+  const CommentSkeleton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: currentTheme,
       builder: (BuildContext context, value, __) {
-        _getColor();
+        bool isDark = currentTheme.value == Brightness.dark;
+
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +22,7 @@ class CommentSkeleton extends StatelessWidget {
             Skeleton(
               width: double.infinity,
               height: 24,
-              textColor: color,
+              textColor: isDark ? UiColor.skeletonDark : UiColor.skeleton,
               borderRadius: BorderRadius.circular(UiBorder.rounded),
             ),
             const SizedBox(height: UiPadding.medium),
@@ -37,14 +31,14 @@ class CommentSkeleton extends StatelessWidget {
                 Skeleton(
                   width: 100,
                   height: 12,
-                  textColor: color,
+                  textColor: isDark ? UiColor.skeletonDark : UiColor.skeleton,
                   borderRadius: BorderRadius.circular(UiBorder.rounded),
                 ),
                 const SizedBox(width: UiPadding.medium),
                 Skeleton(
                   width: 100,
                   height: 12,
-                  textColor: color,
+                  textColor: isDark ? UiColor.skeletonDark : UiColor.skeleton,
                   borderRadius: BorderRadius.circular(UiBorder.rounded),
                 ),
               ],

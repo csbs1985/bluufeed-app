@@ -58,28 +58,31 @@ class DateWidget extends StatelessWidget {
     }
 
     String _getAuthor(_item) {
-      String? userStatus;
-      String? userName;
-      bool? isEdit;
-      bool? isSigned;
+      if (_type != CommentTypeEnum.ACTIVITY.value) {
+        String? userStatus;
+        String? userName;
+        bool? isEdit;
+        bool? isSigned;
 
-      isEdit = _item['isEdit'];
-      isSigned = _item['isSigned'];
-      userName = _item['userName'];
+        isEdit = _item['isEdit'];
+        isSigned = _item['isSigned'];
+        userName = _item['userName'];
 
-      var author = '';
+        var author = '';
 
-      if (_type == CommentTypeEnum.COMMENT.value) {
-        userStatus =
-            _item is CommentModel ? _item.userStatus : _item['userStatus'];
-      }
+        if (_type == CommentTypeEnum.COMMENT.value) {
+          userStatus =
+              _item is CommentModel ? _item.userStatus : _item['userStatus'];
+        }
 
-      userStatus == UserStatusEnum.DELETED.value
-          ? author = 'usuário deletado'
-          : author = isSigned! ? userName! : 'anônimo';
+        userStatus == UserStatusEnum.DELETED.value
+            ? author = 'usuário deletado'
+            : author = isSigned! ? userName! : 'anônimo';
 
-      var temp = ' · $author';
-      return isEdit! ? '$temp · editado' : temp;
+        var temp = ' · $author';
+        return isEdit! ? '$temp · editado' : temp;
+      } else
+        return '';
     }
 
     return Wrap(
@@ -89,7 +92,8 @@ class DateWidget extends StatelessWidget {
         if (_type == CommentTypeEnum.HISTORY.value && _item['isAuthorized'])
           const LabelWidget(label: ' · '),
         LabelWidget(label: _getDate(_item['date'])),
-        LabelWidget(label: _getAuthor(_item)),
+        if (_type != CommentTypeEnum.ACTIVITY.value)
+          LabelWidget(label: _getAuthor(_item)),
       ],
     );
   }

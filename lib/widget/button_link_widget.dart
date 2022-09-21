@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:flutter/material.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 
@@ -25,20 +25,20 @@ class _ButtonLinkWidgetState extends State<ButtonLinkWidget> {
       builder: (BuildContext context, Brightness theme, _) {
         bool isDark = currentTheme.value == Brightness.dark;
 
-        return Material(
-          color: isDark ? UiColor.mainDark : UiColor.main,
-          child: SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: GestureDetector(
+        return GestureDetector(
+          child: Material(
+            color: isDark ? UiColor.mainDark : UiColor.main,
+            // color: Colors.amber,
+            child: SizedBox(
+              width: double.infinity,
+              height: 48,
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: TextWidget(text: widget._label),
               ),
-              onTapDown: (TapTop) =>
-                  Navigator.of(context).pushNamed(widget._link),
             ),
           ),
+          onTapDown: (TapTop) => Navigator.of(context).pushNamed(widget._link),
         );
       },
     );

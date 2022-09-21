@@ -1,6 +1,6 @@
 enum PageEnum {
   ABOUT('/about'),
-  ACTIVITES('/actvities'),
+  ACTIVITY('/actvities'),
   CODE('/code'),
   CREATE('/create'),
   DENOUNCE('/denounce'),
