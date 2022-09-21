@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/firestore/token_firestore.dart';
-import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/model/activity_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/service/email_service.dart';
-import 'package:universe_history_app/service/name_service.dart';
-import 'package:universe_history_app/widget/toast_widget.dart';
+import 'package:bluuffed_app/firestore/token_firestore.dart';
+import 'package:bluuffed_app/firestore/user_firestore.dart';
+import 'package:bluuffed_app/model/activity_model.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/service/email_service.dart';
+import 'package:bluuffed_app/service/name_service.dart';
+import 'package:bluuffed_app/widget/toast_widget.dart';
 
 class AuthService extends ChangeNotifier {
   final ActivityClass activityClass = ActivityClass();

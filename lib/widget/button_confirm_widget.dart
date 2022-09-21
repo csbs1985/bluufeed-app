@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/widget/alert_confirm_widget.dart';
-import 'package:universe_history_app/widget/text_widget.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/alert_confirm_widget.dart';
+import 'package:bluuffed_app/widget/text_widget.dart';
 
 class ButtonConfirmWidget extends StatefulWidget {
   const ButtonConfirmWidget({

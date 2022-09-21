@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:skeleton_animation/skeleton_animation.dart';
-import 'package:universe_history_app/theme/ui_border.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/theme/ui_border.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
 
 class CommentSkeleton extends StatelessWidget {
   CommentSkeleton({Key? key}) : super(key: key);

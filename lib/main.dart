@@ -3,12 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:universe_history_app/core/routes.dart';
-import 'package:universe_history_app/service/auth_check_service.dart';
-import 'package:universe_history_app/service/auth_service.dart';
-import 'package:universe_history_app/service/local_notification_service.dart';
-import 'package:universe_history_app/service/push_notification_service.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/core/routes.dart';
+import 'package:bluuffed_app/service/auth_check_service.dart';
+import 'package:bluuffed_app/service/auth_service.dart';
+import 'package:bluuffed_app/service/local_notification_service.dart';
+import 'package:bluuffed_app/service/push_notification_service.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

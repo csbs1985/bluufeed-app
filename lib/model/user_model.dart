@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/service/auth_service.dart';
-import 'package:universe_history_app/model/activity_model.dart';
-import 'package:universe_history_app/widget/toast_widget.dart';
+import 'package:bluuffed_app/firestore/user_firestore.dart';
+import 'package:bluuffed_app/service/auth_service.dart';
+import 'package:bluuffed_app/model/activity_model.dart';
+import 'package:bluuffed_app/widget/toast_widget.dart';
 
 ValueNotifier<List<UserModel>> currentUser = ValueNotifier<List<UserModel>>([]);
 

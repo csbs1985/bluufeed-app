@@ -1,4 +1,4 @@
-package com.universe.history.app
+package com.bluufeed.app
 
 import io.flutter.embedding.android.FlutterActivity
 

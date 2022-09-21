@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:universe_history_app/modal/comment_modal.dart';
-import 'package:universe_history_app/model/comment_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/theme/ui_icon.dart';
-import 'package:universe_history_app/widget/label_widget.dart';
+import 'package:bluuffed_app/modal/comment_modal.dart';
+import 'package:bluuffed_app/model/comment_model.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/theme/ui_icon.dart';
+import 'package:bluuffed_app/widget/label_widget.dart';
 
 class DateWidget extends StatelessWidget {
   const DateWidget({required String type, required Map<String, dynamic> item})

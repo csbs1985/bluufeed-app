@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(universe_history_app LANGUAGES CXX)
+project(bluuffed_app LANGUAGES CXX)
 
-set(BINARY_NAME "universe_history_app")
+set(BINARY_NAME "bluuffed_app")
 
 cmake_policy(SET CMP0063 NEW)
 

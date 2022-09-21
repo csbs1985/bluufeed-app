@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/theme/ui_text.dart';
+import 'package:bluuffed_app/theme/ui_text.dart';
 
 class SubtitleWidget extends StatelessWidget {
   const SubtitleWidget({

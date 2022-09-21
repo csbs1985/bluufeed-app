@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:universe_history_app/firestore/histories_firestore.dart';
-import 'package:universe_history_app/modal/comment_modal.dart';
-import 'package:universe_history_app/modal/input_comment_modal.dart';
-import 'package:universe_history_app/modal/send_modal.dart';
-import 'package:universe_history_app/model/history_model.dart';
-import 'package:universe_history_app/model/modal_model.dart';
-import 'package:universe_history_app/model/page_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_icon.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/widget/icon_widget.dart';
-import 'package:universe_history_app/widget/number_animation_widget.dart';
-import 'package:universe_history_app/widget/toast_widget.dart';
+import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/modal/comment_modal.dart';
+import 'package:bluuffed_app/modal/input_comment_modal.dart';
+import 'package:bluuffed_app/modal/send_modal.dart';
+import 'package:bluuffed_app/model/history_model.dart';
+import 'package:bluuffed_app/model/modal_model.dart';
+import 'package:bluuffed_app/model/page_model.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_icon.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/widget/icon_widget.dart';
+import 'package:bluuffed_app/widget/number_animation_widget.dart';
+import 'package:bluuffed_app/widget/toast_widget.dart';
 
 class HistoryMenuWidget extends StatefulWidget {
   const HistoryMenuWidget({required Map<String, dynamic> history})

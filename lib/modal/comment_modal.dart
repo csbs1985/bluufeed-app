@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/firestore/comments_firestore.dart';
-import 'package:universe_history_app/model/history_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/widget/button_comment_widget.dart';
-import 'package:universe_history_app/widget/comment_list_widget.dart';
-import 'package:universe_history_app/widget/number_animation_widget.dart';
+import 'package:bluuffed_app/firestore/comments_firestore.dart';
+import 'package:bluuffed_app/model/history_model.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/button_comment_widget.dart';
+import 'package:bluuffed_app/widget/comment_list_widget.dart';
+import 'package:bluuffed_app/widget/number_animation_widget.dart';
 
 class CommentModal extends StatefulWidget with PreferredSizeWidget {
   const CommentModal({super.key});

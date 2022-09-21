@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:universe_history_app/model/page_model.dart';
-import 'package:universe_history_app/page/code_page.dart';
-import 'package:universe_history_app/page/forgot_password_page.dart';
-import 'package:universe_history_app/page/history_page.dart';
-import 'package:universe_history_app/page/home_page.dart';
-import 'package:universe_history_app/page/login_page.dart';
-import 'package:universe_history_app/page/password_create_page.dart';
-import 'package:universe_history_app/page/password_page.dart';
-import 'package:universe_history_app/page/privacy_page.dart';
-import 'package:universe_history_app/page/register_page.dart';
-import 'package:universe_history_app/page/terms_page.dart';
+import 'package:bluuffed_app/model/page_model.dart';
+import 'package:bluuffed_app/page/code_page.dart';
+import 'package:bluuffed_app/page/forgot_password_page.dart';
+import 'package:bluuffed_app/page/history_page.dart';
+import 'package:bluuffed_app/page/home_page.dart';
+import 'package:bluuffed_app/page/login_page.dart';
+import 'package:bluuffed_app/page/password_create_page.dart';
+import 'package:bluuffed_app/page/password_page.dart';
+import 'package:bluuffed_app/page/privacy_page.dart';
+import 'package:bluuffed_app/page/register_page.dart';
+import 'package:bluuffed_app/page/terms_page.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {

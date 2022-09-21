@@ -1,17 +1,17 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/modal/comment_modal.dart';
-import 'package:universe_history_app/model/category_model.dart';
-import 'package:universe_history_app/model/page_model.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/widget/border_widget.dart';
-import 'package:universe_history_app/widget/date_widget.dart';
-import 'package:universe_history_app/widget/history_menu_widget.dart';
-import 'package:universe_history_app/widget/label_widget.dart';
-import 'package:universe_history_app/widget/separator_widget.dart';
-import 'package:universe_history_app/widget/text_widget.dart';
-import 'package:universe_history_app/widget/title_widget.dart';
+import 'package:bluuffed_app/modal/comment_modal.dart';
+import 'package:bluuffed_app/model/category_model.dart';
+import 'package:bluuffed_app/model/page_model.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/widget/border_widget.dart';
+import 'package:bluuffed_app/widget/date_widget.dart';
+import 'package:bluuffed_app/widget/history_menu_widget.dart';
+import 'package:bluuffed_app/widget/label_widget.dart';
+import 'package:bluuffed_app/widget/separator_widget.dart';
+import 'package:bluuffed_app/widget/text_widget.dart';
+import 'package:bluuffed_app/widget/title_widget.dart';
 
 class HistoryItemWidget extends StatefulWidget {
   const HistoryItemWidget({

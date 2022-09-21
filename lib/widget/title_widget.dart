@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget({required String title}) : _title = title;

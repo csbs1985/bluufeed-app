@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/widget/resume_widget.dart';
-import 'package:universe_history_app/widget/subtitle_widget.dart';
+import 'package:bluuffed_app/widget/resume_widget.dart';
+import 'package:bluuffed_app/widget/subtitle_widget.dart';
 
 class SubtitleResumeWidget extends StatelessWidget {
   const SubtitleResumeWidget({required String title, required String resume})

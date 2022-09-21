@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/modal/comment_modal.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/theme/ui_border.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/widget/date_widget.dart';
+import 'package:bluuffed_app/modal/comment_modal.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/theme/ui_border.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/date_widget.dart';
 
 class CommentItemWidget extends StatefulWidget {
   const CommentItemWidget({required Map<String, dynamic> item}) : _item = item;

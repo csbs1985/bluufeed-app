@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_widget.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TermsPage extends StatelessWidget {

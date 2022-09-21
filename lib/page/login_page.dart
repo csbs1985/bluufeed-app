@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/model/form_model.dart';
-import 'package:universe_history_app/model/page_model.dart';
-import 'package:universe_history_app/service/email_service.dart';
-import 'package:universe_history_app/theme/ui_icon.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/widget/button_3d_widget.dart';
-import 'package:universe_history_app/widget/button_text_widget.dart';
-import 'package:universe_history_app/widget/space_x_large.widget.dart';
-import 'package:universe_history_app/widget/text_animation_widget.dart';
-import 'package:universe_history_app/widget/text_widget.dart';
-import 'package:universe_history_app/widget/toast_widget.dart';
+import 'package:bluuffed_app/firestore/user_firestore.dart';
+import 'package:bluuffed_app/model/form_model.dart';
+import 'package:bluuffed_app/model/page_model.dart';
+import 'package:bluuffed_app/service/email_service.dart';
+import 'package:bluuffed_app/theme/ui_icon.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/widget/button_3d_widget.dart';
+import 'package:bluuffed_app/widget/button_text_widget.dart';
+import 'package:bluuffed_app/widget/space_x_large.widget.dart';
+import 'package:bluuffed_app/widget/text_animation_widget.dart';
+import 'package:bluuffed_app/widget/text_widget.dart';
+import 'package:bluuffed_app/widget/toast_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

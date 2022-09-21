@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/widget/separator_widget.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/widget/separator_widget.dart';
 
 class NoResultWidget extends StatelessWidget {
   const NoResultWidget({required String text}) : _text = text;

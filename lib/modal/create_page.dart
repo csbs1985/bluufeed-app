@@ -1,20 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:universe_history_app/firestore/histories_firestore.dart';
-import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/model/history_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_icon.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/model/activity_model.dart';
-import 'package:universe_history_app/widget/button_publish_widget.dart';
-import 'package:universe_history_app/widget/space_x_large.widget.dart';
-import 'package:universe_history_app/widget/select_category_widget.dart';
-import 'package:universe_history_app/widget/select_toggle_widget.dart';
-import 'package:universe_history_app/widget/toast_widget.dart';
+import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/user_firestore.dart';
+import 'package:bluuffed_app/model/history_model.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_icon.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/model/activity_model.dart';
+import 'package:bluuffed_app/widget/button_publish_widget.dart';
+import 'package:bluuffed_app/widget/space_x_large.widget.dart';
+import 'package:bluuffed_app/widget/select_category_widget.dart';
+import 'package:bluuffed_app/widget/select_toggle_widget.dart';
+import 'package:bluuffed_app/widget/toast_widget.dart';
 import 'package:uuid/uuid.dart';
 
 class CreateModal extends StatefulWidget {

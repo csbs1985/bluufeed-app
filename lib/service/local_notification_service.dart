@@ -1,6 +1,7 @@
+import 'package:bluuffed_app/model/page_model.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
-import 'package:universe_history_app/model/history_model.dart';
+import 'package:bluuffed_app/model/history_model.dart';
 
 class LocalNotificationService {
   late HistoryClass historyClass = HistoryClass();
@@ -30,7 +31,7 @@ class LocalNotificationService {
   _onSelectNotification(String? payload) async {
     if (payload != null && payload.isNotEmpty) {
       await historyClass.getHistory(payload);
-      navService.pushNamed('/history', args: payload);
+      navService.pushNamed(PageEnum.HISTORY.value, args: payload);
     }
   }
 

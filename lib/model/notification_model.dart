@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:universe_history_app/firestore/notifications_firestore.dart';
-import 'package:universe_history_app/model/history_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/service/push_notification_service.dart';
+import 'package:bluuffed_app/firestore/notifications_firestore.dart';
+import 'package:bluuffed_app/model/history_model.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/service/push_notification_service.dart';
 
 class NotificationClass {
   final NotificatonFirestore _notificatonFirestore = NotificatonFirestore();
@@ -19,9 +19,8 @@ class NotificationClass {
 
   setNotificationSendHistory(BuildContext context, Map<String, dynamic> _form) {
     String _body =
-        'O usuário ${currentUser.value.first.name} compartilhou uma história com você. Clique aqui para ver.';
-    String _title =
-        '${currentUser.value.first.name} compartilhou uma história com você.';
+        'O usuário ${currentUser.value.first.name} compartilhou uma história com você.';
+    String _title = '${currentUser.value.first.name} mandou uma história';
 
     _sendNotification(
       context,

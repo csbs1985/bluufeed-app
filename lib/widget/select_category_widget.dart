@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/model/category_model.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/theme/ui_text.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/widget/subtitle_resume_widget.dart';
+import 'package:bluuffed_app/model/category_model.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/theme/ui_text.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 
 class SelectCategoriesWidget extends StatefulWidget {
   final Function? _callback;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/theme/ui_border.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/theme/ui_text.dart';
+import 'package:bluuffed_app/theme/ui_border.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/theme/ui_text.dart';
 
 class Button3dWidget extends StatefulWidget {
   const Button3dWidget({

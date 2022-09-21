@@ -1,6 +1,6 @@
 {
-    "name": "universe_history_app",
-    "short_name": "universe_history_app",
+    "name": "bluuffed_app",
+    "short_name": "bluuffed_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

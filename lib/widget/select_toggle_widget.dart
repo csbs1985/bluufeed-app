@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:universe_history_app/widget/subtitle_resume_widget.dart';
-import 'package:universe_history_app/widget/toggle_widget.dart';
+import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
+import 'package:bluuffed_app/widget/toggle_widget.dart';
 
 class SelectToggleWidget extends StatefulWidget {
   const SelectToggleWidget({

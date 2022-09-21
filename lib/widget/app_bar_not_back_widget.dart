@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
 
 class AppBarNotBackWidget extends StatelessWidget with PreferredSizeWidget {
   const AppBarNotBackWidget({required String title}) : _title = title;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/widget/app_bar_widget.dart';
-import 'package:universe_history_app/widget/button_3d_widget.dart';
-import 'package:universe_history_app/widget/text_animation_widget.dart';
-import 'package:universe_history_app/widget/text_widget.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/button_3d_widget.dart';
+import 'package:bluuffed_app/widget/text_animation_widget.dart';
+import 'package:bluuffed_app/widget/text_widget.dart';
 
 class NamePage extends StatefulWidget {
   const NamePage({super.key});

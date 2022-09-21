@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/page/feed_page.dart';
-import 'package:universe_history_app/page/notification_page.dart';
-import 'package:universe_history_app/page/settings_page.dart';
-import 'package:universe_history_app/service/auth_service.dart';
-import 'package:universe_history_app/theme/ui_icon.dart';
+import 'package:bluuffed_app/firestore/user_firestore.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/page/feed_page.dart';
+import 'package:bluuffed_app/page/notification_page.dart';
+import 'package:bluuffed_app/page/settings_page.dart';
+import 'package:bluuffed_app/service/auth_service.dart';
+import 'package:bluuffed_app/theme/ui_icon.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

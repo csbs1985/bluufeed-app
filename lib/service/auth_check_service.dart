@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:universe_history_app/page/home_page.dart';
-import 'package:universe_history_app/page/login_page.dart';
-import 'package:universe_history_app/service/auth_service.dart';
+import 'package:bluuffed_app/page/home_page.dart';
+import 'package:bluuffed_app/page/login_page.dart';
+import 'package:bluuffed_app/service/auth_service.dart';
 
 class AuthCheckService extends StatefulWidget {
   const AuthCheckService({super.key});

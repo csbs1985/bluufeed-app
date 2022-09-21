@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/widget/app_bar_not_back_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_not_back_widget.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);

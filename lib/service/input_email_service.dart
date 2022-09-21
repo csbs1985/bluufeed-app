@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:universe_history_app/firestore/user_firestore.dart';
-import 'package:universe_history_app/widget/toast_widget.dart';
+import 'package:bluuffed_app/firestore/user_firestore.dart';
+import 'package:bluuffed_app/widget/toast_widget.dart';
 
 class InputEmailService {
   final UserFirestore userFirestore = UserFirestore();

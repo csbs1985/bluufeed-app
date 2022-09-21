@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:universe_history_app/theme/ui_button.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_text.dart';
-import 'package:universe_history_app/theme/ui_text_form_field.dart';
+import 'package:bluuffed_app/theme/ui_button.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_text.dart';
+import 'package:bluuffed_app/theme/ui_text_form_field.dart';
 
 ValueNotifier<Brightness> currentTheme = ValueNotifier(
     WidgetsBinding.instance.platformDispatcher.platformBrightness);

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:universe_history_app/modal/create_page.dart';
-import 'package:universe_history_app/model/history_model.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/widget/button_3d_widget.dart';
-import 'package:universe_history_app/widget/text_widget.dart';
-import 'package:universe_history_app/widget/title_widget.dart';
+import 'package:bluuffed_app/modal/create_page.dart';
+import 'package:bluuffed_app/model/history_model.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/widget/button_3d_widget.dart';
+import 'package:bluuffed_app/widget/text_widget.dart';
+import 'package:bluuffed_app/widget/title_widget.dart';
 
 class CreateCardWidget extends StatefulWidget {
   const CreateCardWidget({Key? key}) : super(key: key);

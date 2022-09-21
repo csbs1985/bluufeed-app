@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:universe_history_app/firestore/comments_firestore.dart';
-import 'package:universe_history_app/firestore/histories_firestore.dart';
-import 'package:universe_history_app/firestore/justifications_Firestore.dart';
-import 'package:universe_history_app/core/variables.dart';
-import 'package:universe_history_app/model/user_model.dart';
-import 'package:universe_history_app/widget/loader_widget.dart';
+import 'package:bluuffed_app/firestore/comments_firestore.dart';
+import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/justifications_Firestore.dart';
+import 'package:bluuffed_app/core/variables.dart';
+import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/widget/loader_widget.dart';
 import 'package:uuid/uuid.dart';
 
 class DeleteAccountUtil {

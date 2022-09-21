@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:universe_history_app/firestore/user_firestore.dart';
+import 'package:bluuffed_app/firestore/user_firestore.dart';
 
 ValueNotifier<String> currentName = ValueNotifier<String>('');
 

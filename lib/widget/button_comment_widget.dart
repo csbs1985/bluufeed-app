@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:universe_history_app/modal/input_comment_modal.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/widget/border_widget.dart';
-import 'package:universe_history_app/widget/text_widget.dart';
+import 'package:bluuffed_app/modal/input_comment_modal.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/border_widget.dart';
+import 'package:bluuffed_app/widget/text_widget.dart';
 
 class ButtonCommentWidget extends StatefulWidget {
   const ButtonCommentWidget({Key? key}) : super(key: key);

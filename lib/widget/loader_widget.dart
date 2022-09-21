@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:universe_history_app/core/variables.dart';
-import 'package:universe_history_app/theme/ui_border.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_padding.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
-import 'package:universe_history_app/widget/text_widget.dart';
+import 'package:bluuffed_app/core/variables.dart';
+import 'package:bluuffed_app/theme/ui_border.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/text_widget.dart';
 
 class LoaderWidget extends StatefulWidget {
   const LoaderWidget({Key? key}) : super(key: key);

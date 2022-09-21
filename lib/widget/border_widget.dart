@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_size.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
 
 class BorderWidget extends StatelessWidget {
   const BorderWidget({Key? key}) : super(key: key);

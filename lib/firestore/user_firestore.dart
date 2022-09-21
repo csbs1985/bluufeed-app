@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:universe_history_app/model/user_model.dart';
+import 'package:bluuffed_app/model/user_model.dart';
 
 class UserFirestore {
   CollectionReference user = FirebaseFirestore.instance.collection('users');

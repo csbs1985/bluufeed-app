@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:universe_history_app/theme/ui_color.dart';
-import 'package:universe_history_app/theme/ui_icon.dart';
-import 'package:universe_history_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_icon.dart';
+import 'package:bluuffed_app/theme/ui_theme.dart';
 
 class AppbarWidget extends StatefulWidget with PreferredSizeWidget {
   const AppbarWidget({required String title}) : _title = title;
