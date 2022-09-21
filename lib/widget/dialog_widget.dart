@@ -21,8 +21,7 @@ class _DialogWidgetState extends State<DialogWidget> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      // onWillPop: () async => false,
-      onWillPop: null,
+      onWillPop: () async => false,
       child: ValueListenableBuilder(
         valueListenable: currentTheme,
         builder: (BuildContext context, Brightness theme, _) {

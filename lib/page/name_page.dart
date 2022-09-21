@@ -164,7 +164,7 @@ class _NamePageState extends State<NamePage> {
                   callback: (value) => _nameChange(context),
                   label: 'alterar',
                   style: _cantChange
-                      ? ButtonStyleEnum.PRIMARY.value
+                      ? ButtonStyleEnum.DISABLED.value
                       : ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
                   padding: UiSize.paddingPageSmall,

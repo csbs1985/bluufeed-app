@@ -20,7 +20,7 @@ class ToastWidget {
       text,
       context: context,
       duration: const Duration(seconds: 3),
-      position: StyledToastPosition.center,
+      position: StyledToastPosition.top,
       textStyle: UiText.toast,
       backgroundColor: style,
       animation: StyledToastAnimation.slideToBottomFade,

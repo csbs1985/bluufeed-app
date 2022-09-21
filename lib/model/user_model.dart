@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bluuffed_app/service/device_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
@@ -70,6 +71,7 @@ class UserModel {
 class UserClass {
   final ActivityClass activityClass = ActivityClass();
   final AuthService authService = AuthService();
+  final DeviceService deviceService = DeviceService();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 
@@ -87,29 +89,33 @@ class UserClass {
 
   Future<void> clean(BuildContext context) async {
     try {
-      // await userFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.name);
+      await userFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.value, '');
       await authService.logout();
-      // activityClass.save(
-      //   ActivityEnum.LOGOUT.value,
-      //   DeviceModel(),
-      //   '',
-      // );
       currentUser.value = [];
+      Navigator.pop(context);
       toast.toast(
         context,
-        ToastEnum.SUCCESS.name,
+        ToastEnum.SUCCESS.value,
         'espero que isso não seja um adeus!',
+      );
+      await activityClass.save(
+        type: ActivityEnum.LOGOUT.value,
+        elementId: '',
+        content: deviceService.DeviceModel(),
       );
     } catch (error) {
       debugPrint('ERROR => _setUpQtyHistoryUser:$error');
-      toast.toast(context, ToastEnum.WARNING.name,
-          'não foi possível sair da aplicação no momento, tente novamente mais tarde.');
+      toast.toast(
+        context,
+        ToastEnum.WARNING.value,
+        'não foi possível sair da aplicação no momento, tente novamente mais tarde.',
+      );
     }
   }
 
   Future<void> delete(BuildContext context) async {
     try {
-      await userFirestore.pathLoginLogout(UserStatusEnum.DELETED.name);
+      await userFirestore.pathLoginLogout(UserStatusEnum.DELETED.name, '');
       await userFirestore.deleteUser();
       await authService.delete();
       currentUser.value = [];

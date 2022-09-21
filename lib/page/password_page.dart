@@ -1,3 +1,5 @@
+import 'package:bluuffed_app/model/activity_model.dart';
+import 'package:bluuffed_app/service/device_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
@@ -26,9 +28,10 @@ class PasswordPage extends StatefulWidget {
 class _PasswordPageState extends State<PasswordPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _passwordController = TextEditingController();
-
+  final ActivityClass activityClass = ActivityClass();
   final AuthService authService = AuthService();
+  final DeviceService deviceService = DeviceService();
+  final TextEditingController _passwordController = TextEditingController();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 
@@ -36,11 +39,10 @@ class _PasswordPageState extends State<PasswordPage> {
     if (_formKey.currentState!.validate()) {
       await authService
           .login(context, currentEmail.value, _passwordController.text)
-          .then(
-            (result) => Navigator.pushNamed(context, '/'),
-          )
-          .catchError((error) =>
-              debugPrint('ERROR => _checkEmail: ' + error.toString()));
+          .then((result) => Navigator.pushNamed(context, '/'))
+          .catchError(
+            (error) => debugPrint('ERROR => _checkEmail: ' + error.toString()),
+          );
     }
   }
 

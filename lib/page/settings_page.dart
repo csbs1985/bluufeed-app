@@ -1,3 +1,5 @@
+import 'package:bluuffed_app/widget/button_confirm_widget.dart';
+import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
@@ -7,7 +9,6 @@ import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/app_bar_not_back_widget.dart';
-import 'package:bluuffed_app/widget/button_confirm_widget.dart';
 import 'package:bluuffed_app/widget/button_link_widget.dart';
 import 'package:bluuffed_app/widget/select_toggle_widget.dart';
 import 'package:bluuffed_app/widget/separator_widget.dart';
@@ -48,9 +49,27 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
-  Future<void> goLogout(BuildContext context, bool value) async {
-    userClass.clean(context);
+  _logout() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return DialogConfirmWidget(
+          title: 'Sair',
+          buttonPrimary: 'Cancelar',
+          buttonSecondary: 'Sair',
+          text:
+              'Dar uma tempo e manter seu conteúdo no Bluufeed. Sua conta volta a ficar ativa quando entrar novamente com sua conta cadastrada.',
+          callback: (value) => goLogout(context, value),
+        );
+      },
+    );
+  }
+
+  Future<void> goLogout(BuildContext context, bool _value) async {
     Navigator.pop(context);
+
+    if (_value) userClass.clean(context);
   }
 
   @override
@@ -137,34 +156,28 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 const SeparatorWidget(),
-                if (currentUser.value.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.all(UiPadding.large),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SubtitleResumeWidget(
-                          title: 'Finalizar',
-                          resume:
-                              'Sair temporariamente ou deletar a conta Bluufeed.',
-                        ),
-                        const SizedBox(height: UiPadding.medium),
-                        ButtonConfirmWidget(
-                          title: 'Sair',
-                          btnPrimaryLabel: 'Cancelar',
-                          btnSecondaryLabel: 'Sair',
-                          link: PageEnum.HOME.value,
-                          text:
-                              'Dar uma tempo e manter seu conteúdo no Bluufeed. Sua conta volta a ficar ativa quando entrar novamente com sua conta cadastrada.',
-                          callback: (value) => goLogout(context, value),
-                        ),
-                        ButtonLinkWidget(
-                          label: 'Deletar conta',
-                          link: PageEnum.DELETE_ACCOUNT.value,
-                        ),
-                      ],
-                    ),
+                Padding(
+                  padding: const EdgeInsets.all(UiPadding.large),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SubtitleResumeWidget(
+                        title: 'Finalizar',
+                        resume:
+                            'Sair temporariamente ou deletar a conta Bluufeed.',
+                      ),
+                      const SizedBox(height: UiPadding.medium),
+                      ButtonConfirmWidget(
+                        label: 'Sair',
+                        callback: (value) => _logout(),
+                      ),
+                      ButtonLinkWidget(
+                        label: 'Deletar conta',
+                        link: PageEnum.DELETE_ACCOUNT.value,
+                      ),
+                    ],
                   ),
+                ),
               ],
             );
           },

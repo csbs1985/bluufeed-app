@@ -24,7 +24,8 @@ class _ActivityItemWidgetState extends State<ActivityItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
+      padding: const EdgeInsets.symmetric(
+          horizontal: UiPadding.large, vertical: UiPadding.medium),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

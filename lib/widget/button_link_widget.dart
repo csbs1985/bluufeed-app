@@ -28,7 +28,6 @@ class _ButtonLinkWidgetState extends State<ButtonLinkWidget> {
         return GestureDetector(
           child: Material(
             color: isDark ? UiColor.mainDark : UiColor.main,
-            // color: Colors.amber,
             child: SizedBox(
               width: double.infinity,
               height: 48,

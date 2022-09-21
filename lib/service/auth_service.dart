@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/service/device_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/token_firestore.dart';
@@ -10,6 +11,7 @@ import 'package:bluuffed_app/widget/toast_widget.dart';
 
 class AuthService extends ChangeNotifier {
   final ActivityClass activityClass = ActivityClass();
+  final DeviceService deviceService = DeviceService();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final ToastWidget _toast = ToastWidget();
 
@@ -60,33 +62,39 @@ class AuthService extends ChangeNotifier {
   }
 
   getCurrentUser(String _activity) async {
-    await getToken();
-    await userFirestore
-        .getUserEmail(auth.currentUser!.email!)
-        .then(
-          (user) async => {
-            userClass.add(
-              {
-                'id': user.docs[0]['id'],
-                'date': user.docs[0]['date'],
-                'name': user.docs[0]['name'],
-                'upDateName': user.docs[0]['upDateName'],
-                'status': UserStatusEnum.ACTIVE.value,
-                'email': user.docs[0]['email'],
-                'token': token,
-                'isNotification': user.docs[0]['isNotification'],
-                'qtyHistory': user.docs[0]['qtyHistory'],
-                'qtyComment': user.docs[0]['qtyComment'],
-              },
-            ),
-            await activityClass.save(type: _activity),
-          },
-        )
-        .catchError((error) => debugPrint('ERROR => setToken:' + error));
+    try {
+      await getToken();
+      await userFirestore.getUserEmail(auth.currentUser!.email!).then(
+            (user) async => {
+              userClass.add(
+                {
+                  'id': user.docs[0]['id'],
+                  'date': user.docs[0]['date'],
+                  'name': user.docs[0]['name'],
+                  'upDateName': user.docs[0]['upDateName'],
+                  'status': UserStatusEnum.ACTIVE.value,
+                  'email': user.docs[0]['email'],
+                  'token': token,
+                  'isNotification': user.docs[0]['isNotification'],
+                  'qtyHistory': user.docs[0]['qtyHistory'],
+                  'qtyComment': user.docs[0]['qtyComment'],
+                },
+              ),
+              await activityClass.save(
+                type: _activity,
+                content: deviceService.DeviceModel(),
+              ),
+            },
+          );
+      await userFirestore.pathLoginLogout(UserStatusEnum.ACTIVE.value, token);
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR => setToken: $error');
+    }
   }
 
   setCurrentUser(BuildContext context, String _activity) async {
     await getToken();
+    await userFirestore.pathLoginLogout(UserStatusEnum.ACTIVE.value, token);
 
     _user = {
       'id': auth.currentUser!.uid,
@@ -101,8 +109,9 @@ class AuthService extends ChangeNotifier {
       'qtyComment': 0,
     };
 
-    userFirestore.postUser(_user).then((result) => {
+    userFirestore.postUser(_user).then((result) async => {
           userClass.add(_user),
+          await activityClass.save(type: _activity),
           Navigator.pushNamed(context, '/'),
         });
   }
@@ -130,7 +139,7 @@ class AuthService extends ChangeNotifier {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: senha);
       await getUser();
-      await getCurrentUser(ActivityEnum.LOGIN.name);
+      await getCurrentUser(ActivityEnum.LOGIN.value);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'too-many-requests':

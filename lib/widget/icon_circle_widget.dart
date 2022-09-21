@@ -1,4 +1,6 @@
+import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/theme/ui_border.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_text.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,11 @@ class IconActivityWidget extends StatefulWidget {
 }
 
 class _IconCicleWidgetState extends State<IconActivityWidget> {
+  Color _getColor() {
+    if (widget._item['type'] == ActivityEnum.LOGIN.value) return UiColor.login;
+    return Colors.indigo;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -22,7 +29,7 @@ class _IconCicleWidgetState extends State<IconActivityWidget> {
       child: Container(
         width: UiSize.iconCircle,
         height: UiSize.iconCircle,
-        color: Colors.amber,
+        color: _getColor(),
         alignment: Alignment.center,
         child: const Text(
           'L',
