@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/page/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
@@ -70,6 +71,7 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: _setCurrentPage,
         children: const [
           FeedPage(),
+          SearchPage(),
           NotificationPage(),
           SettingsPage(),
         ],
@@ -91,7 +93,13 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              _currentPage == 1
+              _currentPage == 1 ? UiIcon.searcActived : UiIcon.search,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _currentPage == 2
                   ? UiIcon.notificationActived
                   : UiIcon.notification,
             ),
@@ -99,7 +107,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              _currentPage == 2 ? UiIcon.moreActived : UiIcon.more,
+              _currentPage == 3 ? UiIcon.moreActived : UiIcon.more,
             ),
             label: '',
           ),

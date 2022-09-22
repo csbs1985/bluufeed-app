@@ -17,4 +17,6 @@ class UiIcon {
   static const String option = 'assets/icons/option.svg';
   static const String read = 'assets/icons/read.svg';
   static const String send = 'assets/icons/send.svg';
+  static const String search = 'assets/icons/search.svg';
+  static const String searcActived = 'assets/icons/search_actived.svg';
 }

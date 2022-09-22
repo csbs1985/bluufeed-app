@@ -5,16 +5,13 @@ import 'package:go_router/go_router.dart';
 class IconWidget extends StatefulWidget {
   const IconWidget({
     Function? callback,
-    Color? color,
     String? route,
     required String icon,
   })  : _callback = callback,
-        _color = color,
         _route = route,
         _icon = icon;
 
   final Function? _callback;
-  final Color? _color;
   final String? _route;
   final String _icon;
 
@@ -39,7 +36,6 @@ class _IconWidgetState extends State<IconWidget> {
     return GestureDetector(
       child: SvgPicture.asset(widget._icon),
       onTap: () => _onPressed(),
-      // color: widget._color ?? UiColor.comp_3,
     );
   }
 }
