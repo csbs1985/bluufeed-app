@@ -25,7 +25,9 @@ class _ActivityItemWidgetState extends State<ActivityItemWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-          horizontal: UiPadding.large, vertical: UiPadding.medium),
+        horizontal: UiPadding.large,
+        vertical: UiPadding.medium,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -43,7 +45,7 @@ class _ActivityItemWidgetState extends State<ActivityItemWidget> {
                       'Alguém, espero que seja você, entrou na sua conta History pelo aparelho <bold>${widget._snapshot['content']}</bold>.',
                   tags: {
                     'bold': StyledTextTag(
-                      style: Theme.of(context).textTheme.headline2,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   },
                 ),

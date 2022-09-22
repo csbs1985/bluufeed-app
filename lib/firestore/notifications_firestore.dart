@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class NotificatonFirestore {
+class NotificationFirestore {
   CollectionReference notifications =
       FirebaseFirestore.instance.collection('notifications');
 

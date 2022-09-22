@@ -35,7 +35,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
   final CommentFirestore commentFirestore = CommentFirestore();
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final NotificationClass notificationClass = NotificationClass();
-  final NotificatonFirestore notificatonFirestore = NotificatonFirestore();
+  final NotificationFirestore notificationFirestore = NotificationFirestore();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
   final Uuid uuid = const Uuid();

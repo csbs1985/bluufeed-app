@@ -7,7 +7,7 @@ import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/push_notification_service.dart';
 
 class NotificationClass {
-  final NotificatonFirestore _notificatonFirestore = NotificatonFirestore();
+  final NotificationFirestore _notificatonFirestore = NotificationFirestore();
 
   Future<void> postNotification(BuildContext context, _form) async {
     try {

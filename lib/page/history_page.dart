@@ -60,7 +60,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           case ConnectionState.none:
                             return _noResults();
                           case ConnectionState.waiting:
-                            return HistoryItemSkeleton();
+                            return const HistoryItemSkeleton();
                           case ConnectionState.done:
                           default:
                             try {
