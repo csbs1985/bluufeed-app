@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/page/about_page.dart';
 import 'package:bluuffed_app/page/activity_page.dart';
 import 'package:bluuffed_app/page/common_questions_page.dart';
 import 'package:bluuffed_app/page/name_page.dart';
@@ -17,6 +18,13 @@ import 'package:bluuffed_app/page/terms_page.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    if (settings.name == PageEnum.ABOUT.value) {
+      return PageTransition(
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        child: const AboutPage(),
+      );
+    }
     if (settings.name == PageEnum.ACTIVITY.value) {
       return PageTransition(
         type: PageTransitionType.rightToLeft,
