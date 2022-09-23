@@ -4,6 +4,7 @@ import 'package:bluuffed_app/page/common_questions_page.dart';
 import 'package:bluuffed_app/page/delete_account_page.dart';
 import 'package:bluuffed_app/page/justify_page.dart';
 import 'package:bluuffed_app/page/name_page.dart';
+import 'package:bluuffed_app/page/password_edit_page.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:bluuffed_app/model/page_model.dart';
@@ -93,6 +94,13 @@ class Routes {
     if (settings.name == PageEnum.PASSWORD_CREATE.value) {
       return PageTransition(
         child: const PasswordCreatePage(),
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+      );
+    }
+    if (settings.name == PageEnum.PASSWORD_EDIT.value) {
+      return PageTransition(
+        child: const PasswordEditPage(),
         type: PageTransitionType.rightToLeft,
         settings: settings,
       );

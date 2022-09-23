@@ -7,10 +7,12 @@ import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/button_text_widget.dart';
 
 class InputPasswordWidget extends StatefulWidget {
-  const InputPasswordWidget({required Function callback})
-      : _callback = callback;
+  const InputPasswordWidget({required Function callback, String? label})
+      : _callback = callback,
+        _label = label;
 
   final Function _callback;
+  final String? _label;
 
   @override
   State<InputPasswordWidget> createState() => _InputPasswordWidgetState();
@@ -58,7 +60,7 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
                       horizontal: UiPadding.large,
                       vertical: UiPadding.small,
                     ),
-                    hintText: 'senha',
+                    hintText: widget._label ?? 'senha',
                     hintStyle: Theme.of(context).textTheme.headline2,
                   ),
                 ),

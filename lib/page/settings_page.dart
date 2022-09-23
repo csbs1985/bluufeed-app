@@ -102,7 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           ButtonLinkWidget(
                             label: 'Senha',
-                            link: PageEnum.PASSWORD_CREATE.value,
+                            link: PageEnum.PASSWORD_EDIT.value,
                           ),
                           ButtonLinkWidget(
                             label: 'Suas atividades',

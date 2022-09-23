@@ -16,14 +16,14 @@ import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
 
-class PasswordCreatePage extends StatefulWidget {
-  const PasswordCreatePage({super.key});
+class PasswordEditPage extends StatefulWidget {
+  const PasswordEditPage({super.key});
 
   @override
-  State<PasswordCreatePage> createState() => _PasswordCreatePageState();
+  State<PasswordEditPage> createState() => _PasswordEditPageState();
 }
 
-class _PasswordCreatePageState extends State<PasswordCreatePage> {
+class _PasswordEditPageState extends State<PasswordEditPage> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -74,7 +74,7 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(title: 'Senha'),
+      appBar: const AppbarWidget(title: 'Alterar senha'),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
@@ -87,7 +87,7 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
                 SvgPicture.asset(UiIcon.identity),
                 const SpaceXLargeWidget(),
                 const TextAnimationWidget(
-                  text: 'a senha ajuda a manter seus dados seguros...',
+                  text: 'é sempre bom mudar a senha...',
                 ),
                 const SizedBox(height: UiPadding.large),
                 const TextWidget(
@@ -104,12 +104,18 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 InputPasswordWidget(
+                  label: 'senha atual',
+                  callback: (value) => _passwordController.text = value,
+                ),
+                const SizedBox(height: UiPadding.large),
+                InputPasswordWidget(
+                  label: 'nova senha',
                   callback: (value) => _passwordController.text = value,
                 ),
                 const SizedBox(height: UiPadding.large),
                 Button3dWidget(
                   callback: (value) => _login(context),
-                  label: 'confirmar',
+                  label: 'alterar senha',
                   style: ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
                   padding: UiSize.paddingPageSmall,

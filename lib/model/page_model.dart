@@ -15,6 +15,7 @@ enum PageEnum {
   QUESTIONS('/questions'),
   PASSWORD('/password'),
   PASSWORD_CREATE('/password_create'),
+  PASSWORD_EDIT('/password_edit'),
   PRIVACY('/privacy'),
   REGISTER('/register'),
   SETTINGS('/settings'),
