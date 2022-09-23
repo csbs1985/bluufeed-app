@@ -126,7 +126,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 const TextWidget(
                   text: '- Como lembra minha senha?'
                       '\n'
-                      'R: Digite seu email cadastrado no Bluufeed que enviaremos um código para validação, e depois poderá alterar sua senha.'
+                      'R: Digite seu email cadastrado no bluufeed que enviaremos um código para validação, e depois poderá alterar sua senha.'
                       '\n\n'
                       '- Como lembrar meu email cadastrado?'
                       '\n'

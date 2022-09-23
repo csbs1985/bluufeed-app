@@ -21,7 +21,7 @@ class UiText {
   );
 
   static const TextStyle subtitle = TextStyle(
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: FontWeight.bold,
     color: UiColor.subtitle,
   );

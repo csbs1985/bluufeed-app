@@ -56,11 +56,11 @@ class _AboutPage extends State<AboutPage> {
                     '\n'
                     '${_packageInfo.buildNumber}'
                     '\n\n'
-                    'Bluufeed e os logotipos e logomarcas do Bluufeed são marcas registradas de Universe Inc.'
+                    'bluufeed e os logotipos e logomarcas do bluufeed são marcas registradas de Universe Inc.'
                     '\n\n'
                     'Todos os direitos registrados.'
                     '\n\n'
-                    'Bluufeed foi construído usando software de código aberto e licenciado.',
+                    'bluufeed foi construído usando software de código aberto e licenciado.',
               ),
             ],
           ),

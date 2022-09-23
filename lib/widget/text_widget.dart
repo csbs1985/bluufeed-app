@@ -10,6 +10,7 @@ class TextWidget extends StatelessWidget {
     return Text(
       _text,
       style: Theme.of(context).textTheme.headline2,
+      textAlign: TextAlign.left,
     );
   }
 }

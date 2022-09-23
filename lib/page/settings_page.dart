@@ -56,10 +56,10 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (BuildContext context) {
         return DialogConfirmWidget(
           title: 'Sair',
-          buttonPrimary: 'Cancelar',
-          buttonSecondary: 'Sair',
+          buttonPrimary: 'cancelar',
+          buttonSecondary: 'sair',
           text:
-              'Dar uma tempo e manter seu conteúdo no Bluufeed. Sua conta volta a ficar ativa quando entrar novamente com sua conta cadastrada.',
+              'Dar uma tempo e manter seu conteúdo no bluufeed. Sua conta volta a ficar ativa quando entrar novamente com sua conta cadastrada.',
           callback: (value) => goLogout(context, value),
         );
       },
@@ -100,10 +100,10 @@ class _SettingsPageState extends State<SettingsPage> {
                             label: 'Nome de usuário',
                             link: PageEnum.NAME.value,
                           ),
-                          // ButtonLinkWidget(
-                          //   label: 'Senha',
-                          //   link: PageEnum.NAME.value,
-                          // ),
+                          ButtonLinkWidget(
+                            label: 'Senha',
+                            link: PageEnum.PASSWORD_CREATE.value,
+                          ),
                           ButtonLinkWidget(
                             label: 'Suas atividades',
                             link: PageEnum.ACTIVITY.value,
@@ -132,10 +132,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       const SubtitleResumeWidget(
                         title: 'Informações',
                         resume:
-                            'Sobre o Bluufeed, perguntas, políticas e termos.',
+                            'Sobre o bluufeed, perguntas, políticas e termos.',
                       ),
                       const SizedBox(height: UiPadding.medium),
-                      // const ButtonLinkWidget('Avaliação', '/questions'), TODO: adicionar feedback nas lojas de aplicativos.
+                      const ButtonLinkWidget(label: 'Avaliação', link: '/'),
                       ButtonLinkWidget(
                         label: 'Perguntas frequentes',
                         link: PageEnum.QUESTIONS.value,
@@ -164,7 +164,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       const SubtitleResumeWidget(
                         title: 'Finalizar',
                         resume:
-                            'Sair temporariamente ou deletar a conta Bluufeed.',
+                            'Sair temporariamente ou deletar a conta bluufeed.',
                       ),
                       const SizedBox(height: UiPadding.medium),
                       ButtonConfirmWidget(

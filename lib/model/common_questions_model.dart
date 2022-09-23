@@ -11,19 +11,19 @@ class CommonQuestionsModel {
         id: '0',
         question: 'Por que não utilizamos fotos no perfil?',
         answer:
-            'R: O Bluufeed não tem o objetivo de deixar ninguém famoso ou divulgar seu perfil e sim contar histórias. E o anonimato pode encorajar algumas pessoas.'),
+            'R: O bluufeed não tem o objetivo de deixar ninguém famoso ou divulgar seu perfil e sim contar histórias. E o anonimato pode encorajar algumas pessoas.'),
     CommonQuestionsModel(
       id: '1',
       question: 'Por que não podemos curtir o conteúdo?',
       answer:
-          'R: Quando pensamos em criar o Bluufeed uns dos pontos foi de fugir das características de uma rede social comum onde os usuários buscam aceitação e contam o número de curtidas. Queremos que seja um lugar onde qualquer um possa contar seus segredos e que seja seguro e discreto.',
+          'R: Quando pensamos em criar o bluufeed uns dos pontos foi de fugir das características de uma rede social comum onde os usuários buscam aceitação e contam o número de curtidas. Queremos que seja um lugar onde qualquer um possa contar seus segredos e que seja seguro e discreto.',
     ),
     CommonQuestionsModel(
       id: '2',
       question:
           'Por que tem a opção de escrever histórias e comentário anônimo?',
       answer:
-          'R: Porque queremos que o Bluufeed seja um lugar onde qualquer um possa contar suas histórias e experiências sem o julgamento público, onde possa se identificar com outras pessoas e compartilhar suas dores, experiências, superações e contar como passou por tudo. E quem sabe ajudar ao proximo.',
+          'R: Porque queremos que o bluufeed seja um lugar onde qualquer um possa contar suas histórias e experiências sem o julgamento público, onde possa se identificar com outras pessoas e compartilhar suas dores, experiências, superações e contar como passou por tudo. E quem sabe ajudar ao proximo.',
     ),
     CommonQuestionsModel(
       id: '3',
@@ -35,13 +35,13 @@ class CommonQuestionsModel {
       id: '4',
       question: 'Por que não podemos seguir e ser seguido?',
       answer:
-          'R: Porque não é a intenção do Bluufeed. Aqui queremos um ambiente de discrição, anomimato e confiança.',
+          'R: Porque não é a intenção do bluufeed. Aqui queremos um ambiente de discrição, anomimato e confiança.',
     ),
     CommonQuestionsModel(
       id: '5',
       question: 'Um usuário não esta cumprindo as regras, o que devo fazer?',
       answer:
-          'R: Você pode denuncia-ló ou bloquea-ló. Na terceira denuncia o usuário será bloqueado e terá sua conta deletado do Bluufeed. Bloqueando, vocês não poderão mais ver o conteúdo um do outro.',
+          'R: Você pode denuncia-ló ou bloquea-ló. Na terceira denuncia o usuário será bloqueado e terá sua conta deletado do bluufeed. Bloqueando, vocês não poderão mais ver o conteúdo um do outro.',
     ),
     CommonQuestionsModel(
       id: '6',
