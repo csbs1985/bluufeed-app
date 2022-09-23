@@ -4,7 +4,6 @@ import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/delete_account_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
-import 'package:bluuffed_app/widget/alert_confirm_widget.dart';
 import 'package:bluuffed_app/widget/app_bar_widget.dart';
 import 'package:bluuffed_app/widget/button_card_widget.dart';
 import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
@@ -59,15 +58,15 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext buildContext) {
-        return AlertConfirmWidget(
+        return DialogConfirmWidget(
           title: 'Deletar conta',
           text:
               'Tem certeza que deseja excluir sua conta bluufeed definitivamente? Você não poderá mais ler, editar e visualizar suas hitórias e comentários. Somente poderá ler as histórias de outros escritores.',
-          btnPrimaryLabel: 'cancelar',
-          btnSecondaryLabel: 'deletar',
-          callback: (value) => !value
-              ? Navigator.of(buildContext).pop()
-              : deleteAccountService.deleteAccount(buildContext, null),
+          buttonPrimary: 'cancelar',
+          buttonSecondary: 'deletar',
+          callback: (value) => value
+              ? deleteAccountService.deleteAccount(buildContext, null)
+              : Navigator.of(buildContext).pop(),
         );
       },
     );
