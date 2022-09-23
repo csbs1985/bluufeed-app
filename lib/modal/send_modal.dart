@@ -201,7 +201,7 @@ class _SendModalState extends State<SendModal> {
                       children: [
                         TextWidget(text: currentUserRecent.value[index].name),
                         ButtonPublishWidget(
-                          label: 'enviar',
+                          label: 'enviar história',
                           callback: (value) =>
                               _formatRecent(currentUserRecent.value[index]),
                         ),
@@ -237,7 +237,7 @@ class _SendModalState extends State<SendModal> {
         children: [
           TextWidget(text: _snapshot![index].data['name']),
           ButtonPublishWidget(
-            label: 'enviar',
+            label: 'enviar história',
             callback: (value) => _formatAlgolia(_snapshot![index]),
           ),
         ],
