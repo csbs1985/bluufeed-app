@@ -83,12 +83,3 @@ class _CommentModalState extends State<CommentModal> {
     );
   }
 }
-
-enum CommentTypeEnum {
-  ACTIVITY('activity'),
-  COMMENT('comment'),
-  HISTORY('history');
-
-  final String value;
-  const CommentTypeEnum(this.value);
-}

@@ -1,7 +1,7 @@
+import 'package:bluuffed_app/service/date_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:bluuffed_app/modal/comment_modal.dart';
 import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
@@ -58,7 +58,7 @@ class DateWidget extends StatelessWidget {
     }
 
     String _getAuthor(_item) {
-      if (_type != CommentTypeEnum.ACTIVITY.value) {
+      if (_type != DateEnum.ACTIVITY.value) {
         String? userStatus;
         String? userName;
         bool? isEdit;
@@ -70,7 +70,7 @@ class DateWidget extends StatelessWidget {
 
         var author = '';
 
-        if (_type == CommentTypeEnum.COMMENT.value) {
+        if (_type == DateEnum.COMMENT.value) {
           userStatus =
               _item is CommentModel ? _item.userStatus : _item['userStatus'];
         }
@@ -87,12 +87,12 @@ class DateWidget extends StatelessWidget {
 
     return Wrap(
       children: [
-        if (_type == CommentTypeEnum.HISTORY.value && _item['isAuthorized'])
+        if (_type == DateEnum.HISTORY.value && _item['isAuthorized'])
           SvgPicture.asset(UiIcon.authorized),
-        if (_type == CommentTypeEnum.HISTORY.value && _item['isAuthorized'])
+        if (_type == DateEnum.HISTORY.value && _item['isAuthorized'])
           const LabelWidget(label: ' · '),
         LabelWidget(label: _getDate(_item['date'])),
-        if (_type != CommentTypeEnum.ACTIVITY.value)
+        if (_type != DateEnum.ACTIVITY.value)
           LabelWidget(label: _getAuthor(_item)),
       ],
     );

@@ -1,4 +1,4 @@
-import 'package:bluuffed_app/modal/comment_modal.dart';
+import 'package:bluuffed_app/service/date_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/date_widget.dart';
 import 'package:bluuffed_app/widget/icon_circle_widget.dart';
@@ -52,7 +52,7 @@ class _ActivityItemWidgetState extends State<ActivityItemWidget> {
               ),
               const SizedBox(height: UiPadding.small),
               DateWidget(
-                type: CommentTypeEnum.ACTIVITY.value,
+                type: DateEnum.ACTIVITY.value,
                 item: widget._snapshot,
               ),
             ],

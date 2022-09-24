@@ -1,8 +1,8 @@
 import 'package:bluuffed_app/firestore/notifications_firestore.dart';
-import 'package:bluuffed_app/modal/comment_modal.dart';
 import 'package:bluuffed_app/model/notification_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/service/date_service.dart';
 import 'package:bluuffed_app/service/push_notification_service.dart';
 import 'package:bluuffed_app/skeleton/notification_skeleton.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
@@ -148,7 +148,7 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
           const SizedBox(height: UiPadding.small),
           DateWidget(
-            type: CommentTypeEnum.ACTIVITY.value,
+            type: DateEnum.ACTIVITY.value,
             item: _item,
           ),
         ],

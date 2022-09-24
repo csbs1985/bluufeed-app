@@ -1,6 +1,6 @@
+import 'package:bluuffed_app/service/date_service.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
-import 'package:bluuffed_app/modal/comment_modal.dart';
 import 'package:bluuffed_app/model/category_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
@@ -48,7 +48,7 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
               if (widget._item['title'] != "")
                 TitleWidget(title: widget._item['title']),
               DateWidget(
-                type: CommentTypeEnum.HISTORY.value,
+                type: DateEnum.HISTORY.value,
                 item: widget._item,
               ),
               const SizedBox(height: UiPadding.medium),

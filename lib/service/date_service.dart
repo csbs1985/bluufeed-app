@@ -7,3 +7,13 @@ class DateService {
     return _diff.inDays;
   }
 }
+
+enum DateEnum {
+  ACTIVITY('activity'),
+  COMMENT('comment'),
+  HISTORY('history'),
+  PERFIL('perfil');
+
+  final String value;
+  const DateEnum(this.value);
+}

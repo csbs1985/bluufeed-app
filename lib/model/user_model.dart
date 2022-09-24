@@ -81,6 +81,10 @@ class UserClass {
     saveUser();
   }
 
+  userModelToMap(UserModel _currentUser) {
+    String data = UserModel.toJson(_currentUser);
+  }
+
   Future<File> saveUser() async {
     String data = UserModel.toJson(currentUser.value.first);
     final file = await getFileUser();

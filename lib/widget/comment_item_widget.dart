@@ -1,5 +1,5 @@
+import 'package:bluuffed_app/service/date_service.dart';
 import 'package:flutter/material.dart';
-import 'package:bluuffed_app/modal/comment_modal.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
@@ -61,7 +61,7 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
                   UiPadding.large,
                 ),
                 child: DateWidget(
-                  type: CommentTypeEnum.COMMENT.value,
+                  type: DateEnum.COMMENT.value,
                   item: widget._item,
                 ),
               )
