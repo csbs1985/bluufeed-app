@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/page/perfil_page.dart';
 import 'package:bluuffed_app/page/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -73,6 +74,7 @@ class _HomePageState extends State<HomePage> {
           FeedPage(),
           SearchPage(),
           NotificationPage(),
+          PerfilPage(),
           SettingsPage(),
         ],
       ),
@@ -87,7 +89,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              _currentPage == 0 ? UiIcon.logoActived : UiIcon.logo,
+              _currentPage == 0 ? UiIcon.feedActived : UiIcon.feed,
             ),
             label: '',
           ),
@@ -107,7 +109,13 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              _currentPage == 3 ? UiIcon.moreActived : UiIcon.more,
+              _currentPage == 3 ? UiIcon.logoActived : UiIcon.logo,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              _currentPage == 4 ? UiIcon.moreActived : UiIcon.more,
             ),
             label: '',
           ),
