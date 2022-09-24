@@ -1,3 +1,6 @@
+import 'package:bluuffed_app/button/button_confirm_widget.dart';
+import 'package:bluuffed_app/button/button_follow_widget.dart';
+import 'package:bluuffed_app/button/button_link_widget.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/date_service.dart';
@@ -6,9 +9,6 @@ import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/border_widget.dart';
-import 'package:bluuffed_app/widget/button_confirm_widget.dart';
-import 'package:bluuffed_app/widget/button_follow_widget.dart';
-import 'package:bluuffed_app/widget/button_link_widget.dart';
 import 'package:bluuffed_app/widget/card_perfil_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:flutter/material.dart';

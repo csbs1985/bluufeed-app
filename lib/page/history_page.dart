@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/modal/history_opiton_modal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,10 +9,11 @@ import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
-import 'package:bluuffed_app/widget/button_comment_widget.dart';
+import 'package:bluuffed_app/button/button_comment_widget.dart';
 import 'package:bluuffed_app/widget/comment_list_widget.dart';
 import 'package:bluuffed_app/widget/history_item_widget.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -22,6 +24,18 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   final HistoryFirestore historyFirestore = HistoryFirestore();
+
+  void _openModal(BuildContext context) {
+    showCupertinoModalBottomSheet(
+      expand: false,
+      context: context,
+      barrierColor: UiColor.overley,
+      duration: const Duration(milliseconds: 300),
+      builder: (context) {
+        return const HistoryOptionModal();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +58,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 actions: [
                   IconButton(
                     icon: SvgPicture.asset(UiIcon.option),
-                    onPressed: () => {},
+                    onPressed: () => _openModal(context),
                   ),
                 ],
               ),

@@ -7,7 +7,7 @@ import 'package:bluuffed_app/service/name_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/widget/app_bar_widget.dart';
-import 'package:bluuffed_app/widget/button_3d_widget.dart';
+import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/widget/dialog_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';

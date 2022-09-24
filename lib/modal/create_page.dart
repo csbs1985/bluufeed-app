@@ -10,7 +10,7 @@ import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
-import 'package:bluuffed_app/widget/button_publish_widget.dart';
+import 'package:bluuffed_app/button/button_publish_widget.dart';
 import 'package:bluuffed_app/widget/space_x_large.widget.dart';
 import 'package:bluuffed_app/widget/select_category_widget.dart';
 import 'package:bluuffed_app/widget/select_toggle_widget.dart';

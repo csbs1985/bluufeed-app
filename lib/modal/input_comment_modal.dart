@@ -14,7 +14,7 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/border_widget.dart';
-import 'package:bluuffed_app/widget/button_publish_widget.dart';
+import 'package:bluuffed_app/button/button_publish_widget.dart';
 import 'package:bluuffed_app/widget/icon_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';

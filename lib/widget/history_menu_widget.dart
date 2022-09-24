@@ -47,11 +47,11 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   void _openComment() {
     if (widget._history['isComment']) {
       historyClass.add(widget._history);
-      _showModal(context, ModalEnum.COMMENT.value);
+      _openModal(context, ModalEnum.COMMENT.value);
     }
   }
 
-  void _showModal(BuildContext context, String modalEnum) {
+  void _openModal(BuildContext context, String modalEnum) {
     showCupertinoModalBottomSheet(
       expand: true,
       context: context,
@@ -123,7 +123,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                       icon: UiIcon.comment,
                       callback: (value) {
                         historyClass.add(widget._history);
-                        _showModal(context, ModalEnum.INPUT_COMMENT.value);
+                        _openModal(context, ModalEnum.INPUT_COMMENT.value);
                       },
                     ),
                   const SizedBox(width: UiPadding.xLarge),
@@ -145,7 +145,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                     icon: UiIcon.send,
                     callback: (value) {
                       historyClass.add(widget._history);
-                      _showModal(context, ModalEnum.SEND.value);
+                      _openModal(context, ModalEnum.SEND.value);
                     },
                   ),
                   if (_route != PageEnum.HISTORY.value)

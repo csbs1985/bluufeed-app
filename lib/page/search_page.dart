@@ -1,4 +1,5 @@
 import 'package:algolia/algolia.dart';
+import 'package:bluuffed_app/button/button_publish_widget.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/notification_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
@@ -9,7 +10,6 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/app_bar_not_back_widget.dart';
-import 'package:bluuffed_app/widget/button_publish_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';

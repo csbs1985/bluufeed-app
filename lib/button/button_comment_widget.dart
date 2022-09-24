@@ -16,7 +16,7 @@ class ButtonCommentWidget extends StatefulWidget {
 }
 
 class _ButtonCommentWidgetState extends State<ButtonCommentWidget> {
-  void _showModal(BuildContext context, String historyId, bool openKeyboard) {
+  void _openModal(BuildContext context, String historyId, bool openKeyboard) {
     showCupertinoModalBottomSheet(
       expand: true,
       context: context,
@@ -41,7 +41,7 @@ class _ButtonCommentWidgetState extends State<ButtonCommentWidget> {
             children: [
               const BorderWidget(),
               GestureDetector(
-                onTapDown: (TapTop) => _showModal(context, 'index', true),
+                onTapDown: (TapTop) => _openModal(context, 'index', true),
                 child: Container(
                   alignment: Alignment.centerLeft,
                   color: isDark ? UiColor.mainDark : UiColor.main,

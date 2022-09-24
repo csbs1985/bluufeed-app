@@ -5,7 +5,7 @@ import 'package:bluuffed_app/service/delete_account_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/app_bar_widget.dart';
-import 'package:bluuffed_app/widget/button_card_widget.dart';
+import 'package:bluuffed_app/button/button_card_widget.dart';
 import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
