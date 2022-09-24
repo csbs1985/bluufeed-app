@@ -4,6 +4,8 @@ class UiIcon {
   static const String create = 'assets/icons/create.svg';
   static const String comment = 'assets/icons/comment.svg';
   static const String createActived = 'assets/icons/create_actived.svg';
+  static const String edit = 'assets/icons/edit.svg';
+  static const String delete = 'assets/icons/delete.svg';
   static const String favorite = 'assets/icons/favorite.svg';
   static const String favoriteActived = 'assets/icons/favorited.svg';
   static const String feed = 'assets/icons/feed.svg';

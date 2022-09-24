@@ -5,6 +5,7 @@ class UiSize {
   static const double border = 1;
   static const double borderButton = 4;
   static const double bottomNavigation = 56;
+  static const double bottomXLarge = 48;
   static const double bottomLarge = 42;
   static const double bottomSmall = 32;
   static const double historyMenu = 36;
