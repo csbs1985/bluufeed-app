@@ -41,12 +41,18 @@ class _AboutPage extends State<AboutPage> {
     return Scaffold(
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(
+            UiPadding.large,
+            0,
+            UiPadding.large,
+            UiPadding.large,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Headline1(title: 'Sobre'),
+              const SizedBox(height: UiPadding.xLarge),
               SvgPicture.asset(UiIcon.identity),
               const SizedBox(height: UiPadding.xLarge),
               TextWidget(

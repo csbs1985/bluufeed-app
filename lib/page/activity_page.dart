@@ -2,9 +2,10 @@ import 'package:bluuffed_app/firestore/activity_firestore.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/skeleton/activity_skeleton.dart';
+import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/activity_item_widget.dart';
-import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
+import 'package:bluuffed_app/widget/app_bar_widget.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,7 +43,7 @@ class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidgetOld(title: 'Atividades'),
+      appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: ValueListenableBuilder(
           valueListenable: currentUser,
@@ -50,6 +51,10 @@ class _ActivityPageState extends State<ActivityPage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: UiPadding.large),
+                  child: Headline1(title: 'Atividades'),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
                     UiPadding.large,

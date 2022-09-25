@@ -6,8 +6,8 @@ import 'package:bluuffed_app/widget/border_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
-class CommonQuestionsPage extends StatelessWidget {
-  CommonQuestionsPage({Key? key}) : super(key: key);
+class QuestionsPage extends StatelessWidget {
+  QuestionsPage({Key? key}) : super(key: key);
 
   final List<CommonQuestionsModel> allQuestions =
       CommonQuestionsModel.allQuestions;
@@ -20,7 +20,10 @@ class CommonQuestionsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Headline1(title: 'Perguntas frequentes'),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: UiPadding.large),
+              child: Headline1(title: 'Perguntas frequentes'),
+            ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,

@@ -1,7 +1,8 @@
 import 'package:bluuffed_app/model/justtify_model.dart';
 import 'package:bluuffed_app/service/delete_account_service.dart';
+import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
+import 'package:bluuffed_app/widget/app_bar_widget.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/button/button_card_widget.dart';
 import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
@@ -57,7 +58,8 @@ class _JustifyPageState extends State<JustifyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidgetOld(title: 'Justificar e deletar'),
+      // appBar: const AppBarWidgetOld(title: 'Justificar e deletar'),
+      appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(
@@ -69,9 +71,10 @@ class _JustifyPageState extends State<JustifyPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Headline1(title: 'Justificar e deletar'),
               const TextWidget(
                 text:
-                    'Antes me diga o motivo do porque esta deletando sua conta bluufeed.Antes me diga o motivo do porque esta deletando sua conta bluufeed.Antes me diga o motivo do porque esta deletando sua conta bluufeed.Antes me diga o motivo do porque esta deletando sua conta bluufeed.Antes me diga o motivo do porque esta deletando sua conta bluufeed.Antes me diga o motivo do porque esta deletando sua conta bluufeed.Antes me diga o motivo do porque esta deletando sua conta bluufeed.Antes me diga o motivo do porque esta deletando sua conta bluufeed.',
+                    'Antes me diga o motivo do porque esta deletando sua conta bluufeed.',
               ),
               const SizedBox(height: UiPadding.large),
               ButtonCardWidget(

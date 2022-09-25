@@ -1,6 +1,6 @@
 import 'package:bluuffed_app/page/about_page.dart';
 import 'package:bluuffed_app/page/activity_page.dart';
-import 'package:bluuffed_app/page/common_questions_page.dart';
+import 'package:bluuffed_app/page/questions_page.dart';
 import 'package:bluuffed_app/page/delete_account_page.dart';
 import 'package:bluuffed_app/page/justify_page.dart';
 import 'package:bluuffed_app/page/name_page.dart';
@@ -117,7 +117,7 @@ class Routes {
       return PageTransition(
         type: PageTransitionType.rightToLeft,
         settings: settings,
-        child: CommonQuestionsPage(),
+        child: QuestionsPage(),
       );
     }
     if (settings.name == PageEnum.PRIVACY.value) {

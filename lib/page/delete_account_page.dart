@@ -2,9 +2,9 @@ import 'package:bluuffed_app/model/delete_account_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/delete_account_service.dart';
+import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/theme/ui_theme.dart';
-import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
+import 'package:bluuffed_app/widget/app_bar_widget.dart';
 import 'package:bluuffed_app/button/button_card_widget.dart';
 import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
@@ -75,41 +75,35 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidgetOld(title: 'Deletar conta'),
-      body: ValueListenableBuilder(
-        valueListenable: currentTheme,
-        builder: (BuildContext context, Brightness theme, _) {
-          bool isDark = currentTheme.value == Brightness.dark;
-
-          return SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(
-                UiPadding.large,
-                0,
-                UiPadding.large,
-                UiPadding.large,
+      appBar: const AppBarWidget(),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(
+            UiPadding.large,
+            0,
+            UiPadding.large,
+            UiPadding.large,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Headline1(title: 'Deletar conta'),
+              const TextWidget(
+                text:
+                    'Tem certeza que deseja excluir sua conta bluufeed definitivamente?'
+                    '\n'
+                    'Você não poderá mais ler, editar e visualizar suas hitórias e comentários. Somente poderá ler as histórias de outros escritores.'
+                    '\n\n'
+                    'Escolha uma das opções a baixo.',
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const TextWidget(
-                    text:
-                        'Tem certeza que deseja excluir sua conta bluufeed definitivamente?'
-                        '\n'
-                        'Você não poderá mais ler, editar e visualizar suas hitórias e comentários. Somente poderá ler as histórias de outros escritores.'
-                        '\n\n'
-                        'Escolha uma das opções a baixo.',
-                  ),
-                  const SizedBox(height: UiPadding.large),
-                  ButtonCardWidget(
-                    content: _allDeleteAccount,
-                    callback: (value) => _onPressed(value),
-                  ),
-                ],
+              const SizedBox(height: UiPadding.large),
+              ButtonCardWidget(
+                content: _allDeleteAccount,
+                callback: (value) => _onPressed(value),
               ),
-            ),
-          );
-        },
+            ],
+          ),
+        ),
       ),
     );
   }

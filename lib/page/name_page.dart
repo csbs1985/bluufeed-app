@@ -4,9 +4,9 @@ import 'package:bluuffed_app/service/comment_service.dart';
 import 'package:bluuffed_app/service/date_service.dart';
 import 'package:bluuffed_app/service/history_service.dart';
 import 'package:bluuffed_app/service/name_service.dart';
+import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/theme/ui_size.dart';
-import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
+import 'package:bluuffed_app/widget/app_bar_widget.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/widget/dialog_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
@@ -120,16 +120,22 @@ class _NamePageState extends State<NamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidgetOld(title: 'Nome de usuário'),
+      appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.all(UiPadding.xLarge),
+          padding: const EdgeInsets.fromLTRB(
+            UiPadding.large,
+            0,
+            UiPadding.large,
+            UiPadding.large,
+          ),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Headline1(title: 'Nome de usuário'),
                 const TextWidget(
                   text:
                       'Os nomes de usuário só podem usar letras, números, sublinhados e pontos, deve ser único e de 6 à 20 caracteres.'
@@ -167,7 +173,7 @@ class _NamePageState extends State<NamePage> {
                       ? ButtonStyleEnum.DISABLED.value
                       : ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
-                  padding: UiSize.paddingPageSmall,
+                  padding: 32,
                 ),
               ],
             ),
