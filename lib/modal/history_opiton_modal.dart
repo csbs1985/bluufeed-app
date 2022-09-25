@@ -48,7 +48,7 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
                 OptionButton(
                   callback: (value) => {},
                   label: 'ver perfil do escritor',
-                  icon: UiIcon.logoActived,
+                  icon: UiIcon.perfilActived,
                 ),
               ],
             ),

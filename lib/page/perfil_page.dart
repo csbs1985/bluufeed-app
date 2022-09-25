@@ -4,15 +4,15 @@ import 'package:bluuffed_app/button/button_link_widget.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/date_service.dart';
-import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/app_bar_home_widget.dart';
 import 'package:bluuffed_app/widget/border_widget.dart';
 import 'package:bluuffed_app/widget/card_perfil_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class PerfilPage extends StatefulWidget {
   const PerfilPage({super.key});
@@ -45,27 +45,14 @@ class _PerfilPageState extends State<PerfilPage> {
         bool isDark = currentTheme.value == Brightness.dark;
 
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: isDark ? UiColor.mainDark : UiColor.main,
-            elevation: 0,
-            titleSpacing: UiPadding.large,
-            title: Text(
-              'Perfil',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            actions: [
-              IconButton(
-                icon: SvgPicture.asset(UiIcon.option),
-                onPressed: () => {},
-              ),
-            ],
-          ),
+          appBar: AppBarHomeWidget(callback: (value) {}),
           body: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(UiPadding.large),
+              padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Headline1(title: 'Perfil'),
                   Text(
                     currentUser.value.first.name,
                     style: Theme.of(context).textTheme.headline6,

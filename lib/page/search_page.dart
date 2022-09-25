@@ -5,11 +5,12 @@ import 'package:bluuffed_app/model/notification_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/model/user_recent_model.dart';
 import 'package:bluuffed_app/service/algolia_service.dart';
+import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
-import 'package:bluuffed_app/widget/app_bar_not_back_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_home_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
@@ -122,7 +123,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarNotBackWidget(title: 'Busca'),
+      appBar: AppBarHomeWidget(callback: (value) {}),
       body: ValueListenableBuilder(
         valueListenable: currentTheme,
         builder: (BuildContext context, Brightness theme, _) {
@@ -141,6 +142,7 @@ class _SearchPageState extends State<SearchPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Headline1(title: 'Pesquisar'),
                   const TextWidget(
                     text: 'Busque pelo usuário ou o título da história',
                   ),

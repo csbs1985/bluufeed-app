@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,9 +33,11 @@ class _IconWidgetState extends State<IconWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: SvgPicture.asset(widget._icon),
-      onTap: () => _onPressed(),
+    return IconButton(
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(),
+      icon: SvgPicture.asset(widget._icon),
+      onPressed: () => _onPressed(),
     );
   }
 }

@@ -37,9 +37,11 @@ class _ButtonLinkWidgetState extends State<ButtonLinkWidget> {
               ),
             ),
           ),
-          onTapDown: (TapTop) => Navigator.of(context).pushNamed(widget._link),
+          onTap: () => Navigator.of(context).pushNamed(widget._link),
         );
       },
     );
   }
 }
+
+//onTapDown: (TapTop) => Navigator.of(context).pushNamed(widget._link),

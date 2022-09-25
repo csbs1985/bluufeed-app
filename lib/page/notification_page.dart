@@ -5,6 +5,7 @@ import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/date_service.dart';
 import 'package:bluuffed_app/service/push_notification_service.dart';
 import 'package:bluuffed_app/skeleton/notification_skeleton.dart';
+import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
@@ -13,7 +14,7 @@ import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bluuffed_app/widget/app_bar_not_back_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_home_widget.dart';
 import 'package:flutterfire_ui/firestore.dart';
 import 'package:styled_text/styled_text.dart';
 
@@ -55,7 +56,7 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarNotBackWidget(title: 'Notificações'),
+      appBar: AppBarHomeWidget(callback: (value) {}),
       body: ValueListenableBuilder(
         valueListenable: currentTheme,
         builder: (BuildContext context, Brightness theme, _) {
@@ -65,6 +66,10 @@ class _NotificationPageState extends State<NotificationPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: UiPadding.large),
+                  child: Headline1(title: 'Notificações'),
+                ),
                 FirestoreListView(
                   query: notificationFirestore.notifications
                       .orderBy('date')
