@@ -219,14 +219,14 @@ class _CreatePageState extends State<CreateModal> {
                     minLines: 1,
                     maxLines: 2,
                     maxLength: 60,
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.headline6,
                     onChanged: (value) => _canPublish(),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0),
                       counterText: "",
                       fillColor: isDark ? UiColor.mainDark : UiColor.main,
                       hintText: 'Título',
-                      hintStyle: Theme.of(context).textTheme.headline1,
+                      hintStyle: Theme.of(context).textTheme.headline6,
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none),
                       focusedBorder: const UnderlineInputBorder(

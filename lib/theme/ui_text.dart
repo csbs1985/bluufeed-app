@@ -41,7 +41,7 @@ class UiText {
 
 class UiTextDark {
   static const TextStyle headline1 = TextStyle(
-    fontSize: 24,
+    fontSize: 40,
     fontWeight: FontWeight.normal,
     color: UiColor.textDark,
   );
@@ -71,15 +71,15 @@ class UiTextDark {
   );
 
   static const TextStyle headline6 = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w700,
-    color: UiColor.secondary,
+    fontSize: 24,
+    fontWeight: FontWeight.normal,
+    color: UiColor.textDark,
   );
 }
 
 class UiTextLight {
   static const TextStyle headline1 = TextStyle(
-    fontSize: 24,
+    fontSize: 40,
     fontWeight: FontWeight.normal,
     color: UiColor.text,
   );
@@ -109,8 +109,8 @@ class UiTextLight {
   );
 
   static const TextStyle headline6 = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w700,
-    color: UiColor.secondary,
+    fontSize: 24,
+    fontWeight: FontWeight.normal,
+    color: UiColor.text,
   );
 }

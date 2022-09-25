@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/app_bar_widget.dart';
@@ -38,13 +39,14 @@ class _AboutPage extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(title: 'Sobre'),
+      appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Headline1(title: 'Sobre'),
               SvgPicture.asset(UiIcon.identity),
               const SizedBox(height: UiPadding.xLarge),
               TextWidget(

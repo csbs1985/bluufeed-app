@@ -51,7 +51,7 @@ class _PerfilPageState extends State<PerfilPage> {
             titleSpacing: UiPadding.large,
             title: Text(
               'Perfil',
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.headline6,
             ),
             actions: [
               IconButton(
@@ -68,7 +68,7 @@ class _PerfilPageState extends State<PerfilPage> {
                 children: [
                   Text(
                     currentUser.value.first.name,
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                   TextWidget(text: currentUser.value.first.email),
                   // TextWidget(text: 'desde $_date'),

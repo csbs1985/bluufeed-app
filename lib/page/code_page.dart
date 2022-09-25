@@ -13,7 +13,7 @@ import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_text.dart';
-import 'package:bluuffed_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/button/button_text_widget.dart';
 import 'package:bluuffed_app/widget/space_x_large.widget.dart';
@@ -100,7 +100,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(title: 'Código de verificação'),
+      appBar: const AppBarWidgetOld(title: 'Código de verificação'),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(UiPadding.xLarge),

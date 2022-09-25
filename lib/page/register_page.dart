@@ -10,7 +10,7 @@ import 'package:bluuffed_app/service/name_service.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
-import 'package:bluuffed_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
 import 'package:bluuffed_app/widget/space_x_large.widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
@@ -85,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(title: 'Criar conta'),
+      appBar: const AppBarWidgetOld(title: 'Criar conta'),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,

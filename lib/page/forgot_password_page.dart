@@ -7,7 +7,7 @@ import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
-import 'package:bluuffed_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/widget/space_x_large.widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
@@ -110,7 +110,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(title: 'Problemas ao entrar'),
+      appBar: const AppBarWidgetOld(title: 'Problemas ao entrar'),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(UiPadding.xLarge),

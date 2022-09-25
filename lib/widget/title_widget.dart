@@ -13,7 +13,7 @@ class TitleWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: UiPadding.small),
       child: Text(
         _title,
-        style: Theme.of(context).textTheme.headline1,
+        style: Theme.of(context).textTheme.headline6,
       ),
     );
   }

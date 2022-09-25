@@ -33,18 +33,12 @@ class CommonQuestionsModel {
     ),
     CommonQuestionsModel(
       id: '4',
-      question: 'Por que não podemos seguir e ser seguido?',
-      answer:
-          'R: Porque não é a intenção do bluufeed. Aqui queremos um ambiente de discrição, anomimato e confiança.',
-    ),
-    CommonQuestionsModel(
-      id: '5',
       question: 'Um usuário não esta cumprindo as regras, o que devo fazer?',
       answer:
           'R: Você pode denuncia-ló ou bloquea-ló. Na terceira denuncia o usuário será bloqueado e terá sua conta deletado do bluufeed. Bloqueando, vocês não poderão mais ver o conteúdo um do outro.',
     ),
     CommonQuestionsModel(
-      id: '6',
+      id: '5',
       question: 'Recebi a segunda denuncia, e agora?',
       answer:
           'R: As denuncias servem para manter um controle e garantir que todos siga as regras. Na sua segunda denuncia você entra no alerta, porque na terceira denuncia sua conta e bloqueada e excluida de nossos servidores.',

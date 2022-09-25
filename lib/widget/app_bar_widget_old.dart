@@ -4,8 +4,10 @@ import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AppBarWidget extends StatefulWidget with PreferredSizeWidget {
-  const AppBarWidget({Key? key}) : super(key: key);
+class AppBarWidgetOld extends StatefulWidget with PreferredSizeWidget {
+  const AppBarWidgetOld({required String title}) : _title = title;
+
+  final String _title;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -14,7 +16,7 @@ class AppBarWidget extends StatefulWidget with PreferredSizeWidget {
   _AppbarBackWidgetState createState() => _AppbarBackWidgetState();
 }
 
-class _AppbarBackWidgetState extends State<AppBarWidget> {
+class _AppbarBackWidgetState extends State<AppBarWidgetOld> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -25,6 +27,10 @@ class _AppbarBackWidgetState extends State<AppBarWidget> {
         return AppBar(
           backgroundColor: isDark ? UiColor.mainDark : UiColor.main,
           elevation: 0,
+          title: Text(
+            widget._title,
+            style: Theme.of(context).textTheme.headline6,
+          ),
           titleSpacing: 0,
           leading: IconButton(
             icon: SvgPicture.asset(UiIcon.closed),

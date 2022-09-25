@@ -4,7 +4,7 @@ import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/skeleton/activity_skeleton.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/activity_item_widget.dart';
-import 'package:bluuffed_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,7 +42,7 @@ class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(title: 'Atividades'),
+      appBar: const AppBarWidgetOld(title: 'Atividades'),
       body: SingleChildScrollView(
         child: ValueListenableBuilder(
           valueListenable: currentUser,

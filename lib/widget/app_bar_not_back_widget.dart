@@ -22,7 +22,7 @@ class AppBarNotBackWidget extends StatelessWidget with PreferredSizeWidget {
           elevation: 0,
           title: Text(
             _title,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.headline6,
           ),
           titleSpacing: 16,
         );
