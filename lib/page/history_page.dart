@@ -29,7 +29,7 @@ class _HistoryPageState extends State<HistoryPage> {
     showCupertinoModalBottomSheet(
       expand: false,
       context: context,
-      barrierColor: UiColor.overley,
+      barrierColor: UiColor.overlay,
       duration: const Duration(milliseconds: 300),
       builder: (context) {
         return const HistoryOptionModal();

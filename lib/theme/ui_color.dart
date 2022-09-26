@@ -33,7 +33,7 @@ class UiColor {
   static const Color main = Color(0xffffffff);
   static const Color mainDark = Color(0xFF1F222A);
 
-  static const Color overley = Color(0x901d9bf0);
+  static const Color overlay = Color(0x90000000);
 
   static const Color skeleton = Color(0xFFF8F9F9);
   static const Color skeletonDark = Color(0xFF181A20);

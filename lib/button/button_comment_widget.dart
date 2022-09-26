@@ -20,7 +20,7 @@ class _ButtonCommentWidgetState extends State<ButtonCommentWidget> {
     showCupertinoModalBottomSheet(
       expand: true,
       context: context,
-      barrierColor: UiColor.overley,
+      barrierColor: UiColor.overlay,
       duration: const Duration(milliseconds: 300),
       builder: (context) => const InputCommentModal(),
     );

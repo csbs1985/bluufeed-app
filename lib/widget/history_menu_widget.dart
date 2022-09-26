@@ -55,7 +55,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     showCupertinoModalBottomSheet(
       expand: true,
       context: context,
-      barrierColor: UiColor.overley,
+      barrierColor: UiColor.overlay,
       duration: const Duration(milliseconds: 300),
       builder: (context) {
         if (modalEnum == ModalEnum.SEND.value) return const SendModal();
