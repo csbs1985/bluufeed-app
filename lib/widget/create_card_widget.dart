@@ -18,6 +18,12 @@ class CreateCardWidget extends StatefulWidget {
 class _CreateCardWidgetState extends State<CreateCardWidget> {
   String _user = '';
 
+  @override
+  void initState() {
+    _user = currentUser.value.isNotEmpty ? currentUser.value.first.name : '';
+    super.initState();
+  }
+
   void _openCreateModal() {
     currentHistory.value = [];
 
@@ -28,13 +34,6 @@ class _CreateCardWidgetState extends State<CreateCardWidget> {
       duration: const Duration(milliseconds: 300),
       builder: (context) => const CreateModal(),
     );
-  }
-
-  @override
-  void initState() {
-    _user = currentUser.value.isNotEmpty ? currentUser.value.first.name : '';
-
-    super.initState();
   }
 
   @override

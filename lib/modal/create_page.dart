@@ -29,6 +29,7 @@ class _CreatePageState extends State<CreateModal> {
   TextEditingController textController = TextEditingController();
 
   final ActivityClass activityClass = ActivityClass();
+  final HistoryClass historyClass = HistoryClass();
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
@@ -38,7 +39,7 @@ class _CreatePageState extends State<CreateModal> {
 
   List<String> _categories = [];
 
-  final bool _isEdit = false;
+  bool _isEdit = false;
   bool _isSigned = true;
   bool _isComment = true;
   bool _btnPublish = false;
@@ -49,16 +50,16 @@ class _CreatePageState extends State<CreateModal> {
 
   @override
   void initState() {
-    // if (currentHistory.value.isNotEmpty) {
-    //   titleController.text = currentHistory.value.first.title;
-    //   textController.text = currentHistory.value.first.text;
-    //   _isEdit = true;
-    //   _btnPublish = true;
-    //   _isSigned = currentHistory.value.first.isSigned;
-    //   _isComment = currentHistory.value.first.isComment;
-    //   _isAuthorized = currentHistory.value.first.isAuthorized;
-    //   _categories = currentHistory.value.first.categories;
-    // }
+    if (currentHistory.value.isNotEmpty) {
+      _isEdit = true;
+      _btnPublish = true;
+      titleController.text = currentHistory.value.first.title;
+      textController.text = currentHistory.value.first.text;
+      _isSigned = currentHistory.value.first.isSigned;
+      _isComment = currentHistory.value.first.isComment;
+      _isAuthorized = currentHistory.value.first.isAuthorized;
+      _categories = currentHistory.value.first.categories;
+    }
 
     super.initState();
   }
@@ -136,6 +137,8 @@ class _CreatePageState extends State<CreateModal> {
           'bookmarks': [],
         };
       }
+
+      historyClass.add(_history);
     });
 
     try {
