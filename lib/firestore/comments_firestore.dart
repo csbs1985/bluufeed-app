@@ -1,15 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 
 class CommentFirestore {
   CollectionReference comments =
       FirebaseFirestore.instance.collection('comments');
 
-  deleteComment() {
+  deleteComment(String _commentId) {
+    return comments.doc(_commentId).update({'isDelete': true});
+  }
+
+  getCommentHistory(String _historyId) {
     return comments
-        .doc(currentComment.value.first.id)
-        .update({'isDelete': true});
+        .orderBy('date')
+        .where('historyId', isEqualTo: _historyId)
+        .get();
   }
 
   getAllCommentUser() {
