@@ -126,9 +126,10 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SubtitleResumeWidget(
+                SubtitleResumeWidget(
                   title: 'Opções',
-                  resume: 'Opções para esta história.',
+                  resume:
+                      'Opções para esta história escrita por ${currentHistory.value.first.userName}',
                 ),
                 const SizedBox(height: UiPadding.large),
                 if (isAuthor())
@@ -148,7 +149,7 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
                 if (!isAuthor())
                   OptionButton(
                     label:
-                        'ver perfil do autor da história (${currentHistory.value.first.userName})',
+                        'ver perfil de ${currentHistory.value.first.userName}',
                     icon: UiIcon.perfilActived,
                     callback: (value) => {
                       Navigator.of(context).pop(),

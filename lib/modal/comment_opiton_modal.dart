@@ -3,6 +3,7 @@ import 'package:bluuffed_app/firestore/comments_firestore.dart';
 import 'package:bluuffed_app/firestore/histories_firestore.dart';
 import 'package:bluuffed_app/modal/create_page.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
+import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
@@ -15,6 +16,7 @@ import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CommentOptionModal extends StatefulWidget {
@@ -32,13 +34,13 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
   final ToastWidget toastWidget = ToastWidget();
 
   void _copy() {
-    // Clipboard.setData(ClipboardData(text: _text));
-    // toastWidget.toast(
-    //   context,
-    //   ToastEnum.SUCCESS.value,
-    //   'Texto copiado!',
-    // );
-    // Navigator.of(context).pop();
+    Clipboard.setData(ClipboardData(text: currentComment.value.first.text));
+    toastWidget.toast(
+      context,
+      ToastEnum.SUCCESS.value,
+      'Texto copiado!',
+    );
+    Navigator.of(context).pop();
   }
 
   ////////////////////////////////////

@@ -1,4 +1,5 @@
 import 'package:bluuffed_app/modal/comment_opiton_modal.dart';
+import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/service/date_service.dart';
 import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:bluuffed_app/widget/date_widget.dart';
@@ -19,6 +20,7 @@ class CommentItemWidget extends StatefulWidget {
 }
 
 class _CommentItemWidgetState extends State<CommentItemWidget> {
+  final CommentClass commentClass = CommentClass();
   final UserClass userClass = UserClass();
 
   void _openModal(BuildContext context) {
@@ -82,6 +84,7 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
             ),
           ),
           onLongPress: () => {
+            commentClass.add(widget._item),
             _openModal(context),
           },
         );
