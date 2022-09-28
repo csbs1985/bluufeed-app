@@ -61,6 +61,8 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
   }
 
   void _deleteHistory() async {
+    Navigator.of(context).pop();
+
     try {
       await historyFirestore
           .deleteHistory(currentHistory.value.first.id)
