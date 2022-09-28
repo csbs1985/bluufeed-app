@@ -33,10 +33,33 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final ToastWidget toastWidget = ToastWidget();
 
-  bool isAuthor() {
-    return currentUser.value.first.id == currentComment.value.first.userId
-        ? true
-        : false;
+  bool canCopy() {
+    return currentComment.value.first.isDelete ? false : true;
+  }
+
+  bool canEdit() {
+    if (currentComment.value.first.isDelete) return false;
+    if (currentUser.value.first.id == currentComment.value.first.userId)
+      return true;
+    if (currentUser.value.first.id == currentHistory.value.first.userId)
+      return true;
+    return false;
+  }
+
+  bool canDelete() {
+    if (currentComment.value.first.isDelete) return false;
+    if (currentUser.value.first.id == currentComment.value.first.userId)
+      return true;
+    if (currentUser.value.first.id == currentHistory.value.first.userId)
+      return true;
+    return false;
+  }
+
+  bool canPerfil() {
+    if (!currentComment.value.first.isSigned) return false;
+    if (currentUser.value.first.id == currentComment.value.first.userId)
+      return false;
+    return true;
   }
 
   void _copy() {
@@ -69,54 +92,40 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return DialogConfirmWidget(
-          title: 'Deletar história',
-          text:
-              'Tem certeza que deseja excluir esta história? Tudo será excluido inclusive os comentátios.',
+          title: 'Deletar comentário',
+          text: 'Tem certeza que deseja excluir este comentário?',
           buttonPrimary: 'cancelar',
-          buttonSecondary: 'excluir',
+          buttonSecondary: 'deletar',
           callback: (value) =>
-              value ? _deleteHistory() : Navigator.of(context).pop(),
+              value ? _deleteComment() : Navigator.of(context).pop(),
         );
       },
     );
   }
 
-  void _deleteHistory() async {
+  void _deleteComment() async {
     Navigator.of(context).pop();
 
     try {
-      await historyFirestore
-          .deleteHistory(currentHistory.value.first.id)
-          .then((result) => {_deleteAllComments()})
+      await commentFirestore
+          .deleteComment(currentComment.value.first.id)
+          .then((result) => {
+                activityClass.save(
+                  type: ActivityEnum.DELETE_COMMENT.value,
+                  content: currentComment.value.first.text,
+                  elementId: currentComment.value.first.userName,
+                ),
+              })
           .catchError((error) =>
               debugPrint('ERROR => deleteHistory:' + error.toString()));
       Navigator.of(context).pop();
       toastWidget.toast(
         context,
         ToastEnum.SUCCESS.value,
-        'história deletada!',
+        'comentário deletado!',
       );
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => deleteComment: ' + error.toString());
-    }
-  }
-
-  Future<void> _deleteAllComments() async {
-    try {
-      await commentFirestore
-          .getCommentHistory(currentHistory.value.first.id)
-          .then((result) async => {
-                for (var item in result.docs)
-                  await commentFirestore.deleteComment(item.id),
-                activityClass.save(
-                  type: ActivityEnum.DELETE_HISTORY.value,
-                  content: currentHistory.value.first.text,
-                  elementId: currentHistory.value.first.userName,
-                ),
-                Navigator.of(context).pop(),
-              });
-    } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => deleteAllCommentUser: ' + error.toString());
     }
   }
 
@@ -146,50 +155,52 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
                       'Opções para este comentário escrito por ${currentHistory.value.first.userName}',
                 ),
                 const SizedBox(height: UiPadding.large),
-                OptionButton(
-                  label: 'copiar comentário',
-                  icon: UiIcon.copy,
-                  callback: (value) => _copy(),
-                ),
-                if (isAuthor()) const SizedBox(height: UiPadding.medium),
-                if (isAuthor())
+                if (canCopy())
+                  OptionButton(
+                    label: 'copiar comentário',
+                    icon: UiIcon.copy,
+                    callback: (value) => _copy(),
+                  ),
+                if (canEdit()) const SizedBox(height: UiPadding.medium),
+                if (canEdit())
                   OptionButton(
                     label: 'editar comentário',
                     icon: UiIcon.edit,
                     callback: (value) => _openModal(context),
                   ),
-                // if (isAuthor())
-                const SizedBox(height: UiPadding.medium),
-                // if (isAuthor())
-                OptionButton(
-                  label: 'excluir comentário',
-                  icon: UiIcon.delete,
-                  callback: (value) => _delete(),
-                ),
-                // if (!isAuthor())
-                const SizedBox(height: UiPadding.medium),
-                // if (!isAuthor())
-                OptionButton(
-                  label: 'ver perfil de ${currentHistory.value.first.userName}',
-                  icon: UiIcon.perfilActived,
-                  callback: (value) => {
-                    Navigator.of(context).pop(),
-                    currentUserId.value = currentHistory.value.first.userId,
-                    Navigator.pushNamed(context, PageEnum.PERFIL.value),
-                  },
-                ),
-                const SizedBox(height: UiPadding.medium),
-                OptionButton(
-                  label: 'denunciar ${currentHistory.value.first.userName}',
-                  icon: UiIcon.denounce,
-                  callback: (value) => _delete(),
-                ),
-                const SizedBox(height: UiPadding.medium),
-                OptionButton(
-                  label: 'bloquear ${currentHistory.value.first.userName}',
-                  icon: UiIcon.block,
-                  callback: (value) => _delete(),
-                ),
+                if (canDelete()) const SizedBox(height: UiPadding.medium),
+                if (canDelete())
+                  OptionButton(
+                    label: 'excluir comentário',
+                    icon: UiIcon.delete,
+                    callback: (value) => _delete(),
+                  ),
+                if (canPerfil()) const SizedBox(height: UiPadding.medium),
+                if (canPerfil())
+                  OptionButton(
+                    label:
+                        'ver perfil de ${currentHistory.value.first.userName}',
+                    icon: UiIcon.perfilActived,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      currentUserId.value = currentHistory.value.first.userId,
+                      Navigator.pushNamed(context, PageEnum.PERFIL.value),
+                    },
+                  ),
+                if (canPerfil()) const SizedBox(height: UiPadding.medium),
+                if (canPerfil())
+                  OptionButton(
+                    label: 'denunciar ${currentHistory.value.first.userName}',
+                    icon: UiIcon.denounce,
+                    callback: (value) => _delete(),
+                  ),
+                if (canPerfil()) const SizedBox(height: UiPadding.medium),
+                if (canPerfil())
+                  OptionButton(
+                    label: 'bloquear ${currentHistory.value.first.userName}',
+                    icon: UiIcon.block,
+                    callback: (value) => _delete(),
+                  ),
               ],
             ),
           ),

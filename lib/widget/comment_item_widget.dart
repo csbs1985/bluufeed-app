@@ -24,15 +24,16 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
   final UserClass userClass = UserClass();
 
   void _openModal(BuildContext context) {
-    showCupertinoModalBottomSheet(
-      expand: false,
-      context: context,
-      barrierColor: UiColor.overlay,
-      duration: const Duration(milliseconds: 300),
-      builder: (context) {
-        return const CommentOptionModal();
-      },
-    );
+    if (!currentComment.value.first.isDelete)
+      showCupertinoModalBottomSheet(
+        expand: false,
+        context: context,
+        barrierColor: UiColor.overlay,
+        duration: const Duration(milliseconds: 300),
+        builder: (context) {
+          return const CommentOptionModal();
+        },
+      );
   }
 
   @override
@@ -62,7 +63,7 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
                     padding: const EdgeInsets.all(UiPadding.medium),
                     child: Text(
                       widget._item['isDelete']
-                          ? 'Comentário apagado!'.toUpperCase()
+                          ? 'Comentário deletado!'.toUpperCase()
                           : widget._item['text'],
                       style: Theme.of(context).textTheme.headline2,
                     ),

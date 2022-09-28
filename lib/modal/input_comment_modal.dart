@@ -33,6 +33,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
   final TextEditingController _commentController = TextEditingController();
 
   final ActivityClass activityClass = ActivityClass();
+  final CommentClass commentClass = CommentClass();
   final CommentFirestore commentFirestore = CommentFirestore();
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final NotificationClass notificationClass = NotificationClass();
@@ -77,9 +78,10 @@ class _InputCommentModalState extends State<InputCommentModal> {
 
   Future<void> _postComment(BuildContext context) async {
     _form = {
-      'date': currentComment.value.first.date ?? DateTime.now().toString(),
+      'date':
+          _isEdit ? currentComment.value.first.date : DateTime.now().toString(),
       'historyId': currentHistory.value.first.id,
-      'id': currentComment.value.first.id ?? uuid.v4(),
+      'id': _isEdit ? currentComment.value.first.id : uuid.v4(),
       'isDelete': false,
       'isEdit': _isEdit ? true : false,
       'isSigned': _textSigned,
@@ -132,7 +134,11 @@ class _InputCommentModalState extends State<InputCommentModal> {
       };
       notificationClass.postNotification(context, _form);
       notificationClass.setNotificationOnwer(
-          context, _form, _textSigned, _commentController.text);
+        context,
+        _form,
+        _textSigned,
+        _commentController.text,
+      );
 
       if (_isEdit) Navigator.of(context).pop();
       toast.toast(

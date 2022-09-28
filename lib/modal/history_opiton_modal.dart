@@ -53,7 +53,7 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
           text:
               'Tem certeza que deseja excluir esta história? Tudo será excluido inclusive os comentátios.',
           buttonPrimary: 'cancelar',
-          buttonSecondary: 'excluir',
+          buttonSecondary: 'deletar',
           callback: (value) =>
               value ? _deleteHistory() : Navigator.of(context).pop(),
         );
