@@ -17,19 +17,31 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class HistoryOptionModal extends StatefulWidget {
-  const HistoryOptionModal({Key? key}) : super(key: key);
+class CommentOptionModal extends StatefulWidget {
+  const CommentOptionModal({Key? key}) : super(key: key);
 
   @override
-  State<HistoryOptionModal> createState() => _HistoryOptionModalState();
+  State<CommentOptionModal> createState() => _CommentOptionModalState();
 }
 
-class _HistoryOptionModalState extends State<HistoryOptionModal> {
+class _CommentOptionModalState extends State<CommentOptionModal> {
   final ActivityClass activityClass = ActivityClass();
   final CommentFirestore commentFirestore = CommentFirestore();
   final HistoryClass historyClass = HistoryClass();
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final ToastWidget toastWidget = ToastWidget();
+
+  void _copy() {
+    // Clipboard.setData(ClipboardData(text: _text));
+    // toastWidget.toast(
+    //   context,
+    //   ToastEnum.SUCCESS.value,
+    //   'Texto copiado!',
+    // );
+    // Navigator.of(context).pop();
+  }
+
+  ////////////////////////////////////
 
   void _openModal(BuildContext context) {
     showCupertinoModalBottomSheet(
@@ -126,36 +138,56 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SubtitleResumeWidget(
+                SubtitleResumeWidget(
                   title: 'Opções',
-                  resume: 'Opções para esta história.',
+                  resume:
+                      'Opções para este comentário escrito por ${currentHistory.value.first.userName}',
                 ),
                 const SizedBox(height: UiPadding.large),
-                if (isAuthor())
-                  OptionButton(
-                    label: 'editar história',
-                    icon: UiIcon.edit,
-                    callback: (value) => _openModal(context),
-                  ),
-                if (isAuthor()) const SizedBox(height: UiPadding.medium),
-                if (isAuthor())
-                  OptionButton(
-                    label: 'excluir história',
-                    icon: UiIcon.delete,
-                    callback: (value) => _delete(),
-                  ),
-                if (!isAuthor()) const SizedBox(height: UiPadding.medium),
-                if (!isAuthor())
-                  OptionButton(
-                    label:
-                        'ver perfil do autor da história (${currentHistory.value.first.userName})',
-                    icon: UiIcon.perfilActived,
-                    callback: (value) => {
-                      Navigator.of(context).pop(),
-                      currentUserId.value = currentHistory.value.first.userId,
-                      Navigator.pushNamed(context, PageEnum.PERFIL.value),
-                    },
-                  ),
+                OptionButton(
+                  label: 'copiar comentário',
+                  icon: UiIcon.copy,
+                  callback: (value) => _copy(),
+                ),
+                const SizedBox(height: UiPadding.medium),
+                // if (isAuthor())
+                OptionButton(
+                  label: 'editar comentário',
+                  icon: UiIcon.edit,
+                  callback: (value) => _openModal(context),
+                ),
+                // if (isAuthor())
+                const SizedBox(height: UiPadding.medium),
+                // if (isAuthor())
+                OptionButton(
+                  label: 'excluir comentário',
+                  icon: UiIcon.delete,
+                  callback: (value) => _delete(),
+                ),
+                // if (!isAuthor())
+                const SizedBox(height: UiPadding.medium),
+                // if (!isAuthor())
+                OptionButton(
+                  label: 'ver perfil de ${currentHistory.value.first.userName}',
+                  icon: UiIcon.perfilActived,
+                  callback: (value) => {
+                    Navigator.of(context).pop(),
+                    currentUserId.value = currentHistory.value.first.userId,
+                    Navigator.pushNamed(context, PageEnum.PERFIL.value),
+                  },
+                ),
+                const SizedBox(height: UiPadding.medium),
+                OptionButton(
+                  label: 'denunciar ${currentHistory.value.first.userName}',
+                  icon: UiIcon.denounce,
+                  callback: (value) => _delete(),
+                ),
+                const SizedBox(height: UiPadding.medium),
+                OptionButton(
+                  label: 'bloquear ${currentHistory.value.first.userName}',
+                  icon: UiIcon.block,
+                  callback: (value) => _delete(),
+                ),
               ],
             ),
           ),

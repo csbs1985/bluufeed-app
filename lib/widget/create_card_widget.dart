@@ -1,4 +1,5 @@
 import 'package:bluuffed_app/button/button_3d_widget.dart';
+import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:bluuffed_app/modal/create_page.dart';
@@ -30,7 +31,7 @@ class _CreateCardWidgetState extends State<CreateCardWidget> {
     showCupertinoModalBottomSheet(
       expand: true,
       context: context,
-      barrierColor: Colors.black87,
+      barrierColor: UiColor.overlay,
       duration: const Duration(milliseconds: 300),
       builder: (context) => const CreateModal(),
     );

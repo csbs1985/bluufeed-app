@@ -1,11 +1,14 @@
 class UiIcon {
   static const String authorized = 'assets/icons/authorized.svg';
+  static const String block = 'assets/icons/block.svg';
   static const String closed = 'assets/icons/closed.svg';
   static const String create = 'assets/icons/create.svg';
   static const String comment = 'assets/icons/comment.svg';
+  static const String copy = 'assets/icons/copy.svg';
   static const String createActived = 'assets/icons/create_actived.svg';
   static const String edit = 'assets/icons/edit.svg';
   static const String delete = 'assets/icons/delete.svg';
+  static const String denounce = 'assets/icons/denounce.svg';
   static const String favorite = 'assets/icons/favorite.svg';
   static const String favoriteActived = 'assets/icons/favorited.svg';
   static const String feed = 'assets/icons/feed.svg';
