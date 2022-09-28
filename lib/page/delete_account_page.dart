@@ -4,7 +4,7 @@ import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/delete_account_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:bluuffed_app/button/button_card_widget.dart';
 import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
@@ -75,7 +75,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(),
+      appBar: const AppBarBackWidget(),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.fromLTRB(

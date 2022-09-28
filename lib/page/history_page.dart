@@ -68,8 +68,10 @@ class _HistoryPageState extends State<HistoryPage> {
                     StreamBuilder<QuerySnapshot>(
                       stream: historyFirestore
                           .getHistory(currentHistory.value.first.id),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot,
+                      ) {
                         switch (snapshot.connectionState) {
                           case ConnectionState.none:
                             return _noResults();

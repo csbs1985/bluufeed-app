@@ -6,7 +6,7 @@ import 'package:bluuffed_app/service/history_service.dart';
 import 'package:bluuffed_app/service/name_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/widget/dialog_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
@@ -120,7 +120,7 @@ class _NamePageState extends State<NamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(),
+      appBar: const AppBarBackWidget(),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,

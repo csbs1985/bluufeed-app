@@ -2,7 +2,7 @@ import 'package:bluuffed_app/model/justtify_model.dart';
 import 'package:bluuffed_app/service/delete_account_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/widget/app_bar_widget.dart';
+import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/button/button_card_widget.dart';
 import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
@@ -58,8 +58,8 @@ class _JustifyPageState extends State<JustifyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const AppBarWidgetOld(title: 'Justificar e deletar'),
-      appBar: const AppBarWidget(),
+      // appBar: const AppBarEmptyWidget(title: 'Justificar e deletar'),
+      appBar: const AppBarBackWidget(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(

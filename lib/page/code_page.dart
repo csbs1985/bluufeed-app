@@ -1,6 +1,8 @@
 import 'dart:math';
+import 'package:bluuffed_app/text/headline1.dart';
+import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
+import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:bluuffed_app/model/form_model.dart';
@@ -9,14 +11,11 @@ import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
-import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_text.dart';
-import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/button/button_text_widget.dart';
-import 'package:bluuffed_app/widget/space_x_large.widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
 
@@ -100,15 +99,16 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidgetOld(title: 'Código de verificação'),
+      appBar: const AppBarBackWidget(),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(UiPadding.xLarge),
+          padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SvgPicture.asset(UiIcon.identity),
-              const SpaceXLargeWidget(),
+              const Headline1(title: 'Código de verificação'),
+              const TextAnimationWidget(text: 'um código pode salvar vidas...'),
+              const SizedBox(height: UiPadding.large),
               TextWidget(
                 text:
                     'Enviamos um código de verificação com quatro digitos numéricos para o email ${currentEmail.value} cadastrado. '
@@ -153,9 +153,12 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              const SpaceXLargeWidget(),
+              const SizedBox(height: UiPadding.large),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 56),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 56,
+                  vertical: UiPadding.large,
+                ),
                 child: PinCodeTextField(
                   controller: _codeController,
                   length: 4,
@@ -174,13 +177,12 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              const SpaceXLargeWidget(),
               Button3dWidget(
                 callback: (value) => _validateCode(),
                 label: 'validar',
                 style: ButtonStyleEnum.PRIMARY.value,
                 size: ButtonSizeEnum.LARGE.value,
-                padding: UiSize.paddingPageSmall,
+                padding: UiSize.paddingButtonLarge,
               ),
               const SizedBox(height: UiPadding.large),
               ButtonTextWidget(

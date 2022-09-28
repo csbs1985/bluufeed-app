@@ -11,7 +11,6 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/button/button_publish_widget.dart';
-import 'package:bluuffed_app/widget/space_x_large.widget.dart';
 import 'package:bluuffed_app/widget/select_category_widget.dart';
 import 'package:bluuffed_app/widget/select_toggle_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
@@ -254,7 +253,7 @@ class _CreatePageState extends State<CreateModal> {
                           borderSide: BorderSide.none),
                     ),
                   ),
-                  const SpaceXLargeWidget(),
+                  const SizedBox(height: UiPadding.large),
                   SelectToggleWidget(
                     title: 'Assinatura',
                     resume:
@@ -262,7 +261,7 @@ class _CreatePageState extends State<CreateModal> {
                     value: _isSigned,
                     callback: (value) => _setPrivacy(),
                   ),
-                  const SpaceXLargeWidget(),
+                  const SizedBox(height: UiPadding.large),
                   SelectToggleWidget(
                     title: 'Comentários',
                     resume:
@@ -270,7 +269,7 @@ class _CreatePageState extends State<CreateModal> {
                     value: _isComment,
                     callback: (value) => _setContent(),
                   ),
-                  const SpaceXLargeWidget(),
+                  const SizedBox(height: UiPadding.large),
                   SelectToggleWidget(
                     title: 'Autorizado',
                     resume:
@@ -278,7 +277,7 @@ class _CreatePageState extends State<CreateModal> {
                     value: _isAuthorized,
                     callback: (value) => _setAuthorized(),
                   ),
-                  const SpaceXLargeWidget(),
+                  const SizedBox(height: UiPadding.large),
                   SelectCategoriesWidget(
                     selected: currentHistory.value.isNotEmpty
                         ? currentHistory.value.first.categories

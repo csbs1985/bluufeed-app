@@ -1,17 +1,15 @@
+import 'package:bluuffed_app/text/headline1.dart';
+import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/form_model.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/service/password_service.dart';
-import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
-import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/widget/input_password_widget.dart';
-import 'package:bluuffed_app/widget/space_x_large.widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
@@ -74,18 +72,17 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidgetOld(title: 'Senha'),
+      appBar: const AppBarBackWidget(),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.all(UiPadding.xLarge),
+          padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SvgPicture.asset(UiIcon.identity),
-                const SpaceXLargeWidget(),
+                const Headline1(title: 'Senha'),
                 const TextAnimationWidget(
                   text: 'a senha ajuda a manter seus dados seguros...',
                 ),
@@ -104,15 +101,14 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 InputPasswordWidget(
-                  callback: (value) => _passwordController.text = value,
-                ),
+                    callback: (value) => _passwordController.text = value),
                 const SizedBox(height: UiPadding.large),
                 Button3dWidget(
                   callback: (value) => _login(context),
                   label: 'confirmar',
                   style: ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
-                  padding: UiSize.paddingPageSmall,
+                  padding: UiSize.paddingButtonLarge,
                 ),
               ],
             ),

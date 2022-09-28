@@ -10,6 +10,7 @@ import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
 
 ValueNotifier<List<UserModel>> currentUser = ValueNotifier<List<UserModel>>([]);
+ValueNotifier<String> currentUserId = ValueNotifier<String>('');
 
 class UserModel {
   late String id;
@@ -54,7 +55,7 @@ class UserModel {
 
   static String toJson(UserModel user) => jsonEncode(toMap(user));
 
-  static Map<String, dynamic> toMap(UserModel user) => {
+  static Map<String, dynamic> toMap(user) => {
         'id': user.id,
         'name': user.name,
         'upDateName': user.upDateName,

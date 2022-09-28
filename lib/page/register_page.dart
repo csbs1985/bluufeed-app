@@ -1,17 +1,15 @@
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/button/button_text_widget.dart';
+import 'package:bluuffed_app/text/headline1.dart';
+import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/form_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/service/name_service.dart';
-import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
-import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
-import 'package:bluuffed_app/widget/space_x_large.widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
@@ -85,18 +83,16 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidgetOld(title: 'Criar conta'),
+      appBar: const AppBarBackWidget(),
       body: SingleChildScrollView(
         child: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(UiPadding.xLarge),
+          padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SvgPicture.asset(UiIcon.identity),
-                const SpaceXLargeWidget(),
+                const Headline1(title: 'Criar conta'),
                 const TextAnimationWidget(
                     text: 'espero que venha pra ficar...'),
                 const SizedBox(height: UiPadding.large),
@@ -141,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   label: 'próximo',
                   style: ButtonStyleEnum.PRIMARY.value,
                   size: ButtonSizeEnum.LARGE.value,
-                  padding: UiSize.paddingPageSmall,
+                  padding: UiSize.paddingButtonLarge,
                 ),
                 const SizedBox(height: UiPadding.large),
                 ButtonTextWidget(

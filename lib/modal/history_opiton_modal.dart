@@ -4,6 +4,7 @@ import 'package:bluuffed_app/firestore/histories_firestore.dart';
 import 'package:bluuffed_app/modal/create_page.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/model/history_model.dart';
+import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
@@ -100,6 +101,12 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
   }
 
   @override
+  void dispose() {
+    currentUserId.value = '';
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool isAuthor() {
       return currentUser.value.first.id == currentHistory.value.first.userId
@@ -141,9 +148,13 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
                 if (!isAuthor())
                   OptionButton(
                     label:
-                        'ver perfil de ${currentHistory.value.first.userName}',
+                        'ver perfil do autor da história (${currentHistory.value.first.userName})',
                     icon: UiIcon.perfilActived,
-                    callback: (value) => {},
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      currentUserId.value = currentHistory.value.first.userId,
+                      Navigator.pushNamed(context, PageEnum.PERFIL.value),
+                    },
                   ),
               ],
             ),

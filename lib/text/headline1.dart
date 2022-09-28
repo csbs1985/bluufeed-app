@@ -10,7 +10,7 @@ class Headline1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.only(bottom: UiPadding.large),
+      padding: const EdgeInsets.symmetric(vertical: UiPadding.large),
       child: Text(
         _title,
         style: Theme.of(context).textTheme.headline1,

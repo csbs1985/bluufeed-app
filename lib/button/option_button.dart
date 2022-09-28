@@ -46,6 +46,7 @@ class _OptionButtonState extends State<OptionButton> {
             ),
             child: Row(
               children: [
+                const SizedBox(width: UiPadding.small),
                 SizedBox(
                   width: 20,
                   child: SvgPicture.asset(widget._icon),

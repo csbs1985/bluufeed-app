@@ -15,76 +15,77 @@ class DateWidget extends StatelessWidget {
   final String _type;
   final Map<String, dynamic> _item;
 
-  @override
-  Widget build(BuildContext context) {
-    String _getDate(String _date) {
-      var now = DateTime.now();
-      var date = DateTime.fromMillisecondsSinceEpoch(
-          DateTime.parse(_date).millisecondsSinceEpoch);
-      var diff = now.difference(date);
-      var day = DateFormat('dd');
-      var month = DateFormat('M');
-      var year = DateFormat('yyyy');
-      var hours = DateFormat('hh:mm');
-      var time = '';
-      var months = [
-        'jan',
-        'fev',
-        'mar',
-        'abr',
-        'mai',
-        'jun',
-        'jul',
-        'ago',
-        'set',
-        'out',
-        'nov',
-        'dez'
-      ];
+  String _getDate(String _date) {
+    var now = DateTime.now();
+    var date = DateTime.fromMillisecondsSinceEpoch(
+        DateTime.parse(_date).millisecondsSinceEpoch);
+    var diff = now.difference(date);
+    var day = DateFormat('dd');
+    var month = DateFormat('M');
+    var year = DateFormat('yyyy');
+    var hours = DateFormat('hh:mm');
+    var time = '';
+    var months = [
+      'jan',
+      'fev',
+      'mar',
+      'abr',
+      'mai',
+      'jun',
+      'jul',
+      'ago',
+      'set',
+      'out',
+      'nov',
+      'dez'
+    ];
 
-      if (diff.inSeconds < 60)
-        time = 'agora';
-      else if (diff.inMinutes < 60)
-        time = 'à ' + diff.inMinutes.floor().toString() + ' min';
-      else
-        time = day.format(date) +
-            ' de ' +
-            months[int.parse(month.format(date)) - 1] +
-            '. de ' +
-            year.format(date) +
-            ' às ' +
-            hours.format(date);
-      return time;
-    }
+    if (diff.inSeconds < 60)
+      time = 'agora';
+    else if (diff.inMinutes < 60)
+      time = 'à ' + diff.inMinutes.floor().toString() + ' min';
+    else
+      time = day.format(date) +
+          ' de ' +
+          months[int.parse(month.format(date)) - 1] +
+          '. de ' +
+          year.format(date) +
+          ' às ' +
+          hours.format(date);
+    return time;
+  }
 
-    String _getAuthor(_item) {
-      if (_type != DateEnum.ACTIVITY.value) {
-        String? userStatus;
-        String? userName;
-        bool? isEdit;
-        bool? isSigned;
+  String _getAuthor(_item) {
+    if (_type != DateEnum.ACTIVITY.value && _type != DateEnum.PERFIL.value) {
+      String? userStatus;
+      String? userName;
+      bool? isEdit;
+      bool? isSigned;
 
-        isEdit = _item['isEdit'];
-        isSigned = _item['isSigned'];
-        userName = _item['userName'];
+      isEdit = _item['isEdit'];
+      isSigned = _item['isSigned'];
+      userName = _item['userName'];
 
-        var author = '';
+      var author = '';
 
-        if (_type == DateEnum.COMMENT.value) {
-          userStatus =
-              _item is CommentModel ? _item.userStatus : _item['userStatus'];
-        }
+      if (_type == DateEnum.COMMENT.value) {
+        userStatus =
+            _item is CommentModel ? _item.userStatus : _item['userStatus'];
+      }
 
+      if (_type != DateEnum.PERFIL.value)
         userStatus == UserStatusEnum.DELETED.value
             ? author = 'usuário deletado'
             : author = isSigned! ? userName! : 'anônimo';
 
-        var temp = ' · $author';
-        return isEdit! ? '$temp · editado' : temp;
-      } else
-        return '';
-    }
+      var temp = ' · $author';
+      return isEdit! ? '$temp · editado' : temp;
+    } else
+      return '';
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Wrap(
       children: [
         if (_type == DateEnum.HISTORY.value && _item['isAuthorized'])

@@ -1,5 +1,5 @@
+import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:bluuffed_app/widget/app_bar_widget_old.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TermsPage extends StatelessWidget {
@@ -8,9 +8,9 @@ class TermsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: AppBarWidgetOld(title: 'Termo de uso'),
+      appBar: AppBarBackWidget(),
       body: WebView(
-        initialUrl: 'https://universe-history-web.web.app/termo-uso',
+        initialUrl: 'https://bluufeed.com/terms',
         javascriptMode: JavascriptMode.unrestricted,
       ),
     );
