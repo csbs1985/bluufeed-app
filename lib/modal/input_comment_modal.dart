@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/comments_firestore.dart';
@@ -40,18 +41,26 @@ class _InputCommentModalState extends State<InputCommentModal> {
   final UserFirestore userFirestore = UserFirestore();
   final Uuid uuid = const Uuid();
 
-  bool _isInputEmpty = true;
+  bool _isEdit = false;
+  bool _btnPublish = true;
   bool _textSigned = true;
 
   late Map<String, dynamic> _form;
 
   @override
   void initState() {
+    if (currentComment.value.isNotEmpty) {
+      _isEdit = true;
+      _btnPublish = true;
+      _commentController.text = currentComment.value.first.text;
+      _textSigned = currentComment.value.first.isSigned;
+    }
+
     super.initState();
   }
 
   void keyUp(String _text) {
-    setState(() => _isInputEmpty = _text.isEmpty ? true : false);
+    setState(() => _btnPublish = _text.isEmpty ? false : true);
   }
 
   void _clean() {
@@ -60,7 +69,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
     else
       setState(() {
         _commentController.clear();
-        _isInputEmpty = false;
+        _btnPublish = false;
       });
   }
 
@@ -68,11 +77,11 @@ class _InputCommentModalState extends State<InputCommentModal> {
 
   Future<void> _postComment(BuildContext context) async {
     _form = {
-      'date': DateTime.now().toString(),
+      'date': currentComment.value.first.date ?? DateTime.now().toString(),
       'historyId': currentHistory.value.first.id,
-      'id': uuid.v4(),
+      'id': currentComment.value.first.id ?? uuid.v4(),
       'isDelete': false,
-      'isEdit': false,
+      'isEdit': _isEdit ? true : false,
       'isSigned': _textSigned,
       'text': _commentController.text.trim(),
       'userId': currentUser.value.first.id,
@@ -89,7 +98,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
   }
 
   Future<void> _pathQtyCommentHistory(BuildContext context) async {
-    currentHistory.value.first.qtyComment++;
+    if (!_isEdit) currentHistory.value.first.qtyComment++;
 
     try {
       await historyFirestore.pathQtyCommentHistory(currentHistory.value.first);
@@ -105,7 +114,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
   }
 
   Future<void> _pathQtyCommentUser(BuildContext context) async {
-    currentUser.value.first.qtyComment++;
+    if (!_isEdit) currentUser.value.first.qtyComment++;
 
     try {
       await userFirestore.pathQtyCommentUser(currentUser.value.first);
@@ -125,11 +134,13 @@ class _InputCommentModalState extends State<InputCommentModal> {
       notificationClass.setNotificationOnwer(
           context, _form, _textSigned, _commentController.text);
 
-      // if (_isEdit) Navigator.of(context).pop();
+      if (_isEdit) Navigator.of(context).pop();
       toast.toast(
         context,
         ToastEnum.SUCCESS.value,
-        'Seu comentário foi publicado.',
+        _isEdit
+            ? 'Seu comentário foi alterado.'
+            : 'Seu comentário foi publicado.',
       );
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (error) {
@@ -139,6 +150,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
 
   @override
   void dispose() {
+    currentComment.value = [];
     _commentController.dispose();
     super.dispose();
   }
@@ -214,7 +226,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
                               ),
                             ],
                           ),
-                          if (!_isInputEmpty)
+                          if (_btnPublish)
                             ButtonPublishWidget(
                               callback: (value) => _postComment(context),
                             ),

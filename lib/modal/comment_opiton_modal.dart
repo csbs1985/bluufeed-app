@@ -1,7 +1,7 @@
 import 'package:bluuffed_app/button/option_button.dart';
 import 'package:bluuffed_app/firestore/comments_firestore.dart';
 import 'package:bluuffed_app/firestore/histories_firestore.dart';
-import 'package:bluuffed_app/modal/create_page.dart';
+import 'package:bluuffed_app/modal/input_comment_modal.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/history_model.dart';
@@ -33,6 +33,12 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final ToastWidget toastWidget = ToastWidget();
 
+  bool isAuthor() {
+    return currentUser.value.first.id == currentComment.value.first.userId
+        ? true
+        : false;
+  }
+
   void _copy() {
     Clipboard.setData(ClipboardData(text: currentComment.value.first.text));
     toastWidget.toast(
@@ -52,7 +58,7 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
       barrierColor: UiColor.overlay,
       duration: const Duration(milliseconds: 300),
       builder: (context) {
-        return const CreateModal();
+        return const InputCommentModal();
       },
     );
   }
@@ -114,12 +120,6 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
     }
   }
 
-  bool isAuthor() {
-    return currentUser.value.first.id == currentHistory.value.first.userId
-        ? true
-        : false;
-  }
-
   @override
   void dispose() {
     currentUserId.value = '';
@@ -151,13 +151,13 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
                   icon: UiIcon.copy,
                   callback: (value) => _copy(),
                 ),
-                const SizedBox(height: UiPadding.medium),
-                // if (isAuthor())
-                OptionButton(
-                  label: 'editar comentário',
-                  icon: UiIcon.edit,
-                  callback: (value) => _openModal(context),
-                ),
+                if (isAuthor()) const SizedBox(height: UiPadding.medium),
+                if (isAuthor())
+                  OptionButton(
+                    label: 'editar comentário',
+                    icon: UiIcon.edit,
+                    callback: (value) => _openModal(context),
+                  ),
                 // if (isAuthor())
                 const SizedBox(height: UiPadding.medium),
                 // if (isAuthor())
