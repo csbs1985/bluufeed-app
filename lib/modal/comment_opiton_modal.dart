@@ -72,8 +72,6 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
     Navigator.of(context).pop();
   }
 
-  ////////////////////////////////////
-
   void _openModal(BuildContext context) {
     showCupertinoModalBottomSheet(
       expand: true,
@@ -86,7 +84,7 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
     );
   }
 
-  void _delete() {
+  void _delete(BuildContext context) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -173,7 +171,7 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
                   OptionButton(
                     label: 'excluir comentário',
                     icon: UiIcon.delete,
-                    callback: (value) => _delete(),
+                    callback: (value) => _delete(context),
                   ),
                 if (canPerfil()) const SizedBox(height: UiPadding.medium),
                 if (canPerfil())
@@ -192,14 +190,18 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
                   OptionButton(
                     label: 'denunciar ${currentHistory.value.first.userName}',
                     icon: UiIcon.denounce,
-                    callback: (value) => _delete(),
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      currentUserId.value = currentHistory.value.first.userId,
+                      Navigator.pushNamed(context, PageEnum.DENOUNCE.value),
+                    },
                   ),
                 if (canPerfil()) const SizedBox(height: UiPadding.medium),
                 if (canPerfil())
                   OptionButton(
                     label: 'bloquear ${currentHistory.value.first.userName}',
                     icon: UiIcon.block,
-                    callback: (value) => _delete(),
+                    callback: (value) => _delete(context),
                   ),
               ],
             ),

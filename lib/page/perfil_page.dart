@@ -49,7 +49,7 @@ class _PerfilPageState extends State<PerfilPage> {
           appBar: currentUserId.value == '' ? null : const AppBarBackWidget(),
           body: SingleChildScrollView(
             child: StreamBuilder<QuerySnapshot>(
-              stream: userFirestore.getUserId(_user),
+              stream: userFirestore.getUserId(_user).snapshots(),
               builder: (
                 BuildContext context,
                 AsyncSnapshot<QuerySnapshot> snapshot,

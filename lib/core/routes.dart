@@ -1,5 +1,6 @@
 import 'package:bluuffed_app/page/about_page.dart';
 import 'package:bluuffed_app/page/activity_page.dart';
+import 'package:bluuffed_app/page/denounce_page.dart';
 import 'package:bluuffed_app/page/questions_page.dart';
 import 'package:bluuffed_app/page/delete_account_page.dart';
 import 'package:bluuffed_app/page/justify_page.dart';
@@ -48,6 +49,13 @@ class Routes {
         type: PageTransitionType.rightToLeft,
         settings: settings,
         child: const DeleteAccountPage(),
+      );
+    }
+    if (settings.name == PageEnum.DENOUNCE.value) {
+      return PageTransition(
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        child: const DenouncePage(),
       );
     }
     if (settings.name == PageEnum.FORGOT_PASSWORD.value) {

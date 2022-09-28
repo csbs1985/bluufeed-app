@@ -8,12 +8,20 @@ class UserFirestore {
     return user.doc(currentUser.value.first.id).delete();
   }
 
+  getTokenOwner(String _user) {
+    return user.where('id', isEqualTo: _user).get();
+  }
+
+  getName(String _nickname) {
+    return user.where('name', isEqualTo: _nickname).get();
+  }
+
   getUserEmail(String? _email) {
     return user.where('email', isEqualTo: _email).get();
   }
 
   getUserId(String? _id) {
-    return user.where('id', isEqualTo: _id).snapshots();
+    return user.where('id', isEqualTo: _id).get();
   }
 
   pathNotification() {
@@ -46,13 +54,5 @@ class UserFirestore {
 
   postUser(Map<String, dynamic> _user) {
     return user.doc(_user['id']).set(_user);
-  }
-
-  getTokenOwner(String _user) {
-    return user.where('id', isEqualTo: _user).get();
-  }
-
-  getName(String _nickname) {
-    return user.where('name', isEqualTo: _nickname).get();
   }
 }

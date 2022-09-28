@@ -73,8 +73,10 @@ class _ButtonCardWidgetState extends State<ButtonCardWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextWidget(text: widget._content[index].title),
-                          const SizedBox(height: UiPadding.small),
-                          TextWidget(text: widget._content[index].text)
+                          if (widget._content[index].text != '')
+                            const SizedBox(height: UiPadding.small),
+                          if (widget._content[index].text != '')
+                            TextWidget(text: widget._content[index].text)
                         ],
                       ),
                     ),
