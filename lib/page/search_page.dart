@@ -10,7 +10,6 @@ import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
-import 'package:bluuffed_app/widget/app_bar_home_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
@@ -123,7 +122,10 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarHomeWidget(callback: (value) {}),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: Container(),
+      ),
       body: ValueListenableBuilder(
         valueListenable: currentTheme,
         builder: (BuildContext context, Brightness theme, _) {
@@ -131,50 +133,47 @@ class _SearchPageState extends State<SearchPage> {
 
           return Material(
             color: isDark ? UiColor.mainDark : UiColor.main,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                UiPadding.large,
-                0,
-                UiPadding.large,
-                UiPadding.small,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Headline1(title: 'Pesquisar'),
-                  const TextWidget(
-                    text: 'Busque pelo usuário ou o título da história',
-                  ),
-                  const SizedBox(height: UiPadding.medium),
-                  TextField(
-                    controller: _valueController,
-                    onChanged: (value) => keyUp(),
-                    style: Theme.of(context).textTheme.headline2,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: UiPadding.large,
-                        vertical: UiPadding.small,
-                      ),
-                      hintText: 'pesquisar usuário',
-                      hintStyle: Theme.of(context).textTheme.headline2,
+            child: SingleChildScrollView(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: UiPadding.large),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Headline1(title: 'Pesquisar'),
+                    const TextWidget(
+                      text: 'Pesquise pelo usuário ou o título da história',
                     ),
-                  ),
-                  const SizedBox(height: UiPadding.large),
-                  SingleChildScrollView(
-                    child: isInputEmpty
-                        ? _userRecent()
-                        : Column(
-                            children: [
-                              const SubtitleWidget(resume: 'pesquisando'),
-                              _snapshot == null
-                                  ? _notResult()
-                                  : _algolia(_snapshot),
-                            ],
-                          ),
-                  ),
-                ],
+                    const SizedBox(height: UiPadding.medium),
+                    TextField(
+                      controller: _valueController,
+                      onChanged: (value) => keyUp(),
+                      style: Theme.of(context).textTheme.headline2,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: UiPadding.large,
+                          vertical: UiPadding.small,
+                        ),
+                        hintText: 'pesquisar ',
+                        hintStyle: Theme.of(context).textTheme.headline2,
+                      ),
+                    ),
+                    const SizedBox(height: UiPadding.large),
+                    SingleChildScrollView(
+                      child: isInputEmpty
+                          ? _userRecent()
+                          : Column(
+                              children: [
+                                const SubtitleWidget(resume: 'pesquisando'),
+                                _snapshot == null
+                                    ? _notResult()
+                                    : _algolia(_snapshot),
+                              ],
+                            ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

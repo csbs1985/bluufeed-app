@@ -10,7 +10,6 @@ import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/widget/app_bar_home_widget.dart';
 import 'package:bluuffed_app/widget/select_toggle_widget.dart';
 import 'package:bluuffed_app/widget/separator_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
@@ -76,7 +75,10 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarHomeWidget(callback: (value) {}),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: Container(),
+      ),
       body: SingleChildScrollView(
         child: ValueListenableBuilder(
           valueListenable: currentUser,

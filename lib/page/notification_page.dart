@@ -14,7 +14,6 @@ import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bluuffed_app/widget/app_bar_home_widget.dart';
 import 'package:flutterfire_ui/firestore.dart';
 import 'package:styled_text/styled_text.dart';
 
@@ -56,7 +55,10 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarHomeWidget(callback: (value) {}),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: Container(),
+      ),
       body: ValueListenableBuilder(
         valueListenable: currentTheme,
         builder: (BuildContext context, Brightness theme, _) {

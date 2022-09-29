@@ -58,7 +58,6 @@ class _JustifyPageState extends State<JustifyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const AppBarEmptyWidget(title: 'Justificar e deletar'),
       appBar: const AppBarBackWidget(),
       body: SingleChildScrollView(
         child: Padding(
