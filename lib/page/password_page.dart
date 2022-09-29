@@ -10,7 +10,6 @@ import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/widget/input_password_widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
@@ -75,8 +74,6 @@ class _PasswordPageState extends State<PasswordPage> {
                   callback: (value) => _login(context),
                   label: 'entrar',
                   style: ButtonStyleEnum.PRIMARY.value,
-                  size: ButtonSizeEnum.LARGE.value,
-                  padding: UiSize.paddingButtonLarge,
                 ),
                 const SizedBox(height: UiPadding.large),
                 ButtonTextWidget(

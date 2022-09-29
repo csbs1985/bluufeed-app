@@ -220,7 +220,7 @@ class _SendModalState extends State<SendModal> {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          height: UiSize.bottomLarge,
+          height: UiSize.bottom,
           child: const TextWidget(text: 'usuário não encontrado'),
         ),
       ],

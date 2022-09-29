@@ -99,8 +99,6 @@ class _LoginPageState extends State<LoginPage> {
                   callback: (value) => _login(context),
                   label: 'próximo',
                   style: ButtonStyleEnum.PRIMARY.value,
-                  size: ButtonSizeEnum.LARGE.value,
-                  padding: UiSize.paddingButtonLarge,
                 ),
                 const SizedBox(height: UiPadding.large),
                 ButtonTextWidget(

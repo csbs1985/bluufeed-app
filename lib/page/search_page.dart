@@ -221,7 +221,7 @@ class _SearchPageState extends State<SearchPage> {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          height: UiSize.bottomLarge,
+          height: UiSize.bottom,
           child: const TextWidget(text: 'usuário não encontrado'),
         ),
       ],

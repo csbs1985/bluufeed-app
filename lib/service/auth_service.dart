@@ -76,8 +76,10 @@ class AuthService extends ChangeNotifier {
                   'email': user.docs[0]['email'],
                   'token': token,
                   'isNotification': user.docs[0]['isNotification'],
-                  'qtyHistory': user.docs[0]['qtyHistory'],
                   'qtyComment': user.docs[0]['qtyComment'],
+                  'qtyDenounce': user.docs[0]['qtyDenounce'],
+                  'qtyHistory': user.docs[0]['qtyHistory'],
+                  'following': user.docs[0]['following'],
                 },
               ),
               await activityClass.save(
@@ -105,8 +107,10 @@ class AuthService extends ChangeNotifier {
       'email': currentEmail.value,
       'token': token,
       'isNotification': true,
-      'qtyHistory': 0,
       'qtyComment': 0,
+      'qtyDenounce': 0,
+      'qtyHistory': 0,
+      'following': [],
     };
 
     userFirestore.postUser(_user).then((result) async => {

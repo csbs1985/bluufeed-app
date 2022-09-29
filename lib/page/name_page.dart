@@ -146,7 +146,7 @@ class _NamePageState extends State<NamePage> {
                 if (_cantChange)
                   TextWidget(
                     text:
-                        'espere mais ${_rulesDays - _daysRemaining} dia(s) para alterar o usuário',
+                        'espere mais ${_rulesDays - _daysRemaining} dia(s) para alterar o nome de usuário.',
                   ),
                 const SizedBox(height: UiPadding.large),
                 TextFormField(
@@ -166,15 +166,12 @@ class _NamePageState extends State<NamePage> {
                   ),
                 ),
                 const SizedBox(height: UiPadding.large),
-                Button3dWidget(
-                  callback: (value) => _nameChange(context),
-                  label: 'alterar',
-                  style: _cantChange
-                      ? ButtonStyleEnum.DISABLED.value
-                      : ButtonStyleEnum.PRIMARY.value,
-                  size: ButtonSizeEnum.LARGE.value,
-                  padding: 32,
-                ),
+                if (!_cantChange)
+                  Button3dWidget(
+                    callback: (value) => _nameChange(context),
+                    label: 'alterar',
+                    style: ButtonStyleEnum.PRIMARY.value,
+                  ),
               ],
             ),
           ),

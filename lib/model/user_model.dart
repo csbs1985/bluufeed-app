@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bluuffed_app/model/following_model.dart';
 import 'package:bluuffed_app/service/device_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,8 +22,10 @@ class UserModel {
   late String token;
   late String status;
   late bool isNotification;
-  late num qtyHistory;
+  late num qtyDenounce;
   late num qtyComment;
+  late num qtyHistory;
+  late List<FollowingModel> following;
 
   UserModel({
     required this.id,
@@ -33,8 +36,10 @@ class UserModel {
     required this.email,
     required this.token,
     required this.isNotification,
-    required this.qtyHistory,
+    required this.qtyDenounce,
     required this.qtyComment,
+    required this.qtyHistory,
+    required this.following,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
@@ -49,8 +54,10 @@ class UserModel {
         token: json['token'],
         status: json['status'],
         isNotification: json['isNotification'],
-        qtyHistory: json['qtyHistory'],
         qtyComment: json['qtyComment'],
+        qtyDenounce: json['qtyDenounce'],
+        qtyHistory: json['qtyHistory'],
+        following: json['following'].cast<FollowingModel>(),
       );
 
   static String toJson(UserModel user) => jsonEncode(toMap(user));
@@ -58,14 +65,16 @@ class UserModel {
   static Map<String, dynamic> toMap(user) => {
         'id': user.id,
         'name': user.name,
-        'upDateName': user.upDateName,
+        'upDateName': user.upDateName ?? '',
         'date': user.date,
         'email': user.email,
         'token': user.token,
         'isNotification': user.isNotification,
         'status': user.status,
-        'qtyHistory': user.qtyHistory,
         'qtyComment': user.qtyComment,
+        'qtyDenounce': user.qtyDenounce,
+        'qtyHistory': user.qtyHistory,
+        'following': user.following,
       };
 }
 
@@ -80,10 +89,6 @@ class UserClass {
     currentUser.value = [];
     currentUser.value.add(UserModel.fromJson(user));
     saveUser();
-  }
-
-  userModelToMap(UserModel _currentUser) {
-    String data = UserModel.toJson(_currentUser);
   }
 
   Future<File> saveUser() async {

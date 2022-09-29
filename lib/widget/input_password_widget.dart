@@ -49,7 +49,7 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
               SizedBox(
                 width: MediaQuery.of(context).size.width -
                     buttonSize -
-                    UiSize.paddingButtonLarge,
+                    UiSize.paddingButtonFull,
                 child: TextField(
                   onChanged: (value) => _changeValue(value),
                   obscureText: _show,

@@ -128,8 +128,6 @@ class _DenouncePageState extends State<DenouncePage> {
                 Button3dWidget(
                   label: 'Denunciar',
                   style: ButtonStyleEnum.PRIMARY.value,
-                  size: ButtonSizeEnum.LARGE.value,
-                  padding: UiSize.paddingButtonLarge,
                   callback: (value) => _postDenounce(value),
                 ),
               const SizedBox(height: UiPadding.large),

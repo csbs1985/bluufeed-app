@@ -83,8 +83,8 @@ class _SelectCategoriesWidgetState extends State<SelectCategoriesWidget> {
                               _getSelected(item.id!)
                                   ? UiColor.actived
                                   : isDark
-                                      ? UiColor.inativedDark
-                                      : UiColor.inatived,
+                                      ? UiColor.buttonSecondaryDark
+                                      : UiColor.buttonSecondary,
                             ),
                           ),
                           child: Text(

@@ -181,8 +181,6 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                 callback: (value) => _validateCode(),
                 label: 'validar',
                 style: ButtonStyleEnum.PRIMARY.value,
-                size: ButtonSizeEnum.LARGE.value,
-                padding: UiSize.paddingButtonLarge,
               ),
               const SizedBox(height: UiPadding.large),
               ButtonTextWidget(

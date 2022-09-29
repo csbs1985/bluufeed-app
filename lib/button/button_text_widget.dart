@@ -23,7 +23,7 @@ class _ButtonTextWidgetState extends State<ButtonTextWidget> {
       child: Container(
         alignment: Alignment.center,
         color: Colors.transparent,
-        height: UiSize.bottomLarge,
+        height: UiSize.bottom,
         child: Text(
           widget._label,
           style: UiText.subtitle,

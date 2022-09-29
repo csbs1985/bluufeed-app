@@ -30,7 +30,8 @@ class SinceWidget extends StatelessWidget {
       'dezsembro'
     ];
 
-    return time = day.format(date) +
+    return time = 'desde ' +
+        day.format(date) +
         ' de ' +
         months[int.parse(month.format(date)) - 1] +
         ' de ' +

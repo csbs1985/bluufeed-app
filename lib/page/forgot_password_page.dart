@@ -153,8 +153,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   callback: (value) => _retrieveAccount(),
                   label: 'próximo',
                   style: ButtonStyleEnum.PRIMARY.value,
-                  size: ButtonSizeEnum.LARGE.value,
-                  padding: UiSize.paddingButtonLarge,
                 ),
               ],
             ),

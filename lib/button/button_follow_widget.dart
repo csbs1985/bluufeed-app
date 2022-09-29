@@ -21,31 +21,15 @@ class _ButtonFollowWidgetState extends State<ButtonFollowWidget> {
             callback: (value) {},
             label: 'seguir',
             style: ButtonStyleEnum.PRIMARY.value,
-            size: ButtonSizeEnum.MEDIUM.value,
-            padding: 32,
+            width: 100,
           ),
         if (isFollow)
           Button3dWidget(
             callback: (value) {},
             label: 'deixar de seguir',
             style: ButtonStyleEnum.SECONDARY.value,
-            size: ButtonSizeEnum.MEDIUM.value,
-            padding: 32,
+            width: 100,
           ),
-        Button3dWidget(
-          callback: (value) {},
-          label: 'bloquear',
-          style: ButtonStyleEnum.SECONDARY.value,
-          size: ButtonSizeEnum.MEDIUM.value,
-          padding: 32,
-        ),
-        Button3dWidget(
-          callback: (value) {},
-          label: 'denunciar',
-          style: ButtonStyleEnum.SECONDARY.value,
-          size: ButtonSizeEnum.MEDIUM.value,
-          padding: 32,
-        ),
       ],
     );
   }

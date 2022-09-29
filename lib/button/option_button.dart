@@ -39,7 +39,9 @@ class _OptionButtonState extends State<OptionButton> {
           child: TextButton(
             onPressed: () => widget._callback(true),
             style: ElevatedButton.styleFrom(
-              backgroundColor: isDark ? UiColor.inativedDark : UiColor.inatived,
+              backgroundColor: isDark
+                  ? UiColor.buttonSecondaryDark
+                  : UiColor.buttonSecondary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(UiBorder.rounded),
               ),

@@ -54,7 +54,9 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
               children: [
                 Card(
                   elevation: 0,
-                  color: isDark ? UiColor.inativedDark : UiColor.inatived,
+                  color: isDark
+                      ? UiColor.buttonSecondaryDark
+                      : UiColor.buttonSecondary,
                   margin: const EdgeInsets.all(0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(UiBorder.rounded),

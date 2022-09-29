@@ -7,7 +7,6 @@ import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/service/password_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/widget/input_password_widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
@@ -112,8 +111,6 @@ class _PasswordEditPageState extends State<PasswordEditPage> {
                   callback: (value) => _login(context),
                   label: 'alterar senha',
                   style: ButtonStyleEnum.PRIMARY.value,
-                  size: ButtonSizeEnum.LARGE.value,
-                  padding: UiSize.paddingButtonLarge,
                 ),
               ],
             ),

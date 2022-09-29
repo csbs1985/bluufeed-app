@@ -85,8 +85,6 @@ class _JustifyPageState extends State<JustifyPage> {
                 Button3dWidget(
                   label: 'Justificar e deletar',
                   style: ButtonStyleEnum.PRIMARY.value,
-                  size: ButtonSizeEnum.LARGE.value,
-                  padding: 32,
                   callback: (value) => _showDialog(context),
                 ),
               const SizedBox(height: UiPadding.medium),

@@ -4,4 +4,4 @@ import 'package:flutter/cupertino.dart';
 ValueNotifier<List<UserModel>> currentPerfil =
     ValueNotifier<List<UserModel>>([]);
 
-class PerfilModel {}
+class PerfilClass {}

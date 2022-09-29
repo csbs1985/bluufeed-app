@@ -4,7 +4,8 @@ import 'package:bluuffed_app/theme/ui_color.dart';
 
 class UiButton {
   static ButtonStyle button = ButtonStyle(
-    backgroundColor: const MaterialStatePropertyAll<Color>(UiColor.inatived),
+    backgroundColor:
+        const MaterialStatePropertyAll<Color>(UiColor.buttonSecondary),
     shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
       RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(UiBorder.circle)),
@@ -13,7 +14,7 @@ class UiButton {
 
   static ButtonStyle buttonDark = ButtonStyle(
     backgroundColor:
-        const MaterialStatePropertyAll<Color>(UiColor.inativedDark),
+        const MaterialStatePropertyAll<Color>(UiColor.buttonSecondaryDark),
     shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
       RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(UiBorder.circle)),

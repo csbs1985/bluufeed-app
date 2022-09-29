@@ -6,15 +6,13 @@ class UiSize {
   static const double borderButton = 4;
   static const double bottomNavigation = 56;
   static const double bottomXLarge = 48;
-  static const double bottomLarge = 42;
-  static const double bottomSmall = 32;
+  static const double bottom = 36;
   static const double historyMenu = 36;
   static const double iconCircle = 32;
   static const double input = 48;
-  static const double menuHeight =
-      UiSize.bottomSmall + UiPadding.large + UiPadding.large;
+  static const double menuHeight = 32 + UiPadding.large + UiPadding.large;
   static const double modalHeight = 42;
-  static const double paddingButtonLarge = 32;
+  static const double paddingButtonFull = 32;
   static const double separator = 8;
   static const double tag = 36;
   static const double widthFullLessPadding = UiPadding.large * 2;

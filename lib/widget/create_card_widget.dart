@@ -53,7 +53,7 @@ class _CreateCardWidgetState extends State<CreateCardWidget> {
           Button3dWidget(
             label: 'escrever',
             style: ButtonStyleEnum.PRIMARY.value,
-            size: ButtonSizeEnum.MEDIUM.value,
+            width: 100,
             callback: (value) => _openCreateModal(),
           )
         ],

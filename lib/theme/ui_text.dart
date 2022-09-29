@@ -14,12 +14,6 @@ class UiText {
     color: UiColor.buttonSecondarytext,
   );
 
-  static const TextStyle buttonDisabled = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.normal,
-    color: UiColor.buttonDisabledText,
-  );
-
   static const TextStyle subtitle = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.bold,
@@ -71,7 +65,7 @@ class UiTextDark {
   );
 
   static const TextStyle headline6 = TextStyle(
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: FontWeight.normal,
     color: UiColor.textDark,
   );
@@ -109,7 +103,7 @@ class UiTextLight {
   );
 
   static const TextStyle headline6 = TextStyle(
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: FontWeight.normal,
     color: UiColor.text,
   );

@@ -55,13 +55,11 @@ class _AlertConfirmComponentState extends State<AlertConfirmWidget> {
               children: [
                 Button3dWidget(
                   label: widget._btnSecondaryLabel!,
-                  size: ButtonSizeEnum.MEDIUM.value,
                   style: ButtonStyleEnum.SECONDARY.value,
                   callback: (value) => widget._callback(true),
                 ),
                 Button3dWidget(
                   label: widget._btnPrimaryLabel!,
-                  size: ButtonSizeEnum.MEDIUM.value,
                   style: ButtonStyleEnum.PRIMARY.value,
                   callback: (value) => widget._callback(false),
                 ),

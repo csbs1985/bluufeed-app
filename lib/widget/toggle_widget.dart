@@ -30,7 +30,8 @@ class _ToggleWidgetState extends State<ToggleWidget> {
           height: 32,
           value: widget._value,
           activeColor: UiColor.primary,
-          inactiveColor: isDark ? UiColor.inativedDark : UiColor.inatived,
+          inactiveColor:
+              isDark ? UiColor.buttonSecondaryDark : UiColor.buttonSecondary,
           activeToggleColor: UiColor.secondary,
           inactiveToggleColor: UiColor.primary,
           toggleSize: 20,

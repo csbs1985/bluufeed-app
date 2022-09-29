@@ -64,13 +64,11 @@ class _DialogConfirmWidgetState extends State<DialogConfirmWidget> {
                       callback: (value) => widget._callback(true),
                       label: widget._buttonSecondary,
                       style: ButtonStyleEnum.SECONDARY.value,
-                      size: ButtonSizeEnum.MEDIUM.value,
                     ),
                     Button3dWidget(
                       callback: (value) => widget._callback(false),
                       label: widget._buttonPrimary,
                       style: ButtonStyleEnum.PRIMARY.value,
-                      size: ButtonSizeEnum.MEDIUM.value,
                     )
                   ],
                 )

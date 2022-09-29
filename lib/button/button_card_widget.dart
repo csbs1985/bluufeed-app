@@ -54,8 +54,8 @@ class _ButtonCardWidgetState extends State<ButtonCardWidget> {
                       backgroundColor: _getSelected(widget._content[index].id!)
                           ? UiColor.actived
                           : isDark
-                              ? UiColor.inativedDark
-                              : UiColor.inatived,
+                              ? UiColor.buttonSecondaryDark
+                              : UiColor.buttonSecondary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(UiBorder.rounded),
                       ),

@@ -38,7 +38,8 @@ class _CardPerfilWidgetState extends State<CardPerfilWidget> {
           onPressed: () => Navigator.pushNamed(context, widget._link!),
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(UiPadding.large),
-            backgroundColor: isDark ? UiColor.inativedDark : UiColor.inatived,
+            backgroundColor:
+                isDark ? UiColor.buttonSecondaryDark : UiColor.buttonSecondary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(UiBorder.rounded),
             ),
