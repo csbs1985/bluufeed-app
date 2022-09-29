@@ -130,6 +130,7 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
   @override
   void dispose() {
     currentUserId.value = '';
+    currentComment.value = [];
     super.dispose();
   }
 
@@ -164,14 +165,29 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
                   OptionButton(
                     label: 'editar comentário',
                     icon: UiIcon.edit,
-                    callback: (value) => _openModal(context),
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      _openModal(context),
+                    },
                   ),
                 if (canDelete()) const SizedBox(height: UiPadding.medium),
                 if (canDelete())
                   OptionButton(
                     label: 'excluir comentário',
                     icon: UiIcon.delete,
-                    callback: (value) => _delete(context),
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      _delete(context),
+                    },
+                  ),
+                if (canPerfil()) const SizedBox(height: UiPadding.medium),
+                if (canPerfil())
+                  OptionButton(
+                    label: 'seguir ${currentHistory.value.first.userName}',
+                    icon: UiIcon.perfilActived,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                    },
                   ),
                 if (canPerfil()) const SizedBox(height: UiPadding.medium),
                 if (canPerfil())

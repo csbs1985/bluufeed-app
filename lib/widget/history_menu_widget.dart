@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:bluuffed_app/firestore/histories_firestore.dart';
@@ -44,8 +45,8 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     return 'seja o primeiro a comentar';
   }
 
-  void _openComment() {
-    if (widget._history['isComment']) {
+  void _openComment(String _route) {
+    if (_route != PageEnum.HISTORY.value) if (widget._history['isComment']) {
       historyClass.add(widget._history);
       _openModal(context, ModalEnum.COMMENT.value);
     }
@@ -100,13 +101,19 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     var _route = ModalRoute.of(context)?.settings.name;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: UiPadding.medium),
+      padding: const EdgeInsets.only(right: UiPadding.medium),
       height: UiSize.historyMenu,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () => _openComment(),
+          TextButton(
+            onPressed: () => _openComment(_route!),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(UiBorder.rounded),
+              ),
+            ),
             child: Row(
               children: [
                 if (widget._history['qtyComment'] > 0)

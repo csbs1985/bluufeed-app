@@ -148,6 +148,15 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
                 if (!isAuthor()) const SizedBox(height: UiPadding.medium),
                 if (!isAuthor())
                   OptionButton(
+                    label: 'seguir ${currentHistory.value.first.userName}',
+                    icon: UiIcon.perfilActived,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                    },
+                  ),
+                if (!isAuthor()) const SizedBox(height: UiPadding.medium),
+                if (!isAuthor())
+                  OptionButton(
                     label:
                         'ver perfil de ${currentHistory.value.first.userName}',
                     icon: UiIcon.perfilActived,
@@ -156,6 +165,24 @@ class _HistoryOptionModalState extends State<HistoryOptionModal> {
                       currentUserId.value = currentHistory.value.first.userId,
                       Navigator.pushNamed(context, PageEnum.PERFIL.value),
                     },
+                  ),
+                if (!isAuthor()) const SizedBox(height: UiPadding.medium),
+                if (!isAuthor())
+                  OptionButton(
+                    label: 'denunciar ${currentHistory.value.first.userName}',
+                    icon: UiIcon.denounce,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      currentUserId.value = currentHistory.value.first.userId,
+                      Navigator.pushNamed(context, PageEnum.DENOUNCE.value),
+                    },
+                  ),
+                if (!isAuthor()) const SizedBox(height: UiPadding.medium),
+                if (!isAuthor())
+                  OptionButton(
+                    label: 'bloquear ${currentHistory.value.first.userName}',
+                    icon: UiIcon.block,
+                    callback: (value) => {},
                   ),
               ],
             ),

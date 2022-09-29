@@ -101,7 +101,6 @@ class _PerfilPageState extends State<PerfilPage> {
                     }
                   },
                 ),
-                const SeparatorWidget(),
               ],
             ),
           );
@@ -111,49 +110,64 @@ class _PerfilPageState extends State<PerfilPage> {
   }
 
   Widget _perfilItemWidget(Map<String, dynamic> snapshot) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            snapshot['name'],
-            style: Theme.of(context).textTheme.headline6,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                snapshot['name'],
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              if (canEmail()) TextWidget(text: snapshot['email']),
+              SinceWidget(date: snapshot['date']),
+              const SizedBox(height: UiPadding.large),
+              const ButtonFollowWidget(),
+            ],
           ),
-          if (canEmail()) TextWidget(text: snapshot['email']),
-          SinceWidget(date: snapshot['date']),
-          const SizedBox(height: UiPadding.xLarge),
-          const ButtonFollowWidget(),
-          const SizedBox(height: UiPadding.xLarge),
-          CardPerfilWidget(
-            icon: UiIcon.feedActived,
-            label: 'histórias',
-            number: snapshot['qtyHistory'].toString(),
-            link: PageEnum.ABOUT.value,
+        ),
+        const SizedBox(height: UiPadding.large),
+        const SeparatorWidget(),
+        const SizedBox(height: UiPadding.large),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CardPerfilWidget(
+                icon: UiIcon.feedActived,
+                label: 'histórias',
+                number: snapshot['qtyHistory'].toString(),
+                link: PageEnum.ABOUT.value,
+              ),
+              const SizedBox(height: UiPadding.medium),
+              CardPerfilWidget(
+                icon: UiIcon.feedActived,
+                label: 'históras para ler depois',
+                number: snapshot['qtyHistory'].toString(),
+                link: '',
+              ),
+              const SizedBox(height: UiPadding.medium),
+              CardPerfilWidget(
+                icon: UiIcon.feedActived,
+                label: 'comentários',
+                number: snapshot['qtyComment'].toString(),
+                link: '',
+              ),
+              const SizedBox(height: UiPadding.medium),
+              CardPerfilWidget(
+                icon: UiIcon.feedActived,
+                label: 'seguindo',
+                number: snapshot['following'].length.toString(),
+                link: '',
+              ),
+            ],
           ),
-          const SizedBox(height: UiPadding.medium),
-          CardPerfilWidget(
-            icon: UiIcon.feedActived,
-            label: 'históras para ler depois',
-            number: snapshot['qtyHistory'].toString(),
-            link: '',
-          ),
-          const SizedBox(height: UiPadding.medium),
-          CardPerfilWidget(
-            icon: UiIcon.feedActived,
-            label: 'comentários',
-            number: snapshot['qtyComment'].toString(),
-            link: '',
-          ),
-          const SizedBox(height: UiPadding.medium),
-          CardPerfilWidget(
-            icon: UiIcon.feedActived,
-            label: 'seguindo',
-            number: snapshot['following'].length.toString(),
-            link: '',
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
