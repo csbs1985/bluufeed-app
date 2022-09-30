@@ -2,7 +2,7 @@ import 'package:bluuffed_app/modal/history_opiton_modal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/skeleton/history_item_skeleton.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';

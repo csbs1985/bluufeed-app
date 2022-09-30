@@ -24,18 +24,6 @@ class CategoryModel {
       isDisabled: false,
     ),
     CategoryModel(
-      id: CategoryEnum.MY.value,
-      label: 'minhas',
-      isLogin: true,
-      isDisabled: false,
-    ),
-    CategoryModel(
-      id: CategoryEnum.SAVE.value,
-      label: 'ler mais tarde',
-      isLogin: true,
-      isDisabled: false,
-    ),
-    CategoryModel(
       id: CategoryEnum.ANIMALS.value,
       label: 'animais',
       isLogin: false,

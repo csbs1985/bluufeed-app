@@ -1,4 +1,4 @@
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class HistoryService {

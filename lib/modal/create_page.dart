@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';

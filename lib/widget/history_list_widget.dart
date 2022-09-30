@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutterfire_ui/firestore.dart';
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/model/category_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/skeleton/history_item_skeleton.dart';
@@ -64,8 +64,8 @@ class _HistoryListWidgetState extends State<HistoryListWidget> {
               shrinkWrap: true,
               reverse: true,
               physics: const NeverScrollableScrollPhysics(),
-              loadingBuilder: (context) => HistoryItemSkeleton(),
-              errorBuilder: (context, error, _) => HistoryItemSkeleton(),
+              loadingBuilder: (context) => const HistoryItemSkeleton(),
+              errorBuilder: (context, error, _) => const HistoryItemSkeleton(),
               itemBuilder: (BuildContext context,
                   QueryDocumentSnapshot<dynamic> snapshot) {
                 return HistoryItemWidget(snapshot: snapshot.data());

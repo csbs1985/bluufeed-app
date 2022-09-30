@@ -1,7 +1,7 @@
 import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/modal/comment_modal.dart';
 import 'package:bluuffed_app/modal/input_comment_modal.dart';
 import 'package:bluuffed_app/modal/send_modal.dart';

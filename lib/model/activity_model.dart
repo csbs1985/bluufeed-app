@@ -45,6 +45,7 @@ enum ActivityEnum {
   DELETE_COMMENT('delete_comment'),
   DELETE_HISTORY('delete_history'),
   DENOUNCE('denounce'),
+  FOLLOWING('following'),
   LOGIN('login'),
   LOGOUT('logout'),
   NEW_ACCOUNT('new_account'),

@@ -1,12 +1,13 @@
 import 'package:bluuffed_app/button/option_button.dart';
 import 'package:bluuffed_app/firestore/comments_firestore.dart';
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/modal/input_comment_modal.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/service/following_service.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
@@ -29,6 +30,7 @@ class CommentOptionModal extends StatefulWidget {
 class _CommentOptionModalState extends State<CommentOptionModal> {
   final ActivityClass activityClass = ActivityClass();
   final CommentFirestore commentFirestore = CommentFirestore();
+  final FollowingService followingService = FollowingService();
   final HistoryClass historyClass = HistoryClass();
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final ToastWidget toastWidget = ToastWidget();
@@ -60,6 +62,12 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
     if (currentUser.value.first.id == currentComment.value.first.userId)
       return false;
     return true;
+  }
+
+  String isFollowing() {
+    return followingService.isFollwing(currentComment.value.first.userId)
+        ? 'deixar de seguir ${currentComment.value.first.userName}'
+        : 'seguir ${currentComment.value.first.userName}';
   }
 
   void _copy() {
@@ -183,10 +191,14 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
                 if (canPerfil()) const SizedBox(height: UiPadding.medium),
                 if (canPerfil())
                   OptionButton(
-                    label: 'seguir ${currentHistory.value.first.userName}',
+                    label: isFollowing(),
                     icon: UiIcon.perfilActived,
                     callback: (value) => {
                       Navigator.of(context).pop(),
+                      followingService.toggleFollowing(
+                        context,
+                        currentComment.value.first,
+                      ),
                     },
                   ),
                 if (canPerfil()) const SizedBox(height: UiPadding.medium),

@@ -28,6 +28,12 @@ class UserFirestore {
     return user.where('id', isEqualTo: _id).snapshots();
   }
 
+  pathFallowing(List<Map<String, dynamic>> _following) {
+    return user
+        .doc(currentUser.value.first.id)
+        .update({'following': _following});
+  }
+
   pathNotification() {
     return user
         .doc(currentUser.value.first.id)

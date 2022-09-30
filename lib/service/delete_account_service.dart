@@ -1,5 +1,5 @@
 import 'package:bluuffed_app/firestore/comments_firestore.dart';
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/firestore/justifications_Firestore.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/widget/dialog_widget.dart';

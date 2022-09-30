@@ -27,6 +27,7 @@ linter:
     depend_on_referenced_packages: false
     file_names: false
     library_private_types_in_public_api: false
+    list_remove_unrelated_type: false
     must_be_immutable: false
     no_leading_underscores_for_local_identifiers: false
     non_constant_identifier_names: false

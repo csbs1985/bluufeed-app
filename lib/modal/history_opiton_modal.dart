@@ -1,6 +1,6 @@
 import 'package:bluuffed_app/button/option_button.dart';
 import 'package:bluuffed_app/firestore/comments_firestore.dart';
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/modal/create_page.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/model/history_model.dart';

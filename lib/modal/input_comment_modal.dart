@@ -2,7 +2,7 @@ import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/comments_firestore.dart';
-import 'package:bluuffed_app/firestore/histories_firestore.dart';
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/firestore/notifications_firestore.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
