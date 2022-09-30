@@ -1,5 +1,6 @@
 import 'package:bluuffed_app/button/button_follow_widget.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
+import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/perfil_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
@@ -35,6 +36,12 @@ class _PerfilPageState extends State<PerfilPage> {
     return currentUserId.value == "" ? true : false;
   }
 
+  bool isAuthor() {
+    return currentUser.value.first.id == currentComment.value.first.userId
+        ? true
+        : false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,58 +57,48 @@ class _PerfilPageState extends State<PerfilPage> {
           bool isDark = currentTheme.value == Brightness.dark;
 
           return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: UiPadding.large),
-                  child: Headline1(title: 'Perfil'),
-                ),
-                StreamBuilder<QuerySnapshot>(
-                  stream: userFirestore.getUserIdSnapshots(
-                    currentUserId.value != ""
-                        ? currentUserId.value
-                        : currentUser.value.first.id,
-                  ),
-                  builder: (
-                    BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot,
-                  ) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                        return _noResults();
+            child: StreamBuilder<QuerySnapshot>(
+              stream: userFirestore.getUserIdSnapshots(
+                currentUserId.value != ""
+                    ? currentUserId.value
+                    : currentUser.value.first.id,
+              ),
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<QuerySnapshot> snapshot,
+              ) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    return _noResults();
 
-                      case ConnectionState.waiting:
-                        return const PerfilSkeleton();
+                  case ConnectionState.waiting:
+                    return const PerfilSkeleton();
 
-                      case ConnectionState.done:
-                      default:
-                        try {
-                          _perfil = {
-                            'id': snapshot.data!.docs[0]['id'],
-                            'date': snapshot.data!.docs[0]['date'],
-                            'name': snapshot.data!.docs[0]['name'],
-                            'upDateName': snapshot.data!.docs[0]['upDateName'],
-                            'status': snapshot.data!.docs[0]['status'],
-                            'email': snapshot.data!.docs[0]['email'],
-                            'token': snapshot.data!.docs[0]['token'],
-                            'isNotification': snapshot.data!.docs[0]
-                                ['isNotification'],
-                            'qtyComment': snapshot.data!.docs[0]['qtyComment'],
-                            'qtyDenounce': snapshot.data!.docs[0]
-                                ['qtyDenounce'],
-                            'qtyHistory': snapshot.data!.docs[0]['qtyHistory'],
-                            'following': snapshot.data!.docs[0]['following'],
-                          };
+                  case ConnectionState.done:
+                  default:
+                    try {
+                      _perfil = {
+                        'id': snapshot.data!.docs[0]['id'],
+                        'date': snapshot.data!.docs[0]['date'],
+                        'name': snapshot.data!.docs[0]['name'],
+                        'upDateName': snapshot.data!.docs[0]['upDateName'],
+                        'status': snapshot.data!.docs[0]['status'],
+                        'email': snapshot.data!.docs[0]['email'],
+                        'token': snapshot.data!.docs[0]['token'],
+                        'isNotification': snapshot.data!.docs[0]
+                            ['isNotification'],
+                        'qtyComment': snapshot.data!.docs[0]['qtyComment'],
+                        'qtyDenounce': snapshot.data!.docs[0]['qtyDenounce'],
+                        'qtyHistory': snapshot.data!.docs[0]['qtyHistory'],
+                        'following': snapshot.data!.docs[0]['following'],
+                      };
 
-                          return _perfilItemWidget(_perfil);
-                        } catch (error) {
-                          return _noResults();
-                        }
+                      return _perfilItemWidget(_perfil);
+                    } catch (error) {
+                      return _noResults();
                     }
-                  },
-                ),
-              ],
+                }
+              },
             ),
           );
         },
@@ -118,19 +115,14 @@ class _PerfilPageState extends State<PerfilPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                snapshot['name'],
-                style: Theme.of(context).textTheme.headline6,
-              ),
+              Headline1(title: snapshot['name']),
               if (canEmail()) TextWidget(text: snapshot['email']),
               SinceWidget(date: snapshot['date']),
               const SizedBox(height: UiPadding.large),
-              const ButtonFollowWidget(),
+              if (!isAuthor()) const ButtonFollowWidget(),
             ],
           ),
         ),
-        const SizedBox(height: UiPadding.large),
-        const SeparatorWidget(),
         const SizedBox(height: UiPadding.large),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
@@ -146,7 +138,7 @@ class _PerfilPageState extends State<PerfilPage> {
               const SizedBox(height: UiPadding.medium),
               CardPerfilWidget(
                 icon: UiIcon.feedActived,
-                label: 'históras para ler depois',
+                label: 'ler depois',
                 number: snapshot['qtyHistory'].toString(),
                 link: '',
               ),
@@ -159,14 +151,23 @@ class _PerfilPageState extends State<PerfilPage> {
               ),
               const SizedBox(height: UiPadding.medium),
               CardPerfilWidget(
-                icon: UiIcon.feedActived,
+                icon: UiIcon.perfilActived,
                 label: 'seguindo',
                 number: snapshot['following'].length.toString(),
+                link: '',
+              ),
+              const SizedBox(height: UiPadding.medium),
+              CardPerfilWidget(
+                icon: UiIcon.denounce,
+                label: 'denúncias',
+                number: snapshot['qtyDenounce'].toString(),
                 link: '',
               ),
             ],
           ),
         ),
+        const SizedBox(height: UiPadding.large),
+        const SeparatorWidget(),
       ],
     );
   }

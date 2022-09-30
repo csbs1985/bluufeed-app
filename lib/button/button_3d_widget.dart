@@ -30,6 +30,8 @@ class Button3dWidget extends StatefulWidget {
 class _Button3dWidgetState extends State<Button3dWidget> {
   bool? isDark;
 
+  final double _height = UiSize.bottom;
+
   late double _position = UiSize.borderButton;
 
   Color _getBackColor() {
@@ -55,77 +57,79 @@ class _Button3dWidgetState extends State<Button3dWidget> {
     return MediaQuery.of(context).size.width - UiSize.paddingButtonFull;
   }
 
+  double _getHeight() {
+    if (widget._style == ButtonStyleEnum.PRIMARY.value) return _height;
+    return _height + 3;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: currentTheme,
-        builder: (BuildContext context, Brightness theme, _) {
-          isDark = currentTheme.value == Brightness.dark;
+      valueListenable: currentTheme,
+      builder: (BuildContext context, Brightness theme, _) {
+        isDark = currentTheme.value == Brightness.dark;
 
-          return GestureDetector(
-            child: SizedBox(
-              width: _getWidth(),
-              height: UiSize.bottom + UiSize.borderButton,
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      width: _getWidth(),
-                      height: UiSize.bottom,
-                      decoration: BoxDecoration(
-                        color: _getBorderColor(),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(UiBorder.rounded),
-                        ),
+        return GestureDetector(
+          child: SizedBox(
+            width: _getWidth(),
+            height: _getHeight() + UiSize.borderButton,
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    width: _getWidth(),
+                    height: _getHeight(),
+                    decoration: BoxDecoration(
+                      color: _getBorderColor(),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(UiBorder.rounded),
                       ),
                     ),
                   ),
-                  AnimatedPositioned(
-                    curve: Curves.easeIn,
-                    bottom: _position,
-                    duration: const Duration(milliseconds: 10),
-                    child: Container(
-                      width: _getWidth(),
-                      height: UiSize.bottom,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: UiPadding.medium,
+                ),
+                AnimatedPositioned(
+                  curve: Curves.easeIn,
+                  bottom: _position,
+                  duration: const Duration(milliseconds: 10),
+                  child: Container(
+                    width: _getWidth(),
+                    height: _getHeight(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: UiPadding.medium,
+                    ),
+                    decoration: BoxDecoration(
+                      color: _getBackColor(),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(UiBorder.rounded),
                       ),
-                      decoration: BoxDecoration(
-                        color: _getBackColor(),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(UiBorder.rounded),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          widget._label,
-                          style: _getTextStyle(),
-                        ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        widget._label,
+                        style: _getTextStyle(),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            onTapUp: (_) {
-              setState(() {
-                _position = UiSize.borderButton;
-                widget._callback(true);
-              });
-            },
-            onTapDown: (_) {
-              setState(() {
-                _position = 0;
-              });
-            },
-            onTapCancel: () {
-              setState(() {
-                _position = UiSize.borderButton;
-              });
-            },
-          );
-        });
+          ),
+          onTapUp: (_) {
+            setState(() {
+              _position = UiSize.borderButton;
+              widget._callback(true);
+            });
+          },
+          onTapDown: (_) {
+            setState(() => _position = 0);
+          },
+          onTapCancel: () {
+            setState(() => _position = UiSize.borderButton);
+          },
+        );
+      },
+    );
   }
 }
 

@@ -40,6 +40,12 @@ class UserFirestore {
         .update({'isNotification': currentUser.value.first.isNotification});
   }
 
+  pathDenounce() {
+    return user
+        .doc(currentUser.value.first.id)
+        .update({'qtyDenounce': currentUser.value.first.qtyDenounce});
+  }
+
   pathName(String _name, String _now) {
     return user.doc(currentUser.value.first.id).update({
       'name': _name,

@@ -44,18 +44,18 @@ class _CardPerfilWidgetState extends State<CardPerfilWidget> {
               borderRadius: BorderRadius.circular(UiBorder.rounded),
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SvgPicture.asset(widget._icon),
-              const SizedBox(height: UiPadding.large),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SvgPicture.asset(widget._icon),
+                  const SizedBox(width: UiPadding.large),
                   TextWidget(text: widget._label),
-                  TextWidget(text: widget._number),
                 ],
               ),
+              TextWidget(text: widget._number),
             ],
           ),
         );

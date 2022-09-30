@@ -75,7 +75,7 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
     toastWidget.toast(
       context,
       ToastEnum.SUCCESS.value,
-      'Texto copiado!',
+      'texto copiado!',
     );
     Navigator.of(context).pop();
   }
