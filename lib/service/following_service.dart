@@ -70,4 +70,18 @@ class FollowingService {
       return item.id == _following['id'];
     });
   }
+
+  List<FollowingModel> toModel(List<dynamic> following) {
+    List<FollowingModel> _listFollowing = [];
+
+    for (var item in following) {
+      _listFallowing.add({
+        'id': item['id'],
+        'name': item['name'],
+        'date': item['date'],
+      });
+    }
+
+    return _listFollowing;
+  }
 }

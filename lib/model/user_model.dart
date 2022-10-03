@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:bluuffed_app/model/following_model.dart';
 import 'package:bluuffed_app/service/device_service.dart';
+import 'package:bluuffed_app/service/following_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
@@ -12,6 +13,8 @@ import 'package:bluuffed_app/widget/toast_widget.dart';
 
 ValueNotifier<List<UserModel>> currentUser = ValueNotifier<List<UserModel>>([]);
 ValueNotifier<String> currentUserId = ValueNotifier<String>('');
+
+final FollowingService followingService = FollowingService();
 
 class UserModel {
   late String id;
@@ -56,16 +59,18 @@ class UserModel {
         isNotification: json['isNotification'],
         qtyComment: json['qtyComment'],
         qtyDenounce: json['qtyDenounce'],
+        following: followingService.toModel(
+          json['following'],
+        ),
         qtyHistory: json['qtyHistory'],
-        following: json['following'].cast<FollowingModel>(),
       );
 
   static String toJson(UserModel user) => jsonEncode(toMap(user));
 
-  static Map<String, dynamic> toMap(user) => {
+  static Map<String, dynamic> toMap(UserModel user) => {
         'id': user.id,
         'name': user.name,
-        'upDateName': user.upDateName ?? '',
+        'upDateName': user.upDateName,
         'date': user.date,
         'email': user.email,
         'token': user.token,
@@ -82,6 +87,7 @@ class UserClass {
   final ActivityClass activityClass = ActivityClass();
   final AuthService authService = AuthService();
   final DeviceService deviceService = DeviceService();
+
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 

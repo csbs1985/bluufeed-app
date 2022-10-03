@@ -1,6 +1,5 @@
 import 'package:bluuffed_app/button/button_follow_widget.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
-import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/perfil_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
@@ -37,9 +36,7 @@ class _PerfilPageState extends State<PerfilPage> {
   }
 
   bool isAuthor() {
-    return currentUser.value.first.id == currentComment.value.first.userId
-        ? true
-        : false;
+    return currentUser.value.first.id == currentUserId.value ? true : false;
   }
 
   @override
