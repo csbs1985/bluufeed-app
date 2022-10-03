@@ -4,4 +4,9 @@ import 'package:flutter/cupertino.dart';
 ValueNotifier<List<UserModel>> currentPerfil =
     ValueNotifier<List<UserModel>>([]);
 
-class PerfilClass {}
+class PerfilClass {
+  void add(Map<String, dynamic> user) {
+    currentPerfil.value = [];
+    currentPerfil.value.add(UserModel.fromJson(user));
+  }
+}

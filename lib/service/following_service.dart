@@ -1,6 +1,5 @@
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
-import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/following_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
@@ -12,27 +11,34 @@ class FollowingService {
   final UserFirestore userFirestore = UserFirestore();
   final ToastWidget toastWidget = ToastWidget();
 
-  Iterable<FollowingModel>? _isNotEmpty;
+  Iterable<FollowingModel>? _notResult;
 
-  late Map<String, dynamic> _following;
   final List<Map<String, dynamic>> _listFallowing = [];
 
-  bool isFollwing(String _idUser) {
-    _isNotEmpty = currentUser.value.first.following
+  String message = '';
+
+  bool isFollowing(String _idUser) {
+    _notResult = currentUser.value.first.following
         .where((element) => element.id == _idUser);
 
-    return _isNotEmpty!.isEmpty ? false : true;
+    return _notResult!.isNotEmpty ? true : false;
   }
 
-  toggleFollowing(BuildContext context, CommentModel _comment) {
-    try {
-      _following = {
-        'id': _comment.userId,
-        'name': _comment.userName,
-        'date': DateTime.now().toString(),
-      };
+  String isFollwingButton(String _idUser) {
+    return isFollowing(_idUser)
+        ? 'deixar de seguir ${currentUser.value.first.name}'
+        : 'seguir ${currentUser.value.first.name}';
+  }
 
-      _isNotEmpty!.isEmpty ? add(_following) : remove(_following);
+  toggleFollowing(BuildContext context, _content) {
+    try {
+      if (isFollowing(_content['id'])) {
+        _listFallowing.remove(_content);
+        message = 'deixou de seguir ${_content['name']}';
+      } else {
+        _listFallowing.add(_content);
+        message = 'começou a seguir ${_content['name']}';
+      }
 
       for (var item in currentUser.value.first.following) {
         _listFallowing.add({
@@ -46,15 +52,14 @@ class FollowingService {
 
       activityClass.save(
         type: ActivityEnum.FOLLOWING.value,
-        content: _comment.userName,
-        elementId: _comment.userId,
+        content: _content['name'],
+        elementId: _content['id'],
       );
+
       toastWidget.toast(
         context,
         ToastEnum.SUCCESS.value,
-        _isNotEmpty!.isEmpty
-            ? 'começou a seguir ${_comment.userName}'
-            : 'deixou de seguir ${_comment.userName}',
+        message,
       );
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => postNewHistory: $error');

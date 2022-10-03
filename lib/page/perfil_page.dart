@@ -31,12 +31,8 @@ class _PerfilPageState extends State<PerfilPage> {
 
   late Map<String, dynamic> _perfil;
 
-  bool canEmail() {
-    return currentUserId.value == "" ? true : false;
-  }
-
   bool isAuthor() {
-    return currentUser.value.first.id == currentUserId.value ? true : false;
+    return currentUserId.value == '' ? true : false;
   }
 
   @override
@@ -113,10 +109,10 @@ class _PerfilPageState extends State<PerfilPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Headline1(title: snapshot['name']),
-              if (canEmail()) TextWidget(text: snapshot['email']),
+              if (isAuthor()) TextWidget(text: snapshot['email']),
               SinceWidget(date: snapshot['date']),
               const SizedBox(height: UiPadding.large),
-              if (!isAuthor()) const ButtonFollowWidget(),
+              if (!isAuthor()) ButtonFollowWidget(perfil: _perfil),
             ],
           ),
         ),
@@ -153,13 +149,14 @@ class _PerfilPageState extends State<PerfilPage> {
                 number: snapshot['following'].length.toString(),
                 link: '',
               ),
-              const SizedBox(height: UiPadding.medium),
-              CardPerfilWidget(
-                icon: UiIcon.denounce,
-                label: 'denúncias',
-                number: snapshot['qtyDenounce'].toString(),
-                link: '',
-              ),
+              if (isAuthor()) const SizedBox(height: UiPadding.medium),
+              if (isAuthor())
+                CardPerfilWidget(
+                  icon: UiIcon.denounce,
+                  label: 'denúncias',
+                  number: snapshot['qtyDenounce'].toString(),
+                  link: '',
+                ),
             ],
           ),
         ),

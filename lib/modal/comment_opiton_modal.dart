@@ -64,12 +64,6 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
     return true;
   }
 
-  String isFollowing() {
-    return followingService.isFollwing(currentComment.value.first.userId)
-        ? 'deixar de seguir ${currentComment.value.first.userName}'
-        : 'seguir ${currentComment.value.first.userName}';
-  }
-
   void _copy() {
     Clipboard.setData(ClipboardData(text: currentComment.value.first.text));
     toastWidget.toast(
@@ -191,14 +185,16 @@ class _CommentOptionModalState extends State<CommentOptionModal> {
                 if (canPerfil()) const SizedBox(height: UiPadding.medium),
                 if (canPerfil())
                   OptionButton(
-                    label: isFollowing(),
+                    label: followingService
+                        .isFollwingButton(currentComment.value.first.userId),
                     icon: UiIcon.perfilActived,
                     callback: (value) => {
                       Navigator.of(context).pop(),
-                      followingService.toggleFollowing(
-                        context,
-                        currentComment.value.first,
-                      ),
+                      followingService.toggleFollowing(context, {
+                        'id': currentComment.value.first.userId,
+                        'name': currentComment.value.first.userName,
+                        'date': currentComment.value.first.date,
+                      }),
                     },
                   ),
                 if (canPerfil()) const SizedBox(height: UiPadding.medium),

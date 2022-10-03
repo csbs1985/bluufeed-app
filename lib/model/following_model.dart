@@ -1,3 +1,7 @@
+import 'package:flutter/cupertino.dart';
+
+ValueNotifier<bool> currentIsFollowing = ValueNotifier<bool>(false);
+
 class FollowingModel {
   late String id;
   late String name;
