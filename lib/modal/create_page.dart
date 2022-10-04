@@ -93,7 +93,9 @@ class _CreatePageState extends State<CreateModal> {
 
   void _canPublish() {
     setState(() {
-      _btnPublish = (textController.text.isNotEmpty && _categories.isNotEmpty)
+      _btnPublish = (titleController.text.isNotEmpty &&
+              textController.text.isNotEmpty &&
+              _categories.isNotEmpty)
           ? true
           : false;
     });
