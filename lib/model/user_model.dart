@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:bluuffed_app/model/blocked_model.dart';
 import 'package:bluuffed_app/model/following_model.dart';
+import 'package:bluuffed_app/service/block_service.dart';
 import 'package:bluuffed_app/service/device_service.dart';
 import 'package:bluuffed_app/service/following_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +16,7 @@ import 'package:bluuffed_app/widget/toast_widget.dart';
 ValueNotifier<List<UserModel>> currentUser = ValueNotifier<List<UserModel>>([]);
 ValueNotifier<String> currentUserId = ValueNotifier<String>('');
 
+final BlockService blockService = BlockService();
 final FollowingService followingService = FollowingService();
 
 class UserModel {
@@ -28,6 +31,7 @@ class UserModel {
   late num qtyDenounce;
   late num qtyComment;
   late num qtyHistory;
+  late List<BlockedModel> blocked;
   late List<FollowingModel> following;
 
   UserModel({
@@ -42,6 +46,7 @@ class UserModel {
     required this.qtyDenounce,
     required this.qtyComment,
     required this.qtyHistory,
+    required this.blocked,
     required this.following,
   });
 
@@ -59,10 +64,9 @@ class UserModel {
         isNotification: json['isNotification'],
         qtyComment: json['qtyComment'],
         qtyDenounce: json['qtyDenounce'],
-        following: followingService.toModel(
-          json['following'],
-        ),
         qtyHistory: json['qtyHistory'],
+        blocked: json['blocked'].cast<BlockedModel>(),
+        following: json['following'].cast<FollowingModel>(),
       );
 
   static String toJson(UserModel user) => jsonEncode(toMap(user));
@@ -79,6 +83,7 @@ class UserModel {
         'qtyComment': user.qtyComment,
         'qtyDenounce': user.qtyDenounce,
         'qtyHistory': user.qtyHistory,
+        'blocked': user.blocked,
         'following': user.following,
       };
 }

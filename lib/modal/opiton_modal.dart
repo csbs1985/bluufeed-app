@@ -4,11 +4,11 @@ import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/modal/create_page.dart';
 import 'package:bluuffed_app/modal/input_comment_modal.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
-import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/modal_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/service/block_service.dart';
 import 'package:bluuffed_app/service/comment_service.dart';
 import 'package:bluuffed_app/service/following_service.dart';
 import 'package:bluuffed_app/service/history_service.dart';
@@ -39,6 +39,7 @@ class OptionModal extends StatefulWidget {
 
 class _OptionModalState extends State<OptionModal> {
   final ActivityClass activityClass = ActivityClass();
+  final BlockService blockService = BlockService();
   final CommentFirestore commentFirestore = CommentFirestore();
   final CommentService commentService = CommentService();
   final FollowingService followingService = FollowingService();
@@ -133,11 +134,22 @@ class _OptionModalState extends State<OptionModal> {
     );
   }
 
-  @override
-  void dispose() {
-    currentUserId.value = '';
-    currentComment.value = [];
-    super.dispose();
+  void _block(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return DialogConfirmWidget(
+          title: 'Bloquear usuário',
+          text:
+              'Tem certeza que deseja bloquear ${widget._content['userName']}? Vocês não poderão ver o conteúdo um do outro.',
+          buttonPrimary: 'cancelar',
+          buttonSecondary: 'deletar',
+          callback: (value) =>
+              value ? blockService.bloquear() : Navigator.of(context).pop(),
+        );
+      },
+    );
   }
 
   @override
@@ -233,9 +245,7 @@ class _OptionModalState extends State<OptionModal> {
                   OptionButton(
                     label: 'bloquear ${widget._content['userName']}',
                     icon: UiIcon.block,
-                    callback: (value) => {
-                      Navigator.of(context).pop(),
-                    },
+                    callback: (value) => _block(context),
                   ),
               ],
             ),

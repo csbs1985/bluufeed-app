@@ -13,7 +13,7 @@ class FollowingService {
 
   Iterable<FollowingModel>? _notResult;
 
-  final List<Map<String, dynamic>> _listFallowing = [];
+  final List<Map<String, dynamic>> _listFollowing = [];
 
   String message = '';
 
@@ -33,22 +33,22 @@ class FollowingService {
   toggleFollowing(BuildContext context, _content) {
     try {
       if (isFollowing(_content['id'])) {
-        _listFallowing.remove(_content);
+        _listFollowing.remove(_content);
         message = 'deixou de seguir ${_content['name']}';
       } else {
-        _listFallowing.add(_content);
+        _listFollowing.add(_content);
         message = 'começou a seguir ${_content['name']}';
       }
 
       for (var item in currentUser.value.first.following) {
-        _listFallowing.add({
+        _listFollowing.add({
           'id': item.id,
           'name': item.name,
           'date': item.date,
         });
       }
 
-      userFirestore.pathFallowing(_listFallowing);
+      userFirestore.pathFallowing(_listFollowing);
 
       activityClass.save(
         type: ActivityEnum.FOLLOWING.value,
@@ -74,19 +74,5 @@ class FollowingService {
     currentUser.value.first.following.removeWhere((item) {
       return item.id == _following['id'];
     });
-  }
-
-  List<FollowingModel> toModel(List<dynamic> following) {
-    List<FollowingModel> _listFollowing = [];
-
-    for (var item in following) {
-      _listFallowing.add({
-        'id': item['id'],
-        'name': item['name'],
-        'date': item['date'],
-      });
-    }
-
-    return _listFollowing;
   }
 }

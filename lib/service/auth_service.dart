@@ -79,6 +79,7 @@ class AuthService extends ChangeNotifier {
                   'qtyComment': user.docs[0]['qtyComment'],
                   'qtyDenounce': user.docs[0]['qtyDenounce'],
                   'qtyHistory': user.docs[0]['qtyHistory'],
+                  'blocked': user.docs[0]['blocked'],
                   'following': user.docs[0]['following'],
                 },
               ),

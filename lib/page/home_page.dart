@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
             'qtyComment': result.docs[0]['qtyComment'],
             'qtyDenounce': result.docs[0]['qtyDenounce'],
             'qtyHistory': result.docs[0]['qtyHistory'],
+            'blocked': result.docs[0]['blocked'],
             'following': result.docs[0]['following'],
           };
 
