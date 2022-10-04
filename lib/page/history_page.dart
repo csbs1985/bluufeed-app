@@ -1,4 +1,5 @@
-import 'package:bluuffed_app/modal/history_opiton_modal.dart';
+import 'package:bluuffed_app/modal/opiton_modal.dart';
+import 'package:bluuffed_app/model/modal_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,14 +26,19 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   final HistoryFirestore historyFirestore = HistoryFirestore();
 
-  void _openModal(BuildContext context) {
+  late Map<String, dynamic> _data;
+
+  void _openModal(BuildContext context, Map<String, dynamic> _content) {
     showCupertinoModalBottomSheet(
       expand: false,
       context: context,
       barrierColor: UiColor.overlay,
       duration: const Duration(milliseconds: 300),
       builder: (context) {
-        return const HistoryOptionModal();
+        return OptionModal(
+          content: _content,
+          type: ModalEnum.OPTION_HISTORY.value,
+        );
       },
     );
   }
@@ -58,7 +64,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 actions: [
                   IconButton(
                     icon: SvgPicture.asset(UiIcon.option),
-                    onPressed: () => _openModal(context),
+                    onPressed: () => _openModal(context, _data),
                   ),
                 ],
               ),
@@ -80,7 +86,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           case ConnectionState.done:
                           default:
                             try {
-                              Map<String, dynamic> _data =
+                              _data =
                                   HistoryModel.toMap(snapshot.data!.docs[0]);
                               return HistoryItemWidget(snapshot: _data);
                             } catch (error) {

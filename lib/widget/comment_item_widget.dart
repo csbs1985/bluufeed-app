@@ -23,7 +23,7 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
   final CommentClass commentClass = CommentClass();
   final UserClass userClass = UserClass();
 
-  void _openModal(BuildContext context) {
+  void _openModal(BuildContext context, Map<String, dynamic> content) {
     if (!currentComment.value.first.isDelete)
       showCupertinoModalBottomSheet(
         expand: false,
@@ -88,7 +88,7 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
           ),
           onLongPress: () => {
             commentClass.add(widget._item),
-            _openModal(context),
+            _openModal(context, widget._item),
           },
         );
       },
