@@ -44,7 +44,7 @@ class _MenuWidgetState extends State<MenuWidget> {
           height: UiSize.menuHeight,
           child: ListView.builder(
             itemCount: CategoryModel.allCategories.length,
-            padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
+            padding: const EdgeInsets.only(left: UiPadding.large),
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return ValueListenableBuilder(
