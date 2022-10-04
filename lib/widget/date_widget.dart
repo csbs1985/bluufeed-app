@@ -64,7 +64,9 @@ class DateWidget extends StatelessWidget {
 
       isEdit = _item['isEdit'];
       isSigned = _item['isSigned'];
-      userName = _item['userName'];
+      userName = _item['userName'] ??
+          _item[
+              'userNickName']; //TODO: remover _item['userNickName'] quando zerar o DB
 
       var author = '';
 

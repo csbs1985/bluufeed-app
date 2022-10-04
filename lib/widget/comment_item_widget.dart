@@ -1,5 +1,6 @@
-import 'package:bluuffed_app/modal/comment_opiton_modal.dart';
+import 'package:bluuffed_app/modal/opiton_modal.dart';
 import 'package:bluuffed_app/model/comment_model.dart';
+import 'package:bluuffed_app/model/modal_model.dart';
 import 'package:bluuffed_app/service/date_service.dart';
 import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:bluuffed_app/widget/date_widget.dart';
@@ -23,7 +24,7 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
   final CommentClass commentClass = CommentClass();
   final UserClass userClass = UserClass();
 
-  void _openModal(BuildContext context, Map<String, dynamic> content) {
+  void _openModal(BuildContext context, Map<String, dynamic> _content) {
     if (!currentComment.value.first.isDelete)
       showCupertinoModalBottomSheet(
         expand: false,
@@ -31,7 +32,10 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
         barrierColor: UiColor.overlay,
         duration: const Duration(milliseconds: 300),
         builder: (context) {
-          return const CommentOptionModal();
+          return OptionModal(
+            content: _content,
+            type: ModalEnum.OPTION_COMMENT.value,
+          );
         },
       );
   }

@@ -24,10 +24,10 @@ class FollowingService {
     return _notResult!.isNotEmpty ? true : false;
   }
 
-  String isFollwingButton(String _idUser) {
-    return isFollowing(_idUser)
-        ? 'deixar de seguir ${currentUser.value.first.name}'
-        : 'seguir ${currentUser.value.first.name}';
+  String isFollwingButton(Map<String, dynamic> _user) {
+    return isFollowing(_user['userId'])
+        ? 'deixar de seguir ${_user['userName']}'
+        : 'seguir ${_user['userName']}';
   }
 
   toggleFollowing(BuildContext context, _content) {

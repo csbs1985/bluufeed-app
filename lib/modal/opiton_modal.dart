@@ -1,6 +1,7 @@
 import 'package:bluuffed_app/button/option_button.dart';
 import 'package:bluuffed_app/firestore/comments_firestore.dart';
 import 'package:bluuffed_app/firestore/history_firestore.dart';
+import 'package:bluuffed_app/modal/create_page.dart';
 import 'package:bluuffed_app/modal/input_comment_modal.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/model/comment_model.dart';
@@ -8,7 +9,9 @@ import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/modal_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/service/comment_service.dart';
 import 'package:bluuffed_app/service/following_service.dart';
+import 'package:bluuffed_app/service/history_service.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
@@ -16,7 +19,6 @@ import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -38,9 +40,11 @@ class OptionModal extends StatefulWidget {
 class _OptionModalState extends State<OptionModal> {
   final ActivityClass activityClass = ActivityClass();
   final CommentFirestore commentFirestore = CommentFirestore();
+  final CommentService commentService = CommentService();
   final FollowingService followingService = FollowingService();
   final HistoryClass historyClass = HistoryClass();
   final HistoryFirestore historyFirestore = HistoryFirestore();
+  final HistoryService historyService = HistoryService();
   final ToastWidget toastWidget = ToastWidget();
 
   bool canCopy() {
@@ -48,30 +52,40 @@ class _OptionModalState extends State<OptionModal> {
     return widget._content['isDelete'] ? false : true;
   }
 
-  // bool canEdit() {
-  //   if (widget._content['isDelete) return false;
-  //   if (currentUser.value.first.id == widget._content['userId)
-  //     return true;
-  //   if (currentUser.value.first.id == currentHistory.value.first.userId)
-  //     return true;
-  //   return false;
-  // }
+  bool canEdit() {
+    if (widget._type != ModalEnum.OPTION_COMMENT.value &&
+        widget._type != ModalEnum.OPTION_HISTORY.value) return false;
+    if (widget._content['userId'] == currentUser.value.first.id) return true;
+    if (widget._type == ModalEnum.OPTION_COMMENT.value &&
+        !widget._content['isDelete']) return true;
+    return false;
+  }
 
-  // bool canDelete() {
-  //   if (widget._content['isDelete) return false;
-  //   if (currentUser.value.first.id == widget._content['userId)
-  //     return true;
-  //   if (currentUser.value.first.id == currentHistory.value.first.userId)
-  //     return true;
-  //   return false;
-  // }
+  bool canDelete() {
+    if (widget._type != ModalEnum.OPTION_COMMENT.value &&
+        widget._type != ModalEnum.OPTION_HISTORY.value) return false;
+    if (widget._type == ModalEnum.OPTION_COMMENT.value) {
+      if (currentHistory.value.first.userId == currentUser.value.first.id ||
+          widget._content['userId'] == currentUser.value.first.id) {
+        if (!widget._content['isDelete']) return true;
+      }
+    }
+    if (widget._content['userId'] == currentUser.value.first.id) return true;
+    return false;
+  }
 
-  // bool canPerfil() {
-  //   if (!widget._content['isSigned) return false;
-  //   if (currentUser.value.first.id == widget._content['userId)
-  //     return false;
-  //   return true;
-  // }
+  bool canPerfil() {
+    if (widget._type != ModalEnum.OPTION_COMMENT.value &&
+        widget._type != ModalEnum.OPTION_HISTORY.value) return false;
+    if (!widget._content['isSigned']) return false;
+    if (currentUser.value.first.id == widget._content['userId']) return false;
+    return true;
+  }
+
+  bool canBlock() {
+    if (currentUser.value.first.id != widget._content['userId']) return true;
+    return false;
+  }
 
   void _copy() {
     Clipboard.setData(ClipboardData(text: widget._content['text']));
@@ -90,7 +104,9 @@ class _OptionModalState extends State<OptionModal> {
       barrierColor: UiColor.overlay,
       duration: const Duration(milliseconds: 300),
       builder: (context) {
-        return const InputCommentModal();
+        return widget._type == ModalEnum.OPTION_COMMENT.value
+            ? const InputCommentModal()
+            : const CreateModal();
       },
     );
   }
@@ -101,41 +117,20 @@ class _OptionModalState extends State<OptionModal> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return DialogConfirmWidget(
-          title: 'Deletar comentário',
-          text: 'Tem certeza que deseja excluir este comentário?',
+          title: 'Deletar',
+          text: widget._type == ModalEnum.OPTION_COMMENT.value
+              ? 'Tem certeza que deseja excluir este comentário?'
+              : 'Tem certeza que deseja excluir esta história? Tudo será excluido inclusive os comentátios.',
           buttonPrimary: 'cancelar',
           buttonSecondary: 'deletar',
-          callback: (value) =>
-              value ? _deleteComment() : Navigator.of(context).pop(),
+          callback: (value) => value
+              ? widget._type == ModalEnum.OPTION_COMMENT.value
+                  ? commentService.deleteComment(context, widget._content)
+                  : historyService.deleteHistory(context, widget._content)
+              : Navigator.of(context).pop(),
         );
       },
     );
-  }
-
-  void _deleteComment() async {
-    Navigator.of(context).pop();
-
-    try {
-      await commentFirestore
-          .deleteComment(widget._content['id'])
-          .then((result) => {
-                activityClass.save(
-                  type: ActivityEnum.DELETE_COMMENT.value,
-                  content: widget._content['text'],
-                  elementId: widget._content['userName'],
-                ),
-              })
-          .catchError((error) =>
-              debugPrint('ERROR => deleteHistory:' + error.toString()));
-      Navigator.of(context).pop();
-      toastWidget.toast(
-        context,
-        ToastEnum.SUCCESS.value,
-        'comentário deletado!',
-      );
-    } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => deleteComment: ' + error.toString());
-    }
   }
 
   @override
@@ -159,88 +154,89 @@ class _OptionModalState extends State<OptionModal> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SubtitleResumeWidget(
+                const SubtitleResumeWidget(
                   title: 'Opções',
-                  resume:
-                      'Opções para este comentário escrito por ${currentHistory.value.first.userName}',
+                  resume: 'Estas são suas opções',
                 ),
-                const SizedBox(height: UiPadding.large),
+                if (canCopy()) const SizedBox(height: UiPadding.medium),
                 if (canCopy())
                   OptionButton(
                     label: 'copiar comentário',
                     icon: UiIcon.copy,
                     callback: (value) => _copy(),
                   ),
-                // if (canEdit())
-                const SizedBox(height: UiPadding.medium),
-                // if (canEdit())
-                OptionButton(
-                  label: 'editar comentário',
-                  icon: UiIcon.edit,
-                  callback: (value) => {
-                    Navigator.of(context).pop(),
-                    _openModal(context),
-                  },
-                ),
-                // if (canDelete())
-                const SizedBox(height: UiPadding.medium),
-                // if (canDelete())
-                OptionButton(
-                  label: 'excluir comentário',
-                  icon: UiIcon.delete,
-                  callback: (value) => {
-                    Navigator.of(context).pop(),
-                    _delete(context),
-                  },
-                ),
-                // if (canPerfil())
-                const SizedBox(height: UiPadding.medium),
-                // if (canPerfil())
-                OptionButton(
-                  label: followingService
-                      .isFollwingButton(widget._content['userId']),
-                  icon: UiIcon.perfilActived,
-                  callback: (value) => {
-                    Navigator.of(context).pop(),
-                    followingService.toggleFollowing(context, {
-                      'id': widget._content['userId'],
-                      'name': widget._content['userName'],
-                      'date': widget._content['date'],
-                    }),
-                  },
-                ),
-                // if (canPerfil())
-                const SizedBox(height: UiPadding.medium),
-                // if (canPerfil())
-                OptionButton(
-                  label: 'ver perfil de ${currentHistory.value.first.userName}',
-                  icon: UiIcon.perfilActived,
-                  callback: (value) => {
-                    Navigator.of(context).pop(),
-                    currentUserId.value = currentHistory.value.first.userId,
-                    Navigator.pushNamed(context, PageEnum.PERFIL.value),
-                  },
-                ),
-                // if (canPerfil())
-                const SizedBox(height: UiPadding.medium),
-                // if (canPerfil())
-                OptionButton(
-                  label: 'denunciar ${currentHistory.value.first.userName}',
-                  icon: UiIcon.denounce,
-                  callback: (value) => {
-                    Navigator.of(context).pop(),
-                    currentUserId.value = currentHistory.value.first.userId,
-                    Navigator.pushNamed(context, PageEnum.DENOUNCE.value),
-                  },
-                ),
-                // if (canPerfil())
-                const SizedBox(height: UiPadding.medium),
-                // if (canPerfil())
-                OptionButton(
-                  label: 'bloquear ${currentHistory.value.first.userName}',
-                  icon: UiIcon.block,
-                  callback: (value) => _delete(context),
-                ),
+                if (canEdit()) const SizedBox(height: UiPadding.medium),
+                if (canEdit())
+                  OptionButton(
+                    label: widget._type == ModalEnum.OPTION_COMMENT.value
+                        ? 'editar comentário'
+                        : 'editar história',
+                    icon: UiIcon.edit,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      _openModal(context),
+                    },
+                  ),
+                if (canDelete()) const SizedBox(height: UiPadding.medium),
+                if (canDelete())
+                  OptionButton(
+                    label: widget._type == ModalEnum.OPTION_COMMENT.value
+                        ? 'excluir comentário'
+                        : 'excluir história',
+                    icon: UiIcon.delete,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      _delete(context),
+                    },
+                  ),
+                if (canPerfil()) const SizedBox(height: UiPadding.medium),
+                if (canPerfil())
+                  OptionButton(
+                    label: followingService.isFollwingButton(widget._content),
+                    icon: UiIcon.perfilActived,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      followingService.toggleFollowing(context, {
+                        'id': widget._content['userId'],
+                        'name': widget._content['userName'],
+                        'date': widget._content['date'],
+                      }),
+                    },
+                  ),
+                if (canPerfil()) const SizedBox(height: UiPadding.medium),
+                if (canPerfil())
+                  OptionButton(
+                    label: 'ver perfil de ${widget._content['userName']}',
+                    icon: UiIcon.perfilActived,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      Navigator.pushNamed(
+                        context,
+                        PageEnum.PERFIL.value,
+                        arguments: widget._content['userId'],
+                      ),
+                    },
+                  ),
+                if (canBlock()) const SizedBox(height: UiPadding.medium),
+                if (canBlock())
+                  OptionButton(
+                    label: 'denunciar ${widget._content['userName']}',
+                    icon: UiIcon.denounce,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                      currentUserId.value = widget._content['userId'],
+                      Navigator.pushNamed(context, PageEnum.DENOUNCE.value),
+                    },
+                  ),
+                if (canBlock()) const SizedBox(height: UiPadding.medium),
+                if (canBlock())
+                  OptionButton(
+                    label: 'bloquear ${widget._content['userName']}',
+                    icon: UiIcon.block,
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                    },
+                  ),
               ],
             ),
           ),
