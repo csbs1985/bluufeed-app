@@ -45,8 +45,7 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              if (widget._item['title'] != "")
-                TitleWidget(title: widget._item['title']),
+              TitleWidget(title: widget._item['title']),
               DateWidget(
                 type: DateEnum.HISTORY.value,
                 item: widget._item,
