@@ -30,20 +30,24 @@ class _PerfilPageState extends State<PerfilPage> {
 
   late Map<String, dynamic> _perfil;
   late String _user;
+  bool _isAnotherUser = false;
 
-  bool isAuthor() {
+  isAuthor() {
     if (ModalRoute.of(context)!.settings.arguments != null) {
       _user = ModalRoute.of(context)!.settings.arguments.toString();
-      return true;
+      _isAnotherUser = true;
+    } else {
+      _user = currentUser.value.first.id;
+      _isAnotherUser = false;
     }
-    _user = currentUser.value.first.id;
-    return false;
   }
 
   @override
   Widget build(BuildContext context) {
+    isAuthor();
+
     return Scaffold(
-      appBar: isAuthor()
+      appBar: !_isAnotherUser
           ? PreferredSize(
               preferredSize: const Size.fromHeight(0),
               child: Container(),
@@ -102,10 +106,10 @@ class _PerfilPageState extends State<PerfilPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Headline1(title: snapshot['name']),
-              if (isAuthor()) TextWidget(text: snapshot['email']),
+              if (_isAnotherUser) TextWidget(text: snapshot['email']),
               SinceWidget(date: snapshot['date']),
-              const SizedBox(height: UiPadding.large),
-              if (isAuthor()) ButtonFollowWidget(perfil: _perfil),
+              if (_isAnotherUser) const SizedBox(height: UiPadding.large),
+              if (_isAnotherUser) ButtonFollowWidget(perfil: _perfil),
             ],
           ),
         ),
@@ -142,8 +146,8 @@ class _PerfilPageState extends State<PerfilPage> {
                 number: snapshot['following'].length.toString(),
                 link: '',
               ),
-              if (isAuthor()) const SizedBox(height: UiPadding.medium),
-              if (isAuthor())
+              if (_isAnotherUser) const SizedBox(height: UiPadding.medium),
+              if (_isAnotherUser)
                 CardPerfilWidget(
                   icon: UiIcon.denounce,
                   label: 'denúncias',
@@ -162,8 +166,8 @@ class _PerfilPageState extends State<PerfilPage> {
   Widget _noResults() {
     return Column(
       children: [
-        if (isAuthor()) const SizedBox(height: UiSize.appBar),
-        const NoResultWidget(text: 'Não foi possivél encontrar usuário'),
+        if (_isAnotherUser) const SizedBox(height: UiSize.appBar),
+        const NoResultWidget(text: 'Não foi possível encontrar usuário'),
       ],
     );
   }

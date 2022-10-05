@@ -10,6 +10,7 @@ import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/block_service.dart';
 import 'package:bluuffed_app/service/comment_service.dart';
+import 'package:bluuffed_app/service/denounce_service.dart';
 import 'package:bluuffed_app/service/following_service.dart';
 import 'package:bluuffed_app/service/history_service.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
@@ -42,6 +43,7 @@ class _OptionModalState extends State<OptionModal> {
   final BlockService blockService = BlockService();
   final CommentFirestore commentFirestore = CommentFirestore();
   final CommentService commentService = CommentService();
+  final DenounceService denounceService = DenounceService();
   final FollowingService followingService = FollowingService();
   final HistoryClass historyClass = HistoryClass();
   final HistoryFirestore historyFirestore = HistoryFirestore();
@@ -239,24 +241,25 @@ class _OptionModalState extends State<OptionModal> {
                 if (canBlock()) const SizedBox(height: UiPadding.medium),
                 if (canBlock())
                   OptionButton(
-                    label: widget._content['isSigned']
-                        ? 'denunciar ${widget._content['userName']}'
-                        : 'denunciar usuário',
+                    label: denounceService.getTextButton(widget._content),
                     icon: UiIcon.denounce,
                     callback: (value) => {
                       Navigator.of(context).pop(),
-                      currentUserId.value = widget._content['userId'],
-                      Navigator.pushNamed(context, PageEnum.DENOUNCE.value),
+                      Navigator.pushNamed(
+                        context,
+                        PageEnum.DENOUNCE.value,
+                        arguments: widget._content,
+                      ),
                     },
                   ),
                 if (canBlock()) const SizedBox(height: UiPadding.medium),
                 if (canBlock())
                   OptionButton(
-                    label: widget._content['isSigned']
-                        ? 'bloquear ${widget._content['userName']}'
-                        : 'bloquear usuário',
+                    label: blockService.getTextButton(widget._content),
                     icon: UiIcon.block,
-                    callback: (value) => _block(context),
+                    callback: (value) => {
+                      Navigator.of(context).pop(),
+                    },
                   ),
               ],
             ),

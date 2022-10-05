@@ -64,6 +64,10 @@ class UserFirestore {
     return user.doc(_user.id).update({'qtyComment': _user.qtyComment});
   }
 
+  pathQtyDenounceUser(UserModel _user) {
+    return user.doc(_user.id).update({'qtyDenounce': _user.qtyDenounce});
+  }
+
   pathQtyHistoryUser(UserModel _user) async {
     await user.doc(_user.id).update({"qtyHistory": _user.qtyHistory});
   }

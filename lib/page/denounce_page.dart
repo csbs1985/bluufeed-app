@@ -15,6 +15,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
+ValueNotifier<String> currentIsSigned = ValueNotifier<String>('usuário');
+
 class DenouncePage extends StatefulWidget {
   const DenouncePage({super.key});
 
@@ -25,6 +27,7 @@ class DenouncePage extends StatefulWidget {
 class _DenouncePageState extends State<DenouncePage> {
   final ActivityClass activityClass = ActivityClass();
   final DenounceFirestore denounceFirestore = DenounceFirestore();
+  final ScrollController _scrollController = ScrollController();
   final ToastWidget toastWidget = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
   final Uuid uuid = const Uuid();
@@ -39,15 +42,11 @@ class _DenouncePageState extends State<DenouncePage> {
 
   late DenounceJustifyModel justifySelected;
 
-  @override
-  void initState() {
-    _getUser();
-    super.initState();
-  }
-
   _getUser() async {
     try {
-      await userFirestore.getUserId(currentUserId.value).then((result) => {
+      var argument = ModalRoute.of(context)!.settings.arguments as Map;
+
+      await userFirestore.getUserId(argument['userId']).then((result) => {
             _user = {
               'id': result.docs[0]['id'],
               'date': result.docs[0]['date'],
@@ -61,6 +60,8 @@ class _DenouncePageState extends State<DenouncePage> {
               'qtyComment': result.docs[0]['qtyComment'],
             },
           });
+
+      if (argument['isSigned']) currentIsSigned.value = _user!['name'];
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => postDenounce: ' + error.toString());
     }
@@ -71,6 +72,15 @@ class _DenouncePageState extends State<DenouncePage> {
       _hasButton = true;
       justifySelected = item;
     });
+    _scrollToTop();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      MediaQuery.of(context).size.height - UiSize.bottom,
+      duration: const Duration(seconds: 1),
+      curve: Curves.linear,
+    );
   }
 
   Future<void> _postDenounce(bool value) async {
@@ -86,16 +96,15 @@ class _DenouncePageState extends State<DenouncePage> {
 
     try {
       await denounceFirestore.postDenounce(_form);
-      Navigator.of(context).pop();
       activityClass.save(
         type: ActivityEnum.DENOUNCE.value,
-        content: _user!['name'],
+        content: currentIsSigned.value,
         elementId: _form['date'],
       );
       toastWidget.toast(
         context,
         ToastEnum.SUCCESS.value,
-        'Usuário ${_user!['name']} denunciado!',
+        '${currentIsSigned.value} denunciado!',
       );
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (error) {
@@ -104,36 +113,51 @@ class _DenouncePageState extends State<DenouncePage> {
   }
 
   @override
+  void dispose() {
+    currentIsSigned.value = 'usuário';
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _getUser();
+
     return Scaffold(
       appBar: const AppBarBackWidget(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Headline1(title: "Denunciar ${_user?['name']}"),
-              const TextWidget(
-                text:
-                    'Isso é algo sério, tenha certeza antes de denunciar alguém. Caso um usuário estiver em perigo à vida ou à saúde, peça ajuda imediatamente. Não espere.',
+      body: ValueListenableBuilder(
+        valueListenable: currentIsSigned,
+        builder: (BuildContext context, value, _) {
+          return SingleChildScrollView(
+            controller: _scrollController,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Headline1(title: "Denunciar ${currentIsSigned.value}"),
+                  const TextWidget(
+                    text:
+                        'Isso é algo sério, tenha certeza antes de denunciar alguém. Caso um usuário estiver em perigo à vida ou à saúde, peça ajuda imediatamente. Não espere.',
+                  ),
+                  const SizedBox(height: UiPadding.large),
+                  ButtonCardWidget(
+                    content: _allDenounceJustify,
+                    callback: (value) => _selected(value),
+                  ),
+                  const SizedBox(height: UiPadding.large),
+                  if (_hasButton)
+                    Button3dWidget(
+                      label: 'Denunciar',
+                      style: ButtonStyleEnum.PRIMARY.value,
+                      callback: (value) => _postDenounce(value),
+                    ),
+                  const SizedBox(height: UiPadding.large),
+                ],
               ),
-              const SizedBox(height: UiPadding.large),
-              ButtonCardWidget(
-                content: _allDenounceJustify,
-                callback: (value) => _selected(value),
-              ),
-              const SizedBox(height: UiPadding.large),
-              if (_hasButton)
-                Button3dWidget(
-                  label: 'Denunciar',
-                  style: ButtonStyleEnum.PRIMARY.value,
-                  callback: (value) => _postDenounce(value),
-                ),
-              const SizedBox(height: UiPadding.large),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
