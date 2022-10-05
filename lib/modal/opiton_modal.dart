@@ -143,7 +143,7 @@ class _OptionModalState extends State<OptionModal> {
     );
   }
 
-  void _block(BuildContext context) {
+  void _postBlock(BuildContext context, Map<String, dynamic> _content) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -151,11 +151,12 @@ class _OptionModalState extends State<OptionModal> {
         return DialogConfirmWidget(
           title: 'Bloquear usuário',
           text:
-              'Tem certeza que deseja bloquear ${widget._content['userName']}? Vocês não poderão ver o conteúdo um do outro.',
+              'Tem certeza que deseja bloquear ${widget._content['isSigned'] ? widget._content['userName'] : 'este usuário'}? Vocês não poderão ver o conteúdo um do outro.',
           buttonPrimary: 'cancelar',
           buttonSecondary: 'deletar',
-          callback: (value) =>
-              value ? blockService.bloquear() : Navigator.of(context).pop(),
+          callback: (value) => value
+              ? blockService.postBlock(_content)
+              : Navigator.of(context).pop(),
         );
       },
     );
@@ -259,6 +260,7 @@ class _OptionModalState extends State<OptionModal> {
                     icon: UiIcon.block,
                     callback: (value) => {
                       Navigator.of(context).pop(),
+                      _postBlock(context, widget._content),
                     },
                   ),
               ],

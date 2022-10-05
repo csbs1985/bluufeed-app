@@ -60,6 +60,10 @@ class UserFirestore {
     });
   }
 
+  pathBlock(String _user, Map<String, dynamic> _block) {
+    return user.doc(_user).update({'blocked': _block});
+  }
+
   pathQtyCommentUser(UserModel _user) {
     return user.doc(_user.id).update({'qtyComment': _user.qtyComment});
   }
