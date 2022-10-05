@@ -95,18 +95,32 @@ class _DenouncePageState extends State<DenouncePage> {
     };
 
     try {
-      await denounceFirestore.postDenounce(_form);
-      activityClass.save(
-        type: ActivityEnum.DENOUNCE.value,
-        content: currentIsSigned.value,
-        elementId: _form['date'],
-      );
-      toastWidget.toast(
-        context,
-        ToastEnum.SUCCESS.value,
-        '${currentIsSigned.value} denunciado!',
-      );
-      Navigator.of(context).pop();
+      await denounceFirestore.postDenounce(_form).then((result) => {
+            _pathQtyDenounceUser(),
+            Navigator.of(context).pop(),
+          });
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR => postDenounce: ' + error.toString());
+    }
+  }
+
+  Future<void> _pathQtyDenounceUser() async {
+    try {
+      currentUser.value.first.qtyDenounce++;
+      await userFirestore
+          .pathQtyDenounceUser(currentUser.value.first)
+          .then((result) => {
+                activityClass.save(
+                  type: ActivityEnum.DENOUNCE.value,
+                  content: currentIsSigned.value,
+                  elementId: _form['date'],
+                ),
+                toastWidget.toast(
+                  context,
+                  ToastEnum.SUCCESS.value,
+                  '${currentIsSigned.value} denunciado!',
+                ),
+              });
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => postDenounce: ' + error.toString());
     }
