@@ -42,8 +42,6 @@ class _PerfilPageState extends State<PerfilPage> {
 
   @override
   Widget build(BuildContext context) {
-    isAuthor();
-
     return Scaffold(
       appBar: isAuthor()
           ? PreferredSize(

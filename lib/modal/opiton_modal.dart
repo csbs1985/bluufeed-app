@@ -49,43 +49,50 @@ class _OptionModalState extends State<OptionModal> {
   final ToastWidget toastWidget = ToastWidget();
 
   bool canCopy() {
-    if (widget._type != ModalEnum.OPTION_COMMENT.value) return false;
-    return widget._content['isDelete'] ? false : true;
+    return (widget._type == ModalEnum.OPTION_COMMENT.value &&
+            !widget._content['isDelete'])
+        ? true
+        : false;
   }
 
   bool canEdit() {
-    if (widget._type != ModalEnum.OPTION_COMMENT.value &&
-        widget._type != ModalEnum.OPTION_HISTORY.value) return false;
-    if (widget._content['userId'] == currentUser.value.first.id) return true;
-    if (widget._type == ModalEnum.OPTION_COMMENT.value &&
-        !widget._content['isDelete']) return true;
+    if (widget._type == ModalEnum.OPTION_COMMENT.value ||
+        widget._type == ModalEnum.OPTION_HISTORY.value) {
+      if (widget._content['userId'] == currentUser.value.first.id) {
+        if (widget._type == ModalEnum.OPTION_COMMENT.value &&
+            !widget._content['isDelete']) return true;
+        if (widget._type == ModalEnum.OPTION_HISTORY.value) return true;
+      }
+    }
     return false;
   }
 
   bool canDelete() {
-    if (widget._type != ModalEnum.OPTION_COMMENT.value &&
-        widget._type != ModalEnum.OPTION_HISTORY.value) return false;
-    if (widget._type == ModalEnum.OPTION_COMMENT.value) {
+    if (widget._type == ModalEnum.OPTION_COMMENT.value ||
+        widget._type == ModalEnum.OPTION_HISTORY.value) {
       if (currentHistory.value.first.userId == currentUser.value.first.id ||
           widget._content['userId'] == currentUser.value.first.id) {
-        if (!widget._content['isDelete']) return true;
+        if (widget._type == ModalEnum.OPTION_COMMENT.value &&
+            !widget._content['isDelete']) return true;
+        if (widget._type == ModalEnum.OPTION_HISTORY.value) return true;
       }
     }
-    if (widget._content['userId'] == currentUser.value.first.id) return true;
     return false;
   }
 
   bool canPerfil() {
-    if (widget._type != ModalEnum.OPTION_COMMENT.value &&
-        widget._type != ModalEnum.OPTION_HISTORY.value) return false;
-    if (!widget._content['isSigned']) return false;
-    if (currentUser.value.first.id == widget._content['userId']) return false;
-    return true;
+    if (widget._type == ModalEnum.OPTION_COMMENT.value ||
+        widget._type == ModalEnum.OPTION_HISTORY.value) {
+      if (widget._content['isSigned'] &&
+          currentUser.value.first.id != widget._content['userId']) return true;
+    }
+    return false;
   }
 
   bool canBlock() {
-    if (currentUser.value.first.id != widget._content['userId']) return true;
-    return false;
+    return currentUser.value.first.id != widget._content['userId']
+        ? true
+        : false;
   }
 
   void _copy() {
@@ -232,7 +239,9 @@ class _OptionModalState extends State<OptionModal> {
                 if (canBlock()) const SizedBox(height: UiPadding.medium),
                 if (canBlock())
                   OptionButton(
-                    label: 'denunciar ${widget._content['userName']}',
+                    label: widget._content['isSigned']
+                        ? 'denunciar ${widget._content['userName']}'
+                        : 'denunciar usuário',
                     icon: UiIcon.denounce,
                     callback: (value) => {
                       Navigator.of(context).pop(),
@@ -243,7 +252,9 @@ class _OptionModalState extends State<OptionModal> {
                 if (canBlock()) const SizedBox(height: UiPadding.medium),
                 if (canBlock())
                   OptionButton(
-                    label: 'bloquear ${widget._content['userName']}',
+                    label: widget._content['isSigned']
+                        ? 'bloquear ${widget._content['userName']}'
+                        : 'bloquear usuário',
                     icon: UiIcon.block,
                     callback: (value) => _block(context),
                   ),
