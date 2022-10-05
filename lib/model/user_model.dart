@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:bluuffed_app/model/blocked_model.dart';
 import 'package:bluuffed_app/model/following_model.dart';
@@ -31,8 +30,8 @@ class UserModel {
   late num qtyDenounce;
   late num qtyComment;
   late num qtyHistory;
-  late List<BlockedModel> blocked;
-  late List<FollowingModel> following;
+  final List<BlockedModel> blocked;
+  final List<FollowingModel> following;
 
   UserModel({
     required this.id,
@@ -50,10 +49,7 @@ class UserModel {
     required this.following,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      UserModel.fromMap(json);
-
-  factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'],
         name: json['name'],
         upDateName: json['upDateName'],
@@ -65,13 +61,15 @@ class UserModel {
         qtyComment: json['qtyComment'],
         qtyDenounce: json['qtyDenounce'],
         qtyHistory: json['qtyHistory'],
-        blocked: json['blocked'].cast<BlockedModel>(),
-        following: json['following'].cast<FollowingModel>(),
+        blocked: (json['blocked'] as List)
+            .map((e) => BlockedModel.fromMap(e))
+            .toList(),
+        following: (json['following'] as List)
+            .map((e) => FollowingModel.fromMap(e))
+            .toList(),
       );
 
-  static String toJson(UserModel user) => jsonEncode(toMap(user));
-
-  static Map<String, dynamic> toMap(UserModel user) => {
+  Map<String, dynamic> toJson(UserModel user) => {
         'id': user.id,
         'name': user.name,
         'upDateName': user.upDateName,
@@ -99,13 +97,6 @@ class UserClass {
   void add(Map<String, dynamic> user) {
     currentUser.value = [];
     currentUser.value.add(UserModel.fromJson(user));
-    saveUser();
-  }
-
-  Future<File> saveUser() async {
-    String data = UserModel.toJson(currentUser.value.first);
-    final file = await getFileUser();
-    return file.writeAsString(data);
   }
 
   Future<void> clean(BuildContext context) async {

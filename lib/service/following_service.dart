@@ -13,7 +13,7 @@ class FollowingService {
 
   Iterable<FollowingModel>? _notResult;
 
-  final List<Map<String, dynamic>> _listFollowing = [];
+  final List _listFollowing = [];
 
   String message = '';
 
@@ -67,7 +67,7 @@ class FollowingService {
   }
 
   void add(Map<String, dynamic> _following) {
-    currentUser.value.first.following.add(FollowingModel.fromJson(_following));
+    currentUser.value.first.following.add(FollowingModel.fromMap(_following));
   }
 
   void remove(Map<String, dynamic> _following) {
