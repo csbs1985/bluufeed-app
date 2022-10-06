@@ -46,8 +46,6 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    String _historiId = ModalRoute.of(context)!.settings.arguments.toString();
-
     return ValueListenableBuilder(
       valueListenable: currentTheme,
       builder: (BuildContext context, Brightness theme, _) {
@@ -75,7 +73,8 @@ class _HistoryPageState extends State<HistoryPage> {
                 child: Column(
                   children: [
                     StreamBuilder<QuerySnapshot>(
-                      stream: historyFirestore.getHistory(_historiId),
+                      stream: historyFirestore
+                          .snapshotsHistory(currentHistory.value.first.id),
                       builder: (
                         BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot,

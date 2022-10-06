@@ -17,8 +17,12 @@ class HistoryFirestore {
         .get();
   }
 
-  getHistory(String _idHistory) {
+  snapshotsHistory(String _idHistory) {
     return stories.where('id', isEqualTo: _idHistory).snapshots();
+  }
+
+  getHistory(String _idHistory) {
+    return stories.where('id', isEqualTo: _idHistory).get();
   }
 
   getHistoryNotification(String _idHistory) {

@@ -1,4 +1,6 @@
+import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/firestore/notifications_firestore.dart';
+import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/notification_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
@@ -27,32 +29,61 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
+  final HistoryClass historyClass = HistoryClass();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
   final NotificationFirestore notificationFirestore = NotificationFirestore();
 
   late bool isDark;
+
+  late Map<String, dynamic> _history;
 
   Color _getColor(item) {
     if (item['view']) return isDark ? UiColor.mainDark : UiColor.main;
     return isDark ? UiColor.backDark : UiColor.back;
   }
 
-  Future<void> _pathNotificationView(_history) async {
+  Future<void> _pathNotificationView(_notification) async {
     currentNotification.value = false;
-    if (!_history['view']) {
+    if (!_notification['view']) {
       try {
-        await notificationFirestore.pathNotificationView(_history['id']);
+        await notificationFirestore.pathNotificationView(_notification['id']);
 
-        _history['view'] = true;
+        _notification['view'] = true;
       } on FirebaseAuthException catch (error) {
         debugPrint('ERROR => pathNotificationView: ' + error.toString());
       }
     }
 
-    Navigator.pushNamed(
-      context,
-      PageEnum.HISTORY.value,
-      arguments: _history['contentId'],
-    );
+    await _getHistory(_notification['contentId']);
+
+    Navigator.pushNamed(context, PageEnum.HISTORY.value);
+  }
+
+  _getHistory(String _historyId) async {
+    try {
+      await historyFirestore.getHistory(_historyId).then(
+            (result) => {
+              _history = {
+                'id': result.docs[0]['id'],
+                'title': result.docs[0]['title'],
+                'text': result.docs[0]['text'],
+                'date': result.docs[0]['date'],
+                'isComment': result.docs[0]['isComment'],
+                'isSigned': result.docs[0]['isSigned'],
+                'isEdit': result.docs[0]['isEdit'],
+                'isAuthorized': result.docs[0]['isAuthorized'],
+                'qtyComment': result.docs[0]['qtyComment'],
+                'categories': result.docs[0]['categories'],
+                'userId': result.docs[0]['userId'],
+                'userName': result.docs[0]['userName'],
+                'bookmarks': result.docs[0]['bookmarks'],
+              },
+              historyClass.add(_history),
+            },
+          );
+    } on FirebaseAuthException catch (error) {
+      debugPrint('ERROR => getHistory: ' + error.toString());
+    }
   }
 
   @override
@@ -87,8 +118,10 @@ class _NotificationPageState extends State<NotificationPage> {
                   errorBuilder: (context, error, _) => const NoResultWidget(
                     text: 'Não há ou não encontramos notificações no momento.',
                   ),
-                  itemBuilder: (BuildContext context,
-                      QueryDocumentSnapshot<dynamic> snapshot) {
+                  itemBuilder: (
+                    BuildContext context,
+                    QueryDocumentSnapshot<dynamic> snapshot,
+                  ) {
                     final Map<String, dynamic> _item = snapshot.data();
 
                     return _notificationList(_item);
