@@ -39,6 +39,7 @@ class _NotificationPageState extends State<NotificationPage> {
     if (!_history['view']) {
       try {
         await notificationFirestore.pathNotificationView(_history['id']);
+
         setState(() => _history['view'] = true);
       } on FirebaseAuthException catch (error) {
         debugPrint('ERROR => pathNotificationView: ' + error.toString());

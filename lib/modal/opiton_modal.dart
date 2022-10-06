@@ -4,6 +4,7 @@ import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/modal/create_page.dart';
 import 'package:bluuffed_app/modal/input_comment_modal.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
+import 'package:bluuffed_app/model/comment_model.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/modal_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
@@ -119,6 +120,12 @@ class _OptionModalState extends State<OptionModal> {
             : const CreateModal();
       },
     );
+  }
+
+  @override
+  void dispose() {
+    currentComment.value = [];
+    super.dispose();
   }
 
   void _delete(BuildContext context) {

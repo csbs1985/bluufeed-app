@@ -22,7 +22,7 @@ class _MenuWidgetState extends State<MenuWidget> {
   Widget build(BuildContext context) {
     bool canShow(CategoryModel item) {
       if (item.isDisabled!) return false;
-      if (item.isLogin! && currentUser.value.isNotEmpty) return true;
+
       return true;
     }
 

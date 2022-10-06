@@ -3,47 +3,43 @@ import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 
 class HistoryFirestore {
-  CollectionReference histories =
-      FirebaseFirestore.instance.collection('histories');
+  CollectionReference stories =
+      FirebaseFirestore.instance.collection('stories');
 
   deleteHistory(String _idHistory) {
-    return histories.doc(_idHistory).delete();
+    return stories.doc(_idHistory).delete();
   }
 
   getAllHistoryUser() {
-    return histories
+    return stories
         .orderBy('date')
         .where('userId', isEqualTo: currentUser.value.first.id)
         .get();
   }
 
   getHistory(String _idHistory) {
-    return histories.where('id', isEqualTo: _idHistory).snapshots();
+    return stories.where('id', isEqualTo: _idHistory).snapshots();
   }
 
   getHistoryNotification(String _idHistory) {
-    return histories.where('id', isEqualTo: _idHistory).get();
+    return stories.where('id', isEqualTo: _idHistory).get();
   }
 
   pathNameUserHistory(String _id) {
-    return histories
-        .doc(_id)
-        .update({'userName': currentUser.value.first.name});
+    return stories.doc(_id).update({'userName': currentUser.value.first.name});
   }
 
   pathQtyCommentHistory(HistoryModel _history) {
-    return histories
-        .doc(_history.id)
-        .update({'qtyComment': _history.qtyComment});
+    return stories.doc(_history.id).update({'qtyComment': _history.qtyComment});
   }
 
   pathBookmark(Map<String, dynamic> _history) {
-    return histories
+    return stories
         .doc(_history['id'])
         .update({'bookmarks': _history['bookmarks']});
   }
 
   postHistory(Map<String, dynamic> _history) {
-    return histories.doc(_history['id']).set(_history);
+    return stories.doc(_history['id']).set(_history);
   }
 }

@@ -27,8 +27,8 @@ class JustifyModel {
     ),
     JustifyModel(
       id: '3',
-      title: 'Não vejo motivo para usar o History',
-      text: 'Ainda não encontrei o motivo para utilizar o History.',
+      title: 'Não vejo motivo para usar o bluufeed',
+      text: 'Ainda não encontrei o motivo para utilizar o bluufeed.',
     ),
     JustifyModel(
       id: '4',

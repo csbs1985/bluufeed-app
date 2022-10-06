@@ -173,7 +173,6 @@ class _CreatePageState extends State<CreateModal> {
         ToastEnum.SUCCESS.value,
         _isEdit ? 'História alterada!' : 'História publicada!',
       );
-      Navigator.of(context).pop();
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => pathQtyHistoryUser: $error');
     }

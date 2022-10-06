@@ -43,7 +43,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
   final Uuid uuid = const Uuid();
 
   bool _isEdit = false;
-  bool _btnPublish = true;
+  bool _btnPublish = false;
   bool _textSigned = true;
 
   late Map<String, dynamic> _form;
@@ -175,8 +175,9 @@ class _InputCommentModalState extends State<InputCommentModal> {
               SingleChildScrollView(
                 child: Container(
                   padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom +
-                          UiSize.input),
+                    bottom:
+                        MediaQuery.of(context).viewInsets.bottom + UiSize.input,
+                  ),
                   child: TextField(
                     controller: _commentController,
                     autofocus: true,

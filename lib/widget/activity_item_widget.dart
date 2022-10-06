@@ -42,7 +42,7 @@ class _ActivityItemWidgetState extends State<ActivityItemWidget> {
                 child: StyledText(
                   style: Theme.of(context).textTheme.headline2,
                   text:
-                      'Alguém, espero que seja você, entrou na sua conta History pelo aparelho <bold>${widget._snapshot['content']}</bold>.',
+                      'Alguém, espero que seja você, entrou na sua conta bluufeed pelo aparelho <bold>${widget._snapshot['content']}</bold>.',
                   tags: {
                     'bold': StyledTextTag(
                       style: const TextStyle(fontWeight: FontWeight.bold),

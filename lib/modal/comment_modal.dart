@@ -61,8 +61,8 @@ class _CommentModalState extends State<CommentModal> {
   Widget _appBar() {
     return Row(
       children: [
-        // if (currentHistory.value.first.qtyComment > 0)
-        NumberAnimationWidget(number: currentHistory.value.first.qtyComment),
+        if (currentHistory.value.first.qtyComment > 0)
+          NumberAnimationWidget(number: currentHistory.value.first.qtyComment),
         Text(
           _showComment(currentHistory.value.first),
           style: Theme.of(context).textTheme.headline4,

@@ -41,6 +41,12 @@ class _CommentItemWidgetState extends State<CommentItemWidget> {
   }
 
   @override
+  void dispose() {
+    currentComment.value = [];
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: currentTheme,

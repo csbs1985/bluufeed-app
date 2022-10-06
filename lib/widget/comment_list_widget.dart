@@ -27,7 +27,7 @@ class _CommentListWidgetState extends State<CommentListWidget> {
       shrinkWrap: true,
       reverse: true,
       physics: const NeverScrollableScrollPhysics(),
-      loadingBuilder: (context) => CommentSkeleton(),
+      loadingBuilder: (context) => const CommentSkeleton(),
       errorBuilder: (context, error, _) => const NoResultWidget(
         text: 'Nenhum comentário ainda, ou os comentários foram desativados.',
       ),

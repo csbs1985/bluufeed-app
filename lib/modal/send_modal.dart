@@ -52,8 +52,9 @@ class _SendModalState extends State<SendModal> {
       isInputEmpty = _commentController.text.isEmpty ? true : false;
     });
 
-    AlgoliaQuery _query =
-        algolia!.instance.index('history_users').query(_commentController.text);
+    AlgoliaQuery _query = algolia!.instance
+        .index('bluufeed_users')
+        .query(_commentController.text);
 
     AlgoliaQuerySnapshot _snap = await _query.getObjects();
 

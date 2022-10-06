@@ -31,24 +31,24 @@ class _HistoryListWidgetState extends State<HistoryListWidget> {
     if (_category != CategoryEnum.ALL.value &&
         _category != CategoryEnum.MY.value &&
         _category != CategoryEnum.SAVE.value) {
-      return historyFirestore.histories
+      return historyFirestore.stories
           .orderBy('date')
           .where('categories', arrayContainsAny: [_category]);
     }
 
     if (_category == CategoryEnum.MY.value) {
-      return historyFirestore.histories
+      return historyFirestore.stories
           .orderBy('date')
           .where('userId', isEqualTo: currentUser.value.first.id);
     }
 
     if (_category == CategoryEnum.SAVE.value) {
-      return historyFirestore.histories
+      return historyFirestore.stories
           .orderBy('date')
           .where('bookmarks', arrayContainsAny: [currentUser.value.first.id]);
     }
 
-    return historyFirestore.histories.orderBy('date');
+    return historyFirestore.stories.orderBy('date');
   }
 
   @override
