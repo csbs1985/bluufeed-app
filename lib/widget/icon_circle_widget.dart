@@ -5,8 +5,8 @@ import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_text.dart';
 import 'package:flutter/material.dart';
 
-class IconActivityWidget extends StatefulWidget {
-  const IconActivityWidget({
+class IconCicleWidget extends StatefulWidget {
+  const IconCicleWidget({
     required Map<String, dynamic> item,
   }) : _item = item;
 
@@ -16,7 +16,7 @@ class IconActivityWidget extends StatefulWidget {
   _IconCicleWidgetState createState() => _IconCicleWidgetState();
 }
 
-class _IconCicleWidgetState extends State<IconActivityWidget> {
+class _IconCicleWidgetState extends State<IconCicleWidget> {
   Color _getColor() {
     if (widget._item['type'] == ActivityEnum.LOGIN.value) return UiColor.login;
     return Colors.indigo;

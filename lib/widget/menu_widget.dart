@@ -21,9 +21,7 @@ class _MenuWidgetState extends State<MenuWidget> {
   @override
   Widget build(BuildContext context) {
     bool canShow(CategoryModel item) {
-      if (item.isDisabled!) return false;
-
-      return true;
+      return item.isDisabled! ? false : true;
     }
 
     bool _getSelected(CategoryModel item) {

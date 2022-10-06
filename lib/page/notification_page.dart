@@ -9,6 +9,7 @@ import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/border_widget.dart';
 import 'package:bluuffed_app/widget/date_widget.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -101,18 +102,19 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   Widget _notificationList(Map<String, dynamic> _item) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GestureDetector(
-          child: Container(
+    return GestureDetector(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
             width: double.infinity,
             color: _getColor(_item),
             child: _NotificationItem(_item),
           ),
-          onTap: () => _pathNotificationView(_item),
-        )
-      ],
+          const BorderWidget()
+        ],
+      ),
+      onTap: () => _pathNotificationView(_item),
     );
   }
 

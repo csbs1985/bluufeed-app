@@ -168,7 +168,11 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                       icon: UiIcon.read,
                       callback: (value) {
                         historyClass.add(widget._history);
-                        Navigator.pushNamed(context, PageEnum.HISTORY.value);
+                        Navigator.pushNamed(
+                          context,
+                          PageEnum.HISTORY.value,
+                          arguments: widget._history['id'],
+                        );
                       },
                     ),
                 ],

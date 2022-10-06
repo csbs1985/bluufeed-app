@@ -31,7 +31,7 @@ class _ActivityItemWidgetState extends State<ActivityItemWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          IconActivityWidget(item: widget._snapshot),
+          IconCicleWidget(item: widget._snapshot),
           const SizedBox(width: UiPadding.large),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

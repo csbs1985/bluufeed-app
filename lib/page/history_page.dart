@@ -1,5 +1,8 @@
+import 'package:bluuffed_app/button/button_comment_widget.dart';
 import 'package:bluuffed_app/modal/opiton_modal.dart';
 import 'package:bluuffed_app/model/modal_model.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
+import 'package:bluuffed_app/widget/comment_list_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,10 +11,7 @@ import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/skeleton/history_item_skeleton.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
-import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
-import 'package:bluuffed_app/button/button_comment_widget.dart';
-import 'package:bluuffed_app/widget/comment_list_widget.dart';
 import 'package:bluuffed_app/widget/history_item_widget.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -24,9 +24,10 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  final HistoryClass historyClass = HistoryClass();
   final HistoryFirestore historyFirestore = HistoryFirestore();
 
-  late Map<String, dynamic> _data;
+  Map<String, dynamic>? _data;
 
   void _openModal(BuildContext context, Map<String, dynamic> _content) {
     showCupertinoModalBottomSheet(
@@ -45,6 +46,8 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    String _historiId = ModalRoute.of(context)!.settings.arguments.toString();
+
     return ValueListenableBuilder(
       valueListenable: currentTheme,
       builder: (BuildContext context, Brightness theme, _) {
@@ -64,7 +67,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 actions: [
                   IconButton(
                     icon: SvgPicture.asset(UiIcon.option),
-                    onPressed: () => _openModal(context, _data),
+                    onPressed: () => _openModal(context, _data!),
                   ),
                 ],
               ),
@@ -72,8 +75,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 child: Column(
                   children: [
                     StreamBuilder<QuerySnapshot>(
-                      stream: historyFirestore
-                          .getHistory(currentHistory.value.first.id),
+                      stream: historyFirestore.getHistory(_historiId),
                       builder: (
                         BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot,
@@ -88,7 +90,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             try {
                               _data =
                                   HistoryModel.toMap(snapshot.data!.docs[0]);
-                              return HistoryItemWidget(snapshot: _data);
+                              return HistoryItemWidget(snapshot: _data!);
                             } catch (error) {
                               return _noResults();
                             }
