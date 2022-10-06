@@ -11,6 +11,7 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/border_widget.dart';
 import 'package:bluuffed_app/widget/date_widget.dart';
+import 'package:bluuffed_app/widget/notification_icon_widget.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +42,7 @@ class _NotificationPageState extends State<NotificationPage> {
       try {
         await notificationFirestore.pathNotificationView(_history['id']);
 
-        setState(() => _history['view'] = true);
+        _history['view'] = true;
       } on FirebaseAuthException catch (error) {
         debugPrint('ERROR => pathNotificationView: ' + error.toString());
       }
@@ -102,41 +103,50 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   Widget _notificationList(Map<String, dynamic> _item) {
-    return GestureDetector(
+    return TextButton(
+      onPressed: () => _pathNotificationView(_item),
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(0),
+        backgroundColor: _getColor(_item),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: double.infinity,
-            color: _getColor(_item),
-            child: _NotificationItem(_item),
+            padding: const EdgeInsets.symmetric(
+              horizontal: UiPadding.large,
+              vertical: UiPadding.small,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                NotificationIconWidget(item: _item['status']),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 80,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: _NotificationItem(_item),
+                  ),
+                ),
+              ],
+            ),
           ),
           const BorderWidget()
         ],
       ),
-      onTap: () => _pathNotificationView(_item),
     );
   }
 
   Widget _NotificationItem(Map<String, dynamic> _item) {
     String _getText() {
-      if (_item['status'] == NotificationEnum.COMMENT_ANONYMOUS.value &&
-          _item['content'] == '')
-        return 'Uma de suas histórias recebeu um comentário "<bold>anônimo</bold>".';
-
-      if (_item['status'] == NotificationEnum.COMMENT_ANONYMOUS.value &&
-          _item['content'] != '')
+      if (_item['status'] == NotificationEnum.COMMENT_ANONYMOUS.value)
         return 'Sua história <bold>${_item['content']}</bold> recebeu um comentário "<bold>anônimo</bold>".';
 
-      if (_item['status'] == NotificationEnum.COMMENT_SIGNED.value &&
-          _item['content'] == '')
-        return '<bold>${_item['userName']}</bold> fez um comentou em uma de suas histórias.';
-
-      if (_item['status'] == NotificationEnum.COMMENT_SIGNED.value &&
-          _item['content'] != '')
+      if (_item['status'] == NotificationEnum.COMMENT_SIGNED.value)
         return '<bold>${_item['userName']}</bold> fez um comentou na história <bold>${_item['content']}</bold>';
 
-      return '<bold>${_item['userName']}</bold> compartilhou uma história com você.';
+      return '<bold>${_item['userName']}</bold> compartilhou a história <bold>${_item['content']}</bold> com você.';
     }
 
     return Container(

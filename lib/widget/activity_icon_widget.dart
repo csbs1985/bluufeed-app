@@ -5,34 +5,38 @@ import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_text.dart';
 import 'package:flutter/material.dart';
 
-class IconCicleWidget extends StatefulWidget {
-  const IconCicleWidget({
+class ActivityIconWidget extends StatefulWidget {
+  const ActivityIconWidget({
     required Map<String, dynamic> item,
   }) : _item = item;
 
   final Map<String, dynamic> _item;
 
   @override
-  _IconCicleWidgetState createState() => _IconCicleWidgetState();
+  _ActivityIconWidgetState createState() => _ActivityIconWidgetState();
 }
 
-class _IconCicleWidgetState extends State<IconCicleWidget> {
+class _ActivityIconWidgetState extends State<ActivityIconWidget> {
   Color _getColor() {
     if (widget._item['type'] == ActivityEnum.LOGIN.value) return UiColor.login;
     return Colors.indigo;
   }
 
+  String _getLetter() {
+    return 'L';
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(UiBorder.circle),
+      borderRadius: BorderRadius.circular(UiBorder.rounded),
       child: Container(
-        width: UiSize.iconCircle,
-        height: UiSize.iconCircle,
+        width: UiSize.iconCircleLarge,
+        height: UiSize.iconCircleLarge,
         color: _getColor(),
         alignment: Alignment.center,
-        child: const Text(
-          'L',
+        child: Text(
+          _getLetter(),
           style: UiText.icon,
         ),
       ),

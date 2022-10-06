@@ -7,7 +7,6 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/activity_item_widget.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
-import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -23,23 +22,6 @@ class _ActivityPageState extends State<ActivityPage> {
   final ActivityFirestore activityFirestore = ActivityFirestore();
   final UserFirestore userFirestore = UserFirestore();
 
-  String _qtyHistory = 'nenhuma história';
-  String _qtyComment = 'nenhum comentário';
-
-  _getResume() {
-    userFirestore.getUserEmail(currentUser.value.first.email).then((result) => {
-          if (result.docs.first['qtyHistory'] == 1) _qtyHistory = '1 história',
-          if (result.docs.first['qtyHistory'] > 1)
-            _qtyHistory = '${result.docs.first['qtyHistory']} histórias',
-          if (result.docs.first['qtyComment'] == 1)
-            _qtyComment = '1 comentário',
-          if (result.docs.first['qtyComment'] > 1)
-            _qtyComment = '${result.docs.first['qtyComment']} comentários',
-        });
-
-    return _qtyHistory + ' · ' + _qtyComment;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,18 +36,6 @@ class _ActivityPageState extends State<ActivityPage> {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: UiPadding.large),
                   child: Headline1(title: 'Atividades'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    UiPadding.large,
-                    0,
-                    UiPadding.large,
-                    UiPadding.medium,
-                  ),
-                  child: SubtitleResumeWidget(
-                    title: 'Suas atividades',
-                    resume: _getResume(),
-                  ),
                 ),
                 FirestoreListView(
                   query: activityFirestore.activities

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 class UiColor {
   static const Color primary = Color(0xFF1d9bf0);
   static const Color secondary = Color(0xFF1a8bd8);
+  static const Color tertiary = Color(0xFF3e94d1);
 
   static const Color actived = UiColor.primary;
 

@@ -27,8 +27,8 @@ class _ActivitySkeletonState extends State<ActivitySkeleton> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Skeleton(
-                  width: UiSize.iconCircle,
-                  height: UiSize.iconCircle,
+                  width: UiSize.iconCircleSmall,
+                  height: UiSize.iconCircleSmall,
                   textColor: isDark ? UiColor.skeletonDark : UiColor.skeleton,
                   borderRadius: BorderRadius.circular(UiBorder.circle),
                 ),
