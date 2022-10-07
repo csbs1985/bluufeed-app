@@ -132,13 +132,16 @@ class _InputCommentModalState extends State<InputCommentModal> {
             : NotificationEnum.COMMENT_ANONYMOUS.value,
         'view': false,
       };
-      notificationClass.postNotification(context, _form);
-      notificationClass.setNotificationOnwer(
-        context,
-        _form,
-        _textSigned,
-        _commentController.text,
-      );
+
+      if (currentUser.value.first.id != currentHistory.value.first.userId) {
+        notificationClass.postNotification(context, _form);
+        notificationClass.setNotificationOnwer(
+          context,
+          _form,
+          _textSigned,
+          _commentController.text,
+        );
+      }
 
       if (_isEdit) Navigator.of(context).pop();
       toast.toast(

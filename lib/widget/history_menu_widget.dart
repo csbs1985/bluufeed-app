@@ -42,7 +42,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     if (!widget._history['isComment']) return 'comentário desabilitado';
     if (widget._history['qtyComment'] == 1) return ' comentário';
     if (widget._history['qtyComment'] > 1) return ' comentários';
-    return 'seja o primeiro a comentar';
+    return 'seja o primeiro';
   }
 
   void _openComment(String _route) {

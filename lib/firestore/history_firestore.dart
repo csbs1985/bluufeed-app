@@ -25,10 +25,6 @@ class HistoryFirestore {
     return stories.where('id', isEqualTo: _idHistory).get();
   }
 
-  getHistoryNotification(String _idHistory) {
-    return stories.where('id', isEqualTo: _idHistory).get();
-  }
-
   pathNameUserHistory(String _id) {
     return stories.doc(_id).update({'userName': currentUser.value.first.name});
   }

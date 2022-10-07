@@ -95,8 +95,10 @@ class _SendModalState extends State<SendModal> {
         'view': false,
       };
 
-      notificationClass.postNotification(context, _form);
-      notificationClass.setNotificationSendHistory(context, _form);
+      if (currentUser.value.first.id != currentHistory.value.first.userId) {
+        notificationClass.postNotification(context, _form);
+        notificationClass.setNotificationSendHistory(context, _form);
+      }
 
       toast.toast(
         context,

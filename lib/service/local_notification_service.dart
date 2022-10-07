@@ -1,9 +1,10 @@
-import 'package:bluuffed_app/model/page_model.dart';
+import 'package:bluuffed_app/service/history_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 
 class LocalNotificationService {
+  final HistoryService historyService = HistoryService();
+
   late HistoryClass historyClass = HistoryClass();
 
   late AndroidNotificationDetails androidDetails;
@@ -29,10 +30,8 @@ class LocalNotificationService {
   }
 
   _onSelectNotification(String? payload) async {
-    if (payload != null && payload.isNotEmpty) {
-      await historyClass.getHistory(payload);
-      navService.pushNamed(PageEnum.HISTORY.value, args: payload);
-    }
+    if (payload != null && payload.isNotEmpty)
+      historyService.getHistoryPage(payload);
   }
 
   showNotification(CustomNotification notification, {String? user}) {

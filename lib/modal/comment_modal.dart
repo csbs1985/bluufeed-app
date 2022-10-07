@@ -26,7 +26,7 @@ class _CommentModalState extends State<CommentModal> {
     if (!history.isComment) return 'comentário desabilitado';
     if (history.qtyComment == 1) return ' comentário';
     if (history.qtyComment > 1) return ' comentários';
-    return 'seja o primeiro a comentar';
+    return 'seja o primeiro ';
   }
 
   @override

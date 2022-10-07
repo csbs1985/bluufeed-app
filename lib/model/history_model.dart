@@ -83,11 +83,9 @@ class HistoryClass {
 
   Future<void> getHistory(String historyId) async {
     try {
-      await historyFirestore
-          .getHistoryNotification(historyId)
-          .then((result) => {
-                add(result.docs[0].data()),
-              });
+      await historyFirestore.getHistory(historyId).then((result) => {
+            add(result.docs[0].data()),
+          });
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => _getHistory: $error');
     }

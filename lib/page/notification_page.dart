@@ -2,9 +2,9 @@ import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/firestore/notifications_firestore.dart';
 import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/notification_model.dart';
-import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/date_service.dart';
+import 'package:bluuffed_app/service/history_service.dart';
 import 'package:bluuffed_app/service/push_notification_service.dart';
 import 'package:bluuffed_app/skeleton/notification_skeleton.dart';
 import 'package:bluuffed_app/text/headline1.dart';
@@ -31,11 +31,10 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   final HistoryClass historyClass = HistoryClass();
   final HistoryFirestore historyFirestore = HistoryFirestore();
+  final HistoryService historyService = HistoryService();
   final NotificationFirestore notificationFirestore = NotificationFirestore();
 
   late bool isDark;
-
-  late Map<String, dynamic> _history;
 
   Color _getColor(item) {
     if (item['view']) return isDark ? UiColor.mainDark : UiColor.main;
@@ -54,36 +53,7 @@ class _NotificationPageState extends State<NotificationPage> {
       }
     }
 
-    await _getHistory(_notification['contentId']);
-
-    Navigator.pushNamed(context, PageEnum.HISTORY.value);
-  }
-
-  _getHistory(String _historyId) async {
-    try {
-      await historyFirestore.getHistory(_historyId).then(
-            (result) => {
-              _history = {
-                'id': result.docs[0]['id'],
-                'title': result.docs[0]['title'],
-                'text': result.docs[0]['text'],
-                'date': result.docs[0]['date'],
-                'isComment': result.docs[0]['isComment'],
-                'isSigned': result.docs[0]['isSigned'],
-                'isEdit': result.docs[0]['isEdit'],
-                'isAuthorized': result.docs[0]['isAuthorized'],
-                'qtyComment': result.docs[0]['qtyComment'],
-                'categories': result.docs[0]['categories'],
-                'userId': result.docs[0]['userId'],
-                'userName': result.docs[0]['userName'],
-                'bookmarks': result.docs[0]['bookmarks'],
-              },
-              historyClass.add(_history),
-            },
-          );
-    } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => getHistory: ' + error.toString());
-    }
+    historyService.getHistoryPage(_notification['contentId']);
   }
 
   @override
@@ -124,7 +94,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   ) {
                     final Map<String, dynamic> _item = snapshot.data();
 
-                    return _notificationList(_item);
+                    return _notificationList(context, _item);
                   },
                 ),
               ],
@@ -135,7 +105,7 @@ class _NotificationPageState extends State<NotificationPage> {
     );
   }
 
-  Widget _notificationList(Map<String, dynamic> _item) {
+  Widget _notificationList(BuildContext context, Map<String, dynamic> _item) {
     return TextButton(
       onPressed: () => _pathNotificationView(_item),
       style: ElevatedButton.styleFrom(
@@ -152,9 +122,13 @@ class _NotificationPageState extends State<NotificationPage> {
               vertical: UiPadding.small,
             ),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                NotificationIconWidget(item: _item['status']),
+                Padding(
+                  padding: const EdgeInsets.only(top: UiPadding.small),
+                  child: NotificationIconWidget(item: _item['status']),
+                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 80,
                   child: SizedBox(
@@ -183,10 +157,7 @@ class _NotificationPageState extends State<NotificationPage> {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: UiPadding.large,
-        vertical: UiPadding.medium,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
