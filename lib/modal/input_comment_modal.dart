@@ -148,8 +148,8 @@ class _InputCommentModalState extends State<InputCommentModal> {
         context,
         ToastEnum.SUCCESS.value,
         _isEdit
-            ? 'Seu comentário foi alterado.'
-            : 'Seu comentário foi publicado.',
+            ? 'seu comentário foi alterado'
+            : 'seu comentário foi publicado',
       );
       Navigator.of(context).pop();
     } on FirebaseAuthException catch (error) {

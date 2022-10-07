@@ -45,7 +45,7 @@ class CommentService {
       toastWidget.toast(
         context,
         ToastEnum.SUCCESS.value,
-        'comentário deletado!',
+        'comentário deletado',
       );
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => deleteComment: ' + error.toString());

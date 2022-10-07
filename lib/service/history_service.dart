@@ -81,7 +81,7 @@ class HistoryService {
       toastWidget.toast(
         context,
         ToastEnum.SUCCESS.value,
-        'história deletada!',
+        'história deletada',
       );
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => deleteComment: ' + error.toString());

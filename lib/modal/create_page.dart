@@ -150,7 +150,7 @@ class _CreatePageState extends State<CreateModal> {
       toast.toast(
         context,
         ToastEnum.WARNING.value,
-        'Erro ao publicar história, tente novamente mais tarde.',
+        'erro ao publicar história, tente novamente mais tarde',
       );
     }
   }
@@ -171,7 +171,7 @@ class _CreatePageState extends State<CreateModal> {
       toast.toast(
         context,
         ToastEnum.SUCCESS.value,
-        _isEdit ? 'História alterada!' : 'História publicada!',
+        _isEdit ? 'história alterada' : 'história publicada',
       );
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => pathQtyHistoryUser: $error');

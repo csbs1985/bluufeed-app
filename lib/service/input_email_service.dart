@@ -17,7 +17,7 @@ class InputEmailService {
     if (_email.isEmpty)
       _toastMessage = 'informe seu email';
     else if (!RegExp(_emailRegx).hasMatch(_email))
-      _toastMessage = 'email informado não é válido.';
+      _toastMessage = 'email informado não é válido';
     else
       await _validateEmailDb(context, _email);
 

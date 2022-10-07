@@ -103,7 +103,7 @@ class _OptionModalState extends State<OptionModal> {
     toastWidget.toast(
       context,
       ToastEnum.SUCCESS.value,
-      'texto copiado!',
+      'texto copiado',
     );
     Navigator.of(context).pop();
   }

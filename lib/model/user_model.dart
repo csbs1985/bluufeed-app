@@ -108,7 +108,7 @@ class UserClass {
       toast.toast(
         context,
         ToastEnum.SUCCESS.value,
-        'espero que isso não seja um adeus!',
+        'espero que isso não seja um adeus',
       );
       await activityClass.save(
         type: ActivityEnum.LOGOUT.value,
@@ -120,7 +120,7 @@ class UserClass {
       toast.toast(
         context,
         ToastEnum.WARNING.value,
-        'não foi possível sair da aplicação no momento, tente novamente mais tarde.',
+        'não foi possível sair da aplicação no momento, tente novamente mais tarde',
       );
     }
   }

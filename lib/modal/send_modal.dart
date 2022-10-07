@@ -46,11 +46,8 @@ class _SendModalState extends State<SendModal> {
   }
 
   Future<void> keyUp() async {
-    if (_commentController.text == " ") Navigator.of(context).pop();
-
-    setState(() {
-      isInputEmpty = _commentController.text.isEmpty ? true : false;
-    });
+    setState(
+        () => isInputEmpty = _commentController.text.isEmpty ? true : false);
 
     AlgoliaQuery _query = algolia!.instance
         .index('bluufeed_users')
@@ -95,7 +92,8 @@ class _SendModalState extends State<SendModal> {
         'view': false,
       };
 
-      if (currentUser.value.first.id != currentHistory.value.first.userId) {
+      if ((currentUser.value.first.id != currentHistory.value.first.userId) ||
+          (_form['userId'] != currentUser.value.first.id)) {
         notificationClass.postNotification(context, _form);
         notificationClass.setNotificationSendHistory(context, _form);
       }
@@ -170,7 +168,7 @@ class _SendModalState extends State<SendModal> {
                     ? _userRecent()
                     : Column(
                         children: [
-                          const SubtitleWidget(resume: 'pesquisando'),
+                          const SubtitleWidget(resume: 'encontramos'),
                           _snapshot == null
                               ? _notResult()
                               : _algolia(_snapshot),

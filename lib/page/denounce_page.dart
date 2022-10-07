@@ -118,7 +118,7 @@ class _DenouncePageState extends State<DenouncePage> {
                 toastWidget.toast(
                   context,
                   ToastEnum.SUCCESS.value,
-                  '${currentIsSigned.value} denunciado!',
+                  '${currentIsSigned.value} denunciado',
                 ),
               });
     } on FirebaseAuthException catch (error) {

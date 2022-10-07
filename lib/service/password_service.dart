@@ -11,7 +11,7 @@ class PasswordService {
   bool validatePassword(BuildContext context, String _password) {
     _toastMessage = '';
 
-    if (_password.isEmpty) _toastMessage = 'informe sua senha.';
+    if (_password.isEmpty) _toastMessage = 'informe sua senha';
 
     if (_toastMessage.isNotEmpty)
       toast.toast(

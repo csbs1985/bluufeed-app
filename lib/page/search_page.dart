@@ -47,18 +47,18 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Future<void> keyUp() async {
-    if (_valueController.text == " ") Navigator.of(context).pop();
-
     setState(() {
       isInputEmpty = _valueController.text.isEmpty ? true : false;
     });
 
-    AlgoliaQuery _query =
-        algolia!.instance.index('history_users').query(_valueController.text);
+    AlgoliaQuery _query = algolia!.instance
+        .index('bluufeed_stories')
+        .query(_valueController.text);
 
     AlgoliaQuerySnapshot _snap = await _query.getObjects();
 
     if (_snap.hits.isNotEmpty) setState(() => _snapshot = _snap.hits);
+
     if (_valueController.text.isEmpty) _snapshot = null;
   }
 
@@ -236,7 +236,7 @@ class _SearchPageState extends State<SearchPage> {
       itemBuilder: (BuildContext context, int index) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextWidget(text: _snapshot![index].data['name']),
+          TextWidget(text: _snapshot![index].data['title']),
           ButtonPublishWidget(
             label: 'enviar',
             callback: (value) => _formatAlgolia(_snapshot![index]),
