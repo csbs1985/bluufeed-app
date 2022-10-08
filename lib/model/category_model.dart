@@ -205,6 +205,11 @@ class CategoryModel {
       id: CategoryEnum.VIOLENCE.value,
       label: 'violência',
       isDisabled: false,
+    ),
+    CategoryModel(
+      id: CategoryEnum.SHAME.value,
+      label: 'vergonha',
+      isDisabled: false,
     )
   ];
 }
@@ -256,7 +261,8 @@ enum CategoryEnum {
   TV_MOVIES_SERIES('tv_movies_series'),
   VEHICLES('vehicles'),
   LIFE_DEATH('life_death'),
-  VIOLENCE('violence');
+  VIOLENCE('violence'),
+  SHAME('shame');
 
   final String value;
   const CategoryEnum(this.value);
