@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:bluuffed_app/core/routes.dart';
 import 'package:bluuffed_app/service/auth_check_service.dart';
@@ -71,6 +72,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           bool isDark = currentTheme.value == Brightness.dark;
 
           return MaterialApp(
+            navigatorKey: NavigationService.navigationKey,
             debugShowCheckedModeBanner: false,
             home: const AuthCheckService(),
             theme: isDark ? UiTheme.themeDark : UiTheme.theme,

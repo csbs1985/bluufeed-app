@@ -1,19 +1,20 @@
 import 'package:algolia/algolia.dart';
-import 'package:bluuffed_app/button/button_publish_widget.dart';
-import 'package:bluuffed_app/model/history_model.dart';
 import 'package:bluuffed_app/model/notification_model.dart';
-import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/model/user_recent_model.dart';
 import 'package:bluuffed_app/service/algolia_service.dart';
+import 'package:bluuffed_app/service/history_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
+import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
+import 'package:bluuffed_app/widget/border_widget.dart';
+import 'package:bluuffed_app/widget/search_date_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
+import 'package:bluuffed_app/widget/title_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -25,6 +26,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final HistoryService historyService = HistoryService();
   final NotificationClass notificationClass = NotificationClass();
   final TextEditingController _valueController = TextEditingController();
   final ToastWidget toast = ToastWidget();
@@ -37,8 +39,7 @@ class _SearchPageState extends State<SearchPage> {
 
   bool isInputEmpty = true;
 
-  late Map<String, dynamic> _form;
-  late Map<String, dynamic> _currentRecent;
+  bool? isDark;
 
   @override
   initState() {
@@ -62,56 +63,7 @@ class _SearchPageState extends State<SearchPage> {
     if (_valueController.text.isEmpty) _snapshot = null;
   }
 
-  _formatAlgolia(_user) {
-    _currentRecent = {
-      'id': _user.data['objectID'],
-      'name': _user.data['name'],
-    };
-
-    _postSend(_currentRecent);
-  }
-
-  _formatRecent(_user) {
-    _currentRecent = {
-      'id': _user.id,
-      'name': _user.name,
-    };
-
-    _postSend(_currentRecent);
-  }
-
-  _postSend(_user) {
-    userRecentClass.add(_currentRecent);
-
-    try {
-      _form = {
-        'content': '',
-        'date': DateTime.now().toString(),
-        'id': uuid.v4(),
-        'contentId': currentHistory.value.first.id,
-        'userId': _user['id'] ?? _user.data['objectID'],
-        'userName': currentUser.value.first.name,
-        'status': NotificationEnum.SEND_HISTORY.value,
-        'view': false,
-      };
-
-      notificationClass.postNotification(context, _form);
-      notificationClass.setNotificationSendHistory(context, _form);
-
-      toast.toast(
-        context,
-        ToastEnum.SUCCESS.value,
-        'história compartilhada',
-      );
-    } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => _postSend: ' + error.toString());
-      toast.toast(
-        context,
-        ToastEnum.WARNING.value,
-        'não foi possivél compartilhar história',
-      );
-    }
-  }
+  _getHistory(String _historyId) {}
 
   @override
   void dispose() {
@@ -129,51 +81,56 @@ class _SearchPageState extends State<SearchPage> {
       body: ValueListenableBuilder(
         valueListenable: currentTheme,
         builder: (BuildContext context, Brightness theme, _) {
-          bool isDark = currentTheme.value == Brightness.dark;
+          isDark = currentTheme.value == Brightness.dark;
 
           return Material(
-            color: isDark ? UiColor.mainDark : UiColor.main,
+            color: isDark! ? UiColor.mainDark : UiColor.main,
             child: SingleChildScrollView(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: UiPadding.large),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Headline1(title: 'Pesquisar'),
-                    const TextWidget(
-                      text: 'Pesquise pelo usuário ou o título da história',
-                    ),
-                    const SizedBox(height: UiPadding.medium),
-                    TextField(
-                      controller: _valueController,
-                      onChanged: (value) => keyUp(),
-                      style: Theme.of(context).textTheme.headline2,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: UiPadding.large,
-                          vertical: UiPadding.small,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: UiPadding.large),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Headline1(title: 'Pesquisar'),
+                        const TextWidget(
+                          text: 'Pesquise pelo usuário ou o título da história',
                         ),
-                        hintText: 'pesquisar ',
-                        hintStyle: Theme.of(context).textTheme.headline2,
-                      ),
-                    ),
-                    const SizedBox(height: UiPadding.large),
-                    SingleChildScrollView(
-                      child: isInputEmpty
-                          ? _userRecent()
-                          : Column(
-                              children: [
-                                const SubtitleWidget(resume: 'pesquisando'),
-                                _snapshot == null
-                                    ? _notResult()
-                                    : _algolia(_snapshot),
-                              ],
+                        const SizedBox(height: UiPadding.medium),
+                        TextField(
+                          controller: _valueController,
+                          onChanged: (value) => keyUp(),
+                          style: Theme.of(context).textTheme.headline2,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: UiPadding.large,
+                              vertical: UiPadding.small,
                             ),
+                            hintText: 'pesquisar ',
+                            hintStyle: Theme.of(context).textTheme.headline2,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: UiPadding.large),
+                  Column(
+                    children: [
+                      const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: UiPadding.large),
+                        child: SubtitleWidget(resume: 'histórias'),
+                      ),
+                      _snapshot == null
+                          ? _notResult()
+                          : _algoliaHistory(_snapshot),
+                    ],
+                  ),
+                ],
               ),
             ),
           );
@@ -182,64 +139,60 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget _userRecent() {
-    return ValueListenableBuilder(
-      valueListenable: currentUserRecent,
-      builder: (BuildContext context, value, _) {
-        return Column(
+  Widget _algoliaHistory(_snapshot) {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      reverse: true,
+      itemCount: _snapshot!.length,
+      itemBuilder: (BuildContext context, int index) => TextButton(
+        onPressed: () =>
+            historyService.getHistoryPage(_snapshot![index].data['objectID']),
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.all(0),
+          backgroundColor: isDark! ? UiColor.mainDark : UiColor.main,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(UiBorder.none),
+          ),
+        ),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SubtitleWidget(resume: 'recente'),
-            const SizedBox(height: UiPadding.medium),
-            currentUserRecent.value.isEmpty
-                ? const TextWidget(text: 'você não compartilhou história ainda')
-                : ListView.builder(
-                    shrinkWrap: true,
-                    reverse: true,
-                    itemCount: currentUserRecent.value.length,
-                    itemBuilder: (BuildContext context, int index) => Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextWidget(text: currentUserRecent.value[index].name),
-                        ButtonPublishWidget(
-                          label: 'enviar',
-                          callback: (value) =>
-                              _formatRecent(currentUserRecent.value[index]),
-                        ),
-                      ],
-                    ),
-                  ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: UiPadding.large,
+                vertical: UiPadding.medium,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TitleWidget(title: _snapshot![index].data['title']),
+                  SearchDateWidget(item: _snapshot![index].data),
+                  const SizedBox(height: UiPadding.medium),
+                  TextWidget(text: _snapshot![index].data['text']),
+                  const SizedBox(height: UiPadding.large),
+                ],
+              ),
+            ),
+            const BorderWidget(),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 
   Widget _notResult() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          height: UiSize.bottom,
-          child: const TextWidget(text: 'usuário não encontrado'),
-        ),
-      ],
-    );
-  }
-
-  Widget _algolia(_snapshot) {
-    return ListView.builder(
-      shrinkWrap: true,
-      reverse: true,
-      itemCount: _snapshot!.length,
-      itemBuilder: (BuildContext context, int index) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextWidget(text: _snapshot![index].data['title']),
-          ButtonPublishWidget(
-            label: 'enviar',
-            callback: (value) => _formatAlgolia(_snapshot![index]),
+          Container(
+            alignment: Alignment.centerLeft,
+            height: UiSize.bottom,
+            child: const TextWidget(
+              text: 'não encontramos histórias para sua pesquisa',
+            ),
           ),
         ],
       ),

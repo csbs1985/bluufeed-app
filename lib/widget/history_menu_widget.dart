@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/service/history_service.dart';
 import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -28,8 +29,9 @@ class HistoryMenuWidget extends StatefulWidget {
 }
 
 class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
-  final HistoryFirestore historyFirestore = HistoryFirestore();
   final HistoryClass historyClass = HistoryClass();
+  final HistoryFirestore historyFirestore = HistoryFirestore();
+  final HistoryService historyService = HistoryService();
   final ToastWidget toast = ToastWidget();
 
   bool _isComment(String _route, Map<String, dynamic> _history) {
@@ -166,14 +168,9 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                   if (_route != PageEnum.HISTORY.value)
                     IconWidget(
                       icon: UiIcon.read,
-                      callback: (value) {
-                        historyClass.add(widget._history);
-                        Navigator.pushNamed(
-                          context,
-                          PageEnum.HISTORY.value,
-                          arguments: widget._history['id'],
-                        );
-                      },
+                      callback: (value) => historyService.getHistoryPage(
+                        widget._history['id'],
+                      ),
                     ),
                 ],
               );

@@ -12,7 +12,8 @@ enum DateEnum {
   ACTIVITY('activity'),
   COMMENT('comment'),
   HISTORY('history'),
-  PERFIL('perfil');
+  PERFIL('perfil'),
+  SEARCH_HISTORY('search_history');
 
   final String value;
   const DateEnum(this.value);

@@ -59,25 +59,25 @@ class _SendModalState extends State<SendModal> {
     if (_commentController.text.isEmpty) _snapshot = null;
   }
 
-  _formatAlgolia(_user) {
+  _formatAlgolia(BuildContext context, _user) {
     _currentRecent = {
       'id': _user.data['objectID'],
       'name': _user.data['name'],
     };
 
-    _postSend(_currentRecent);
+    _postSend(context, _currentRecent);
   }
 
-  _formatRecent(_user) {
+  _formatRecent(BuildContext context, _user) {
     _currentRecent = {
       'id': _user.id,
       'name': _user.name,
     };
 
-    _postSend(_currentRecent);
+    _postSend(context, _currentRecent);
   }
 
-  _postSend(_user) {
+  _postSend(BuildContext context, _user) {
     userRecentClass.add(_currentRecent);
 
     try {
@@ -92,11 +92,11 @@ class _SendModalState extends State<SendModal> {
         'view': false,
       };
 
+      notificationClass.postNotification(context, _form);
+
       if ((currentUser.value.first.id != currentHistory.value.first.userId) ||
-          (_form['userId'] != currentUser.value.first.id)) {
-        notificationClass.postNotification(context, _form);
+          (_form['userId'] != currentUser.value.first.id))
         notificationClass.setNotificationSendHistory(context, _form);
-      }
 
       toast.toast(
         context,
@@ -190,7 +190,6 @@ class _SendModalState extends State<SendModal> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SubtitleWidget(resume: 'recente'),
-            const SizedBox(height: UiPadding.medium),
             currentUserRecent.value.isEmpty
                 ? const TextWidget(text: 'você não compartilhou história ainda')
                 : ListView.builder(
@@ -203,8 +202,8 @@ class _SendModalState extends State<SendModal> {
                         TextWidget(text: currentUserRecent.value[index].name),
                         ButtonPublishWidget(
                           label: 'enviar história',
-                          callback: (value) =>
-                              _formatRecent(currentUserRecent.value[index]),
+                          callback: (value) => _formatRecent(
+                              context, currentUserRecent.value[index]),
                         ),
                       ],
                     ),
@@ -239,7 +238,7 @@ class _SendModalState extends State<SendModal> {
           TextWidget(text: _snapshot![index].data['name']),
           ButtonPublishWidget(
             label: 'enviar história',
-            callback: (value) => _formatAlgolia(_snapshot![index]),
+            callback: (value) => _formatAlgolia(context, _snapshot![index]),
           ),
         ],
       ),

@@ -2,7 +2,6 @@ import 'package:bluuffed_app/firestore/comments_firestore.dart';
 import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
 import 'package:bluuffed_app/model/history_model.dart';
-import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/service/comment_service.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +14,7 @@ class HistoryService {
   final CommentService commentService = CommentService();
   final HistoryClass historyClass = HistoryClass();
   final HistoryFirestore historyFirestore = HistoryFirestore();
+  final NavigationService navService = NavigationService();
   final ToastWidget toastWidget = ToastWidget();
 
   late Map<String, dynamic> _history;
@@ -42,7 +42,9 @@ class HistoryService {
             },
           );
 
-      navService.pushNamed(PageEnum.HISTORY.value);
+      NavigationService.navigationKey.currentState!.pushNamed('/history');
+      // navService.pushNamed('/history');
+      // Navigator.pushNamed(context, PageEnum.HISTORY.value);
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => getHistory: ' + error.toString());
     }
