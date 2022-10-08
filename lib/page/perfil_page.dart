@@ -42,6 +42,10 @@ class _PerfilPageState extends State<PerfilPage> {
     }
   }
 
+  isCurrentUser() {
+    return _user == currentUser.value.first.id ? true : false;
+  }
+
   @override
   Widget build(BuildContext context) {
     isAuthor();
@@ -109,7 +113,7 @@ class _PerfilPageState extends State<PerfilPage> {
               if (_isAnotherUser) TextWidget(text: snapshot['email']),
               SinceWidget(date: snapshot['date']),
               if (_isAnotherUser) const SizedBox(height: UiPadding.large),
-              if (_isAnotherUser) ButtonFollowWidget(perfil: _perfil),
+              if (!isCurrentUser()) ButtonFollowWidget(perfil: _perfil),
             ],
           ),
         ),
