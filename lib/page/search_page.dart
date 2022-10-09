@@ -1,5 +1,6 @@
 import 'package:algolia/algolia.dart';
 import 'package:bluuffed_app/model/notification_model.dart';
+import 'package:bluuffed_app/model/search_model.dart';
 import 'package:bluuffed_app/model/user_recent_model.dart';
 import 'package:bluuffed_app/service/algolia_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
@@ -7,9 +8,8 @@ import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/search_history_widget.dart';
+import 'package:bluuffed_app/widget/search_menu_widget.dart';
 import 'package:bluuffed_app/widget/search_user_widget.dart';
-import 'package:bluuffed_app/widget/separator_widget.dart';
-import 'package:bluuffed_app/widget/subtitle_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +35,8 @@ class _SearchPageState extends State<SearchPage> {
   List<AlgoliaObjectSnapshot>? _snapshotUser;
 
   bool isInputEmpty = true;
+
+  String _searchMenu = SearchMenuEnum.HISTORY.value;
 
   @override
   initState() {
@@ -74,6 +76,10 @@ class _SearchPageState extends State<SearchPage> {
       setState(() => _snapshotUser = _snapUser.hits);
 
     if (_valueController.text.isEmpty) _snapshotUser = null;
+  }
+
+  _menuCallback(String value) {
+    setState(() => _searchMenu = value);
   }
 
   @override
@@ -117,7 +123,7 @@ class _SearchPageState extends State<SearchPage> {
                               horizontal: UiPadding.large,
                               vertical: UiPadding.small,
                             ),
-                            hintText: 'pesquisar ',
+                            hintText: 'pesquisar',
                             hintStyle: Theme.of(context).textTheme.headline2,
                           ),
                         ),
@@ -137,24 +143,14 @@ class _SearchPageState extends State<SearchPage> {
                         )
                       : Column(
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: UiPadding.large),
-                              child: SubtitleWidget(resume: 'usuários'),
+                            SearchMenuWidget(
+                              init: _searchMenu,
+                              callback: (value) => _menuCallback(value),
                             ),
-                            SearchUserWidget(snapshot: _snapshotUser),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: UiPadding.large),
-                              child: SeparatorWidget(),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: UiPadding.large,
-                              ),
-                              child: SubtitleWidget(resume: 'histórias'),
-                            ),
-                            SearchHistoryWidget(snapshot: _snapshotHistory),
+                            if (_searchMenu == SearchMenuEnum.HISTORY.value)
+                              SearchHistoryWidget(snapshot: _snapshotHistory),
+                            if (_searchMenu == SearchMenuEnum.USER.value)
+                              SearchUserWidget(snapshot: _snapshotUser),
                           ],
                         ),
                 ],
