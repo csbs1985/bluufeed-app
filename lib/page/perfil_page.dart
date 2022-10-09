@@ -5,6 +5,7 @@ import 'package:bluuffed_app/model/perfil_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/skeleton/perfil_skeleton.dart';
 import 'package:bluuffed_app/text/headline1.dart';
+import 'package:bluuffed_app/text/headline6.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
@@ -109,10 +110,11 @@ class _PerfilPageState extends State<PerfilPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Headline1(title: snapshot['name']),
-              if (_isAnotherUser) TextWidget(text: snapshot['email']),
+              const Headline1(title: 'Perfil'),
+              Headline6(title: snapshot['name']),
+              if (isCurrentUser()) TextWidget(text: snapshot['email']),
               SinceWidget(date: snapshot['date']),
-              if (_isAnotherUser) const SizedBox(height: UiPadding.large),
+              if (!isCurrentUser()) const SizedBox(height: UiPadding.large),
               if (!isCurrentUser()) ButtonFollowWidget(perfil: _perfil),
             ],
           ),

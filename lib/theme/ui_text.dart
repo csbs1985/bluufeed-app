@@ -47,7 +47,7 @@ class UiTextDark {
   );
 
   static const TextStyle headline3 = TextStyle(
-    fontSize: 12,
+    fontSize: 20,
     fontWeight: FontWeight.w700,
     color: UiColor.button,
   );
@@ -65,7 +65,7 @@ class UiTextDark {
   );
 
   static const TextStyle headline6 = TextStyle(
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: FontWeight.normal,
     color: UiColor.textDark,
   );
@@ -85,7 +85,7 @@ class UiTextLight {
   );
 
   static const TextStyle headline3 = TextStyle(
-    fontSize: 12,
+    fontSize: 20,
     fontWeight: FontWeight.w700,
     color: UiColor.button,
   );
@@ -103,7 +103,7 @@ class UiTextLight {
   );
 
   static const TextStyle headline6 = TextStyle(
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: FontWeight.normal,
     color: UiColor.text,
   );
