@@ -138,7 +138,7 @@ class _DenouncePageState extends State<DenouncePage> {
     _getUser();
 
     return Scaffold(
-      appBar: const AppBarBackWidget(),
+      appBar: AppBarBackWidget(option: false),
       body: ValueListenableBuilder(
         valueListenable: currentIsSigned,
         builder: (BuildContext context, value, _) {

@@ -1,14 +1,8 @@
 import 'package:bluuffed_app/button/button_3d_widget.dart';
-import 'package:bluuffed_app/modal/opiton_modal.dart';
 import 'package:bluuffed_app/model/following_model.dart';
-import 'package:bluuffed_app/model/modal_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/following_service.dart';
-import 'package:bluuffed_app/theme/ui_color.dart';
-import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ButtonFollowWidget extends StatefulWidget {
   const ButtonFollowWidget({required Map<String, dynamic> perfil})
@@ -25,21 +19,6 @@ class _ButtonFollowWidgetState extends State<ButtonFollowWidget> {
 
   bool isAuthor() {
     return currentUser.value.first.id == currentUserId.value ? true : false;
-  }
-
-  void _openModal(BuildContext context, Map<String, dynamic> _content) {
-    showCupertinoModalBottomSheet(
-      expand: false,
-      context: context,
-      barrierColor: UiColor.overlay,
-      duration: const Duration(milliseconds: 300),
-      builder: (context) {
-        return OptionModal(
-          content: _content,
-          type: ModalEnum.OPTION_PERFIL.value,
-        );
-      },
-    );
   }
 
   void _toggleFollowing() {
@@ -72,11 +51,6 @@ class _ButtonFollowWidgetState extends State<ButtonFollowWidget> {
                   : ButtonStyleEnum.PRIMARY.value,
               width: MediaQuery.of(context).size.width / 2,
             ),
-            if (!isAuthor())
-              IconButton(
-                icon: SvgPicture.asset(UiIcon.option),
-                onPressed: () => _openModal(context, widget._perfil),
-              ),
           ],
         );
       },

@@ -120,7 +120,7 @@ class _NamePageState extends State<NamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarBackWidget(),
+      appBar: AppBarBackWidget(option: false),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,

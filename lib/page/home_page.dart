@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
             'id': result.docs[0]['id'],
             'date': result.docs[0]['date'],
             'name': result.docs[0]['name'],
+            'bio': result.docs[0]['bio'],
             'upDateName': result.docs[0]['upDateName'],
             'status': result.docs[0]['status'],
             'email': result.docs[0]['email'],

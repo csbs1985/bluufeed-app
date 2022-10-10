@@ -71,7 +71,7 @@ class _PasswordEditPageState extends State<PasswordEditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarBackWidget(),
+      appBar: AppBarBackWidget(option: false),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),

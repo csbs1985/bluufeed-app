@@ -45,9 +45,8 @@ class _ButtonCardWidgetState extends State<ButtonCardWidget> {
               shrinkWrap: true,
               itemCount: widget._content.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
+                return SizedBox(
                   width: double.infinity,
-                  padding: const EdgeInsets.only(bottom: UiPadding.medium),
                   child: TextButton(
                     onPressed: () => _onPressed(widget._content[index]),
                     style: ElevatedButton.styleFrom(

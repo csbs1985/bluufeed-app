@@ -90,7 +90,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: UiPadding.large),
+                        horizontal: UiPadding.large,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -133,6 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 Padding(
                   padding: const EdgeInsets.all(UiPadding.large),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SubtitleResumeWidget(
                         title: 'Informações',

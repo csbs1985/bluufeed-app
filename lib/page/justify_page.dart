@@ -58,7 +58,7 @@ class _JustifyPageState extends State<JustifyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarBackWidget(),
+      appBar: AppBarBackWidget(option: false),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(

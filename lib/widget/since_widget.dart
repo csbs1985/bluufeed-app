@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/widget/subtitle_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -8,13 +9,11 @@ class SinceWidget extends StatelessWidget {
   final String _date;
 
   String _getSince() {
-    var now = DateTime.now();
     var date = DateTime.fromMillisecondsSinceEpoch(
         DateTime.parse(_date).millisecondsSinceEpoch);
     var day = DateFormat('dd');
     var month = DateFormat('M');
     var year = DateFormat('yyyy');
-    var time = '';
     var months = [
       'janeiro',
       'fevereiro',
@@ -30,8 +29,7 @@ class SinceWidget extends StatelessWidget {
       'dezsembro'
     ];
 
-    return time = 'desde ' +
-        day.format(date) +
+    return day.format(date) +
         ' de ' +
         months[int.parse(month.format(date)) - 1] +
         ' de ' +
@@ -40,6 +38,12 @@ class SinceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextWidget(text: _getSince());
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SubtitleWidget(resume: 'desde'),
+        TextWidget(text: _getSince()),
+      ],
+    );
   }
 }

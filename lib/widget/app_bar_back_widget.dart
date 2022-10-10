@@ -5,7 +5,12 @@ import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppBarBackWidget extends StatefulWidget with PreferredSizeWidget {
-  const AppBarBackWidget({Key? key}) : super(key: key);
+  AppBarBackWidget({Function? callback, required bool option})
+      : _callback = callback,
+        _option = option;
+
+  final Function? _callback;
+  final bool _option;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -30,6 +35,13 @@ class _AppbarBackWidgetState extends State<AppBarBackWidget> {
             icon: SvgPicture.asset(UiIcon.closed),
             onPressed: () => Navigator.of(context).pop(),
           ),
+          actions: [
+            if (widget._option)
+              IconButton(
+                icon: SvgPicture.asset(UiIcon.option),
+                onPressed: () => widget._callback!(true),
+              ),
+          ],
         );
       },
     );

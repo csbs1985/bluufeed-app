@@ -8,7 +8,7 @@ class Headline6 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
+      // width: MediaQuery.of(context).size.width,
       child: Text(
         _title,
         style: Theme.of(context).textTheme.headline6,

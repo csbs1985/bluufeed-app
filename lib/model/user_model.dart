@@ -21,6 +21,7 @@ final FollowingService followingService = FollowingService();
 class UserModel {
   late String id;
   late String name;
+  late String bio;
   late String upDateName;
   late String date;
   late String email;
@@ -36,6 +37,7 @@ class UserModel {
   UserModel({
     required this.id,
     required this.name,
+    required this.bio,
     required this.upDateName,
     required this.date,
     required this.status,
@@ -52,6 +54,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'],
         name: json['name'],
+        bio: json['bio'],
         upDateName: json['upDateName'],
         date: json["date"],
         email: json['email'],
@@ -72,6 +75,7 @@ class UserModel {
   Map<String, dynamic> toJson(UserModel user) => {
         'id': user.id,
         'name': user.name,
+        'bio': user.bio,
         'upDateName': user.upDateName,
         'date': user.date,
         'email': user.email,

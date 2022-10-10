@@ -71,7 +71,7 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarBackWidget(),
+      appBar: AppBarBackWidget(option: false),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,

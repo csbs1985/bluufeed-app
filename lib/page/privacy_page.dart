@@ -7,9 +7,9 @@ class PrivacyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: AppBarBackWidget(),
-      body: WebView(
+    return Scaffold(
+      appBar: AppBarBackWidget(option: false),
+      body: const WebView(
         initialUrl: 'https://bluufeed.com/privacy',
         javascriptMode: JavascriptMode.unrestricted,
       ),

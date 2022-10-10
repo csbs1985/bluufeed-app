@@ -10,7 +10,7 @@ class ResumeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
+      // width: MediaQuery.of(context).size.width,
       child: Text(
         _resume,
         style: Theme.of(context).textTheme.headline2,

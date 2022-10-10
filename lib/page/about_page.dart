@@ -39,7 +39,7 @@ class _AboutPage extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarBackWidget(),
+      appBar: AppBarBackWidget(option: false),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.fromLTRB(

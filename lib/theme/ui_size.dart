@@ -14,6 +14,7 @@ class UiSize {
   static const double input = 48;
   static const double menuHeight = 32 + UiPadding.large + UiPadding.large;
   static const double modalHeight = 42;
+  static const double noAppBar = 48;
   static const double paddingButtonFull = 32;
   static const double separator = 8;
   static const double tag = 36;
