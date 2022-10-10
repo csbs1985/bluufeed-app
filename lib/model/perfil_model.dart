@@ -10,3 +10,12 @@ class PerfilClass {
     currentPerfil.value.add(UserModel.fromJson(user));
   }
 }
+
+enum PerfilTabEnum {
+  BOOKMARK('bookmark'),
+  HISTORY('history'),
+  USER('user');
+
+  final String value;
+  const PerfilTabEnum(this.value);
+}
