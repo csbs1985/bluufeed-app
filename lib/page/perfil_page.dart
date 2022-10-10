@@ -6,16 +6,16 @@ import 'package:bluuffed_app/model/perfil_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/skeleton/perfil_skeleton.dart';
 import 'package:bluuffed_app/text/headline1.dart';
-import 'package:bluuffed_app/text/headline6.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
+import 'package:bluuffed_app/widget/perfil_Item_widget.dart';
+import 'package:bluuffed_app/widget/separator_widget.dart';
 import 'package:bluuffed_app/widget/since_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
-import 'package:bluuffed_app/widget/subtitle_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -130,52 +130,63 @@ class _PerfilPageState extends State<PerfilPage> {
         bool isDark = currentTheme.value == Brightness.dark;
 
         return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Headline1(title: 'Perfil'),
-                const SubtitleWidget(resume: 'usuário'),
-                Headline6(title: snapshot['name']),
-                const SizedBox(height: UiPadding.large),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
+          child: Column(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: UiPadding.large),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SubtitleResumeWidget(
-                      title: 'histórias',
-                      resume: snapshot['qtyHistory'].toString(),
+                    const Headline1(title: 'Perfil'),
+                    Headline1(title: snapshot['name']),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        PerfilItemWidget(
+                          title: 'histórias',
+                          resume: snapshot['qtyHistory'].toString(),
+                          callback: (value) => {},
+                        ),
+                        const SizedBox(width: UiPadding.large),
+                        PerfilItemWidget(
+                          title: 'comentários',
+                          resume: snapshot['qtyComment'].toString(),
+                          callback: (value) => {},
+                        ),
+                        const SizedBox(width: UiPadding.large),
+                        PerfilItemWidget(
+                          title: 'seguindo',
+                          resume: snapshot['following'].length.toString(),
+                          callback: (value) => {},
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: UiPadding.large),
+                    const SizedBox(height: UiPadding.large),
+                    if (isCurrentUser())
+                      SubtitleResumeWidget(
+                        title: 'email',
+                        resume: snapshot['email'],
+                      ),
+                    if (isCurrentUser())
+                      const SizedBox(height: UiPadding.large),
+                    SinceWidget(date: snapshot['date']),
+                    const SizedBox(height: UiPadding.large),
                     SubtitleResumeWidget(
-                      title: 'comentários',
-                      resume: snapshot['qtyComment'].toString(),
+                      title: 'biografia',
+                      resume: snapshot['bio'],
                     ),
-                    const SizedBox(width: UiPadding.large),
-                    SubtitleResumeWidget(
-                      title: 'seguindo',
-                      resume: snapshot['following'].length.toString(),
-                    ),
+                    if (!isCurrentUser())
+                      const SizedBox(height: UiPadding.large),
+                    if (!isCurrentUser()) ButtonFollowWidget(perfil: _perfil),
                   ],
                 ),
-                const SizedBox(height: UiPadding.large),
-                if (isCurrentUser())
-                  SubtitleResumeWidget(
-                    title: 'email',
-                    resume: snapshot['email'],
-                  ),
-                if (isCurrentUser()) const SizedBox(height: UiPadding.large),
-                SinceWidget(date: snapshot['date']),
-                const SizedBox(height: UiPadding.large),
-                SubtitleResumeWidget(
-                  title: 'biografia',
-                  resume: snapshot['bio'],
-                ),
-                if (!isCurrentUser()) const SizedBox(height: UiPadding.large),
-                if (!isCurrentUser()) ButtonFollowWidget(perfil: _perfil),
-              ],
-            ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: UiPadding.large),
+                child: SeparatorWidget(),
+              ),
+            ],
           ),
         );
       },
