@@ -76,6 +76,7 @@ class AuthService extends ChangeNotifier {
                   'email': user.docs[0]['email'],
                   'token': token,
                   'isNotification': user.docs[0]['isNotification'],
+                  'qtyBookmark': user.docs[0]['qtyBookmark'],
                   'qtyComment': user.docs[0]['qtyComment'],
                   'qtyDenounce': user.docs[0]['qtyDenounce'],
                   'qtyHistory': user.docs[0]['qtyHistory'],

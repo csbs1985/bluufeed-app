@@ -7,17 +7,19 @@ import 'package:bluuffed_app/model/perfil_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/skeleton/history_item_skeleton.dart';
 import 'package:bluuffed_app/skeleton/perfil_skeleton.dart';
+import 'package:bluuffed_app/skeleton/user_item_skeleton.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:bluuffed_app/widget/history_item_widget.dart';
 import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:bluuffed_app/widget/perfil_Item_widget.dart';
+import 'package:bluuffed_app/widget/separator_widget.dart';
 import 'package:bluuffed_app/widget/since_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 import 'package:bluuffed_app/widget/subtitle_widget.dart';
+import 'package:bluuffed_app/widget/user_item_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/firestore.dart';
@@ -72,9 +74,7 @@ class _PerfilPageState extends State<PerfilPage> {
   }
 
   _setTab(String tab) {
-    setState(() {
-      _tab = tab;
-    });
+    setState(() => _tab = tab);
   }
 
   @override
@@ -93,14 +93,16 @@ class _PerfilPageState extends State<PerfilPage> {
             ),
       body: SingleChildScrollView(
         child: StreamBuilder<QuerySnapshot>(
-          stream: userFirestore.getUserIdSnapshots(_user),
+          stream: userFirestore.snapshotsUserId(_user),
           builder: (
             BuildContext context,
             AsyncSnapshot<QuerySnapshot> snapshot,
           ) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
-                return _noResults();
+                return const NoResultWidget(
+                  text: 'Não foi possível encontrar usuário',
+                );
 
               case ConnectionState.waiting:
                 return const PerfilSkeleton();
@@ -118,6 +120,7 @@ class _PerfilPageState extends State<PerfilPage> {
                     'email': snapshot.data!.docs[0]['email'],
                     'token': snapshot.data!.docs[0]['token'],
                     'isNotification': snapshot.data!.docs[0]['isNotification'],
+                    'qtyBookmark': snapshot.data!.docs[0]['qtyBookmark'],
                     'qtyComment': snapshot.data!.docs[0]['qtyComment'],
                     'qtyDenounce': snapshot.data!.docs[0]['qtyDenounce'],
                     'qtyHistory': snapshot.data!.docs[0]['qtyHistory'],
@@ -126,7 +129,9 @@ class _PerfilPageState extends State<PerfilPage> {
 
                   return _perfilItem(_perfil);
                 } catch (error) {
-                  return _noResults();
+                  return const NoResultWidget(
+                    text: 'Não foi possível encontrar usuário 3',
+                  );
                 }
             }
           },
@@ -145,7 +150,11 @@ class _PerfilPageState extends State<PerfilPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Headline1(title: 'Perfil'),
-                Headline1(title: snapshot['name']),
+                SubtitleResumeWidget(
+                  title: 'nome de usuário',
+                  resume: snapshot['name'],
+                ),
+                const SizedBox(height: UiPadding.large),
                 if (isCurrentUser())
                   SubtitleResumeWidget(
                     title: 'email',
@@ -167,7 +176,7 @@ class _PerfilPageState extends State<PerfilPage> {
                 if (!isCurrentUser()) ButtonFollowWidget(perfil: _perfil),
                 const SizedBox(height: UiPadding.large),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PerfilItemWidget(
                       title: 'histórias',
@@ -177,7 +186,7 @@ class _PerfilPageState extends State<PerfilPage> {
                     const SizedBox(width: UiPadding.large),
                     PerfilItemWidget(
                       title: 'ler depois',
-                      resume: snapshot['qtyComment'].toString(),
+                      resume: snapshot['qtyBookmark'].toString(),
                       callback: (value) => _setTab(
                         PerfilTabEnum.BOOKMARK.value,
                       ),
@@ -193,11 +202,28 @@ class _PerfilPageState extends State<PerfilPage> {
               ],
             ),
           ),
+          const SizedBox(height: UiPadding.large),
+          const SeparatorWidget(),
           if (_tab == PerfilTabEnum.HISTORY.value) _listHistory(),
-          if (_tab == PerfilTabEnum.USER.value) _listUsers(),
           if (_tab == PerfilTabEnum.BOOKMARK.value) _listBookmarks(),
+          // if (_tab == PerfilTabEnum.USER.value) _listFollowings(),
         ],
       ),
+    );
+  }
+
+  Widget _listFollowings() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(UiPadding.large),
+          child: SubtitleWidget(resume: 'seguindo'),
+        ),
+        _perfil.isEmpty
+            ? const UserItemSkeleton()
+            : UserItemWidget(content: _perfil['following'])
+      ],
     );
   }
 
@@ -219,8 +245,10 @@ class _PerfilPageState extends State<PerfilPage> {
           physics: const NeverScrollableScrollPhysics(),
           loadingBuilder: (context) => const HistoryItemSkeleton(),
           errorBuilder: (context, error, _) => const HistoryItemSkeleton(),
-          itemBuilder:
-              (BuildContext context, QueryDocumentSnapshot<dynamic> snapshot) {
+          itemBuilder: (
+            BuildContext context,
+            QueryDocumentSnapshot<dynamic> snapshot,
+          ) {
             return HistoryItemWidget(snapshot: snapshot.data());
           },
         ),
@@ -245,47 +273,13 @@ class _PerfilPageState extends State<PerfilPage> {
           physics: const NeverScrollableScrollPhysics(),
           loadingBuilder: (context) => const HistoryItemSkeleton(),
           errorBuilder: (context, error, _) => const HistoryItemSkeleton(),
-          itemBuilder:
-              (BuildContext context, QueryDocumentSnapshot<dynamic> snapshot) {
+          itemBuilder: (
+            BuildContext context,
+            QueryDocumentSnapshot<dynamic> snapshot,
+          ) {
             return HistoryItemWidget(snapshot: snapshot.data());
           },
         ),
-      ],
-    );
-  }
-
-  Widget _listUsers() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.all(UiPadding.large),
-          child: SubtitleWidget(resume: 'seguindo'),
-        ),
-        FirestoreListView(
-          query: historyFirestore.stories
-              .orderBy('date')
-              .where('userId', isEqualTo: _user),
-          pageSize: 10,
-          shrinkWrap: true,
-          reverse: true,
-          physics: const NeverScrollableScrollPhysics(),
-          loadingBuilder: (context) => const HistoryItemSkeleton(),
-          errorBuilder: (context, error, _) => const HistoryItemSkeleton(),
-          itemBuilder:
-              (BuildContext context, QueryDocumentSnapshot<dynamic> snapshot) {
-            return HistoryItemWidget(snapshot: snapshot.data());
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _noResults() {
-    return Column(
-      children: [
-        if (_isAnotherUser) const SizedBox(height: UiSize.appBar),
-        const NoResultWidget(text: 'Não foi possível encontrar usuário'),
       ],
     );
   }

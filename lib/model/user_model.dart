@@ -28,8 +28,9 @@ class UserModel {
   late String token;
   late String status;
   late bool isNotification;
-  late num qtyDenounce;
+  late num qtyBookmark;
   late num qtyComment;
+  late num qtyDenounce;
   late num qtyHistory;
   final List<BlockedModel> blocked;
   final List<FollowingModel> following;
@@ -44,8 +45,9 @@ class UserModel {
     required this.email,
     required this.token,
     required this.isNotification,
-    required this.qtyDenounce,
+    required this.qtyBookmark,
     required this.qtyComment,
+    required this.qtyDenounce,
     required this.qtyHistory,
     required this.blocked,
     required this.following,
@@ -61,6 +63,7 @@ class UserModel {
         token: json['token'],
         status: json['status'],
         isNotification: json['isNotification'],
+        qtyBookmark: json['qtyBookmark'],
         qtyComment: json['qtyComment'],
         qtyDenounce: json['qtyDenounce'],
         qtyHistory: json['qtyHistory'],
@@ -82,6 +85,7 @@ class UserModel {
         'token': user.token,
         'isNotification': user.isNotification,
         'status': user.status,
+        'qtyBookmark': user.qtyBookmark,
         'qtyComment': user.qtyComment,
         'qtyDenounce': user.qtyDenounce,
         'qtyHistory': user.qtyHistory,

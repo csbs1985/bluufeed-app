@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/service/history_service.dart';
 import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final HistoryService historyService = HistoryService();
   final ToastWidget toast = ToastWidget();
+  final UserFirestore userFirestore = UserFirestore();
 
   bool _isComment(String _route, Map<String, dynamic> _history) {
     if (_route == PageEnum.HISTORY.value) return false;
@@ -80,6 +82,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     setState(() {
       if (history['bookmarks'].contains(currentUser.value.first.id)) {
         history['bookmarks'].remove(currentUser.value.first.id);
+        currentUser.value.first.qtyBookmark--;
         toast.toast(
           context,
           ToastEnum.SUCCESS.value,
@@ -87,6 +90,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
         );
       } else {
         history['bookmarks'].add(currentUser.value.first.id);
+        currentUser.value.first.qtyBookmark++;
         toast.toast(
           context,
           ToastEnum.SUCCESS.value,
@@ -96,6 +100,8 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
 
       historyFirestore.pathBookmark(history);
     });
+
+    userFirestore.pathQtyBookmarkUser(currentUser.value.first);
   }
 
   @override
@@ -105,78 +111,82 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
     return Container(
       padding: const EdgeInsets.only(right: UiPadding.medium),
       height: UiSize.historyMenu,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextButton(
-            onPressed: () => _openComment(_route!),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(UiBorder.rounded),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextButton(
+              onPressed: () => _openComment(_route!),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(UiBorder.rounded),
+                ),
+              ),
+              child: Row(
+                children: [
+                  if (widget._history['qtyComment'] > 0)
+                    NumberAnimationWidget(
+                        number: widget._history['qtyComment']),
+                  Text(
+                    _textComment(),
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ],
               ),
             ),
-            child: Row(
-              children: [
-                if (widget._history['qtyComment'] > 0)
-                  NumberAnimationWidget(number: widget._history['qtyComment']),
-                Text(
-                  _textComment(),
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ],
-            ),
-          ),
-          ValueListenableBuilder(
-            valueListenable: currentUser,
-            builder: (BuildContext context, value, __) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (_isComment(_route!, widget._history))
-                    IconWidget(
-                      icon: UiIcon.comment,
-                      callback: (value) {
-                        historyClass.add(widget._history);
-                        _openModal(context, ModalEnum.INPUT_COMMENT.value);
+            ValueListenableBuilder(
+              valueListenable: currentUser,
+              builder: (BuildContext context, value, __) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (_isComment(_route!, widget._history))
+                      IconWidget(
+                        icon: UiIcon.comment,
+                        callback: (value) {
+                          historyClass.add(widget._history);
+                          _openModal(context, ModalEnum.INPUT_COMMENT.value);
+                        },
+                      ),
+                    const SizedBox(width: UiPadding.xLarge),
+                    ValueListenableBuilder(
+                      valueListenable: currentHistory,
+                      builder: (BuildContext context, value, __) {
+                        return IconWidget(
+                          icon: _getBookmark(widget._history)
+                              ? UiIcon.favoriteActived
+                              : UiIcon.favorite,
+                          callback: (value) {
+                            _toggleBookmark(widget._history);
+                          },
+                        );
                       },
                     ),
-                  const SizedBox(width: UiPadding.xLarge),
-                  ValueListenableBuilder(
-                    valueListenable: currentHistory,
-                    builder: (BuildContext context, value, __) {
-                      return IconWidget(
-                        icon: _getBookmark(widget._history)
-                            ? UiIcon.favoriteActived
-                            : UiIcon.favorite,
-                        callback: (value) {
-                          _toggleBookmark(widget._history);
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(width: UiPadding.xLarge),
-                  IconWidget(
-                    icon: UiIcon.send,
-                    callback: (value) {
-                      historyClass.add(widget._history);
-                      _openModal(context, ModalEnum.SEND.value);
-                    },
-                  ),
-                  if (_route != PageEnum.HISTORY.value)
                     const SizedBox(width: UiPadding.xLarge),
-                  if (_route != PageEnum.HISTORY.value)
                     IconWidget(
-                      icon: UiIcon.read,
-                      callback: (value) => historyService.getHistoryPage(
-                        widget._history['id'],
-                      ),
+                      icon: UiIcon.send,
+                      callback: (value) {
+                        historyClass.add(widget._history);
+                        _openModal(context, ModalEnum.SEND.value);
+                      },
                     ),
-                ],
-              );
-            },
-          ),
-        ],
+                    if (_route != PageEnum.HISTORY.value)
+                      const SizedBox(width: UiPadding.xLarge),
+                    if (_route != PageEnum.HISTORY.value)
+                      IconWidget(
+                        icon: UiIcon.read,
+                        callback: (value) => historyService.getHistoryPage(
+                          widget._history['id'],
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

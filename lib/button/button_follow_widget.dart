@@ -49,7 +49,6 @@ class _ButtonFollowWidgetState extends State<ButtonFollowWidget> {
               style: following
                   ? ButtonStyleEnum.SECONDARY.value
                   : ButtonStyleEnum.PRIMARY.value,
-              width: MediaQuery.of(context).size.width / 2,
             ),
           ],
         );

@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
             'email': result.docs[0]['email'],
             'token': result.docs[0]['token'],
             'isNotification': result.docs[0]['isNotification'],
+            'qtyBookmark': result.docs[0]['qtyBookmark'],
             'qtyComment': result.docs[0]['qtyComment'],
             'qtyDenounce': result.docs[0]['qtyDenounce'],
             'qtyHistory': result.docs[0]['qtyHistory'],

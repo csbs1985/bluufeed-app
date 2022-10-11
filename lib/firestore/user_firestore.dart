@@ -24,7 +24,7 @@ class UserFirestore {
     return user.where('id', isEqualTo: _id).get();
   }
 
-  getUserIdSnapshots(String? _id) {
+  snapshotsUserId(String _id) {
     return user.where('id', isEqualTo: _id).snapshots();
   }
 
@@ -66,6 +66,10 @@ class UserFirestore {
 
   pathQtyCommentUser(UserModel _user) {
     return user.doc(_user.id).update({'qtyComment': _user.qtyComment});
+  }
+
+  pathQtyBookmarkUser(UserModel _user) {
+    return user.doc(_user.id).update({'qtyBookmark': _user.qtyBookmark});
   }
 
   pathQtyDenounceUser(UserModel _user) {
