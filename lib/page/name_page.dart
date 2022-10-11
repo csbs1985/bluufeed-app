@@ -153,7 +153,7 @@ class _NamePageState extends State<NamePage> {
                   enabled: !_cantChange,
                   controller: _nameController,
                   style: Theme.of(context).textTheme.headline2,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.text,
                   maxLines: 1,
                   validator: (value) => _nameClass.validateName(value),
                   decoration: InputDecoration(

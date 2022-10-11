@@ -1,6 +1,8 @@
 enum PageEnum {
   ABOUT('/about'),
   ACTIVITY('/actvities'),
+  BIOGRAPHY('biography'),
+  BLOCKEDS('blockeds'),
   CODE('/code'),
   CREATE('/create'),
   DENOUNCE('/denounce'),

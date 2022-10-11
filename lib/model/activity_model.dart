@@ -57,6 +57,7 @@ enum ActivityEnum {
   UP_HISTORY('up_history'),
   UP_NICKNAME('up_nickname'),
   UP_NOTIFICATION('up_notification'),
+  UP_BIOGRAPHY('up_biography'),
   UNBLOCK_USER('unblock_user');
 
   final String value;

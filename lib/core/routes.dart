@@ -1,5 +1,7 @@
 import 'package:bluuffed_app/page/about_page.dart';
 import 'package:bluuffed_app/page/activity_page.dart';
+import 'package:bluuffed_app/page/biography_page.dart';
+import 'package:bluuffed_app/page/blockeds_page.dart';
 import 'package:bluuffed_app/page/denounce_page.dart';
 import 'package:bluuffed_app/page/questions_page.dart';
 import 'package:bluuffed_app/page/delete_account_page.dart';
@@ -35,6 +37,20 @@ class Routes {
         type: PageTransitionType.rightToLeft,
         settings: settings,
         child: const ActivityPage(),
+      );
+    }
+    if (settings.name == PageEnum.BIOGRAPHY.value) {
+      return PageTransition(
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        child: const BiographyPage(),
+      );
+    }
+    if (settings.name == PageEnum.BLOCKEDS.value) {
+      return PageTransition(
+        type: PageTransitionType.rightToLeft,
+        settings: settings,
+        child: const BlockedsPage(),
       );
     }
     if (settings.name == PageEnum.CODE.value) {
