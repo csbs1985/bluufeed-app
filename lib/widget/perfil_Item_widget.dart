@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/service/quantity_service.dart';
 import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
@@ -8,18 +9,20 @@ import 'package:flutter/material.dart';
 class PerfilItemWidget extends StatelessWidget {
   const PerfilItemWidget({
     required String title,
-    required String resume,
+    required int resume,
     Function? callback,
   })  : _title = title,
         _resume = resume,
         _callback = callback;
 
   final String _title;
-  final String _resume;
+  final int _resume;
   final Function? _callback;
 
   @override
   Widget build(BuildContext context) {
+    final QuantityService quantityService = QuantityService();
+
     return ValueListenableBuilder(
       valueListenable: currentTheme,
       builder: (BuildContext context, Brightness theme, _) {
@@ -42,7 +45,7 @@ class PerfilItemWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: SubtitleResumeWidget(
                 title: _title,
-                resume: _resume,
+                resume: quantityService.quantity(_resume),
               ),
             ),
           ),

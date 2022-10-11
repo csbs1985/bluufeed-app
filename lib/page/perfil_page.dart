@@ -5,9 +5,9 @@ import 'package:bluuffed_app/modal/opiton_modal.dart';
 import 'package:bluuffed_app/model/modal_model.dart';
 import 'package:bluuffed_app/model/perfil_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/service/quantity_service.dart';
 import 'package:bluuffed_app/skeleton/history_item_skeleton.dart';
 import 'package:bluuffed_app/skeleton/perfil_skeleton.dart';
-import 'package:bluuffed_app/skeleton/user_item_skeleton.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
@@ -35,6 +35,7 @@ class PerfilPage extends StatefulWidget {
 class _PerfilPageState extends State<PerfilPage> {
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final PerfilClass perfilClass = PerfilClass();
+  final QuantityService quantityService = QuantityService();
   final UserFirestore userFirestore = UserFirestore();
 
   late Map<String, dynamic> _perfil;
@@ -169,10 +170,10 @@ class _PerfilPageState extends State<PerfilPage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 SubtitleResumeWidget(
-                  title: 'interações',
-                  resume: '${snapshot['qtyComment'].toString()} comentários',
+                  title: 'número de comentários',
+                  resume: quantityService.quantity(snapshot['qtyComment']),
                 ),
-                if (!isCurrentUser()) const SizedBox(height: UiPadding.large),
+                const SizedBox(height: UiPadding.xLarge),
                 if (!isCurrentUser()) ButtonFollowWidget(perfil: _perfil),
                 const SizedBox(height: UiPadding.large),
                 Row(
@@ -180,21 +181,20 @@ class _PerfilPageState extends State<PerfilPage> {
                   children: [
                     PerfilItemWidget(
                       title: 'histórias',
-                      resume: snapshot['qtyHistory'].toString(),
+                      resume: snapshot['qtyHistory'],
                       callback: (value) => _setTab(PerfilTabEnum.HISTORY.value),
                     ),
                     const SizedBox(width: UiPadding.large),
                     PerfilItemWidget(
                       title: 'ler depois',
-                      resume: snapshot['qtyBookmark'].toString(),
-                      callback: (value) => _setTab(
-                        PerfilTabEnum.BOOKMARK.value,
-                      ),
+                      resume: snapshot['qtyBookmark'],
+                      callback: (value) =>
+                          _setTab(PerfilTabEnum.BOOKMARK.value),
                     ),
                     const SizedBox(width: UiPadding.large),
                     PerfilItemWidget(
                       title: 'seguindo',
-                      resume: snapshot['following'].length.toString(),
+                      resume: snapshot['following'].length,
                       callback: (value) => _setTab(PerfilTabEnum.USER.value),
                     ),
                   ],
@@ -206,24 +206,9 @@ class _PerfilPageState extends State<PerfilPage> {
           const SeparatorWidget(),
           if (_tab == PerfilTabEnum.HISTORY.value) _listHistory(),
           if (_tab == PerfilTabEnum.BOOKMARK.value) _listBookmarks(),
-          // if (_tab == PerfilTabEnum.USER.value) _listFollowings(),
+          if (_tab == PerfilTabEnum.USER.value) _listFollowings(),
         ],
       ),
-    );
-  }
-
-  Widget _listFollowings() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.all(UiPadding.large),
-          child: SubtitleWidget(resume: 'seguindo'),
-        ),
-        _perfil.isEmpty
-            ? const UserItemSkeleton()
-            : UserItemWidget(content: _perfil['following'])
-      ],
     );
   }
 
@@ -249,7 +234,10 @@ class _PerfilPageState extends State<PerfilPage> {
             BuildContext context,
             QueryDocumentSnapshot<dynamic> snapshot,
           ) {
-            return HistoryItemWidget(snapshot: snapshot.data());
+            return snapshot.data() == null
+                ? const NoResultWidget(
+                    text: 'Você não escreveu histórias ainda')
+                : HistoryItemWidget(snapshot: snapshot.data());
           },
         ),
       ],
@@ -265,8 +253,9 @@ class _PerfilPageState extends State<PerfilPage> {
           child: SubtitleWidget(resume: 'ler depois'),
         ),
         FirestoreListView(
-          query: historyFirestore.stories.orderBy('date').where('bookmarks',
-              arrayContainsAny: [currentUser.value.first.id]),
+          query: historyFirestore.stories
+              .orderBy('date')
+              .where('bookmarks', arrayContainsAny: [_user]),
           pageSize: 10,
           shrinkWrap: true,
           reverse: true,
@@ -277,9 +266,26 @@ class _PerfilPageState extends State<PerfilPage> {
             BuildContext context,
             QueryDocumentSnapshot<dynamic> snapshot,
           ) {
-            return HistoryItemWidget(snapshot: snapshot.data());
+            return snapshot.data() == null
+                ? const NoResultWidget(text: 'Você ainda não salvou histórias')
+                : HistoryItemWidget(snapshot: snapshot.data());
           },
         ),
+      ],
+    );
+  }
+
+  Widget _listFollowings() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(UiPadding.large),
+          child: SubtitleWidget(resume: 'seguindo'),
+        ),
+        _perfil.isEmpty
+            ? const NoResultWidget(text: 'Você ainda não segue ninguém')
+            : UserItemWidget(content: _perfil['following'])
       ],
     );
   }
