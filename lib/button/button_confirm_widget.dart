@@ -1,6 +1,5 @@
-import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:flutter/material.dart';
-import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 
 class ButtonConfirmWidget extends StatefulWidget {
@@ -20,26 +19,23 @@ class ButtonConfirmWidget extends StatefulWidget {
 class _ButtonConfirmWidgetState extends State<ButtonConfirmWidget> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: currentTheme,
-      builder: (BuildContext context, Brightness theme, _) {
-        bool isDark = currentTheme.value == Brightness.dark;
-
-        return GestureDetector(
-          child: Material(
-            color: isDark ? UiColor.mainDark : UiColor.main,
-            child: SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Headline2(text: widget._label),
-              ),
-            ),
-          ),
-          onTapDown: (TapTop) => widget._callback(true),
-        );
-      },
+    return TextButton(
+      onPressed: () => widget._callback(true),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        padding: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(UiBorder.none),
+        ),
+      ),
+      child: SizedBox(
+        width: double.infinity,
+        height: 48,
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Headline2(text: widget._label),
+        ),
+      ),
     );
   }
 }

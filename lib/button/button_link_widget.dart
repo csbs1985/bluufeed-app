@@ -1,6 +1,5 @@
-import 'package:bluuffed_app/theme/ui_color.dart';
+import 'package:bluuffed_app/theme/ui_border.dart';
 import 'package:flutter/material.dart';
-import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 
 class ButtonLinkWidget extends StatefulWidget {
@@ -20,28 +19,24 @@ class ButtonLinkWidget extends StatefulWidget {
 class _ButtonLinkWidgetState extends State<ButtonLinkWidget> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: currentTheme,
-      builder: (BuildContext context, Brightness theme, _) {
-        bool isDark = currentTheme.value == Brightness.dark;
-
-        return GestureDetector(
-          child: Material(
-            color: isDark ? UiColor.mainDark : UiColor.main,
-            child: SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Headline2(text: widget._label),
-              ),
-            ),
-          ),
-          onTap: () => Navigator.of(context).pushNamed(widget._link),
-        );
-      },
+    return TextButton(
+      onPressed: () => Navigator.of(context).pushNamed(widget._link),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        padding: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(UiBorder.none),
+        ),
+      ),
+      child: Container(
+        width: double.infinity,
+        height: 48,
+        padding: const EdgeInsets.symmetric(horizontal: 0),
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Headline2(text: widget._label),
+        ),
+      ),
     );
   }
 }
-
-//onTapDown: (TapTop) => Navigator.of(context).pushNamed(widget._link),
