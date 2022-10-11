@@ -6,6 +6,7 @@ import 'package:bluuffed_app/model/modal_model.dart';
 import 'package:bluuffed_app/model/perfil_model.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/quantity_service.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:bluuffed_app/skeleton/history_item_skeleton.dart';
 import 'package:bluuffed_app/skeleton/perfil_skeleton.dart';
 import 'package:bluuffed_app/text/headline1.dart';
@@ -37,6 +38,7 @@ class _PerfilPageState extends State<PerfilPage> {
   final PerfilClass perfilClass = PerfilClass();
   final QuantityService quantityService = QuantityService();
   final UserFirestore userFirestore = UserFirestore();
+  final UserService userService = UserService();
 
   late Map<String, dynamic> _perfil;
   late String _user;
@@ -313,7 +315,7 @@ class _PerfilPageState extends State<PerfilPage> {
         ),
         _perfil.isEmpty
             ? const NoResultWidget(text: 'Você ainda não segue ninguém')
-            : UserItemWidget(content: _perfil['following'])
+            : UserItemWidget(content: _perfil['following']),
       ],
     );
   }

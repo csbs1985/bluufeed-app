@@ -3,15 +3,16 @@ import 'package:bluuffed_app/model/notification_model.dart';
 import 'package:bluuffed_app/model/search_model.dart';
 import 'package:bluuffed_app/model/user_recent_model.dart';
 import 'package:bluuffed_app/service/algolia_service.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/search_history_widget.dart';
 import 'package:bluuffed_app/widget/search_menu_widget.dart';
-import 'package:bluuffed_app/widget/search_user_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:bluuffed_app/widget/user_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -27,6 +28,7 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _valueController = TextEditingController();
   final ToastWidget toast = ToastWidget();
   final UserRecentClass userRecentClass = UserRecentClass();
+  final UserService userService = UserService();
   final Uuid uuid = const Uuid();
 
   Algolia? algolia;
@@ -151,7 +153,10 @@ class _SearchPageState extends State<SearchPage> {
                             if (_searchMenu == SearchMenuEnum.HISTORY.value)
                               SearchHistoryWidget(snapshot: _snapshotHistory),
                             if (_searchMenu == SearchMenuEnum.USER.value)
-                              SearchUserWidget(snapshot: _snapshotUser),
+                              UserItemWidget(
+                                content:
+                                    userService.algoliaToList(_snapshotUser!),
+                              ),
                           ],
                         ),
                 ],
