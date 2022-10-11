@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TextWidget extends StatelessWidget {
-  const TextWidget({required String text}) : _text = text;
+class Headline2 extends StatelessWidget {
+  const Headline2({required String text}) : _text = text;
 
   final String _text;
 

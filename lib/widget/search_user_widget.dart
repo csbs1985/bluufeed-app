@@ -133,7 +133,7 @@ class _SearchUserWidgetState extends State<SearchUserWidget> {
           Container(
             alignment: Alignment.centerLeft,
             height: UiSize.bottom,
-            child: const TextWidget(text: 'usuário não encontrado'),
+            child: const Headline2(text: 'usuário não encontrado'),
           ),
         ],
       ),

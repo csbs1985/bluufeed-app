@@ -229,7 +229,7 @@ class _InputCommentModalState extends State<InputCommentModal> {
                                 callback: (value) => _toggleAnonimous(),
                               ),
                               const SizedBox(width: UiPadding.medium),
-                              TextWidget(
+                              Headline2(
                                 text: _textSigned
                                     ? currentUser.value.first.name
                                     : 'anônimo',

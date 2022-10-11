@@ -33,7 +33,7 @@ class _ButtonConfirmWidgetState extends State<ButtonConfirmWidget> {
               height: 48,
               child: Container(
                 alignment: Alignment.centerLeft,
-                child: TextWidget(text: widget._label),
+                child: Headline2(text: widget._label),
               ),
             ),
           ),

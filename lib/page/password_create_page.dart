@@ -86,7 +86,7 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
                   text: 'a senha ajuda a manter seus dados seguros...',
                 ),
                 const SizedBox(height: UiPadding.large),
-                const TextWidget(
+                const Headline2(
                   text:
                       'Digite uma senha seguindo o padrão abaixo e a confirme.'
                       '\n\n'

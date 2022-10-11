@@ -65,7 +65,7 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                             SearchDateWidget(
                                 item: widget._snapshot![index].data),
                             const SizedBox(height: UiPadding.medium),
-                            TextWidget(
+                            Headline2(
                                 text: widget._snapshot![index].data['text']),
                             const SizedBox(height: UiPadding.large),
                           ],
@@ -89,7 +89,7 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
           Container(
             alignment: Alignment.centerLeft,
             height: UiSize.bottom,
-            child: const TextWidget(
+            child: const Headline2(
               text: 'não encontramos histórias para sua pesquisa',
             ),
           ),

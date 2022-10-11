@@ -55,7 +55,7 @@ class _DialogConfirmWidgetState extends State<DialogConfirmWidget> {
                 SvgPicture.asset(UiIcon.identity),
                 const SizedBox(height: UiPadding.large),
                 TextAnimationWidget(text: widget._title),
-                TextWidget(text: widget._text),
+                Headline2(text: widget._text),
                 const SizedBox(height: UiPadding.xLarge),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

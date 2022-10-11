@@ -48,7 +48,7 @@ class _ButtonCommentWidgetState extends State<ButtonCommentWidget> {
                   width: double.infinity,
                   height: UiSize.bottomNavigation,
                   padding: const EdgeInsets.only(left: UiPadding.large),
-                  child: const TextWidget(text: "Escrever comentário..."),
+                  child: const Headline2(text: "Escrever comentário..."),
                 ),
               ),
             ],

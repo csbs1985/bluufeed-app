@@ -6,7 +6,6 @@ import 'package:bluuffed_app/model/form_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
-import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/button/button_text_widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
@@ -75,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 const Headline1(title: 'Entrar'),
                 const TextAnimationWidget(text: 'é bom ter você de volta...'),
                 const SizedBox(height: UiPadding.large),
-                const TextWidget(
+                const Headline2(
                     text:
                         'Informe seu email cadastrado e clique em "próximo" para continuar.'),
                 const SizedBox(height: UiPadding.large),
@@ -101,12 +100,12 @@ class _LoginPageState extends State<LoginPage> {
                   style: ButtonStyleEnum.PRIMARY.value,
                 ),
                 const SizedBox(height: UiPadding.large),
-                ButtonTextWidget(
+                ButtonHeadline2(
                   callback: (value) =>
                       Navigator.pushNamed(context, PageEnum.REGISTER.value),
                   label: 'sou novo aqui, cadastrar',
                 ),
-                ButtonTextWidget(
+                ButtonHeadline2(
                   callback: (value) => Navigator.pushNamed(
                     context,
                     PageEnum.FORGOT_PASSWORD.value,

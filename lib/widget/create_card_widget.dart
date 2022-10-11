@@ -45,7 +45,7 @@ class _CreateCardWidgetState extends State<CreateCardWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const TitleWidget(title: 'Escrever nova história'),
-          TextWidget(
+          Headline2(
             text:
                 'O melhor jeito de lembrar é registrando. $_user escreva, conte sua história.',
           ),

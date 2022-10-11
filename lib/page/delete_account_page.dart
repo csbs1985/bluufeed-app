@@ -88,7 +88,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Headline1(title: 'Deletar conta'),
-              const TextWidget(
+              const Headline2(
                 text:
                     'Tem certeza que deseja excluir sua conta bluufeed definitivamente?'
                     '\n'

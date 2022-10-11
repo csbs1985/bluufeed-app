@@ -39,14 +39,14 @@ class _DialogWidgetState extends State<DialogWidget> {
                 SvgPicture.asset(UiIcon.identity),
                 const SizedBox(height: UiPadding.large),
                 const TextAnimationWidget(text: 'Estamos trabalhando'),
-                const TextWidget(
+                const Headline2(
                   text: 'Não feche o aplicativo ou tente mudar de página.',
                 ),
                 const SizedBox(height: UiPadding.large),
                 ValueListenableBuilder(
                   valueListenable: currentDialog,
                   builder: (BuildContext context, String dialog, _) {
-                    return TextWidget(text: dialog);
+                    return Headline2(text: dialog);
                   },
                 ),
               ],

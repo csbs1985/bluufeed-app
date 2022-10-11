@@ -61,7 +61,7 @@ class _HistoryItemWidgetState extends State<HistoryItemWidget> {
                   linkColor: UiColor.primary,
                 ),
               if (_route == PageEnum.HISTORY.value)
-                TextWidget(text: widget._item['text']),
+                Headline2(text: widget._item['text']),
               const SizedBox(height: UiPadding.medium),
               Wrap(
                 children: [

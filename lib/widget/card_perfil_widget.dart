@@ -52,10 +52,10 @@ class _CardPerfilWidgetState extends State<CardPerfilWidget> {
                 children: [
                   SvgPicture.asset(widget._icon),
                   const SizedBox(width: UiPadding.large),
-                  TextWidget(text: widget._label),
+                  Headline2(text: widget._label),
                 ],
               ),
-              TextWidget(text: widget._number),
+              Headline2(text: widget._number),
             ],
           ),
         );

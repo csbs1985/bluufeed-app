@@ -71,11 +71,11 @@ class _ButtonCardWidgetState extends State<ButtonCardWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          TextWidget(text: widget._content[index].title),
+                          Headline2(text: widget._content[index].title),
                           if (widget._content[index].text != '')
                             const SizedBox(height: UiPadding.small),
                           if (widget._content[index].text != '')
-                            TextWidget(text: widget._content[index].text)
+                            Headline2(text: widget._content[index].text)
                         ],
                       ),
                     ),

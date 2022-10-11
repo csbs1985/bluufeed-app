@@ -136,7 +136,7 @@ class _NamePageState extends State<NamePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Headline1(title: 'Nome de usuário'),
-                const TextWidget(
+                const Headline2(
                   text:
                       'Os nomes de usuário só podem usar letras, números, sublinhados e pontos, deve ser único e de 6 à 20 caracteres.'
                       '\n'
@@ -144,7 +144,7 @@ class _NamePageState extends State<NamePage> {
                 ),
                 if (_cantChange) const SizedBox(height: UiPadding.large),
                 if (_cantChange)
-                  TextWidget(
+                  Headline2(
                     text:
                         'espere mais ${_rulesDays - _daysRemaining} dia(s) para alterar o nome de usuário.',
                   ),

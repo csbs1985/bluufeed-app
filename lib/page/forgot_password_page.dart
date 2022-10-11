@@ -119,7 +119,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 const Headline1(title: 'Problemas ao entrar'),
                 const TextAnimationWidget(text: 'vou te ajudar...'),
                 const SizedBox(height: UiPadding.large),
-                const TextWidget(
+                const Headline2(
                   text: '- Como lembra minha senha?'
                       '\n'
                       'R: Digite seu email cadastrado no bluufeed que enviaremos um código para validação, e depois poderá alterar sua senha.'

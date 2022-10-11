@@ -42,7 +42,7 @@ class SinceWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SubtitleWidget(resume: 'desde'),
-        TextWidget(text: _getSince()),
+        Headline2(text: _getSince()),
       ],
     );
   }

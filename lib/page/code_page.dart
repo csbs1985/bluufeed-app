@@ -109,14 +109,14 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
               const Headline1(title: 'Código de verificação'),
               const TextAnimationWidget(text: 'um código pode salvar vidas...'),
               const SizedBox(height: UiPadding.large),
-              TextWidget(
+              Headline2(
                 text:
                     'Enviamos um código de verificação com quatro digitos numéricos para o email ${currentEmail.value} cadastrado. '
                     'Caso não confirme abaixo com o código em até 10 (cinco) minutos a operação é cancelada e você deverá reinicar o precesso. '
                     'Se precisar bastar solicitar um novo código de verificação. ',
               ),
               const SizedBox(height: UiPadding.large),
-              const TextWidget(
+              const Headline2(
                 text:
                     'Caso não consigo visualizar o email, confira sua caixa de span.',
               ),
@@ -126,7 +126,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                 children: [
                   const SizedBox(
                     width: 291,
-                    child: TextWidget(
+                    child: Headline2(
                       text:
                           'Por favor, insira o código de validação recebido em ',
                     ),
@@ -147,7 +147,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                   ),
                   const SizedBox(
                     width: 1,
-                    child: TextWidget(
+                    child: Headline2(
                       text: '.',
                     ),
                   ),
@@ -183,7 +183,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                 style: ButtonStyleEnum.PRIMARY.value,
               ),
               const SizedBox(height: UiPadding.large),
-              ButtonTextWidget(
+              ButtonHeadline2(
                 callback: (value) => _sendCode(),
                 label: 'enviar novo código',
               ),

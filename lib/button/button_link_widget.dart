@@ -33,7 +33,7 @@ class _ButtonLinkWidgetState extends State<ButtonLinkWidget> {
               height: 48,
               child: Container(
                 alignment: Alignment.centerLeft,
-                child: TextWidget(text: widget._label),
+                child: Headline2(text: widget._label),
               ),
             ),
           ),

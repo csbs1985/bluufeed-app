@@ -34,7 +34,7 @@ class QuestionsPage extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(UiPadding.large),
-                      child: TextWidget(
+                      child: Headline2(
                         text: '${allQuestions[index].question}'
                             '\n\n'
                             '${allQuestions[index].answer}',

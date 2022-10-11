@@ -107,11 +107,19 @@ class _SettingsPageState extends State<SettingsPage> {
                             link: PageEnum.NAME.value,
                           ),
                           ButtonLinkWidget(
+                            label: 'Biografia',
+                            link: PageEnum.NAME.value,
+                          ),
+                          ButtonLinkWidget(
                             label: 'Senha',
                             link: PageEnum.PASSWORD_EDIT.value,
                           ),
                           ButtonLinkWidget(
                             label: 'Suas atividades',
+                            link: PageEnum.ACTIVITY.value,
+                          ),
+                          ButtonLinkWidget(
+                            label: 'Bloqueados',
                             link: PageEnum.ACTIVITY.value,
                           ),
                         ],

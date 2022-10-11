@@ -84,7 +84,7 @@ class _PasswordEditPageState extends State<PasswordEditPage> {
                 const TextAnimationWidget(
                     text: 'é sempre bom mudar a senha...'),
                 const SizedBox(height: UiPadding.large),
-                const TextWidget(
+                const Headline2(
                   text:
                       'Digite uma senha seguindo o padrão abaixo e a confirme.'
                       '\n\n'

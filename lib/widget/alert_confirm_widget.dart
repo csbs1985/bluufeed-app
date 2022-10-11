@@ -47,8 +47,8 @@ class _AlertConfirmComponentState extends State<AlertConfirmWidget> {
             borderRadius: BorderRadius.all(Radius.circular(UiBorder.rounded)),
           ),
           backgroundColor: isDark ? UiColor.mainDark : UiColor.main,
-          title: TextWidget(text: widget._title),
-          content: TextWidget(text: widget._text),
+          title: Headline2(text: widget._title),
+          content: Headline2(text: widget._text),
           actions: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

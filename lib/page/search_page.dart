@@ -114,6 +114,7 @@ class _SearchPageState extends State<SearchPage> {
                       children: [
                         const Headline1(title: 'Pesquisar'),
                         TextField(
+                          autofocus: false,
                           controller: _valueController,
                           onChanged: (value) => keyUp(),
                           style: Theme.of(context).textTheme.headline2,
@@ -136,7 +137,7 @@ class _SearchPageState extends State<SearchPage> {
                           padding: EdgeInsets.symmetric(
                             horizontal: UiPadding.large,
                           ),
-                          child: TextWidget(
+                          child: Headline2(
                             text:
                                 'Pesquise pelo nome de usuário, título ou texto da história',
                           ),

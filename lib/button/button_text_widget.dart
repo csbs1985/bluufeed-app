@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_text.dart';
 
-class ButtonTextWidget extends StatefulWidget {
-  const ButtonTextWidget({
+class ButtonHeadline2 extends StatefulWidget {
+  const ButtonHeadline2({
     required Function callback,
     required String label,
   })  : _callback = callback,
@@ -13,10 +13,10 @@ class ButtonTextWidget extends StatefulWidget {
   final String _label;
 
   @override
-  State<ButtonTextWidget> createState() => _ButtonTextWidgetState();
+  State<ButtonHeadline2> createState() => _ButtonHeadline2State();
 }
 
-class _ButtonTextWidgetState extends State<ButtonTextWidget> {
+class _ButtonHeadline2State extends State<ButtonHeadline2> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

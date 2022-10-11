@@ -138,7 +138,7 @@ class _SendModalState extends State<SendModal> {
                 height: UiSize.appBar,
                 padding:
                     const EdgeInsets.symmetric(horizontal: UiPadding.large),
-                child: const TextWidget(text: 'Compartilhar história'),
+                child: const Headline2(text: 'Compartilhar história'),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(
@@ -191,7 +191,7 @@ class _SendModalState extends State<SendModal> {
           children: [
             const SubtitleWidget(resume: 'recente'),
             currentUserRecent.value.isEmpty
-                ? const TextWidget(text: 'você não compartilhou história ainda')
+                ? const Headline2(text: 'você não compartilhou história ainda')
                 : ListView.builder(
                     shrinkWrap: true,
                     reverse: true,
@@ -199,7 +199,7 @@ class _SendModalState extends State<SendModal> {
                     itemBuilder: (BuildContext context, int index) => Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextWidget(text: currentUserRecent.value[index].name),
+                        Headline2(text: currentUserRecent.value[index].name),
                         ButtonPublishWidget(
                           label: 'enviar história',
                           callback: (value) => _formatRecent(
@@ -221,7 +221,7 @@ class _SendModalState extends State<SendModal> {
         Container(
           alignment: Alignment.centerLeft,
           height: UiSize.bottom,
-          child: const TextWidget(text: 'usuário não encontrado'),
+          child: const Headline2(text: 'usuário não encontrado'),
         ),
       ],
     );
@@ -235,7 +235,7 @@ class _SendModalState extends State<SendModal> {
       itemBuilder: (BuildContext context, int index) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextWidget(text: _snapshot![index].data['name']),
+          Headline2(text: _snapshot![index].data['name']),
           ButtonPublishWidget(
             label: 'enviar história',
             callback: (value) => _formatAlgolia(context, _snapshot![index]),

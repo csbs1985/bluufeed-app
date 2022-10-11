@@ -71,7 +71,7 @@ class _JustifyPageState extends State<JustifyPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Headline1(title: 'Justificar e deletar'),
-              const TextWidget(
+              const Headline2(
                 text:
                     'Antes me diga o motivo do porque esta deletando sua conta bluufeed.',
               ),

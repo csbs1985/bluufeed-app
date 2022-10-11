@@ -55,7 +55,7 @@ class _AboutPage extends State<AboutPage> {
               const SizedBox(height: UiPadding.xLarge),
               SvgPicture.asset(UiIcon.identity),
               const SizedBox(height: UiPadding.xLarge),
-              TextWidget(
+              Headline2(
                 text: 'Versão'
                     '\n'
                     'v${_packageInfo.version}'

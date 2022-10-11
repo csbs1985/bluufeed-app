@@ -150,7 +150,7 @@ class _DenouncePageState extends State<DenouncePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Headline1(title: "Denunciar ${currentIsSigned.value}"),
-                  const TextWidget(
+                  const Headline2(
                     text:
                         'Isso é algo sério, tenha certeza antes de denunciar alguém. Caso um usuário estiver em perigo à vida ou à saúde, peça ajuda imediatamente. Não espere.',
                   ),

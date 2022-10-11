@@ -69,7 +69,7 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
                 alignment: Alignment.center,
                 color: isDark ? UiColor.backDark : UiColor.back,
                 width: buttonSize,
-                child: ButtonTextWidget(
+                child: ButtonHeadline2(
                   label: _show ? 'mostrar' : 'ocultar',
                   callback: (value) => _showPassword(),
                 ),

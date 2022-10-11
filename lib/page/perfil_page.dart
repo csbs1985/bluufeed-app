@@ -43,7 +43,11 @@ class _PerfilPageState extends State<PerfilPage> {
 
   bool _isAnotherUser = false;
 
-  String _tab = PerfilTabEnum.HISTORY.value;
+  @override
+  void initState() {
+    super.initState();
+    currentPerfilTab.value = PerfilTabEnum.HISTORY.value;
+  }
 
   isAuthor() {
     if (ModalRoute.of(context)!.settings.arguments != null) {
@@ -74,10 +78,6 @@ class _PerfilPageState extends State<PerfilPage> {
     );
   }
 
-  _setTab(String tab) {
-    setState(() => _tab = tab);
-  }
-
   @override
   Widget build(BuildContext context) {
     isAuthor();
@@ -102,8 +102,7 @@ class _PerfilPageState extends State<PerfilPage> {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
                 return const NoResultWidget(
-                  text: 'Não foi possível encontrar usuário',
-                );
+                    text: 'Não foi possível encontrar usuário');
 
               case ConnectionState.waiting:
                 return const PerfilSkeleton();
@@ -131,7 +130,7 @@ class _PerfilPageState extends State<PerfilPage> {
                   return _perfilItem(_perfil);
                 } catch (error) {
                   return const NoResultWidget(
-                    text: 'Não foi possível encontrar usuário 3',
+                    text: 'Não foi possível encontrar usuário ',
                   );
                 }
             }
@@ -170,10 +169,10 @@ class _PerfilPageState extends State<PerfilPage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 SubtitleResumeWidget(
-                  title: 'número de comentários',
+                  title: 'comentários',
                   resume: quantityService.quantity(snapshot['qtyComment']),
                 ),
-                const SizedBox(height: UiPadding.xLarge),
+                if (!isCurrentUser()) const SizedBox(height: UiPadding.large),
                 if (!isCurrentUser()) ButtonFollowWidget(perfil: _perfil),
                 const SizedBox(height: UiPadding.large),
                 Row(
@@ -182,20 +181,22 @@ class _PerfilPageState extends State<PerfilPage> {
                     PerfilItemWidget(
                       title: 'histórias',
                       resume: snapshot['qtyHistory'],
-                      callback: (value) => _setTab(PerfilTabEnum.HISTORY.value),
+                      callback: (value) =>
+                          currentPerfilTab.value = PerfilTabEnum.HISTORY.value,
                     ),
                     const SizedBox(width: UiPadding.large),
                     PerfilItemWidget(
                       title: 'ler depois',
                       resume: snapshot['qtyBookmark'],
                       callback: (value) =>
-                          _setTab(PerfilTabEnum.BOOKMARK.value),
+                          currentPerfilTab.value = PerfilTabEnum.BOOKMARK.value,
                     ),
                     const SizedBox(width: UiPadding.large),
                     PerfilItemWidget(
                       title: 'seguindo',
                       resume: snapshot['following'].length,
-                      callback: (value) => _setTab(PerfilTabEnum.USER.value),
+                      callback: (value) =>
+                          currentPerfilTab.value = PerfilTabEnum.USER.value,
                     ),
                   ],
                 ),
@@ -204,9 +205,21 @@ class _PerfilPageState extends State<PerfilPage> {
           ),
           const SizedBox(height: UiPadding.large),
           const SeparatorWidget(),
-          if (_tab == PerfilTabEnum.HISTORY.value) _listHistory(),
-          if (_tab == PerfilTabEnum.BOOKMARK.value) _listBookmarks(),
-          if (_tab == PerfilTabEnum.USER.value) _listFollowings(),
+          ValueListenableBuilder(
+            valueListenable: currentPerfilTab,
+            builder: (BuildContext context, String _currentPerfilTab, _) {
+              return Column(
+                children: [
+                  if (_currentPerfilTab == PerfilTabEnum.HISTORY.value)
+                    _listHistory(),
+                  if (_currentPerfilTab == PerfilTabEnum.BOOKMARK.value)
+                    _listBookmarks(),
+                  if (_currentPerfilTab == PerfilTabEnum.USER.value)
+                    _listFollowings(),
+                ],
+              );
+            },
+          ),
         ],
       ),
     );
@@ -217,7 +230,12 @@ class _PerfilPageState extends State<PerfilPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.all(UiPadding.large),
+          padding: EdgeInsets.fromLTRB(
+            UiPadding.large,
+            UiPadding.large,
+            UiPadding.large,
+            0,
+          ),
           child: SubtitleWidget(resume: 'histórias'),
         ),
         FirestoreListView(
@@ -234,7 +252,7 @@ class _PerfilPageState extends State<PerfilPage> {
             BuildContext context,
             QueryDocumentSnapshot<dynamic> snapshot,
           ) {
-            return snapshot.data() == null
+            return !snapshot.exists
                 ? const NoResultWidget(
                     text: 'Você não escreveu histórias ainda')
                 : HistoryItemWidget(snapshot: snapshot.data());
@@ -249,7 +267,12 @@ class _PerfilPageState extends State<PerfilPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.all(UiPadding.large),
+          padding: EdgeInsets.fromLTRB(
+            UiPadding.large,
+            UiPadding.large,
+            UiPadding.large,
+            0,
+          ),
           child: SubtitleWidget(resume: 'ler depois'),
         ),
         FirestoreListView(
@@ -280,7 +303,12 @@ class _PerfilPageState extends State<PerfilPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.all(UiPadding.large),
+          padding: EdgeInsets.fromLTRB(
+            UiPadding.large,
+            UiPadding.large,
+            UiPadding.large,
+            0,
+          ),
           child: SubtitleWidget(resume: 'seguindo'),
         ),
         _perfil.isEmpty

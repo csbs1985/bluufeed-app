@@ -33,14 +33,14 @@ class _LoaderWidgetState extends State<LoaderWidget> {
                   size: 80,
                   color: UiColor.primary,
                 ),
-                const TextWidget(text: 'Aguarde...'),
+                const Headline2(text: 'Aguarde...'),
                 if (currentDialog.value != '')
                   Padding(
                     padding: const EdgeInsets.only(top: UiPadding.medium),
                     child: ValueListenableBuilder(
                       valueListenable: currentDialog,
                       builder: (context, value, __) {
-                        return TextWidget(text: currentDialog.value);
+                        return Headline2(text: currentDialog.value);
                       },
                     ),
                   ),

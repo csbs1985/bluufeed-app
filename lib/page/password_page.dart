@@ -64,7 +64,7 @@ class _PasswordPageState extends State<PasswordPage> {
                 const Headline1(title: 'Senha'),
                 const TextAnimationWidget(text: 'agora vem a senha...'),
                 const SizedBox(height: UiPadding.large),
-                const TextWidget(text: 'Informe sua senha.'),
+                const Headline2(text: 'Informe sua senha.'),
                 const SizedBox(height: UiPadding.large),
                 InputPasswordWidget(
                   callback: (value) => _passwordController.text = value,
@@ -76,7 +76,7 @@ class _PasswordPageState extends State<PasswordPage> {
                   style: ButtonStyleEnum.PRIMARY.value,
                 ),
                 const SizedBox(height: UiPadding.large),
-                ButtonTextWidget(
+                ButtonHeadline2(
                   callback: (value) => Navigator.pushNamed(
                       context, PageEnum.FORGOT_PASSWORD.value),
                   label: 'esqueci a senha',
