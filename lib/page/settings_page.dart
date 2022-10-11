@@ -88,110 +88,110 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: UiPadding.large,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Headline1(title: 'Configurações'),
-                          const SubtitleResumeWidget(
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(UiPadding.large),
+                          child: Headline1(title: 'Configurações'),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: UiPadding.large,
+                          ),
+                          child: SubtitleResumeWidget(
                             title: 'Conta',
                             resume:
                                 'Mantenha seus dados atualizados e consulte seu conteúdo.',
                           ),
-                          const SizedBox(height: UiPadding.medium),
-                          ButtonLinkWidget(
-                            label: 'Nome de usuário',
-                            link: PageEnum.NAME.value,
-                          ),
-                          ButtonLinkWidget(
-                            label: 'Biografia',
-                            link: PageEnum.NAME.value,
-                          ),
-                          ButtonLinkWidget(
-                            label: 'Senha',
-                            link: PageEnum.PASSWORD_EDIT.value,
-                          ),
-                          ButtonLinkWidget(
-                            label: 'Suas atividades',
-                            link: PageEnum.ACTIVITY.value,
-                          ),
-                          ButtonLinkWidget(
-                            label: 'Bloqueados',
-                            link: PageEnum.ACTIVITY.value,
-                          ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: UiPadding.medium),
+                        ButtonLinkWidget(
+                          label: 'Nome de usuário',
+                          link: PageEnum.NAME.value,
+                        ),
+                        ButtonLinkWidget(
+                          label: 'Biografia',
+                          link: PageEnum.NAME.value,
+                        ),
+                        ButtonLinkWidget(
+                          label: 'Senha',
+                          link: PageEnum.PASSWORD_EDIT.value,
+                        ),
+                        ButtonLinkWidget(
+                          label: 'Suas atividades',
+                          link: PageEnum.ACTIVITY.value,
+                        ),
+                        ButtonLinkWidget(
+                          label: 'Bloqueados',
+                          link: PageEnum.ACTIVITY.value,
+                        ),
+                      ],
                     ),
                   ],
                 ),
                 const SeparatorWidget(),
-                Padding(
-                  padding: const EdgeInsets.all(UiPadding.large),
-                  child: SelectToggleWidget(
-                    callback: (value) => _toggleNotification(),
-                    title: 'Notificações',
-                    resume:
-                        'Ligado para habilitar e desligado para desabilitar as notificações.',
-                    value: currentUser.value.first.isNotification,
-                  ),
+                SelectToggleWidget(
+                  callback: (value) => _toggleNotification(),
+                  title: 'Notificações',
+                  resume:
+                      'Ligado para habilitar e desligado para desabilitar as notificações.',
+                  value: currentUser.value.first.isNotification,
                 ),
                 const SeparatorWidget(),
-                Padding(
-                  padding: const EdgeInsets.all(UiPadding.large),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SubtitleResumeWidget(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(UiPadding.large),
+                      child: SubtitleResumeWidget(
                         title: 'Informações',
                         resume:
                             'Sobre o bluufeed, perguntas, políticas e termos.',
                       ),
-                      const SizedBox(height: UiPadding.medium),
-                      const ButtonLinkWidget(label: 'Avaliação', link: '/'),
-                      ButtonLinkWidget(
-                        label: 'Perguntas frequentes',
-                        link: PageEnum.QUESTIONS.value,
-                      ),
-                      ButtonLinkWidget(
-                        label: 'Termo de uso',
-                        link: PageEnum.TERMS.value,
-                      ),
-                      ButtonLinkWidget(
-                        label: 'Política de privacidade',
-                        link: PageEnum.PRIVACY.value,
-                      ),
-                      ButtonLinkWidget(
-                        label: 'Sobre',
-                        link: PageEnum.ABOUT.value,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: UiPadding.medium),
+                    const ButtonLinkWidget(label: 'Avaliação', link: '/'),
+                    ButtonLinkWidget(
+                      label: 'Perguntas frequentes',
+                      link: PageEnum.QUESTIONS.value,
+                    ),
+                    ButtonLinkWidget(
+                      label: 'Termo de uso',
+                      link: PageEnum.TERMS.value,
+                    ),
+                    ButtonLinkWidget(
+                      label: 'Política de privacidade',
+                      link: PageEnum.PRIVACY.value,
+                    ),
+                    ButtonLinkWidget(
+                      label: 'Sobre',
+                      link: PageEnum.ABOUT.value,
+                    ),
+                  ],
                 ),
                 const SeparatorWidget(),
-                Padding(
-                  padding: const EdgeInsets.all(UiPadding.large),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SubtitleResumeWidget(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(UiPadding.large),
+                      child: SubtitleResumeWidget(
                         title: 'Finalizar',
                         resume:
                             'Sair temporariamente ou deletar a conta bluufeed.',
                       ),
-                      const SizedBox(height: UiPadding.medium),
-                      ButtonConfirmWidget(
-                        label: 'Sair',
-                        callback: (value) => _logout(),
-                      ),
-                      ButtonLinkWidget(
-                        label: 'Deletar conta',
-                        link: PageEnum.DELETE_ACCOUNT.value,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: UiPadding.medium),
+                    ButtonConfirmWidget(
+                      label: 'Sair',
+                      callback: (value) => _logout(),
+                    ),
+                    ButtonLinkWidget(
+                      label: 'Deletar conta',
+                      link: PageEnum.DELETE_ACCOUNT.value,
+                    ),
+                  ],
                 ),
               ],
             );

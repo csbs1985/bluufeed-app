@@ -1,4 +1,6 @@
 import 'package:bluuffed_app/theme/ui_border.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
+import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 
@@ -23,14 +25,14 @@ class _ButtonLinkWidgetState extends State<ButtonLinkWidget> {
       onPressed: () => Navigator.of(context).pushNamed(widget._link),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.transparent,
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(UiBorder.none),
         ),
       ),
       child: Container(
         width: double.infinity,
-        height: 48,
+        height: UiSize.link,
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Container(
           alignment: Alignment.centerLeft,

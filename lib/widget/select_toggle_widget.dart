@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:bluuffed_app/theme/ui_border.dart';
+import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 import 'package:bluuffed_app/widget/toggle_widget.dart';
+import 'package:flutter/material.dart';
 
 class SelectToggleWidget extends StatefulWidget {
   const SelectToggleWidget({
@@ -25,22 +27,32 @@ class SelectToggleWidget extends StatefulWidget {
 class _SelectToggleWidgetState extends State<SelectToggleWidget> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width - 108,
-          child: SubtitleResumeWidget(
-            title: widget._title,
-            resume: widget._resume,
+    return TextButton(
+      onPressed: () => widget._callback(true),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        padding: const EdgeInsets.all(UiPadding.large),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(UiBorder.none),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width - 108,
+            child: SubtitleResumeWidget(
+              title: widget._title,
+              resume: widget._resume,
+            ),
           ),
-        ),
-        ToggleWidget(
-          value: widget._value,
-          callback: (value) => widget._callback(value),
-        ),
-      ],
+          ToggleWidget(
+            value: widget._value,
+            callback: (value) => widget._callback(value),
+          ),
+        ],
+      ),
     );
   }
 }

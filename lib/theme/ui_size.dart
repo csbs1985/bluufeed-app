@@ -12,6 +12,7 @@ class UiSize {
   static const double iconCircleSmall = 32;
   static const double iconCircleLarge = 42;
   static const double input = 48;
+  static const double link = 48;
   static const double menuHeight = 32 + UiPadding.large + UiPadding.large;
   static const double modalHeight = 42;
   static const double noAppBar = 48;
