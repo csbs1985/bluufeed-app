@@ -11,8 +11,7 @@ class BlockService {
   final UserFirestore userFirestore = UserFirestore();
   final ToastWidget toastWidget = ToastWidget();
 
-  final List _listBlocked = [];
-  late Map<String, dynamic> _user;
+  late Map<String, dynamic> _block;
 
   Iterable<BlockedModel>? _notResult;
 
@@ -25,33 +24,37 @@ class BlockService {
     return 'bloquear ${_content['userName'] ?? _content['name']}';
   }
 
-  bool isBlocked(String _idUser) {
+  bool isBlocked(String _userId) {
     _notResult = currentUser.value.first.blocked
-        .where((element) => element.idUser == _idUser);
+        .where((element) => element.blockedUserId == _userId);
 
     return _notResult!.isNotEmpty ? true : false;
   }
 
-  postBlock(Map<String, dynamic> _content) {
+  postBlock(BuildContext context, Map<String, dynamic> _content) {
     try {
-      _user = {
-        'idUser': _content['idUser'],
-        'nameUser': _content['nameUser'],
+      _block = {
+        'blockedUserId': _content['userId'],
+        'blockedUserName': _content['userName'],
         'date': DateTime.now().toString(),
-        'isBlocker': true,
+        'blockingUser': currentUser.value.first.id,
       };
 
-      _listBlocked.add(_user);
-
-      userFirestore.pathBlock(currentUser.value.first.id, _user);
-
-      postBlock(_content);
+      userFirestore.postBlockedUser(_block);
+      userFirestore.postBlockingUser(_block);
 
       activityClass.save(
         type: ActivityEnum.BLOCK_USER.value,
-        content: _content['name'],
-        elementId: _content['idUser'],
+        content: _block['blockedUserName'],
+        elementId: _block['date'],
       );
+
+      toastWidget.toast(
+        context,
+        ToastEnum.SUCCESS.value,
+        'usuário bloqueado',
+      );
+      Navigator.of(context).pop();
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => postNewHistory: $error');
     }

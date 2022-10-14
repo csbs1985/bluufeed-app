@@ -160,9 +160,9 @@ class _OptionModalState extends State<OptionModal> {
           text:
               'Tem certeza que deseja bloquear ${widget._content['isSigned'] ? widget._content['userName'] : 'este usuário'}? Vocês não poderão ver o conteúdo um do outro.',
           buttonPrimary: 'cancelar',
-          buttonSecondary: 'deletar',
+          buttonSecondary: 'bloquear',
           callback: (value) => value
-              ? blockService.postBlock(_content)
+              ? blockService.postBlock(context, _content)
               : Navigator.of(context).pop(),
         );
       },

@@ -1,27 +1,27 @@
 class BlockedModel {
-  late String idUser;
-  late String nameUser;
+  late String blockedUserId;
+  late String blockedUserName;
+  late String blockingUser;
   late String date;
-  late bool isBlocker;
 
   BlockedModel({
-    required this.idUser,
-    required this.nameUser,
+    required this.blockedUserId,
+    required this.blockedUserName,
+    required this.blockingUser,
     required this.date,
-    required this.isBlocker,
   });
 
   factory BlockedModel.fromMap(Map<String, dynamic> json) => BlockedModel(
-        idUser: json['idUser'],
-        nameUser: json['nameUser'],
+        blockedUserId: json['blockedUserId'],
+        blockedUserName: json['blockedUserName'],
+        blockingUser: json['blockingUser'],
         date: json['date'],
-        isBlocker: json['isBlocker'],
       );
 
   Map<String, dynamic> toMap(BlockedModel user) => {
-        'idUser': user.idUser,
-        'nameUser': user.nameUser,
+        'blockedUserId': user.blockedUserId,
+        'blockedUserName': user.blockedUserName,
+        'blockingUser': user.blockingUser,
         'date': user.date,
-        'isBlocker': user.isBlocker,
       };
 }
