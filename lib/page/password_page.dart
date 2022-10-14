@@ -78,7 +78,9 @@ class _PasswordPageState extends State<PasswordPage> {
                 const SizedBox(height: UiPadding.large),
                 ButtonHeadline2(
                   callback: (value) => Navigator.pushNamed(
-                      context, PageEnum.FORGOT_PASSWORD.value),
+                    context,
+                    PageEnum.FORGOT_PASSWORD.value,
+                  ),
                   label: 'esqueci a senha',
                 ),
               ],

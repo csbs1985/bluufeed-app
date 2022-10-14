@@ -26,7 +26,7 @@ class _PasswordEditPageState extends State<PasswordEditPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   final AuthService authService = AuthService();
-  final PasswordClass passwordClass = PasswordClass();
+  final PasswordService passwordService = PasswordService();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 

@@ -28,7 +28,7 @@ class _NamePageState extends State<NamePage> {
   final CommentService commentService = CommentService();
   final DateService dateService = DateService();
   final HistoryService historyService = HistoryService();
-  final NameClass _nameClass = NameClass();
+  final NameService nameService = NameService();
   final TextEditingController _nameController = TextEditingController();
   final ToastWidget toastWidget = ToastWidget();
 
@@ -66,7 +66,7 @@ class _NamePageState extends State<NamePage> {
 
       try {
         String _now;
-        _nameClass.getName(_nameController.text).then((result) => {
+        nameService.getName(_nameController.text).then((result) => {
               if (result)
                 toastWidget.toast(
                   context,
@@ -76,7 +76,7 @@ class _NamePageState extends State<NamePage> {
               else
                 {
                   _now = DateTime.now().toString(),
-                  _nameClass.nameChange(_nameController.text, _now),
+                  nameService.nameChange(_nameController.text, _now),
                   currentUser.value.first.name = _nameController.text,
                   currentUser.value.first.upDateName = _now,
                   currentDialog.value =
@@ -155,7 +155,7 @@ class _NamePageState extends State<NamePage> {
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.text,
                   maxLines: 1,
-                  validator: (value) => _nameClass.validateName(value),
+                  validator: (value) => nameService.validateName(value!),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: UiPadding.large,

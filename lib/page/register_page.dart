@@ -23,53 +23,25 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final EmailClass _emailClass = EmailClass();
-  final NameClass _nameClass = NameClass();
+  final EmailService emailService = EmailService();
+  final NameService nameService = NameService();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
-  _login(BuildContext context) async {
+  _login(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       try {
-        _getEmail();
-      } on Exception catch (error) {
-        debugPrint('ERROR => _checkEmail: ' + error.toString());
-      }
-    }
-  }
-
-  _getEmail() {
-    _emailClass.getEmail(_emailController.text).then((result) {
-      if (!result)
-        _getName();
-      else {
-        toast.toast(
-          context,
-          ToastEnum.WARNING.value,
-          'este email já está cadastrado',
-        );
-      }
-    });
-  }
-
-  _getName() {
-    _nameClass.getName(_nameController.text).then((result) {
-      if (!result) {
         currentEmail.value = _emailController.text;
         currentForm.value = FormEnum.REGISTER.value;
         currentName.value = _nameController.text;
         Navigator.pushNamed(context, PageEnum.CODE.value);
-      } else {
-        toast.toast(
-          context,
-          ToastEnum.WARNING.value,
-          'nome de usuário indisponível',
-        );
+      } on Exception catch (error) {
+        debugPrint('ERROR => _login: ' + error.toString());
       }
-    });
+    }
   }
 
   @override
@@ -93,11 +65,12 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const Headline1(title: 'Criar conta'),
                 const TextAnimationWidget(
-                    text: 'espero que venha pra ficar...'),
+                  text: 'espero que venha pra ficar...',
+                ),
                 const SizedBox(height: UiPadding.large),
                 const Headline2(
                   text:
-                      'Ólá, vamos fazer seu cadastro. Para isso, precisamos de alguns dados pessoais. '
+                      'Olá, vamos fazer seu cadastro. Para isso, precisamos de alguns dados pessoais. '
                       'Digite seu email e nome de usuário e veremos a disponibilidade.',
                 ),
                 const SizedBox(height: UiPadding.large),
@@ -105,7 +78,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _emailController,
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.emailAddress,
-                  validator: (value) => _emailClass.validateEmail(value),
+                  validator: (value) => emailService.validateEmail(
+                    EmailEnum.REGISTER.value,
+                    value!,
+                  ),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: UiPadding.large,
@@ -119,8 +95,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFormField(
                   controller: _nameController,
                   style: Theme.of(context).textTheme.headline2,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) => _nameClass.validateName(value),
+                  keyboardType: TextInputType.text,
+                  validator: (value) => nameService.validateName(value!),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: UiPadding.large,
@@ -143,7 +119,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 ButtonHeadline2(
                   callback: (value) => Navigator.pushNamed(
-                      context, PageEnum.FORGOT_PASSWORD.value),
+                    context,
+                    PageEnum.FORGOT_PASSWORD.value,
+                  ),
                   label: 'problema ao entrar',
                 ),
               ],

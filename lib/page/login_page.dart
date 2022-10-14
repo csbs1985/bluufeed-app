@@ -21,7 +21,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final EmailClass _emailClass = EmailClass();
+
+  final EmailService emailService = EmailService();
   final TextEditingController _emailController = TextEditingController();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
@@ -32,21 +33,19 @@ class _LoginPageState extends State<LoginPage> {
         await userFirestore
             .getUserEmail(_emailController.text)
             .then((result) => {
-                  if (result.size > 0)
-                    {
-                      currentEmail.value = _emailController.text,
-                      currentForm.value = FormEnum.LOGIN.value,
-                      Navigator.pushNamed(context, PageEnum.CODE.value)
-                    }
-                  else
+                  if (result.size <= 0)
                     toast.toast(
                       context,
                       ToastEnum.WARNING.value,
                       'email informado não encontrado',
                     )
-                })
-            .catchError((error) =>
-                debugPrint('ERROR => _checkEmail: ' + error.toString()));
+                  else
+                    {
+                      currentEmail.value = _emailController.text,
+                      currentForm.value = FormEnum.LOGIN.value,
+                      Navigator.pushNamed(context, PageEnum.CODE.value)
+                    }
+                });
       } on Exception catch (error) {
         debugPrint('ERROR => _checkEmail: ' + error.toString());
       }
@@ -75,15 +74,19 @@ class _LoginPageState extends State<LoginPage> {
                 const TextAnimationWidget(text: 'é bom ter você de volta...'),
                 const SizedBox(height: UiPadding.large),
                 const Headline2(
-                    text:
-                        'Informe seu email cadastrado e clique em "próximo" para continuar.'),
+                  text:
+                      'Informe seu email cadastrado e clique em "próximo" para continuar.',
+                ),
                 const SizedBox(height: UiPadding.large),
                 TextFormField(
                   autofocus: true,
                   controller: _emailController,
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.emailAddress,
-                  validator: (value) => _emailClass.validateEmail(value),
+                  validator: (value) => emailService.validateEmail(
+                    EmailEnum.LOGIN.value,
+                    value!,
+                  ),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: UiPadding.large,

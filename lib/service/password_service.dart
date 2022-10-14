@@ -1,33 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:flutter/cupertino.dart';
 
 class PasswordService {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final UserFirestore userFirestore = UserFirestore();
   final ToastWidget toast = ToastWidget();
 
-  late String _toastMessage = '';
+  final String _regx =
+      r'^(?=.*[A-Z])(?=.*[@#%^*>\$@?/[]=+])(?=.*[0-9])(?=.*[a-z]).{6,20}$';
 
-  bool validatePassword(BuildContext context, String _password) {
-    _toastMessage = '';
-
-    if (_password.isEmpty) _toastMessage = 'informe sua senha';
-
-    if (_toastMessage.isNotEmpty)
-      toast.toast(
-        context,
-        ToastEnum.WARNING.value,
-        _toastMessage,
-      );
-
-    return _toastMessage.isEmpty ? true : false;
-  }
-}
-
-class PasswordClass {
-  validatePassword(value) {
-    if (value!.isEmpty) return 'informe sua senha';
-    if (value!.length < 6) return 'a senha deve ter no mínimo 6 caracteres';
+  validatePassword(String _password) {
+    if (_password.isEmpty) return 'informe sua senha';
+    if (_password.length < 6 || _password.length > 20)
+      return 'a senha deve ter de 6 à 20 caracteres';
+    if (!RegExp(_regx).hasMatch(_password))
+      return 'senha informada não é válida';
     return null;
+  }
+
+  validateForm() {
+    return formKey.currentState!.validate();
   }
 }

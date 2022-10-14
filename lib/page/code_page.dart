@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:bluuffed_app/service/interval_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
@@ -29,7 +30,8 @@ class CodePage extends StatefulWidget {
 class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   final AuthService authService = AuthService();
   final EmailService _emailService = EmailService();
-  final ToastWidget _toast = ToastWidget();
+  final IntervalService intervalService = IntervalService();
+  final ToastWidget toastWidget = ToastWidget();
 
   final TextEditingController _codeController = TextEditingController();
 
@@ -43,7 +45,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   }
 
   _sendCode() {
-    _code = Random().nextInt(999) + 1000;
+    _code = Random().nextInt(9999);
     _sendEmail();
   }
 
@@ -56,7 +58,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
         code: _code.toString(),
         template: EmailJsEnum.CODE.value,
       );
-      _toast.toast(
+      toastWidget.toast(
         context,
         ToastEnum.SUCCESS.value,
         'código enviado para o email ${currentEmail.value}',
@@ -67,12 +69,12 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   }
 
   _endTimer() {
-    _toast.toast(
+    toastWidget.toast(
       context,
       ToastEnum.WARNING.value,
       'tempo encerrado, vamos reiniciar o processo',
     );
-    Navigator.pop(context);
+    intervalService.back(context);
   }
 
   _validateCode() {
@@ -85,7 +87,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
         Navigator.pushNamed(context, PageEnum.PASSWORD_CREATE.value);
     } else {
       _codeController.text = '';
-      _toast.toast(
+      toastWidget.toast(
           context, ToastEnum.WARNING.value, 'código informado incorreto');
     }
   }
@@ -113,6 +115,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                 text:
                     'Enviamos um código de verificação com quatro digitos numéricos para o email ${currentEmail.value} cadastrado. '
                     'Caso não confirme abaixo com o código em até 10 (cinco) minutos a operação é cancelada e você deverá reinicar o precesso. '
+                    '\n'
                     'Se precisar bastar solicitar um novo código de verificação. ',
               ),
               const SizedBox(height: UiPadding.large),
@@ -127,9 +130,8 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                   const SizedBox(
                     width: 291,
                     child: Headline2(
-                      text:
-                          'Por favor, insira o código de validação recebido em ',
-                    ),
+                        text:
+                            'Por favor, insira o código de validação recebido em '),
                   ),
                   TimerCountdown(
                     format: CountDownTimerFormat.minutesSeconds,
@@ -137,19 +139,12 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
                     timeTextStyle: UiText.button,
                     colonsTextStyle: UiText.button,
                     spacerWidth: 1,
-                    endTime: DateTime.now().add(
-                      const Duration(
-                        minutes: 10,
-                        seconds: 0,
-                      ),
-                    ),
+                    endTime: DateTime.now().add(const Duration(minutes: 10)),
                     onEnd: () => _endTimer(),
                   ),
                   const SizedBox(
                     width: 1,
-                    child: Headline2(
-                      text: '.',
-                    ),
+                    child: Headline2(text: '.'),
                   ),
                 ],
               ),

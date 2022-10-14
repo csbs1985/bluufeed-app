@@ -6,6 +6,13 @@ import 'package:bluuffed_app/firestore/user_firestore.dart';
 ValueNotifier<String> currentEmail = ValueNotifier<String>('');
 
 class EmailService {
+  final UserFirestore userFirestore = UserFirestore();
+
+  final String _regx =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+  bool alreadyEmail = false;
+
   Future sendEmail({
     required String email,
     required String subject,
@@ -37,31 +44,36 @@ class EmailService {
       }),
     );
   }
-}
 
-class EmailClass {
-  final UserFirestore userFirestore = UserFirestore();
-  final String _regx =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-  late bool alreadyEmail;
-
-  validateEmail(value) {
-    if (value!.isEmpty) return 'informe seu email';
+  validateEmail(String _type, String value) {
+    if (value.isEmpty) return 'informe seu email';
     if (!RegExp(_regx).hasMatch(value)) return 'email informado não é válido';
+    if (_type == EmailEnum.LOGIN.value) {
+      if (!getEmail(value)) return 'email informado não encontrado';
+    } else {
+      if (getEmail(value)) return 'email informado já cadastrado';
+    }
     return null;
   }
 
-  getEmail(value) async {
-    await userFirestore
+  bool getEmail(String value) {
+    userFirestore
         .getUserEmail(value)
-        .then((result) => {
-              alreadyEmail = result.size > 0 ? true : false,
-            })
+        .then(
+          (result) => alreadyEmail = result.size > 0 ? true : false,
+        )
         .catchError((error) => debugPrint('ERROR => _checkEmail: ' + error));
 
     return alreadyEmail;
   }
+}
+
+enum EmailEnum {
+  LOGIN('login'),
+  REGISTER('register');
+
+  final String value;
+  const EmailEnum(this.value);
 }
 
 enum EmailJsEnum {

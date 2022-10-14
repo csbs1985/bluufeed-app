@@ -2,9 +2,7 @@ import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
-import 'package:bluuffed_app/model/form_model.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
-import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/service/password_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/button/button_3d_widget.dart';
@@ -23,43 +21,36 @@ class PasswordCreatePage extends StatefulWidget {
 class _PasswordCreatePageState extends State<PasswordCreatePage> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _passwordController = TextEditingController();
-
   final AuthService authService = AuthService();
-  final PasswordClass passwordClass = PasswordClass();
-  final ToastWidget toast = ToastWidget();
+  final PasswordService passwordService = PasswordService();
+  final TextEditingController _passwordController = TextEditingController();
+  final ToastWidget toastWidget = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 
-  final String _regx =
-      r'^(?=.*[A-Z])(?=.*[@#%^*>\$@?/[]=+])(?=.*[0-9])(?=.*[a-z]).{6,20}$';
-
-  String _errorMessage = '';
-
-  _login(BuildContext context) async {
-    _validatePassword();
-
-    if (_errorMessage == '') {
-      if (currentForm.value == FormEnum.FORGOT.value) {
-        authService.changePassword(context, currentEmail.value);
-      } else {
-        await authService
-            .register(context, currentEmail.value, _passwordController.text)
-            .catchError((error) =>
-                debugPrint('ERROR => _checkEmail: ' + error.toString()));
+  _register(BuildContext context) async {
+    if (passwordService.validateForm()) {
+      try {
+        print('object******************');
+      } on Exception catch (error) {
+        debugPrint('ERROR => register: ' + error.toString());
       }
-    } else {
-      toast.toast(context, ToastEnum.WARNING.value, _errorMessage);
     }
-  }
+    // passwordService.validatePassword(_passwordController.text);
 
-  _validatePassword() {
-    if (_passwordController.text.isEmpty) _errorMessage = 'informe sua senha';
-    if (_passwordController.text.length < 6 ||
-        _passwordController.text.length > 20)
-      _errorMessage = 'a senha deve ter entre 6 e 20 caracteres';
-    if (!RegExp(_regx).hasMatch(_passwordController.text))
-      _errorMessage = 'senha informado não é válido';
-    _errorMessage = '';
+    // if (passwordService.errorMessage == "") {
+    //   // if (currentForm.value == FormEnum.FORGOT.value) {
+    //   //   authService.changePassword(context, currentEmail.value);
+    //   // } else {
+    //   //   await authService
+    //   //       .register(context, currentEmail.value, _passwordController.text)
+    //   //       .catchError((error) =>
+    //   //           debugPrint('ERROR => _checkEmail: ' + error.toString()));
+    //   // }
+    //   print('teste');
+    // } else {
+    //   toastWidget.toast(
+    //       context, ToastEnum.WARNING.value, passwordService.errorMessage);
+    // }
   }
 
   @override
@@ -90,7 +81,9 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
                   text:
                       'Digite uma senha seguindo o padrão abaixo e a confirme.'
                       '\n\n'
-                      '- deves ter somente letras, números e caracteres especiais'
+                      '- deve ter de seis (6) à vinte (20) caracteres'
+                      '\n'
+                      '- deve ter somente letras, números e caracteres especiais'
                       '\n'
                       '- deve ter no mínimo uma letra maiúscula e minúscula'
                       '\n'
@@ -100,10 +93,11 @@ class _PasswordCreatePageState extends State<PasswordCreatePage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 InputPasswordWidget(
-                    callback: (value) => _passwordController.text = value),
+                  callback: (value) => _passwordController.text = value,
+                ),
                 const SizedBox(height: UiPadding.large),
                 Button3dWidget(
-                  callback: (value) => _login(context),
+                  callback: (value) => _register(context),
                   label: 'confirmar',
                   style: ButtonStyleEnum.PRIMARY.value,
                 ),

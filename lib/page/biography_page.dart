@@ -28,7 +28,7 @@ class _BiographyPageState extends State<BiographyPage> {
   final CommentService commentService = CommentService();
   final DateService dateService = DateService();
   final HistoryService historyService = HistoryService();
-  final NameClass _nameClass = NameClass();
+  final NameService nameService = NameService();
   final TextEditingController _bioController = TextEditingController();
   final ToastWidget toastWidget = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
@@ -92,7 +92,7 @@ class _BiographyPageState extends State<BiographyPage> {
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.text,
                   maxLines: null,
-                  validator: (value) => _nameClass.validateName(value),
+                  validator: (value) => nameService.validateName(value!),
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(UiPadding.large),
                     hintText: 'usuário',
