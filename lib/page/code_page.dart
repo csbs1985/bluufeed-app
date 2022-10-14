@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:bluuffed_app/service/interval_service.dart';
+import 'package:bluuffed_app/service/password_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
@@ -81,10 +82,13 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
     if (_codeController.text == _code.toString()) {
       _code = 0;
 
-      if (currentForm.value == FormEnum.LOGIN.value)
+      if (currentForm.value == FormEnum.LOGIN.value) {
+        currentPasswordType.value = PasswordTypeEnum.LOGIN.value;
         Navigator.pushNamed(context, PageEnum.PASSWORD.value);
-      else
-        Navigator.pushNamed(context, PageEnum.PASSWORD_CREATE.value);
+      } else {
+        currentPasswordType.value = PasswordTypeEnum.CREATE.value;
+        Navigator.pushNamed(context, PageEnum.PASSWORD.value);
+      }
     } else {
       _codeController.text = '';
       toastWidget.toast(

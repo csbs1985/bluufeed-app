@@ -31,6 +31,12 @@ class UiText {
     fontWeight: FontWeight.bold,
     color: UiColor.buttonText,
   );
+
+  static const TextStyle error = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: UiColor.warning,
+  );
 }
 
 class UiTextDark {

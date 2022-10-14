@@ -45,7 +45,7 @@ class UiColor {
 
   static const Color toast = Color(0xFF2a2d2e);
 
-  static const Color warning = Color(0xFFE95750);
+  static const Color warning = Color(0xFFE50D23);
 
   static const Color login = Color(0xFF66B132);
 }

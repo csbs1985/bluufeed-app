@@ -1,7 +1,7 @@
+import 'package:bluuffed_app/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bluuffed_app/page/home_page.dart';
-import 'package:bluuffed_app/page/login_page.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
 
 class AuthCheckService extends StatefulWidget {
