@@ -14,6 +14,7 @@ import 'package:bluuffed_app/widget/toast_widget.dart';
 
 ValueNotifier<List<UserModel>> currentUser = ValueNotifier<List<UserModel>>([]);
 ValueNotifier<String> currentUserId = ValueNotifier<String>('');
+ValueNotifier<String> currentToken = ValueNotifier<String>('');
 
 final BlockService blockService = BlockService();
 final FollowingService followingService = FollowingService();
@@ -102,14 +103,9 @@ class UserClass {
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 
-  void add(Map<String, dynamic> user) {
-    currentUser.value = [];
-    currentUser.value.add(UserModel.fromJson(user));
-  }
-
   Future<void> clean(BuildContext context) async {
     try {
-      await userFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.value, '');
+      await userFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.value);
       await authService.logout();
       currentUser.value = [];
       Navigator.pop(context);
@@ -135,7 +131,7 @@ class UserClass {
 
   Future<void> delete(BuildContext context) async {
     try {
-      await userFirestore.pathLoginLogout(UserStatusEnum.DELETED.name, '');
+      await userFirestore.pathLoginLogout(UserStatusEnum.DELETED.name);
       await userFirestore.deleteUser();
       await authService.delete();
       currentUser.value = [];

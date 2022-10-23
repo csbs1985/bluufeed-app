@@ -47,6 +47,6 @@ app.*.map.json
 
 # private
 **/lib/service/algolia_service.dart
-**/ios/-Info.plist
+**/ios/GoogleService-Info.plist
 **/android/app/google-services.json
 

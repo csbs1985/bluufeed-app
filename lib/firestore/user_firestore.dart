@@ -57,10 +57,10 @@ class UserFirestore {
     });
   }
 
-  pathLoginLogout(String _status, String? token) {
+  pathLoginLogout(String _status) {
     return user.doc(currentUser.value.first.id).update({
       "status": _status,
-      "token": token,
+      "token": currentToken.value,
     });
   }
 

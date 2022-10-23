@@ -1,4 +1,5 @@
 import 'package:algolia/algolia.dart';
+import 'package:bluuffed_app/model/user_model.dart';
 
 class UserService {
   List<dynamic> _listUser = [];
@@ -13,5 +14,10 @@ class UserService {
       });
 
     return _listUser;
+  }
+
+  void setCurrentUser(Map<String, dynamic> user) {
+    currentUser.value = [];
+    currentUser.value.add(UserModel.fromJson(user));
   }
 }

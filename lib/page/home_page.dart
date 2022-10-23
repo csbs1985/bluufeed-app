@@ -1,5 +1,6 @@
 import 'package:bluuffed_app/page/perfil_page.dart';
 import 'package:bluuffed_app/page/search_page.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
@@ -19,8 +20,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final AuthService _authService = AuthService();
-  final UserClass _userClass = UserClass();
+
   final UserFirestore _userFirestore = UserFirestore();
+  final UserService _userService = UserService();
 
   PageController _pageController = PageController();
 
@@ -59,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             'following': result.docs[0]['following'],
           };
 
-          _userClass.add(_user);
+          _userService.setCurrentUser(_user);
         },
       );
     }

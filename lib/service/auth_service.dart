@@ -1,4 +1,5 @@
 import 'package:bluuffed_app/service/device_service.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/token_firestore.dart';
@@ -14,6 +15,7 @@ class AuthService extends ChangeNotifier {
   final DeviceService deviceService = DeviceService();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final ToastWidget _toast = ToastWidget();
+  final UserService _userService = UserService();
 
   late TokenFirestore tokenFirestore = TokenFirestore();
   late UserClass userClass = UserClass();
@@ -22,7 +24,6 @@ class AuthService extends ChangeNotifier {
   String message = 'erro não classificado, tente novamente';
 
   User? user;
-  String? token;
   bool isLoading = true;
 
   late Map<String, dynamic> _user;
@@ -57,7 +58,7 @@ class AuthService extends ChangeNotifier {
   getToken() async {
     await tokenFirestore
         .getToken()
-        .then((String? result) => token = result)
+        .then((String? result) => currentToken.value = result!)
         .catchError((error) => debugPrint('ERROR => getToken:' + error));
   }
 
@@ -66,31 +67,30 @@ class AuthService extends ChangeNotifier {
       await getToken();
       await userFirestore.getUserEmail(auth.currentUser!.email!).then(
             (user) async => {
-              userClass.add(
-                {
-                  'id': user.docs[0]['id'],
-                  'date': user.docs[0]['date'],
-                  'name': user.docs[0]['name'],
-                  'upDateName': user.docs[0]['upDateName'],
-                  'status': UserStatusEnum.ACTIVE.value,
-                  'email': user.docs[0]['email'],
-                  'token': token,
-                  'isNotification': user.docs[0]['isNotification'],
-                  'qtyBookmark': user.docs[0]['qtyBookmark'],
-                  'qtyComment': user.docs[0]['qtyComment'],
-                  'qtyDenounce': user.docs[0]['qtyDenounce'],
-                  'qtyHistory': user.docs[0]['qtyHistory'],
-                  'blocked': user.docs[0]['blocked'],
-                  'following': user.docs[0]['following'],
-                },
-              ),
+              _user = {
+                'id': user.docs[0]['id'],
+                'date': user.docs[0]['date'],
+                'name': user.docs[0]['name'],
+                'upDateName': user.docs[0]['upDateName'],
+                'status': UserStatusEnum.ACTIVE.value,
+                'email': user.docs[0]['email'],
+                'token': currentToken.value,
+                'isNotification': user.docs[0]['isNotification'],
+                'qtyBookmark': user.docs[0]['qtyBookmark'],
+                'qtyComment': user.docs[0]['qtyComment'],
+                'qtyDenounce': user.docs[0]['qtyDenounce'],
+                'qtyHistory': user.docs[0]['qtyHistory'],
+                'blocked': user.docs[0]['blocked'],
+                'following': user.docs[0]['following'],
+              },
+              _userService.setCurrentUser(_user),
               await activityClass.save(
                 type: _activity,
                 content: deviceService.DeviceModel(),
               ),
             },
           );
-      await userFirestore.pathLoginLogout(UserStatusEnum.ACTIVE.value, token);
+      await userFirestore.pathLoginLogout(UserStatusEnum.ACTIVE.value);
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => setToken: $error');
     }
@@ -98,28 +98,30 @@ class AuthService extends ChangeNotifier {
 
   setCurrentUser(BuildContext context, String _activity) async {
     await getToken();
-    await userFirestore.pathLoginLogout(UserStatusEnum.ACTIVE.value, token);
 
     _user = {
       'id': auth.currentUser!.uid,
       'date': DateTime.now().toString(),
       'name': currentName.value,
+      'bio': '',
       'upDateName': '',
       'status': UserStatusEnum.ACTIVE.value,
       'email': currentEmail.value,
-      'token': token,
+      'token': currentToken.value,
       'isNotification': true,
+      'qtyBookmark': 0,
       'qtyComment': 0,
       'qtyDenounce': 0,
       'qtyHistory': 0,
+      'blocked': [],
       'following': [],
     };
 
-    userFirestore.postUser(_user).then((result) async => {
-          userClass.add(_user),
-          await activityClass.save(type: _activity),
-          Navigator.pushNamed(context, '/'),
-        });
+    _userService.setCurrentUser(_user);
+
+    userFirestore.postUser(_user).then(
+          (result) async => {await activityClass.save(type: _activity)},
+        );
   }
 
   register(BuildContext context, String email, String senha) async {
