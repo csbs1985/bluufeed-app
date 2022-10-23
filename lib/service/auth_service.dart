@@ -13,13 +13,14 @@ import 'package:bluuffed_app/widget/toast_widget.dart';
 class AuthService extends ChangeNotifier {
   final ActivityClass activityClass = ActivityClass();
   final DeviceService deviceService = DeviceService();
-  final FirebaseAuth auth = FirebaseAuth.instance;
   final ToastWidget _toast = ToastWidget();
+  final UserFirestore _userFirestore = UserFirestore();
   final UserService _userService = UserService();
+  final TokenFirestore _tokenFirestore = TokenFirestore();
 
-  late TokenFirestore tokenFirestore = TokenFirestore();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   late UserClass userClass = UserClass();
-  late UserFirestore userFirestore = UserFirestore();
 
   String message = 'erro não classificado, tente novamente';
 
@@ -33,7 +34,7 @@ class AuthService extends ChangeNotifier {
   }
 
   _authCheck() {
-    auth.authStateChanges().listen((User? _user) {
+    _auth.authStateChanges().listen((User? _user) {
       user = (_user == null) ? null : _user;
       isLoading = false;
       notifyListeners();
@@ -41,22 +42,22 @@ class AuthService extends ChangeNotifier {
   }
 
   getUser() {
-    user = auth.currentUser;
+    user = _auth.currentUser;
     notifyListeners();
   }
 
   logout() async {
-    await auth.signOut();
+    await _auth.signOut();
     getUser();
   }
 
   delete() async {
-    auth.currentUser!.delete();
+    _auth.currentUser!.delete();
     getUser();
   }
 
   getToken() async {
-    await tokenFirestore
+    await _tokenFirestore
         .getToken()
         .then((String? result) => currentToken.value = result!)
         .catchError((error) => debugPrint('ERROR => getToken:' + error));
@@ -65,32 +66,16 @@ class AuthService extends ChangeNotifier {
   getCurrentUser(String _activity) async {
     try {
       await getToken();
-      await userFirestore.getUserEmail(auth.currentUser!.email!).then(
-            (user) async => {
-              _user = {
-                'id': user.docs[0]['id'],
-                'date': user.docs[0]['date'],
-                'name': user.docs[0]['name'],
-                'upDateName': user.docs[0]['upDateName'],
-                'status': UserStatusEnum.ACTIVE.value,
-                'email': user.docs[0]['email'],
-                'token': currentToken.value,
-                'isNotification': user.docs[0]['isNotification'],
-                'qtyBookmark': user.docs[0]['qtyBookmark'],
-                'qtyComment': user.docs[0]['qtyComment'],
-                'qtyDenounce': user.docs[0]['qtyDenounce'],
-                'qtyHistory': user.docs[0]['qtyHistory'],
-                'blocked': user.docs[0]['blocked'],
-                'following': user.docs[0]['following'],
-              },
-              _userService.setCurrentUser(_user),
+      await _userFirestore.getUserEmail(_auth.currentUser!.email!).then(
+            (result) async => {
+              _userService.setModelUser(result),
               await activityClass.save(
                 type: _activity,
                 content: deviceService.DeviceModel(),
               ),
             },
           );
-      await userFirestore.pathLoginLogout(UserStatusEnum.ACTIVE.value);
+      await _userFirestore.pathLoginLogout(UserStatusEnum.ACTIVE.value);
     } on FirebaseAuthException catch (error) {
       debugPrint('ERROR => setToken: $error');
     }
@@ -100,7 +85,7 @@ class AuthService extends ChangeNotifier {
     await getToken();
 
     _user = {
-      'id': auth.currentUser!.uid,
+      'id': _auth.currentUser!.uid,
       'date': DateTime.now().toString(),
       'name': currentName.value,
       'bio': '',
@@ -119,14 +104,14 @@ class AuthService extends ChangeNotifier {
 
     _userService.setCurrentUser(_user);
 
-    userFirestore.postUser(_user).then(
+    _userFirestore.postUser(_user).then(
           (result) async => {await activityClass.save(type: _activity)},
         );
   }
 
   register(BuildContext context, String email, String senha) async {
     try {
-      await auth.createUserWithEmailAndPassword(email: email, password: senha);
+      await _auth.createUserWithEmailAndPassword(email: email, password: senha);
       await getUser();
       await setCurrentUser(context, ActivityEnum.NEW_ACCOUNT.name);
     } on FirebaseAuthException catch (e) {
@@ -145,7 +130,7 @@ class AuthService extends ChangeNotifier {
 
   login(BuildContext context, String email, String senha) async {
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: senha);
+      await _auth.signInWithEmailAndPassword(email: email, password: senha);
       await getUser();
       await getCurrentUser(ActivityEnum.LOGIN.value);
     } on FirebaseAuthException catch (e) {
@@ -167,13 +152,13 @@ class AuthService extends ChangeNotifier {
 
   changePassword(BuildContext context, String password) async {
     try {
-      await auth.confirmPasswordReset(code: 'code', newPassword: password).then(
-            (_) => _toast.toast(
-              context,
-              ToastEnum.SUCCESS.value,
-              'senha redefinida com sucesso',
-            ),
-          );
+      await _auth
+          .confirmPasswordReset(code: 'code', newPassword: password)
+          .then((_) => _toast.toast(
+                context,
+                ToastEnum.SUCCESS.value,
+                'senha redefinida com sucesso',
+              ));
     } catch (e) {
       _toast.toast(
           context, ToastEnum.WARNING.value, 'não foi possivél alterar a senha');

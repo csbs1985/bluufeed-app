@@ -10,6 +10,7 @@ import 'package:bluuffed_app/page/notification_page.dart';
 import 'package:bluuffed_app/page/settings_page.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,8 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final AuthService _authService = AuthService();
-
   final UserFirestore _userFirestore = UserFirestore();
   final UserService _userService = UserService();
 
@@ -28,42 +27,17 @@ class _HomePageState extends State<HomePage> {
 
   int _currentPage = 0;
 
-  late Map<String, dynamic> _user;
-
   @override
   void initState() {
-    identify();
     _pageController = PageController(initialPage: _currentPage);
     super.initState();
   }
 
-  Future<void> identify() async {
+  Future<void> identify(AuthService _authService) async {
     if (currentUser.value.isEmpty) {
-      await _userFirestore
-          .getUserEmail(_authService.auth.currentUser!.email)
-          .then(
-        (result) {
-          _user = {
-            'id': result.docs[0]['id'],
-            'date': result.docs[0]['date'],
-            'name': result.docs[0]['name'],
-            'bio': result.docs[0]['bio'],
-            'upDateName': result.docs[0]['upDateName'],
-            'status': result.docs[0]['status'],
-            'email': result.docs[0]['email'],
-            'token': result.docs[0]['token'],
-            'isNotification': result.docs[0]['isNotification'],
-            'qtyBookmark': result.docs[0]['qtyBookmark'],
-            'qtyComment': result.docs[0]['qtyComment'],
-            'qtyDenounce': result.docs[0]['qtyDenounce'],
-            'qtyHistory': result.docs[0]['qtyHistory'],
-            'blocked': result.docs[0]['blocked'],
-            'following': result.docs[0]['following'],
-          };
-
-          _userService.setCurrentUser(_user);
-        },
-      );
+      await _userFirestore.getUserId(_authService.user!.uid).then((result) {
+        _userService.setModelUser(result);
+      });
     }
   }
 
@@ -73,6 +47,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService _authService = Provider.of<AuthService>(context);
+
+    identify(_authService);
+
     return Scaffold(
       body: PageView(
         controller: _pageController,
