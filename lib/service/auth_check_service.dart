@@ -24,7 +24,7 @@ class _AuthCheckServiceState extends State<AuthCheckService> {
       return const HomePage();
   }
 
-  Scaffold loading() {
+  loading() {
     return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),

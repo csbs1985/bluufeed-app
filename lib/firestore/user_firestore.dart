@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/core/variables.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 
@@ -57,10 +58,10 @@ class UserFirestore {
     });
   }
 
-  pathLoginLogout(String _status, String? token) {
+  pathLoginLogout(String _status) {
     return user.doc(currentUser.value.first.id).update({
       "status": _status,
-      "token": token,
+      "token": currentToken.value,
     });
   }
 

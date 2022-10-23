@@ -10,7 +10,6 @@ import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_text.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
@@ -19,6 +18,8 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PasswordPage extends StatefulWidget {
   const PasswordPage({super.key});
@@ -87,15 +88,15 @@ class _PasswordPageState extends State<PasswordPage> {
         '- deve ter no mínimo um (1) caractere especial';
   }
 
-  _login(BuildContext context) async {
+  _login(BuildContext _context) async {
     setState(() => _errorMessage =
         passwordService.validatePassword(_passwordController.text));
 
     if (_errorMessage.isEmpty) {
       try {
-        await authService
-            .login(context, currentEmail.value, _passwordController.text)
-            .then((result) => Navigator.pushNamed(context, '/'))
+        await context
+            .read<AuthService>()
+            .login(_context, currentEmail.value, _passwordController.text)
             .catchError(
               (error) =>
                   debugPrint('ERROR => _checkEmail: ' + error.toString()),
@@ -106,7 +107,7 @@ class _PasswordPageState extends State<PasswordPage> {
     }
   }
 
-  _register(BuildContext context) async {
+  _register(BuildContext _context) async {
     setState(() {
       _errorMessage =
           passwordService.validatePassword(_passwordController.text);
@@ -114,11 +115,11 @@ class _PasswordPageState extends State<PasswordPage> {
 
     if (_errorMessage.isEmpty) {
       try {
-        await authService.register(
-          context,
-          currentEmail.value,
-          _passwordController.text,
-        );
+        await context.read<AuthService>().register(
+              _context,
+              currentEmail.value,
+              _passwordController.text,
+            );
       } on Exception catch (error) {
         debugPrint('ERROR => register: ' + error.toString());
       }

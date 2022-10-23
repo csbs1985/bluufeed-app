@@ -1,5 +1,7 @@
 import 'package:bluuffed_app/page/perfil_page.dart';
 import 'package:bluuffed_app/page/search_page.dart';
+import 'package:bluuffed_app/service/auth_service.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
@@ -7,8 +9,8 @@ import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/page/feed_page.dart';
 import 'package:bluuffed_app/page/notification_page.dart';
 import 'package:bluuffed_app/page/settings_page.dart';
-import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,9 +20,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final AuthService _authService = AuthService();
-  final UserClass _userClass = UserClass();
   final UserFirestore _userFirestore = UserFirestore();
+  final UserService _userService = UserService();
 
   PageController _pageController = PageController();
 
@@ -30,16 +31,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    identify();
     _pageController = PageController(initialPage: _currentPage);
     super.initState();
   }
 
-  Future<void> identify() async {
+  Future<void> identify(AuthService auth) async {
     if (currentUser.value.isEmpty) {
-      await _userFirestore
-          .getUserEmail(_authService.auth.currentUser!.email)
-          .then(
+      await _userFirestore.getUserEmail(auth.user!.email).then(
         (result) {
           _user = {
             'id': result.docs[0]['id'],
@@ -59,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             'following': result.docs[0]['following'],
           };
 
-          _userClass.add(_user);
+          _userService.add(_user);
         },
       );
     }
@@ -71,6 +69,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = Provider.of<AuthService>(context);
+
+    identify(authService);
+
     return Scaffold(
       body: PageView(
         controller: _pageController,

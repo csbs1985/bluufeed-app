@@ -14,21 +14,25 @@ import 'package:bluuffed_app/theme/ui_theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp();
+
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   );
 
-  await Firebase.initializeApp();
-
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(
+          create: (context) => AuthService(),
+        ),
         Provider<LocalNotificationService>(
-            create: (context) => LocalNotificationService()),
+          create: (context) => LocalNotificationService(),
+        ),
         Provider<PushNotificationService>(
-          create: (context) =>
-              PushNotificationService(context.read<LocalNotificationService>()),
+          create: (context) => PushNotificationService(
+            context.read<LocalNotificationService>(),
+          ),
         )
       ],
       child: const MyApp(),

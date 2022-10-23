@@ -34,7 +34,7 @@ class _NotificationPageState extends State<NotificationPage> {
   final HistoryService historyService = HistoryService();
   final NotificationFirestore notificationFirestore = NotificationFirestore();
 
-  late bool isDark;
+  bool isDark = false;
 
   Color _getColor(item) {
     if (item['view']) return isDark ? UiColor.mainDark : UiColor.main;
