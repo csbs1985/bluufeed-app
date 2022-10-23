@@ -151,20 +151,19 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                         },
                       ),
                     const SizedBox(width: UiPadding.xLarge),
-                    if (currentHistory.value.isNotEmpty)
-                      ValueListenableBuilder(
-                        valueListenable: currentHistory,
-                        builder: (BuildContext context, value, __) {
-                          return IconWidget(
-                            icon: _getBookmark(widget._history)
-                                ? UiIcon.favoriteActived
-                                : UiIcon.favorite,
-                            callback: (value) {
-                              _toggleBookmark(widget._history);
-                            },
-                          );
-                        },
-                      ),
+                    ValueListenableBuilder(
+                      valueListenable: currentHistory,
+                      builder: (BuildContext context, value, __) {
+                        return IconWidget(
+                          icon: _getBookmark(widget._history)
+                              ? UiIcon.favoriteActived
+                              : UiIcon.favorite,
+                          callback: (value) {
+                            _toggleBookmark(widget._history);
+                          },
+                        );
+                      },
+                    ),
                     const SizedBox(width: UiPadding.xLarge),
                     IconWidget(
                       icon: UiIcon.send,

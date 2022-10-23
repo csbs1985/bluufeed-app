@@ -1,15 +1,15 @@
-import 'package:bluuffed_app/page/perfil_page.dart';
-import 'package:bluuffed_app/page/search_page.dart';
-import 'package:bluuffed_app/service/user_service.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/page/feed_page.dart';
 import 'package:bluuffed_app/page/notification_page.dart';
+import 'package:bluuffed_app/page/perfil_page.dart';
+import 'package:bluuffed_app/page/search_page.dart';
 import 'package:bluuffed_app/page/settings_page.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

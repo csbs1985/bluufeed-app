@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/page/loading_page.dart';
 import 'package:bluuffed_app/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,18 +18,10 @@ class _AuthCheckServiceState extends State<AuthCheckService> {
     AuthService auth = Provider.of<AuthService>(context);
 
     if (auth.isLoading)
-      return loading();
+      return const LoadingPage();
     else if (auth.user == null)
       return const LoginPage();
     else
       return const HomePage();
-  }
-
-  Scaffold loading() {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
   }
 }

@@ -14,9 +14,9 @@ class AuthService extends ChangeNotifier {
   final ActivityClass activityClass = ActivityClass();
   final DeviceService deviceService = DeviceService();
   final ToastWidget _toast = ToastWidget();
+  final TokenFirestore _tokenFirestore = TokenFirestore();
   final UserFirestore _userFirestore = UserFirestore();
   final UserService _userService = UserService();
-  final TokenFirestore _tokenFirestore = TokenFirestore();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
