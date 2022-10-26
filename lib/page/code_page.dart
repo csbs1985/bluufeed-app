@@ -36,7 +36,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
 
   final TextEditingController _codeController = TextEditingController();
 
-  late int _code;
+  String _code = "0000";
 
   @override
   void initState() {
@@ -46,7 +46,10 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   }
 
   _sendCode() {
-    _code = Random().nextInt(9999);
+    var _codeTemp = Random().nextInt(9999);
+    if (_code != 4) {
+      _code = _codeTemp.toString().padLeft(4, '0');
+    }
     _sendEmail();
   }
 
@@ -56,13 +59,8 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
         email: currentEmail.value,
         subject: 'Código de verificação',
         name: '',
-        code: _code.toString(),
+        code: _code,
         template: EmailJsEnum.CODE.value,
-      );
-      toastWidget.toast(
-        context,
-        ToastEnum.SUCCESS.value,
-        'código enviado para o email ${currentEmail.value}',
       );
     } catch (error) {
       debugPrint('não foi possivél enviar o código.');
@@ -80,7 +78,7 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
 
   _validateCode() {
     if (_codeController.text == _code.toString()) {
-      _code = 0;
+      _code = "0000";
 
       if (currentForm.value == FormEnum.LOGIN.value) {
         currentPasswordType.value = PasswordTypeEnum.LOGIN.value;
