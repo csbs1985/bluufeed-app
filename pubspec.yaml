@@ -69,7 +69,7 @@ dev_dependencies:
 # flutter pub run flutter_native_splash:create
 flutter_native_splash:
   image: "assets/images/ic_splash.png"
-  color: "#ffffff"
+  color: "#1d9bf0"
   android: true
   ios: true
 
