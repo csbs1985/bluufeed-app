@@ -14,11 +14,11 @@ import 'package:bluuffed_app/theme/ui_theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp();
+
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   );
-
-  await Firebase.initializeApp();
 
   runApp(
     MultiProvider(

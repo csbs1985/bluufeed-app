@@ -15,11 +15,11 @@ class AuthCheckService extends StatefulWidget {
 class _AuthCheckServiceState extends State<AuthCheckService> {
   @override
   Widget build(BuildContext context) {
-    AuthService auth = Provider.of<AuthService>(context);
+    AuthService _auth = Provider.of<AuthService>(context);
 
-    if (auth.isLoading)
+    if (_auth.isLoading)
       return const LoadingPage();
-    else if (auth.user == null)
+    else if (_auth.user == null)
       return const LoginPage();
     else
       return const HomePage();

@@ -10,7 +10,6 @@ import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/theme/ui_text.dart';
 import 'package:bluuffed_app/theme/ui_theme.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
@@ -19,6 +18,8 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PasswordPage extends StatefulWidget {
   const PasswordPage({super.key});
@@ -46,6 +47,7 @@ class _PasswordPageState extends State<PasswordPage> {
 
   @override
   void initState() {
+    _passwordController.text = "Csbs@002";
     currentPasswordType.value = PasswordTypeEnum.CREATE.value;
     super.initState();
   }
@@ -75,7 +77,7 @@ class _PasswordPageState extends State<PasswordPage> {
       return 'informe sua senha...';
 
     return 'Digite uma senha seguindo o padrão abaixo e a confirme.'
-        '\n\n'
+        '\n'
         '- deve ter de seis (6) à vinte (20) caracteres'
         '\n'
         '- deve ter somente letras, números e caracteres especiais'
@@ -93,9 +95,9 @@ class _PasswordPageState extends State<PasswordPage> {
 
     if (_errorMessage.isEmpty) {
       try {
-        await authService
+        await context
+            .read<AuthService>()
             .login(context, currentEmail.value, _passwordController.text)
-            .then((result) => Navigator.pushNamed(context, '/'))
             .catchError(
               (error) =>
                   debugPrint('ERROR => _checkEmail: ' + error.toString()),
@@ -106,7 +108,7 @@ class _PasswordPageState extends State<PasswordPage> {
     }
   }
 
-  _register(BuildContext context) async {
+  _register(BuildContext _ontext) async {
     setState(() {
       _errorMessage =
           passwordService.validatePassword(_passwordController.text);
@@ -114,11 +116,11 @@ class _PasswordPageState extends State<PasswordPage> {
 
     if (_errorMessage.isEmpty) {
       try {
-        await authService.register(
-          context,
-          currentEmail.value,
-          _passwordController.text,
-        );
+        await context.read<AuthService>().register(
+              _ontext,
+              currentEmail.value,
+              _passwordController.text,
+            );
       } on Exception catch (error) {
         debugPrint('ERROR => register: ' + error.toString());
       }
