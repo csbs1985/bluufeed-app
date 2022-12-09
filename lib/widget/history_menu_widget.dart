@@ -128,7 +128,8 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                 children: [
                   if (widget._history['qtyComment'] > 0)
                     NumberAnimationWidget(
-                        number: widget._history['qtyComment']),
+                      number: widget._history['qtyComment'],
+                    ),
                   Text(
                     _textComment(),
                     style: Theme.of(context).textTheme.headline4,
@@ -136,13 +137,13 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                 ],
               ),
             ),
-            ValueListenableBuilder(
-              valueListenable: currentUser,
-              builder: (BuildContext context, value, __) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (_isComment(_route!, widget._history))
+            if (_isComment(_route!, widget._history))
+              ValueListenableBuilder(
+                valueListenable: currentUser,
+                builder: (BuildContext context, value, __) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       IconWidget(
                         icon: UiIcon.comment,
                         callback: (value) {
@@ -150,41 +151,41 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                           _openModal(context, ModalEnum.INPUT_COMMENT.value);
                         },
                       ),
-                    const SizedBox(width: UiPadding.xLarge),
-                    ValueListenableBuilder(
-                      valueListenable: currentHistory,
-                      builder: (BuildContext context, value, __) {
-                        return IconWidget(
-                          icon: _getBookmark(widget._history)
-                              ? UiIcon.favoriteActived
-                              : UiIcon.favorite,
-                          callback: (value) {
-                            _toggleBookmark(widget._history);
-                          },
-                        );
-                      },
-                    ),
-                    const SizedBox(width: UiPadding.xLarge),
-                    IconWidget(
-                      icon: UiIcon.send,
-                      callback: (value) {
-                        historyClass.add(widget._history);
-                        _openModal(context, ModalEnum.SEND.value);
-                      },
-                    ),
-                    if (_route != PageEnum.HISTORY.value)
                       const SizedBox(width: UiPadding.xLarge),
-                    if (_route != PageEnum.HISTORY.value)
-                      IconWidget(
-                        icon: UiIcon.read,
-                        callback: (value) => historyService.getHistoryPage(
-                          widget._history['id'],
-                        ),
+                      ValueListenableBuilder(
+                        valueListenable: currentHistory,
+                        builder: (BuildContext context, value, __) {
+                          return IconWidget(
+                            icon: _getBookmark(widget._history)
+                                ? UiIcon.favoriteActived
+                                : UiIcon.favorite,
+                            callback: (value) {
+                              _toggleBookmark(widget._history);
+                            },
+                          );
+                        },
                       ),
-                  ],
-                );
-              },
-            ),
+                      const SizedBox(width: UiPadding.xLarge),
+                      IconWidget(
+                        icon: UiIcon.send,
+                        callback: (value) {
+                          historyClass.add(widget._history);
+                          _openModal(context, ModalEnum.SEND.value);
+                        },
+                      ),
+                      if (_route != PageEnum.HISTORY.value)
+                        const SizedBox(width: UiPadding.xLarge),
+                      if (_route != PageEnum.HISTORY.value)
+                        IconWidget(
+                          icon: UiIcon.read,
+                          callback: (value) => historyService.getHistoryPage(
+                            widget._history['id'],
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              ),
           ],
         ),
       ),

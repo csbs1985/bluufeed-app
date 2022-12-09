@@ -108,7 +108,7 @@ class _PasswordPageState extends State<PasswordPage> {
     }
   }
 
-  _register(BuildContext _ontext) async {
+  _register(BuildContext _context) async {
     setState(() {
       _errorMessage =
           passwordService.validatePassword(_passwordController.text);
@@ -117,7 +117,7 @@ class _PasswordPageState extends State<PasswordPage> {
     if (_errorMessage.isEmpty) {
       try {
         await context.read<AuthService>().register(
-              _ontext,
+              _context,
               currentEmail.value,
               _passwordController.text,
             );

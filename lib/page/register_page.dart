@@ -31,6 +31,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
+  @override
+  void initState() {
+    _emailController.text = "csbs.conta@outlook.com";
+    _nameController.text = "charles.1985";
+    super.initState();
+  }
+
   _login(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       try {

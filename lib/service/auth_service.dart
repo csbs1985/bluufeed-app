@@ -104,9 +104,9 @@ class AuthService extends ChangeNotifier {
 
     _userService.setCurrentUser(_user);
 
-    _userFirestore.postUser(_user).then(
-          (result) async => {await activityClass.save(type: _activity)},
-        );
+    _userFirestore.postUser(_user).then((result) async => {
+          await activityClass.save(type: _activity),
+        });
   }
 
   register(BuildContext context, String email, String senha) async {

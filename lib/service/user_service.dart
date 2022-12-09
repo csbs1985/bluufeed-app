@@ -17,9 +17,7 @@ class UserService {
   }
 
   void setModelUser(_value) {
-    late Map<String, dynamic> _user;
-
-    _user = {
+    setCurrentUser({
       'id': _value.docs[0]['id'],
       'date': _value.docs[0]['date'],
       'name': _value.docs[0]['name'],
@@ -35,13 +33,11 @@ class UserService {
       'qtyHistory': _value.docs[0]['qtyHistory'],
       'blocked': _value.docs[0]['blocked'],
       'following': _value.docs[0]['following'],
-    };
-
-    setCurrentUser(_user);
+    });
   }
 
-  void setCurrentUser(Map<String, dynamic> user) {
+  void setCurrentUser(Map<String, dynamic> _user) {
     currentUser.value = [];
-    currentUser.value.add(UserModel.fromJson(user));
+    currentUser.value.add(UserModel.fromJson(_user));
   }
 }

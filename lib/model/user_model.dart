@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:bluuffed_app/model/blocked_model.dart';
 import 'package:bluuffed_app/model/following_model.dart';
 import 'package:bluuffed_app/service/block_service.dart';
@@ -6,7 +5,6 @@ import 'package:bluuffed_app/service/device_service.dart';
 import 'package:bluuffed_app/service/following_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/model/activity_model.dart';
@@ -144,16 +142,6 @@ class UserClass {
         'não foi possível delatar a conta no momento, tente novamente mais tarde.',
       );
     }
-  }
-
-  Future<String> readUser() async {
-    final file = await getFileUser();
-    return file.readAsString();
-  }
-
-  Future<File> getFileUser() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File('${directory.path}/user.json');
   }
 
   bool isLogin() {

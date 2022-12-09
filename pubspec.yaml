@@ -60,6 +60,9 @@ dependencies:
   styled_text: ^5.1.0
   package_info_plus: ^1.4.3+1
 
+  #database
+  hive: ^2.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

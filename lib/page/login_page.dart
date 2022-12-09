@@ -79,7 +79,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 TextFormField(
-                  autofocus: true,
                   controller: _emailController,
                   style: Theme.of(context).textTheme.headline2,
                   keyboardType: TextInputType.emailAddress,
