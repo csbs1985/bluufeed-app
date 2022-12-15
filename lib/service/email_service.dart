@@ -59,9 +59,7 @@ class EmailService {
   bool getEmail(String value) {
     userFirestore
         .getUserEmail(value)
-        .then(
-          (result) => alreadyEmail = result.size > 0 ? true : false,
-        )
+        .then((result) => alreadyEmail = result.size > 0 ? true : false)
         .catchError((error) => debugPrint('ERROR => _checkEmail: ' + error));
 
     return alreadyEmail;

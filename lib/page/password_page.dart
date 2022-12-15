@@ -45,13 +45,6 @@ class _PasswordPageState extends State<PasswordPage> {
 
   final double buttonSize = 66;
 
-  @override
-  void initState() {
-    _passwordController.text = "Csbs@002";
-    currentPasswordType.value = PasswordTypeEnum.CREATE.value;
-    super.initState();
-  }
-
   _showPassword() {
     setState(() => _show = !_show);
   }
@@ -248,8 +241,8 @@ class _PasswordPageState extends State<PasswordPage> {
                         UiSize.paddingButtonFull -
                         2,
                     child: TextFormField(
-                      // validator: (value) =>
-                      //     passwordService.validatePassword(value!),
+                      validator: (value) =>
+                          passwordService.validatePassword(value!),
                       controller: _controller,
                       obscureText: _show,
                       style: Theme.of(context).textTheme.headline2,

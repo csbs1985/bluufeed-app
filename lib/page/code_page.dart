@@ -20,6 +20,7 @@ import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/button/button_text_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class CodePage extends StatefulWidget {
   const CodePage({super.key});
@@ -46,27 +47,25 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
   }
 
   _sendCode() {
+    _codeController.text = '';
     var _codeTemp = Random().nextInt(9999);
-    if (_code != 4) {
-      _code = _codeTemp.toString().padLeft(4, '0');
-    }
+    if (_code != 4) _code = _codeTemp.toString().padLeft(4, '0');
     _sendEmail();
   }
 
   _sendEmail() async {
     try {
-      // _emailService.sendEmail(
-      //   email: currentEmail.value,
-      //   subject: 'Código de verificação',
-      //   name: '',
-      //   code: _code,
-      //   template: EmailJsEnum.CODE.value,
-      // );
+      _emailService.sendEmail(
+        email: currentEmail.value,
+        subject: 'Código de verificação',
+        name: '',
+        code: _code,
+        template: EmailJsEnum.CODE.value,
+      );
       toastWidget.toast(
         context,
         ToastEnum.SUCCESS.value,
-        _code,
-        // 'código enviado para o email ${currentEmail.value}',
+        'código enviado para o email ${currentEmail.value}',
       );
     } catch (error) {
       debugPrint('não foi possivél enviar o código.');
@@ -86,17 +85,17 @@ class _CodePageState extends State<CodePage> with TickerProviderStateMixin {
     if (_codeController.text == _code.toString()) {
       _code = "0000";
 
-      if (currentForm.value == FormEnum.LOGIN.value) {
-        currentPasswordType.value = PasswordTypeEnum.LOGIN.value;
-        Navigator.pushNamed(context, PageEnum.PASSWORD.value);
-      } else {
-        currentPasswordType.value = PasswordTypeEnum.CREATE.value;
-        Navigator.pushNamed(context, PageEnum.PASSWORD.value);
-      }
+      currentForm.value == FormEnum.LOGIN.value
+          ? currentPasswordType.value = PasswordTypeEnum.LOGIN.value
+          : currentPasswordType.value = PasswordTypeEnum.CREATE.value;
+      context.push(PageEnum.PASSWORD.value);
     } else {
       _codeController.text = '';
       toastWidget.toast(
-          context, ToastEnum.WARNING.value, 'código informado incorreto');
+        context,
+        ToastEnum.WARNING.value,
+        'código informado incorreto',
+      );
     }
   }
 

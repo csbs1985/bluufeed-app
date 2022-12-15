@@ -11,6 +11,7 @@ import 'package:bluuffed_app/button/button_text_widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -30,22 +31,22 @@ class _LoginPageState extends State<LoginPage> {
   _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       try {
-        await userFirestore
-            .getUserEmail(_emailController.text)
-            .then((result) => {
-                  if (result.size <= 0)
-                    toast.toast(
-                      context,
-                      ToastEnum.WARNING.value,
-                      'email informado não encontrado',
-                    )
-                  else
-                    {
-                      currentEmail.value = _emailController.text,
-                      currentForm.value = FormEnum.LOGIN.value,
-                      Navigator.pushNamed(context, PageEnum.CODE.value)
-                    }
-                });
+        await userFirestore.getUserEmail(_emailController.text).then(
+              (result) => {
+                if (result.size <= 0)
+                  toast.toast(
+                    context,
+                    ToastEnum.WARNING.value,
+                    'email informado não encontrado',
+                  )
+                else
+                  {
+                    currentEmail.value = _emailController.text,
+                    currentForm.value = FormEnum.LOGIN.value,
+                    context.push(PageEnum.CODE.value),
+                  }
+              },
+            );
       } on Exception catch (error) {
         debugPrint('ERROR => _checkEmail: ' + error.toString());
       }
@@ -103,15 +104,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: UiPadding.large),
                 ButtonHeadline2(
-                  callback: (value) =>
-                      Navigator.pushNamed(context, PageEnum.REGISTER.value),
+                  callback: (value) => context.push(PageEnum.REGISTER.value),
                   label: 'sou novo aqui, cadastrar',
                 ),
                 ButtonHeadline2(
-                  callback: (value) => Navigator.pushNamed(
-                    context,
-                    PageEnum.FORGOT_PASSWORD.value,
-                  ),
+                  callback: (value) =>
+                      context.push(PageEnum.FORGOT_PASSWORD.value),
                   label: 'problema ao entrar',
                 ),
               ],

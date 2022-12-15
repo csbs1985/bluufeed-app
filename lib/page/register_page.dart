@@ -12,6 +12,7 @@ import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -31,20 +32,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
-  @override
-  void initState() {
-    _emailController.text = "csbs.conta@outlook.com";
-    _nameController.text = "charles.1985";
-    super.initState();
-  }
-
   _login(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       try {
         currentEmail.value = _emailController.text;
         currentForm.value = FormEnum.REGISTER.value;
         currentName.value = _nameController.text;
-        Navigator.pushNamed(context, PageEnum.CODE.value);
+        context.push(PageEnum.CODE.value);
       } on Exception catch (error) {
         debugPrint('ERROR => _login: ' + error.toString());
       }
@@ -125,10 +119,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   label: 'já tenha conta, voltar',
                 ),
                 ButtonHeadline2(
-                  callback: (value) => Navigator.pushNamed(
-                    context,
-                    PageEnum.FORGOT_PASSWORD.value,
-                  ),
+                  callback: (value) =>
+                      context.push(PageEnum.FORGOT_PASSWORD.value),
                   label: 'problema ao entrar',
                 ),
               ],

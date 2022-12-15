@@ -10,6 +10,7 @@ import 'package:bluuffed_app/button/button_3d_widget.dart';
 import 'package:bluuffed_app/widget/text_animation_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -54,7 +55,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                   currentEmail.value = _valueController.text,
                   currentForm.value = FormEnum.FORGOT.value,
-                  Navigator.pushNamed(context, PageEnum.CODE.value),
+                  context.push(PageEnum.CODE.value),
                 }
               else
                 _getName(),
@@ -75,7 +76,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ToastEnum.SUCCESS.value,
                   'pronto, enviamos uma mensagem para seu email cadastrado',
                 ),
-                Navigator.pushNamed(context, PageEnum.LOGIN.value),
+                context.push(PageEnum.LOGIN.value),
               }
             else
               toast.toast(
