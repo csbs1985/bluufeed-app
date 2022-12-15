@@ -10,6 +10,11 @@ import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/service/name_service.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
 
+class AuthException implements Exception {
+  String message;
+  AuthException(this.message);
+}
+
 class AuthService extends ChangeNotifier {
   final ActivityClass activityClass = ActivityClass();
   final DeviceService deviceService = DeviceService();
@@ -41,19 +46,60 @@ class AuthService extends ChangeNotifier {
     });
   }
 
-  getUser() {
+  _getUser() {
     user = _auth.currentUser;
     notifyListeners();
   }
 
+  register(BuildContext context, String email, String senha) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(email: email, password: senha);
+      // await setCurrentUser(context, ActivityEnum.NEW_ACCOUNT.name);
+      _getUser();
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'weak-password':
+          message = 'a senha é muito fraca';
+          break;
+        case 'email-already-in-use':
+          message = 'este email já está cadastrado';
+          break;
+      }
+
+      _toast.toast(context, ToastEnum.WARNING.value, message);
+    }
+  }
+
+  login(BuildContext context, String email, String senha) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: senha);
+      // await getCurrentUser(ActivityEnum.LOGIN.value);
+      _getUser();
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'too-many-requests':
+          message = 'erro na requisição, tente novamente mais tarde';
+          break;
+        case 'user-not-found':
+          message = 'email informado não encontrado';
+          break;
+        case 'wrong-password':
+          message = 'senha informada incorreta';
+          break;
+      }
+
+      _toast.toast(context, ToastEnum.WARNING.value, message);
+    }
+  }
+
   logout() async {
     await _auth.signOut();
-    getUser();
+    _getUser();
   }
 
   delete() async {
     _auth.currentUser!.delete();
-    getUser();
+    _getUser();
   }
 
   getToken() async {
@@ -107,47 +153,6 @@ class AuthService extends ChangeNotifier {
     _userFirestore.postUser(_user).then((result) async => {
           await activityClass.save(type: _activity),
         });
-  }
-
-  register(BuildContext context, String email, String senha) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(email: email, password: senha);
-      await getUser();
-      await setCurrentUser(context, ActivityEnum.NEW_ACCOUNT.name);
-    } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'weak-password':
-          message = 'a senha é muito fraca';
-          break;
-        case 'email-already-in-use':
-          message = 'este email já está cadastrado';
-          break;
-      }
-
-      _toast.toast(context, ToastEnum.WARNING.value, message);
-    }
-  }
-
-  login(BuildContext context, String email, String senha) async {
-    try {
-      await _auth.signInWithEmailAndPassword(email: email, password: senha);
-      await getUser();
-      await getCurrentUser(ActivityEnum.LOGIN.value);
-    } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'too-many-requests':
-          message = 'erro na requisição, tente novamente mais tarde';
-          break;
-        case 'user-not-found':
-          message = 'email informado não encontrado';
-          break;
-        case 'wrong-password':
-          message = 'senha informada incorreta';
-          break;
-      }
-
-      _toast.toast(context, ToastEnum.WARNING.value, message);
-    }
   }
 
   changePassword(BuildContext context, String password) async {
