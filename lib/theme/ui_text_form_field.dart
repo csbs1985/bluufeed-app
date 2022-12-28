@@ -18,9 +18,13 @@ class UiTextField {
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UiBorder.rounded),
-      borderSide: const BorderSide(width: 1, color: UiColor.back),
+      borderSide: const BorderSide(width: 1, color: UiColor.actived),
     ),
     errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(UiBorder.rounded),
+      borderSide: const BorderSide(width: 1, color: UiColor.warning),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UiBorder.rounded),
       borderSide: const BorderSide(width: 1, color: UiColor.warning),
     ),
@@ -41,9 +45,13 @@ class UiTextField {
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UiBorder.rounded),
-      borderSide: const BorderSide(width: 1, color: UiColor.backDark),
+      borderSide: const BorderSide(width: 1, color: UiColor.actived),
     ),
     errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(UiBorder.rounded),
+      borderSide: const BorderSide(width: 1, color: UiColor.warning),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(UiBorder.rounded),
       borderSide: const BorderSide(width: 1, color: UiColor.warning),
     ),

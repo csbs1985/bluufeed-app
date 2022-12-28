@@ -11,13 +11,13 @@ class PasswordService {
   final String _regx =
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,20}$';
 
-  String validatePassword(String _password) {
+  validatePassword(String _password) {
     if (_password.isEmpty) return 'informe sua senha';
     if (_password.length < 6 || _password.length > 20)
       return 'a senha deve ter de 6 à 20 caracteres';
     if (!RegExp(_regx).hasMatch(_password))
       return 'senha informada não é válida';
-    return '';
+    return null;
   }
 }
 

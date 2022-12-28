@@ -45,24 +45,10 @@ class EmailService {
     );
   }
 
-  validateEmail(String _type, String value) {
-    if (value.isEmpty) return 'informe seu email';
-    if (!RegExp(_regx).hasMatch(value)) return 'email informado não é válido';
-    if (_type == EmailEnum.LOGIN.value) {
-      if (!getEmail(value)) return 'email informado não encontrado';
-    } else {
-      if (getEmail(value)) return 'email informado já cadastrado';
-    }
+  validateEmail(String _type, String _value) {
+    if (_value.isEmpty) return 'informe seu email';
+    if (!RegExp(_regx).hasMatch(_value)) return 'email informado não é válido';
     return null;
-  }
-
-  bool getEmail(String value) {
-    userFirestore
-        .getUserEmail(value)
-        .then((result) => alreadyEmail = result.size > 0 ? true : false)
-        .catchError((error) => debugPrint('ERROR => _checkEmail: ' + error));
-
-    return alreadyEmail;
   }
 }
 
