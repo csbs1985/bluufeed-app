@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:bluuffed_app/theme/ui_color.dart';
@@ -26,15 +27,15 @@ class _ToggleWidgetState extends State<ToggleWidget> {
         bool isDark = currentTheme.value == Brightness.dark;
 
         return FlutterSwitch(
-          width: 48,
-          height: 32,
+          width: UiSize.toggleWidth,
+          height: UiSize.toggleHeight,
           value: widget._value,
           activeColor: UiColor.primary,
           inactiveColor:
               isDark ? UiColor.buttonSecondaryDark : UiColor.buttonSecondary,
           activeToggleColor: UiColor.secondary,
           inactiveToggleColor: UiColor.primary,
-          toggleSize: 20,
+          toggleSize: UiSize.toggleSize,
           onToggle: (value) => widget._callback(value),
         );
       },

@@ -21,4 +21,7 @@ class UiSize {
   static const double separator = 8;
   static const double tag = 36;
   static const double widthFullLessPadding = UiPadding.large * 2;
+  static const double toggleHeight = 32;
+  static const double toggleWidth = 48;
+  static const double toggleSize = 20;
 }

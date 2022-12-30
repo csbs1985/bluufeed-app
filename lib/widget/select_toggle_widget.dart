@@ -1,5 +1,4 @@
 import 'package:bluuffed_app/theme/ui_border.dart';
-import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/subtitle_resume_widget.dart';
 import 'package:bluuffed_app/widget/toggle_widget.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class _SelectToggleWidgetState extends State<SelectToggleWidget> {
       onPressed: () => widget._callback(true),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.transparent,
-        padding: const EdgeInsets.all(UiPadding.large),
+        padding: const EdgeInsets.all(0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(UiBorder.none),
         ),
@@ -41,7 +40,7 @@ class _SelectToggleWidgetState extends State<SelectToggleWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width - 108,
+            width: MediaQuery.of(context).size.width - 80,
             child: SubtitleResumeWidget(
               title: widget._title,
               resume: widget._resume,
