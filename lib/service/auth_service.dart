@@ -73,7 +73,6 @@ class AuthService extends ChangeNotifier {
   login(BuildContext context, String email, String senha) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
-      // await getCurrentUser(ActivityEnum.LOGIN.value);
       _getUser();
     } on FirebaseAuthException catch (e) {
       switch (e.code) {

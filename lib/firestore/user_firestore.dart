@@ -16,7 +16,7 @@ class UserFirestore {
     return user.where('name', isEqualTo: _nickname).get();
   }
 
-  getUserEmail(String? _email) {
+  getUserEmail(String _email) {
     return user.where('email', isEqualTo: _email).get();
   }
 

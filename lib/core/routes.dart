@@ -20,28 +20,26 @@ import 'package:bluuffed_app/page/questions_page.dart';
 import 'package:bluuffed_app/page/register_page.dart';
 import 'package:bluuffed_app/page/terms_page.dart';
 import 'package:bluuffed_app/service/auth_service.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
-// class Routes {
-//   static Route<dynamic> generateRoute(RouteSettings settings,
-
-//   }
-
-//   static GlobalKey<NavigatorState>? navigatorKey = GlobalKey<NavigatorState>();
-// }
-
-final _authService = AuthService();
+final AuthService _authService = AuthService();
+final UserService _userService = UserService();
 
 final routes = GoRouter(
   initialLocation: PageEnum.LOGIN.value,
   refreshListenable: _authService,
   debugLogDiagnostics: true,
-  redirect: (BuildContext context, GoRouterState state) {
-    if (_authService.isLoading) return PageEnum.LOADING.value;
-    if (_authService.user != null) return PageEnum.HOME.value;
-    // if (_authService.user == null && ) return PageEnum.LOGIN.value;
-    return null;
+  redirect: (BuildContext context, GoRouterState state) async {
+    if (_authService.isLoading)
+      return PageEnum.LOADING.value;
+    else if (_authService.user == null)
+      return PageEnum.LOGIN.value;
+    else {
+      await _userService.initUser(context);
+      return PageEnum.HOME.value;
+    }
   },
   routes: <RouteBase>[
     GoRoute(

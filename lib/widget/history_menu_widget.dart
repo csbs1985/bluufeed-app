@@ -36,7 +36,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 
-  bool _isComment(String _route, Map<String, dynamic> _history) {
+  bool _isComment(String? _route, Map<String, dynamic> _history) {
     if (_route == PageEnum.HISTORY.value) return false;
     if (_history['isComment']) return true;
     return false;
@@ -137,7 +137,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                 ],
               ),
             ),
-            if (_isComment(_route!, widget._history))
+            if (_isComment(_route, widget._history))
               ValueListenableBuilder(
                 valueListenable: currentUser,
                 builder: (BuildContext context, value, __) {

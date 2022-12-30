@@ -1,4 +1,5 @@
 import 'package:bluuffed_app/widget/app_bar_home_widget.dart';
+import 'package:bluuffed_app/widget/history_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/widget/create_card_widget.dart';
 import 'package:bluuffed_app/widget/menu_widget.dart';
@@ -41,7 +42,7 @@ class _FeedPageState extends State<FeedPage> {
             MenuWidget(),
             CreateCardWidget(),
             SeparatorWidget(),
-            // HistoryListWidget(),
+            HistoryListWidget(),
           ],
         ),
       ),

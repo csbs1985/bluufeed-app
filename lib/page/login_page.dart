@@ -1,3 +1,4 @@
+import 'package:bluuffed_app/service/auth_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_icon.dart';
 import 'package:bluuffed_app/theme/ui_size.dart';
@@ -5,7 +6,6 @@ import 'package:bluuffed_app/widget/input_password_widget.dart';
 import 'package:bluuffed_app/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/user_firestore.dart';
-import 'package:bluuffed_app/model/form_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
 import 'package:bluuffed_app/service/email_service.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
@@ -25,31 +25,31 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
+  final AuthService _authService = AuthService();
   final EmailService emailService = EmailService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final ToastWidget toast = ToastWidget();
   final UserFirestore userFirestore = UserFirestore();
 
+  @override
+  void initState() {
+    super.initState();
+    _emailController.text = 'csbs.conta@outlook.com';
+    _passwordController.text = 'Csbs@002';
+  }
+
   _login(BuildContext context) async {
+    FocusScope.of(context).unfocus(); // ocultar teclado
+
     if (_formKey.currentState!.validate()) {
       try {
-        await userFirestore.getUserEmail(_emailController.text).then(
-              (result) => {
-                if (result.size <= 0)
-                  toast.toast(
-                    context,
-                    ToastEnum.WARNING.value,
-                    'email informado não encontrado',
-                  )
-                else
-                  {
-                    currentEmail.value = _emailController.text,
-                    currentForm.value = FormEnum.LOGIN.value,
-                    context.push(PageEnum.CODE.value),
-                  }
-              },
-            );
+        currentEmail.value = _emailController.text;
+        await _authService.login(
+          context,
+          _emailController.text,
+          _passwordController.text,
+        );
       } on Exception catch (error) {
         debugPrint('ERROR => _checkEmail: ' + error.toString());
       }
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: UiPadding.large),
           child: Form(
             key: _formKey,
