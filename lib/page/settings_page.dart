@@ -1,5 +1,6 @@
 import 'package:bluuffed_app/button/button_confirm_widget.dart';
 import 'package:bluuffed_app/button/button_link_widget.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/widget/dialog_confirm_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +25,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   final ActivityClass activityClass = ActivityClass();
   final AuthService authService = AuthService();
-  final UserClass userClass = UserClass();
+  final UserService _userService = UserService();
   final UserFirestore userFirestore = UserFirestore();
 
   void _toggleNotification() {
@@ -69,7 +70,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> goLogout(BuildContext context, bool _value) async {
     Navigator.pop(context);
 
-    if (_value) userClass.clean(context);
+    if (_value) _userService.clean(context);
   }
 
   @override

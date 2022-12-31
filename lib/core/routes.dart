@@ -124,12 +124,14 @@ final routes = GoRouter(
       ),
     ),
     GoRoute(
-      path: PageEnum.HISTORY.value,
-      builder: (context, state) => const HistoryPage(),
+      path: PageEnum.HISTORY.value + '/:historyId',
+      builder: (context, state) {
+        return HistoryPage(historyId: state.params['historyId']!);
+      },
       pageBuilder: (context, state) => buildPageWithDefaultTransition(
         context: context,
         state: state,
-        child: const HistoryPage(),
+        child: HistoryPage(historyId: state.params['historyId']!),
       ),
     ),
     GoRoute(

@@ -1,14 +1,8 @@
 import 'package:bluuffed_app/model/blocked_model.dart';
 import 'package:bluuffed_app/model/following_model.dart';
 import 'package:bluuffed_app/service/block_service.dart';
-import 'package:bluuffed_app/service/device_service.dart';
 import 'package:bluuffed_app/service/following_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:bluuffed_app/firestore/user_firestore.dart';
-import 'package:bluuffed_app/service/auth_service.dart';
-import 'package:bluuffed_app/model/activity_model.dart';
-import 'package:bluuffed_app/widget/toast_widget.dart';
 
 ValueNotifier<List<UserModel>> currentUser = ValueNotifier<List<UserModel>>([]);
 ValueNotifier<String> currentUserId = ValueNotifier<String>('');
@@ -91,62 +85,6 @@ class UserModel {
         'blocked': user.blocked,
         'following': user.following,
       };
-}
-
-class UserClass {
-  final ActivityClass activityClass = ActivityClass();
-  final AuthService authService = AuthService();
-  final DeviceService deviceService = DeviceService();
-
-  final ToastWidget toast = ToastWidget();
-  final UserFirestore userFirestore = UserFirestore();
-
-  Future<void> clean(BuildContext context) async {
-    try {
-      await userFirestore.pathLoginLogout(UserStatusEnum.INACTIVE.value);
-      await authService.logout();
-      currentUser.value = [];
-      Navigator.pop(context);
-      toast.toast(
-        context,
-        ToastEnum.SUCCESS.value,
-        'espero que isso não seja um adeus',
-      );
-      await activityClass.save(
-        type: ActivityEnum.LOGOUT.value,
-        elementId: '',
-        content: deviceService.DeviceModel(),
-      );
-    } catch (error) {
-      debugPrint('ERROR => _setUpQtyHistoryUser:$error');
-      toast.toast(
-        context,
-        ToastEnum.WARNING.value,
-        'não foi possível sair da aplicação no momento, tente novamente mais tarde',
-      );
-    }
-  }
-
-  Future<void> delete(BuildContext context) async {
-    try {
-      await userFirestore.pathLoginLogout(UserStatusEnum.DELETED.name);
-      await userFirestore.deleteUser();
-      await authService.delete();
-      currentUser.value = [];
-    } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => deleteUser: $error');
-      Navigator.of(context).pop();
-      toast.toast(
-        context,
-        ToastEnum.WARNING.name,
-        'não foi possível delatar a conta no momento, tente novamente mais tarde.',
-      );
-    }
-  }
-
-  bool isLogin() {
-    return currentUser.value.isNotEmpty ? true : false;
-  }
 }
 
 enum UserStatusEnum {

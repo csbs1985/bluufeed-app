@@ -1,5 +1,4 @@
 import 'package:bluuffed_app/service/device_service.dart';
-import 'package:bluuffed_app/service/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bluuffed_app/firestore/token_firestore.dart';
@@ -18,14 +17,10 @@ class AuthException implements Exception {
 class AuthService extends ChangeNotifier {
   final ActivityClass activityClass = ActivityClass();
   final DeviceService deviceService = DeviceService();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final ToastWidget _toast = ToastWidget();
   final TokenFirestore _tokenFirestore = TokenFirestore();
   final UserFirestore _userFirestore = UserFirestore();
-  final UserService _userService = UserService();
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  late UserClass userClass = UserClass();
 
   String message = 'erro não classificado, tente novamente';
 
@@ -113,7 +108,7 @@ class AuthService extends ChangeNotifier {
       await getToken();
       await _userFirestore.getUserEmail(_auth.currentUser!.email!).then(
             (result) async => {
-              _userService.setModelUser(result),
+              // _userService.setModelUser(result),
               await activityClass.save(
                 type: _activity,
                 content: deviceService.DeviceModel(),
@@ -146,8 +141,6 @@ class AuthService extends ChangeNotifier {
       'blocked': [],
       'following': [],
     };
-
-    _userService.setCurrentUser(_user);
 
     _userFirestore.postUser(_user).then((result) async => {
           await activityClass.save(type: _activity),

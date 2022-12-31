@@ -18,6 +18,7 @@ import 'package:bluuffed_app/theme/ui_size.dart';
 import 'package:bluuffed_app/widget/icon_widget.dart';
 import 'package:bluuffed_app/widget/number_animation_widget.dart';
 import 'package:bluuffed_app/widget/toast_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class HistoryMenuWidget extends StatefulWidget {
   const HistoryMenuWidget({required Map<String, dynamic> history})
@@ -50,7 +51,7 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
   }
 
   void _openComment(String _route) {
-    if (_route != PageEnum.HISTORY.value) if (widget._history['isComment']) {
+    if (_route != PageEnum.HISTORY.value && widget._history['isComment']) {
       historyClass.add(widget._history);
       _openModal(context, ModalEnum.COMMENT.value);
     }
@@ -178,9 +179,9 @@ class _HistoryMenuWidgetState extends State<HistoryMenuWidget> {
                       if (_route != PageEnum.HISTORY.value)
                         IconWidget(
                           icon: UiIcon.read,
-                          callback: (value) => historyService.getHistoryPage(
-                            widget._history['id'],
-                          ),
+                          callback: (value) => context.push(
+                              PageEnum.HISTORY.value +
+                                  '/${widget._history["id"]}'),
                         ),
                     ],
                   );

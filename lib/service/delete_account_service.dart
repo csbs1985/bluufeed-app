@@ -2,6 +2,7 @@ import 'package:bluuffed_app/firestore/comments_firestore.dart';
 import 'package:bluuffed_app/firestore/history_firestore.dart';
 import 'package:bluuffed_app/firestore/justifications_Firestore.dart';
 import 'package:bluuffed_app/model/user_model.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:bluuffed_app/widget/dialog_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class DeleteAccountService {
   final HistoryFirestore historyFirestore = HistoryFirestore();
   final JustificationsFirestore justificationsFirestore =
       JustificationsFirestore();
-  final UserClass userClass = UserClass();
+  final UserService _userService = UserService();
   final Uuid uuid = const Uuid();
 
   late Map<String, dynamic> _form;
@@ -73,7 +74,7 @@ class DeleteAccountService {
                 currentDialog.value = 'Atualizando comentários...',
               for (var item in result.docs)
                 await commentFirestore.upStatusUserComment(item['id']),
-              userClass.delete(context)
+              _userService.delete(context)
             })
         .catchError((error) => debugPrint('ERROR:' + error));
   }

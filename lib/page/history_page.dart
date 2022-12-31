@@ -17,7 +17,9 @@ import 'package:bluuffed_app/widget/no_result_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+  final String historyId;
+
+  const HistoryPage({super.key, required this.historyId});
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();

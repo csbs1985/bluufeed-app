@@ -1,7 +1,7 @@
 import 'package:bluuffed_app/model/delete_account_model.dart';
 import 'package:bluuffed_app/model/page_model.dart';
-import 'package:bluuffed_app/model/user_model.dart';
 import 'package:bluuffed_app/service/delete_account_service.dart';
+import 'package:bluuffed_app/service/user_service.dart';
 import 'package:bluuffed_app/text/headline1.dart';
 import 'package:bluuffed_app/theme/ui_padding.dart';
 import 'package:bluuffed_app/widget/app_bar_back_widget.dart';
@@ -19,7 +19,7 @@ class DeleteAccountPage extends StatefulWidget {
 
 class _DeleteAccountPageState extends State<DeleteAccountPage> {
   final DeleteAccountService deleteAccountService = DeleteAccountService();
-  final UserClass userClass = UserClass();
+  final UserService _userService = UserService();
 
   final List<DeleteAccountModel> _allDeleteAccount =
       DeleteAccountModel.allDeleteAccount;
@@ -43,7 +43,7 @@ class _DeleteAccountPageState extends State<DeleteAccountPage> {
           text:
               'Dar uma tempo e manter seu conteúdo no bluufeed. Sua conta volta a ficar ativa quando entrar novamente com sua conta cadastrada.',
           callback: (value) =>
-              value ? userClass.clean(context) : Navigator.of(context).pop(),
+              value ? _userService.clean(context) : Navigator.of(context).pop(),
         );
       },
     );

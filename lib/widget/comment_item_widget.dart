@@ -22,7 +22,6 @@ class CommentItemWidget extends StatefulWidget {
 
 class _CommentItemWidgetState extends State<CommentItemWidget> {
   final CommentClass commentClass = CommentClass();
-  final UserClass userClass = UserClass();
 
   void _openModal(BuildContext context, Map<String, dynamic> _content) {
     if (!currentComment.value.first.isDelete)
