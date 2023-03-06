@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:algolia/algolia.dart';
@@ -33,6 +34,21 @@ class UserService {
     return _listUser;
   }
 
+  initUser(BuildContext context) async {
+    try {
+      await _readUser().then((_user) async => {
+            if (_user != null)
+              setModelUser(_user)
+            else
+              await _userFirestore
+                  .getUserEmail(currentEmail.value)
+                  .then((result) => setModelUser(result))
+          });
+    } on AuthException catch (error) {
+      debugPrint('ERROR => getUserEmail: ' + error.toString());
+    }
+  }
+
   void setModelUser(_value) {
     setCurrentUser({
       'id': _value.docs[0]['id'],
@@ -53,41 +69,30 @@ class UserService {
     });
   }
 
-  initUser(BuildContext context) async {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
-      if (user != null) {
-        try {
-          await readUser();
-          await _userFirestore
-              .getUserEmail(currentEmail.value)
-              .then((result) => setModelUser(result));
-        } on AuthException catch (error) {
-          debugPrint('ERROR => getUserEmail: ' + error.toString());
-        }
-      }
-    });
-  }
-
   void setCurrentUser(Map<String, dynamic> _user) {
     currentUser.value = [];
     currentUser.value.add(UserModel.fromJson(_user));
     saveUser(_user);
   }
 
+  Future<File> _getUserFile() async {
+    final Directory directory = await getApplicationDocumentsDirectory();
+    return File("${directory.path}/user.json");
+  }
+
   Future<File> saveUser(_user) async {
-    // String data = UserModel.toJson(currentUser.value.first);
-    final file = await getFileUser();
-    return file.writeAsString(_user);
+    String data = jsonEncode(_user);
+    final file = await _getUserFile();
+    return file.writeAsString(data);
   }
 
-  Future<String> readUser() async {
-    final file = await getFileUser();
-    return file.readAsString();
-  }
-
-  Future<File> getFileUser() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File('${directory.path}/user.json');
+  Future<Future<String>?> _readUser() async {
+    try {
+      final file = await _getUserFile();
+      return file.readAsString();
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<void> clean(BuildContext context) async {
@@ -131,9 +136,5 @@ class UserService {
         'não foi possível delatar a conta no momento, tente novamente mais tarde.',
       );
     }
-  }
-
-  bool isLogin() {
-    return currentUser.value.isNotEmpty ? true : false;
   }
 }
