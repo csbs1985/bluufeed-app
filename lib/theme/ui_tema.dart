@@ -35,10 +35,10 @@ class UiTema {
       backgroundColor: UiCor.main,
       elevation: 0,
     ),
+    scaffoldBackgroundColor: UiCor.main,
+    fontFamily: 'nunito',
     bottomNavigationBarTheme:
         const BottomNavigationBarThemeData(backgroundColor: UiCor.main),
-    fontFamily: 'nunito',
-    scaffoldBackgroundColor: UiCor.main,
     // textButtonTheme: TextButtonThemeData(style: UiButton.button),
     // inputDecorationTheme: UiTextField.textField,
     textTheme: const TextTheme(
@@ -47,11 +47,15 @@ class UiTema {
       // displaySmall: UiTexto.headline3,
       // headlineMedium: UiTexto.headline4,
       // headlineSmall: UiTexto.headline5,
-      // titleLarge: UiTexto.headline6,
+      titleLarge: UiTexto.texto6,
     ),
   );
 
   static ThemeData temaEscuro = ThemeData(
+    appBarTheme: const AppBarTheme(
+      backgroundColor: UiCor.mainEscuro,
+      elevation: 0,
+    ),
     scaffoldBackgroundColor: UiCor.mainEscuro,
     fontFamily: 'nunito',
     bottomNavigationBarTheme:
@@ -64,7 +68,7 @@ class UiTema {
       // displaySmall: UiTextDark.headline3,
       // headlineMedium: UiTextDark.headline4,
       // headlineSmall: UiTextDark.headline5,
-      // titleLarge: UiTextDark.headline6,
+      titleLarge: UiTextoEscuro.texto6,
     ),
   );
 }

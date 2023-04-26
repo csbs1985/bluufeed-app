@@ -10,9 +10,13 @@ class EntrarPage extends StatefulWidget {
 class _EntrarPageState extends State<EntrarPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
-        child: Text('data'),
+        child: Text(
+          'Whereas disregard and contempt for human rights have resulted',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
     );
   }

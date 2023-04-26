@@ -5,16 +5,9 @@ import 'package:go_router/go_router.dart';
 final RotasClass _rotasClass = RotasClass();
 
 final GoRouter routes = GoRouter(
+  debugLogDiagnostics: true,
+  initialLocation: RouteEnum.ENTRAR.value,
   routes: [
-    GoRoute(
-      path: '/',
-      pageBuilder: (context, state) =>
-          _rotasClass.buildPageWithDefaultTransition(
-        context: context,
-        state: state,
-        child: const EntrarPage(),
-      ),
-    ),
     GoRoute(
       path: RouteEnum.ENTRAR.value,
       pageBuilder: (context, state) =>

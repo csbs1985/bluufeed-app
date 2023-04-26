@@ -35,16 +35,15 @@ flutter_native_splash: # flutter pub run flutter_native_splash:create
   android: true
   ios: true
 
-  assets:
-    - assets/app/
-    - assets/font/
-    - assets/icon/
-    - assets/image/
-
 flutter:
   uses-material-design: true
 
-  # fonts:
-  #   - family: ElementalSansPro
-  #     fonts:
-  #       - asset: assets/fonts/ElementalSansPro.ttf
+  assets:
+    - assets/app/
+    - assets/icon/
+    - assets/image/
+
+  fonts:
+    - family: nunito
+      fonts:
+        - asset: assets/font/nunito.ttf
