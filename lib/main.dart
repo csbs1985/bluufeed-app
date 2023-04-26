@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bluufeed_app/config/hive_config.dart';
 import 'package:bluufeed_app/config/routes_config.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await HiveConfig.start();
 
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],

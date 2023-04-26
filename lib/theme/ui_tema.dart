@@ -42,8 +42,8 @@ class UiTema {
     // textButtonTheme: TextButtonThemeData(style: UiButton.button),
     // inputDecorationTheme: UiTextField.textField,
     textTheme: const TextTheme(
-      displayLarge: UiTexto.texto1,
-      // displayMedium: UiTexto.headline2,
+      displayLarge: UiTexto.texto2,
+      displayMedium: UiTexto.texto1,
       // displaySmall: UiTexto.headline3,
       // headlineMedium: UiTexto.headline4,
       // headlineSmall: UiTexto.headline5,
@@ -63,8 +63,8 @@ class UiTema {
     // textButtonTheme: TextButtonThemeData(style: UiButton.buttonDark),
     // inputDecorationTheme: UiTextField.textFieldDark,
     textTheme: const TextTheme(
-      displayLarge: UiTextoEscuro.texto1,
-      // displayMedium: UiTextDark.headline2,
+      displayLarge: UiTextoEscuro.texto2,
+      displayMedium: UiTextoEscuro.texto1,
       // displaySmall: UiTextDark.headline3,
       // headlineMedium: UiTextDark.headline4,
       // headlineSmall: UiTextDark.headline5,
