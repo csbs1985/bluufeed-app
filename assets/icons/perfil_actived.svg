@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
-    <g id="perfl" transform="translate(-185 -16)">
-        <circle id="Elipse_11" data-name="Elipse 11" cx="11" cy="11" r="11" transform="translate(185 16)"
-            fill="#3e94d1" />
-        <path id="perfil"
-            d="M12,11A4,4,0,1,0,8,7,4,4,0,0,0,12,11Zm0,2a9.985,9.985,0,0,0-8,4,10,10,0,0,0,16,0,9.985,9.985,0,0,0-8-4Z"
-            transform="translate(184 15)" fill="#007dc1" />
-    </g>
-</svg>
