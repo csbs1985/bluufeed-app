@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:bluufeed_app/page/entrar_page.dart';
+import 'package:bluufeed_app/config/routes_config.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,21 +51,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         builder: (BuildContext context, Brightness tema, _) {
           bool isEscuro = tema == Brightness.dark;
 
-          return MaterialApp(
-            home: const EntrarPage(),
+          return MaterialApp.router(
+            routerDelegate: routes.routerDelegate,
+            routeInformationParser: routes.routeInformationParser,
+            routeInformationProvider: routes.routeInformationProvider,
             title: "Bluufeed",
             debugShowCheckedModeBanner: false,
             theme: isEscuro ? UiTema.temaEscuro : UiTema.tema,
           );
         },
-
-        // return MaterialApp.router(
-        //   routerDelegate: routes.routerDelegate,
-        //   routeInformationParser: routes.routeInformationParser,
-        //   routeInformationProvider: routes.routeInformationProvider,
-        //   debugShowCheckedModeBanner: false,
-        //   theme: isDark ? UiTema.themeDark : UiTema.theme,
-        // );
       ),
     );
   }

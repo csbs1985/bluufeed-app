@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 final RotasClass _rotasClass = RotasClass();
 
-final GoRouter router = GoRouter(
+final GoRouter routes = GoRouter(
   routes: [
     GoRoute(
       path: '/',
