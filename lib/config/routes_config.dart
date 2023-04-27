@@ -1,12 +1,27 @@
+import 'package:bluufeed_app/class/auth_class.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
+import 'package:bluufeed_app/hive/usuario_hive.dart';
 import 'package:bluufeed_app/page/entrar_page.dart';
+import 'package:bluufeed_app/page/inicio_page.dart';
 import 'package:go_router/go_router.dart';
 
+final AuthClass _authClass = AuthClass();
 final RotasClass _rotasClass = RotasClass();
+final UsuarioHive _usuarioHive = UsuarioHive();
 
 final GoRouter routes = GoRouter(
   debugLogDiagnostics: true,
-  initialLocation: RouteEnum.ENTRAR.value,
+  initialLocation: RouteEnum.INICIO.value,
+  refreshListenable: _authClass,
+  redirect: (context, state) {
+    final isAuthenticated = _authClass.isAuthenticated;
+    final isLoginRoute = state.subloc == RouteEnum.ENTRAR.value;
+
+    if (_usuarioHive.verificarUsuario()) return RouteEnum.INICIO.value;
+    if (!isAuthenticated) return isLoginRoute ? null : RouteEnum.ENTRAR.value;
+    if (isLoginRoute) return RouteEnum.INICIO.value;
+    return null;
+  },
   routes: [
     GoRoute(
       path: RouteEnum.ENTRAR.value,
@@ -23,7 +38,7 @@ final GoRouter routes = GoRouter(
           _rotasClass.buildPageWithDefaultTransition(
         context: context,
         state: state,
-        child: const EntrarPage(),
+        child: const InicioPage(),
       ),
     ),
   ],

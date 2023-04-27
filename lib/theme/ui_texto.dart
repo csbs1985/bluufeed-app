@@ -7,13 +7,11 @@ class UiTexto {
     fontWeight: FontWeight.normal,
     color: UiCor.texto,
   );
-
   static const TextStyle texto2 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.normal,
     color: UiCor.texto,
   );
-
   static const TextStyle texto6 = TextStyle(
     fontSize: 48,
     fontWeight: FontWeight.normal,
@@ -27,13 +25,11 @@ class UiTextoEscuro {
     fontWeight: FontWeight.normal,
     color: UiCor.textoEscuro,
   );
-
   static const TextStyle texto2 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.normal,
     color: UiCor.textoEscuro,
   );
-
   static const TextStyle texto6 = TextStyle(
     fontSize: 48,
     fontWeight: FontWeight.normal,

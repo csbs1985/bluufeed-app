@@ -1,3 +1,4 @@
+import 'package:bluufeed_app/class/auth_class.dart';
 import 'package:bluufeed_app/config/constants.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +12,10 @@ class EntrarPage extends StatefulWidget {
 }
 
 class _EntrarPageState extends State<EntrarPage> {
-  // final AuthService _authService = AuthService();
+  final AuthClass _authClass = AuthClass();
 
   signInWithGoogle(BuildContext context) async {
-    // await _authService.signIn(context);
+    await _authClass.signIn(context);
   }
 
   @override

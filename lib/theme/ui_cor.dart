@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 class UiCor {
   static const Color principal = Color(0xFF1d9bf0);
 
+  static const Color alerta = Color(0xFFE50D23);
+  static const Color sucesso = Color(0xFFA1D151);
+
   static const Color main = Color(0xffffffff);
   static const Color mainEscuro = Color(0xFF1F222A);
 
@@ -45,13 +48,9 @@ class UiCor {
 
   // static const Color subtitle = UiCor.primary;
 
-  // static const Color success = Color(0xFFA1D151);
-
   // static const Color textEscuro = Color(0xFFffffff);
 
   // static const Color toast = Color(0xFF2a2d2e);
-
-  // static const Color warning = Color(0xFFE50D23);
 
   // static const Color login = Color(0xFF66B132);
 }

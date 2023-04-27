@@ -16,7 +16,7 @@ class UsuarioHive {
     return _usuarioBox.values.first;
   }
 
-  checkUsuario() {
+  verificarUsuario() {
     return _usuarioBox.isNotEmpty;
   }
 }
