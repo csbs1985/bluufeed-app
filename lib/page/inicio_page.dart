@@ -1,11 +1,9 @@
-import 'package:bluufeed_app/page/busca_page.dart';
-import 'package:bluufeed_app/page/configuracao_page.dart';
-import 'package:bluufeed_app/page/notificacao_page.dart';
-import 'package:bluufeed_app/page/perfil_part.dart';
-import 'package:bluufeed_app/page/principal_page.dart';
-import 'package:bluufeed_app/theme/ui_svg.dart';
+import 'package:bluufeed_app/appbar/inicio_appbar.dart';
+import 'package:bluufeed_app/button/criar_button.dart';
+import 'package:bluufeed_app/drawer/perfil_drawer.dart';
+import 'package:bluufeed_app/theme/ui_size.dart';
+import 'package:bluufeed_app/widget/menu_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class InicioPage extends StatefulWidget {
   const InicioPage({super.key});
@@ -15,81 +13,56 @@ class InicioPage extends StatefulWidget {
 }
 
 class _InicioPageState extends State<InicioPage> {
-  PageController _pageController = PageController();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final ScrollController _scrollController = ScrollController();
 
-  int _currentPage = 0;
-
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: _currentPage);
-    super.initState();
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.linear,
+    );
   }
 
-  void _setCurrentPage(page) {
-    setState(() => _currentPage = page);
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: _setCurrentPage,
-        children: const [
-          PrincipalPage(),
-          BuscaPage(),
-          NotificacaoPage(),
-          PerfilPage(),
-          ConfiguracaoPage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentPage,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedFontSize: 0,
-        unselectedFontSize: 0,
-        elevation: 0,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              _currentPage == 0 ? UiSvg.principalAtivo : UiSvg.principal,
+      key: scaffoldKey,
+      appBar: AppBar(toolbarHeight: 0),
+      endDrawer: const PerfilDrawer(),
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverAppBar(
+            toolbarHeight: UiTamalho.appbar,
+            floating: true,
+            snap: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background: InicioAppbar(
+                callbackAvatar: () => scaffoldKey.currentState!.openDrawer(),
+                callbackLogo: _scrollToTop,
+              ),
             ),
-            label: '',
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              _currentPage == 1 ? UiSvg.buscarAtivo : UiSvg.buscar,
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                CriarBotao(),
+                const MenuWidget(),
+                for (var i = 0; i < 100; i++)
+                  const ListTile(
+                    title: Text('Item 1'),
+                  ),
+              ],
             ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              _currentPage == 2 ? UiSvg.notificacaoAtivo : UiSvg.notificacao,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              _currentPage == 3 ? UiSvg.perfilAtivo : UiSvg.perfil,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              _currentPage == 4 ? UiSvg.maisAtivo : UiSvg.mais,
-            ),
-            label: '',
           ),
         ],
-        onTap: (page) => {
-          _pageController.animateToPage(
-            page,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.ease,
-          ),
-        },
       ),
     );
   }

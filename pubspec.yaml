@@ -21,6 +21,7 @@ dependencies:
   google_sign_in: ^6.0.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  modal_bottom_sheet: ^3.0.0-pre
   provider: ^6.0.5
 
 dev_dependencies:
@@ -41,6 +42,7 @@ flutter_icons: # flutter pub run flutter_launcher_icons:main
 
 flutter_native_splash: # flutter pub run flutter_native_splash:create
   color: "#FFFFFF"
+  color_dark: "#1F222A"
   icon_background_color: "#FFFFFF"
   image: "assets/app/ic_splash.png"
   android: true

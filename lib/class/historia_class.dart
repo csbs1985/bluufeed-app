@@ -1,5 +1,23 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/favorito_class.dart';
+import 'package:flutter/material.dart';
+
+ValueNotifier<HistoriaModel> currentHistory =
+    ValueNotifier<HistoriaModel>(HistoriaModel(
+  idHistoria: '',
+  titulo: '',
+  texto: '',
+  dataCriacao: '',
+  idUsuario: '',
+  nameUsuario: '',
+  isComentario: false,
+  isAssinado: false,
+  isEditado: false,
+  isAutorizado: false,
+  qtdComentario: 0,
+  categorias: [],
+  favoritos: [],
+));
 
 class HistoriaModel {
   late String idHistoria;
@@ -31,4 +49,24 @@ class HistoriaModel {
     required this.categorias,
     required this.favoritos,
   });
+}
+
+class HistoriaClass {
+  limparCurrentHistoria() {
+    currentHistory.value = HistoriaModel(
+      idHistoria: '',
+      titulo: '',
+      texto: '',
+      dataCriacao: '',
+      idUsuario: '',
+      nameUsuario: '',
+      isComentario: false,
+      isAssinado: false,
+      isEditado: false,
+      isAutorizado: false,
+      qtdComentario: 0,
+      categorias: [],
+      favoritos: [],
+    );
+  }
 }

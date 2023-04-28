@@ -15,7 +15,7 @@ class UiTexto {
   static const TextStyle texto6 = TextStyle(
     fontSize: 48,
     fontWeight: FontWeight.normal,
-    color: UiCor.principal,
+    color: UiCor.primeiro,
   );
 }
 
@@ -33,6 +33,6 @@ class UiTextoEscuro {
   static const TextStyle texto6 = TextStyle(
     fontSize: 48,
     fontWeight: FontWeight.normal,
-    color: UiCor.principal,
+    color: UiCor.primeiro,
   );
 }

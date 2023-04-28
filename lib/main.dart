@@ -3,7 +3,7 @@ import 'package:bluufeed_app/config/hive_config.dart';
 import 'package:bluufeed_app/config/routes_config.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter/services.dart';
 
 Future<void> main() async {
@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return WillPopScope(
       onWillPop: () => exit(0),
       child: ValueListenableBuilder(
-        valueListenable: UiTema.currentTema,
+        valueListenable: currentTema,
         builder: (BuildContext context, Brightness tema, _) {
           bool isEscuro = tema == Brightness.dark;
 

@@ -1,12 +1,12 @@
 import 'package:bluufeed_app/class/auth_class.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/hive/usuario_hive.dart';
+import 'package:bluufeed_app/page/busca_page.dart';
 import 'package:bluufeed_app/page/entrar_page.dart';
 import 'package:bluufeed_app/page/inicio_page.dart';
 import 'package:go_router/go_router.dart';
 
 final AuthClass _authClass = AuthClass();
-final RotasClass _rotasClass = RotasClass();
 final UsuarioHive _usuarioHive = UsuarioHive();
 
 final GoRouter routes = GoRouter(
@@ -24,9 +24,16 @@ final GoRouter routes = GoRouter(
   },
   routes: [
     GoRoute(
+      path: RouteEnum.BUSCAR.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const BuscarPage(),
+      ),
+    ),
+    GoRoute(
       path: RouteEnum.ENTRAR.value,
-      pageBuilder: (context, state) =>
-          _rotasClass.buildPageWithDefaultTransition(
+      pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
         child: const EntrarPage(),
@@ -34,8 +41,7 @@ final GoRouter routes = GoRouter(
     ),
     GoRoute(
       path: RouteEnum.INICIO.value,
-      pageBuilder: (context, state) =>
-          _rotasClass.buildPageWithDefaultTransition(
+      pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
         child: const InicioPage(),

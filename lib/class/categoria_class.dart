@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class CategoriaModel {
   final String? idCategoria;
   final String? texto;
@@ -9,6 +11,9 @@ class CategoriaModel {
     this.isDesabilitada,
   });
 }
+
+ValueNotifier<CategoriaModel> currentCategoria =
+    ValueNotifier<CategoriaModel>(listaCategoria.first);
 
 final List<CategoriaModel> listaCategoria = [
   CategoriaModel(
@@ -38,7 +43,7 @@ final List<CategoriaModel> listaCategoria = [
   ),
   CategoriaModel(
     idCategoria: CategoriaEnum.DRINK.value,
-    texto: 'bebidCategoriaa',
+    texto: 'babida',
     isDesabilitada: false,
   ),
   CategoriaModel(
@@ -63,7 +68,7 @@ final List<CategoriaModel> listaCategoria = [
   ),
   CategoriaModel(
     idCategoria: CategoriaEnum.FOOD.value,
-    texto: 'comidCategoriaa',
+    texto: 'comida',
     isDesabilitada: false,
   ),
   CategoriaModel(
@@ -112,7 +117,7 @@ final List<CategoriaModel> listaCategoria = [
     isDesabilitada: false,
   ),
   CategoriaModel(
-    idCategoria: CategoriaEnum.PHOTOGRAPHY_VidCategoriaEO.value,
+    idCategoria: CategoriaEnum.PHOTOGRAPHY_VIDEO.value,
     texto: 'fotografia e vídeos',
     isDesabilitada: false,
   ),
@@ -193,7 +198,7 @@ final List<CategoriaModel> listaCategoria = [
   ),
   CategoriaModel(
     idCategoria: CategoriaEnum.LIFE_DEATH.value,
-    texto: 'vidCategoriaa e morte',
+    texto: 'vida e morte',
     isDesabilitada: false,
   ),
   CategoriaModel(
@@ -234,7 +239,7 @@ enum CategoriaEnum {
   MONEY('money'),
   MUSIC('music'),
   MY('my'),
-  PHOTOGRAPHY_VidCategoriaEO('photagraphy_vidCategoriaeo'),
+  PHOTOGRAPHY_VIDEO('photagraphy_video'),
   RELIGION('religion'),
   ROMANCE('romance'),
   SAVE('save'),

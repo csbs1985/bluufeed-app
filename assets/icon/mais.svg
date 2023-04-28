@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-    <rect data-name="Retângulo 7" width="9.091" height="9.091" rx="3.54" fill="#8f939d" />
-    <rect data-name="Retângulo 8" width="9.091" height="9.091" rx="3.54" transform="translate(10.909)" fill="#e4e6eb" />
-    <rect data-name="Retângulo 9" width="9.091" height="9.091" rx="3.54" transform="translate(0 10.909)"
-        fill="#e4e6eb" />
-    <rect data-name="Retângulo 10" width="9.091" height="9.091" rx="3.54" transform="translate(10.909 10.909)"
-        fill="#e4e6eb" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect data-name="Retângulo 7" width="9.091" height="9.091" rx="3.54" fill="#e4e6eb"/><rect data-name="Retângulo 8" width="9.091" height="9.091" rx="3.54" transform="translate(10.909)" fill="#3e94d1"/><rect data-name="Retângulo 9" width="9.091" height="9.091" rx="3.54" transform="translate(0 10.909)" fill="#3e94d1"/><rect data-name="Retângulo 10" width="9.091" height="9.091" rx="3.54" transform="translate(10.909 10.909)" fill="#3e94d1"/></svg>

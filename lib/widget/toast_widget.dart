@@ -6,7 +6,7 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ToastWidget {
   void toast(BuildContext context, ToastEnum? type, String text) {
-    Color style = UiCor.principal;
+    Color style = UiCor.primeiro;
     if (type == ToastEnum.SUCESSO.name) {
       style = UiCor.sucesso;
     }

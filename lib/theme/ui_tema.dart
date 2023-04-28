@@ -3,10 +3,9 @@ import 'package:bluufeed_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class UiTema {
-  static ValueNotifier<Brightness> currentTema =
-      ValueNotifier(Brightness.light);
+ValueNotifier<Brightness> currentTema = ValueNotifier(Brightness.light);
 
+class UiTema {
   static definirTema() {
     currentTema.value =
         WidgetsBinding.instance.platformDispatcher.platformBrightness;

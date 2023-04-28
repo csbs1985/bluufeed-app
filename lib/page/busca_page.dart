@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-class BuscaPage extends StatefulWidget {
-  const BuscaPage({super.key});
+class BuscarPage extends StatefulWidget {
+  const BuscarPage({super.key});
 
   @override
-  State<BuscaPage> createState() => _BuscaPageState();
+  State<BuscarPage> createState() => _BuscaPageState();
 }
 
-class _BuscaPageState extends State<BuscaPage> {
+class _BuscaPageState extends State<BuscarPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SingleChildScrollView(
+      child: Container(
+        height: 100,
+        width: double.infinity,
+        color: Colors.amber,
+      ),
+    );
   }
 }
