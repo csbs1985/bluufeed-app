@@ -34,7 +34,7 @@ class _PerfilPageState extends State<PerfilDrawer> {
                   const AvatarWidget(),
                   _marginPequena,
                   Text(
-                    currentUsuario.value.nome,
+                    currentUsuario.value.nomeUsuario,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                   Text(

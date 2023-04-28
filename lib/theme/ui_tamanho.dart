@@ -6,6 +6,10 @@ class UiTamalho {
   static const double menuAltura = 70;
   static const double separador = 8;
   static const double historiaMenuAltura = 36;
+  static const double tag = 36;
+  static const double toggleAltura = 32;
+  static const double toggleLargura = 48;
+  static const double toggleTamanho = 20;
 
   // static const double borderButton = 4;
   // static const double bottomNavigation = 56;
@@ -20,9 +24,5 @@ class UiTamalho {
   // static const double modalHeight = 42;
   // static const double noAppBar = 48;
   // static const double paddingButtonFull = 32;
-  // static const double tag = 36;
   // static const double widthFullLessPadding = UiPadding.large * 2;
-  // static const double toggleHeight = 32;
-  // static const double toggleWidth = 48;
-  // static const double toggleSize = 20;
 }

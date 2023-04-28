@@ -1,3 +1,7 @@
+import 'package:bluufeed_app/class/usuario_class.dart';
+import 'package:bluufeed_app/firestore/atividade_firebase.dart';
+import 'package:uuid/uuid.dart';
+
 class AtividadeModel {
   late String conteudo;
   late String dataAtividade;
@@ -38,4 +42,24 @@ enum AtividadeEnum {
 
   final String value;
   const AtividadeEnum(this.value);
+}
+
+class AtividadeClass {
+  final AtividadeFirestore _atividadeFirestore = AtividadeFirestore();
+  final Uuid uuid = const Uuid();
+
+  late Map<String, dynamic> _atividade;
+
+  post({required String type, String? content, String? elementId}) async {
+    _atividade = {
+      'conteudo': content?.trim() ?? '',
+      'dataAtividade': DateTime.now().toString(),
+      'idConteudo': elementId ?? '',
+      'idAtividade': uuid.v4(),
+      'tipoAtividade': type,
+      'idUsuario': currentUsuario.value.idUsuario,
+    };
+
+    await _atividadeFirestore.postActivity(_atividade);
+  }
 }

@@ -13,7 +13,7 @@ class UsuarioModel {
   late String email;
   late String idUsuario;
   late String dataRegistro;
-  late String nome;
+  late String nomeUsuario;
   late String situacaoConta;
   late String token;
   late String dataAtualizacaoNome;
@@ -31,7 +31,7 @@ class UsuarioModel {
     required this.email,
     required this.idUsuario,
     required this.dataRegistro,
-    required this.nome,
+    required this.nomeUsuario,
     required this.situacaoConta,
     required this.token,
     required this.dataAtualizacaoNome,
@@ -52,7 +52,7 @@ ValueNotifier<UsuarioModel> currentUsuario =
   email: '',
   idUsuario: '',
   dataRegistro: '',
-  nome: '',
+  nomeUsuario: '',
   situacaoConta: '',
   token: '',
   dataAtualizacaoNome: '',
@@ -80,7 +80,7 @@ class UsuarioClass {
         biografia: doc.docs.first['biografia'],
         idUsuario: doc.docs.first['idUsuario'],
         dataRegistro: doc.docs.first['dataRegistro'],
-        nome: doc.docs.first['nome'],
+        nomeUsuario: doc.docs.first['nome'],
         email: doc.docs.first['email'],
         situacaoConta: doc.docs.first['situacaoConta'],
         token: doc.docs.first['token'],
@@ -99,7 +99,7 @@ class UsuarioClass {
         biografia: '',
         idUsuario: usuario['uid'],
         dataRegistro: '',
-        nome: usuario['displayName'],
+        nomeUsuario: usuario['displayName'],
         email: usuario['email']!,
         situacaoConta: '',
         token: await _tokenClass.pegarToken(),
@@ -124,7 +124,7 @@ class UsuarioClass {
       'biografia': currentUsuario.value.biografia,
       'idUsuario': currentUsuario.value.idUsuario,
       'dataRegistro': currentUsuario.value.dataRegistro,
-      'nome': currentUsuario.value.nome,
+      'nome': currentUsuario.value.nomeUsuario,
       'email': currentUsuario.value.email,
       'situacaoConta': currentUsuario.value.situacaoConta,
       'token': currentUsuario.value.token,
@@ -168,7 +168,7 @@ class UsuarioClass {
       idUsuario: '',
       email: '',
       dataRegistro: '',
-      nome: '',
+      nomeUsuario: '',
       situacaoConta: '',
       token: '',
       dataAtualizacaoNome: '',

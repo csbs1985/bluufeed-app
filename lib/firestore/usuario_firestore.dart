@@ -15,6 +15,12 @@ class UsuarioFirestore {
         .update({'qtyBookmark': _usuario.qtdFavoritos});
   }
 
+  pathQtdHistorias(UsuarioModel _usuario) async {
+    await usuarios
+        .doc(_usuario.idUsuario)
+        .update({"qtyHistory": _usuario.qtdHistorias});
+  }
+
   // deleteUser() {
   //   return user.doc(currentUsuario.value.id).delete();
   // }
@@ -83,10 +89,6 @@ class UsuarioFirestore {
 
   // pathQtyDenounceUser(UsuarioModel user) {
   //   return user.doc(user.id).update({'qtyDenounce': user.qtyDenounce});
-  // }
-
-  // pathQtyHistoryUser(UsuarioModel user) async {
-  //   await user.doc(user.id).update({"qtyHistory": user.qtyHistory});
   // }
 
   // postUser(Map<String, dynamic> user) {

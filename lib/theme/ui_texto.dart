@@ -32,6 +32,11 @@ class UiTexto {
     fontWeight: FontWeight.normal,
     color: UiCor.primeiro,
   );
+  static const TextStyle texto7 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: UiCor.subtitulo,
+  );
 }
 
 class UiTextoEscuro {

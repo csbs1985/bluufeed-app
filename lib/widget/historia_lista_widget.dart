@@ -29,23 +29,23 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
     if (_category != CategoriaEnum.ALL.value &&
         _category != CategoriaEnum.MY.value &&
         _category != CategoriaEnum.SAVE.value) {
-      return _historiaFirestore.stories
+      return _historiaFirestore.historias
           .orderBy('date')
           .where('categories', arrayContainsAny: [_category]);
     }
 
     if (_category == CategoriaEnum.MY.value) {
-      return _historiaFirestore.stories
+      return _historiaFirestore.historias
           .orderBy('date')
           .where('userId', isEqualTo: currentUsuario.value.idUsuario);
     }
 
     if (_category == CategoriaEnum.SAVE.value) {
-      return _historiaFirestore.stories.orderBy('date').where('bookmarks',
+      return _historiaFirestore.historias.orderBy('date').where('bookmarks',
           arrayContainsAny: [currentUsuario.value.idUsuario]);
     }
 
-    return _historiaFirestore.stories.orderBy('date');
+    return _historiaFirestore.historias.orderBy('date');
   }
 
   @override

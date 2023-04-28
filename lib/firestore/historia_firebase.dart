@@ -28,7 +28,9 @@ class HistoriaFirestore {
   }
 
   pathNameUserHistory(String _id) {
-    return historias.doc(_id).update({'userName': currentUsuario.value.nome});
+    return historias
+        .doc(_id)
+        .update({'userName': currentUsuario.value.nomeUsuario});
   }
 
   pathQtyCommentHistory(HistoriaModel _history) {
