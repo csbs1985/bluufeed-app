@@ -3,7 +3,7 @@ import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/theme/ui_botao.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
-import 'package:bluufeed_app/theme/ui_size.dart';
+import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +38,7 @@ class _MenuWidgetState extends State<MenuWidget> {
 
         return Container(
           color: isDark ? UiCor.bordaEscura : UiCor.borda,
-          height: UiTamalho.menuHeight,
+          height: UiTamalho.menuAltura,
           child: ListView.builder(
             itemCount: listaCategoria.length,
             padding: const EdgeInsets.only(left: UiEspaco.large),

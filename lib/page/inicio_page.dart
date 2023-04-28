@@ -1,7 +1,8 @@
 import 'package:bluufeed_app/appbar/inicio_appbar.dart';
 import 'package:bluufeed_app/button/criar_button.dart';
 import 'package:bluufeed_app/drawer/perfil_drawer.dart';
-import 'package:bluufeed_app/theme/ui_size.dart';
+import 'package:bluufeed_app/theme/ui_tamanho.dart';
+import 'package:bluufeed_app/widget/historia_lista_widget.dart';
 import 'package:bluufeed_app/widget/menu_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -55,10 +56,7 @@ class _InicioPageState extends State<InicioPage> {
               [
                 CriarBotao(),
                 const MenuWidget(),
-                for (var i = 0; i < 100; i++)
-                  const ListTile(
-                    title: Text('Item 1'),
-                  ),
+                const HistoriaListaWidget(),
               ],
             ),
           ),

@@ -24,8 +24,36 @@ CustomTransitionPage transicaoPaginas<T>({
 enum RouteEnum {
   BUSCAR('/buscar'),
   ENTRAR('/entrar'),
-  INICIO('/inicio');
+  INICIO('/inicio'),
+  HISTORIA('/historia');
 
   final String value;
   const RouteEnum(this.value);
 }
+
+
+
+  // ABOUT('/about'),
+  // ACTIVITY('/actvities'),
+  // BIOGRAPHY('/biography'),
+  // BLOCKEDS('/blockeds'),
+  // CODE('/code'),
+  // CREATE('/create'),
+  // DELETE_ACCOUNT('/delete_account'),
+  // DENOUNCE('/denounce'),
+  // FORGOT_PASSWORD('/forgot_password'),
+  // JUSTIFY('/justify'),
+  // HISTORY('/history'),
+  // HOME('/home'),
+  // LOADING('/loading'),
+  // LOGIN('/login'),
+  // NAME('/name'),
+  // NOTIFICATION('/notification'),
+  // QUESTIONS('/questions'),
+  // PASSWORD('/password'),
+  // PERFIL('/perfil'),
+  // PRIVACY('/privacy'),
+  // REGISTER('/register'),
+  // SETTINGS('/settings'),
+  // TERMS('/terms');
+

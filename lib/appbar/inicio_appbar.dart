@@ -1,6 +1,6 @@
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_size.dart';
+import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

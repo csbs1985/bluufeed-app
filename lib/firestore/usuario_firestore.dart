@@ -1,10 +1,18 @@
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UsuarioFirestore {
-  CollectionReference user = FirebaseFirestore.instance.collection('users');
+  CollectionReference usuarios =
+      FirebaseFirestore.instance.collection('usuarios');
 
   getUsuarioEmail(String email) async {
-    return user.where('email', isEqualTo: email).get();
+    return usuarios.where('email', isEqualTo: email).get();
+  }
+
+  pathQtdFavoritos(UsuarioModel _usuario) {
+    return usuarios
+        .doc(_usuario.idUsuario)
+        .update({'qtyBookmark': _usuario.qtdFavoritos});
   }
 
   // deleteUser() {
@@ -71,10 +79,6 @@ class UsuarioFirestore {
 
   // pathQtyCommentUser(UsuarioModel user) {
   //   return user.doc(user.id).update({'qtyComment': user.qtyComment});
-  // }
-
-  // pathQtyBookmarkUser(UsuarioModel user) {
-  //   return user.doc(user.id).update({'qtyBookmark': user.qtyBookmark});
   // }
 
   // pathQtyDenounceUser(UsuarioModel user) {

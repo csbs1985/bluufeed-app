@@ -3,7 +3,7 @@ import 'package:bluufeed_app/config/constants.dart';
 import 'package:bluufeed_app/modal/criar_historia_modal.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_size.dart';
+import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

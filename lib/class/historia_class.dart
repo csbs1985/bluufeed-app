@@ -2,7 +2,7 @@ import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/favorito_class.dart';
 import 'package:flutter/material.dart';
 
-ValueNotifier<HistoriaModel> currentHistory =
+ValueNotifier<HistoriaModel> currentHistoria =
     ValueNotifier<HistoriaModel>(HistoriaModel(
   idHistoria: '',
   titulo: '',
@@ -49,11 +49,29 @@ class HistoriaModel {
     required this.categorias,
     required this.favoritos,
   });
+
+  factory HistoriaModel.fromJson(json) => HistoriaModel.fromMap(json);
+
+  factory HistoriaModel.fromMap(json) => HistoriaModel(
+        idHistoria: json['id'],
+        titulo: json['title'],
+        texto: json['text'],
+        dataCriacao: json['date'],
+        isComentario: json['isComment'],
+        isAssinado: json['isSigned'],
+        isEditado: json['isEdit'],
+        isAutorizado: json['isAuthorized'],
+        idUsuario: json['userId'],
+        nameUsuario: json['userName'],
+        qtdComentario: json['qtyComment'],
+        categorias: json['categories'].cast<String>(),
+        favoritos: json['categories'].cast<String>(),
+      );
 }
 
 class HistoriaClass {
   limparCurrentHistoria() {
-    currentHistory.value = HistoriaModel(
+    currentHistoria.value = HistoriaModel(
       idHistoria: '',
       titulo: '',
       texto: '',
@@ -68,5 +86,23 @@ class HistoriaClass {
       categorias: [],
       favoritos: [],
     );
+  }
+
+  void adicionar(Map<String, dynamic> history) {
+    limparCurrentHistoria();
+    currentHistoria.value = HistoriaModel.fromJson(history);
+  }
+
+  String definirTextoComentario(Map<String, dynamic> _historia) {
+    if (!_historia['isComment']) return 'comentário desabilitado';
+    if (_historia['qtyComment'] == 1) return ' comentário';
+    if (_historia['qtyComment'] > 1) return ' comentários';
+    return 'seja o primeiro';
+  }
+
+  bool isComentario(String? _route, Map<String, dynamic> _historia) {
+    // if (_route == RouteEnum.historia.value) return false;
+    if (_historia['isComment']) return true;
+    return false;
   }
 }

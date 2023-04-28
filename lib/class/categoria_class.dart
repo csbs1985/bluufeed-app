@@ -259,3 +259,11 @@ enum CategoriaEnum {
   final String value;
   const CategoriaEnum(this.value);
 }
+
+class CategoriaClass {
+  getCategoryLabel(String _item) {
+    for (var item in listaCategoria) {
+      if (item.idCategoria == _item) return item.texto;
+    }
+  }
+}

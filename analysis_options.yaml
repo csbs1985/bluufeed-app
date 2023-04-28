@@ -23,4 +23,6 @@ linter:
   # producing the lint.
   rules:
     constant_identifier_names: false
+    depend_on_referenced_packages: false
+    file_names: false
     no_leading_underscores_for_local_identifiers: false

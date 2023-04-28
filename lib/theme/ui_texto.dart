@@ -12,6 +12,21 @@ class UiTexto {
     fontWeight: FontWeight.normal,
     color: UiCor.texto,
   );
+  static const TextStyle texto3 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: UiCor.texto,
+  );
+  static const TextStyle texto4 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.normal,
+    color: UiCor.texto,
+  );
+  static const TextStyle texto5 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: UiCor.tag,
+  );
   static const TextStyle texto6 = TextStyle(
     fontSize: 48,
     fontWeight: FontWeight.normal,
@@ -26,6 +41,16 @@ class UiTextoEscuro {
     color: UiCor.textoEscuro,
   );
   static const TextStyle texto2 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.normal,
+    color: UiCor.textoEscuro,
+  );
+  static const TextStyle texto3 = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: UiCor.textoEscuro,
+  );
+  static const TextStyle texto4 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.normal,
     color: UiCor.textoEscuro,
