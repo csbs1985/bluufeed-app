@@ -20,11 +20,12 @@ const String ENTRAR_GOOGLE =
     "\n Cadastre-se ou entre com sua conta Google nativa no dispositivo, selecionando o botão a baixo";
 
 const String HISTORIA_ALTERADA = "história alterada";
-const String HISTORIA_FAVORITADA =
-    "história adicionada à lista para ler mais tarde";
 const String HISTORIA_DESFAVORITADA = "história removida da lista";
 const String HISTORIA_ERRO_PUBLICAR =
     "erro ao publicar história, tente novamente mais tarde";
+const String HISTORIA_FAVORITADA =
+    "história adicionada à lista para ler mais tarde";
+const String HISTORIA_FIM = "Isso é tudo por enquanto.";
 const String HISTORIA_PUBLICADA = "história publicada";
 const String HISTORIA_TITULO = "Título da história";
 const String HISTORIA_TEXTO = "Texto da história";

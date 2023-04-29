@@ -20,19 +20,19 @@ class FavoritoModel {
 
 class FavoritoClass {
   String isFavorito(Map<String, dynamic> historia) {
-    return historia['bookmarks'].contains(currentUsuario.value.idUsuario)
+    return historia['favoritos'].contains(currentUsuario.value.idUsuario)
         ? UiSvg.favoritoAtivo
         : UiSvg.favorito;
   }
 
   void toggleFavorito(BuildContext context, Map<String, dynamic> historia) {
     try {
-      if (historia['bookmarks'].contains(currentUsuario.value.idUsuario)) {
-        historia['bookmarks'].remove(currentUsuario.value.idUsuario);
+      if (historia['favoritos'].contains(currentUsuario.value.idUsuario)) {
+        historia['favoritos'].remove(currentUsuario.value.idUsuario);
         currentUsuario.value.qtdFavoritos--;
         _toastWidget.toast(context, ToastEnum.SUCESSO, HISTORIA_DESFAVORITADA);
       } else {
-        historia['bookmarks'].add(currentUsuario.value.idUsuario);
+        historia['favoritos'].add(currentUsuario.value.idUsuario);
         currentUsuario.value.qtdFavoritos++;
         _toastWidget.toast(context, ToastEnum.SUCESSO, HISTORIA_FAVORITADA);
       }

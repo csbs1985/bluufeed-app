@@ -84,7 +84,7 @@ class UsuarioFirestore {
   // }
 
   // pathQtyCommentUser(UsuarioModel user) {
-  //   return user.doc(user.id).update({'qtyComment': user.qtyComment});
+  //   return user.doc(user.id).update({'qtdComentario': user.qtdComentario});
   // }
 
   // pathQtyDenounceUser(UsuarioModel user) {

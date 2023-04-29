@@ -44,18 +44,18 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              TituloText(title: widget._item['title']),
+              TituloText(title: widget._item['titulo']),
               DataText(item: widget._item),
               GestureDetector(
                 onTap: () => context.push(RouteEnum.HISTORIA.value),
                 child: TextoText(
-                  texto: widget._item['text'],
+                  texto: widget._item['texto'],
                   limiteLinha: 5,
                 ),
               ),
               Wrap(
                 children: [
-                  for (var item in widget._item['categories'])
+                  for (var item in widget._item['categorias'])
                     Padding(
                       padding: const EdgeInsets.only(right: UiEspaco.small),
                       child: TagText(
@@ -75,16 +75,6 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
         ),
         // if (_route != PageEnum.HISTORY.value)
         const SeparadorWidget(),
-        // if (_route == PageEnum.HISTORY.value)
-        Container(
-          padding: const EdgeInsets.fromLTRB(
-            UiEspaco.large,
-            0,
-            UiEspaco.large,
-            UiEspaco.large,
-          ),
-          child: const BorderWidget(),
-        ),
       ],
     );
   }

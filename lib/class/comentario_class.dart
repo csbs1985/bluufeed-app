@@ -35,7 +35,7 @@ final ModalClass _modalClass = ModalClass();
 class ComentarioClass {
   void abrirComentario(
       BuildContext context, String _route, Map<String, dynamic> _historia) {
-    if (_route != RouteEnum.HISTORIA.value && _historia['isComment']) {
+    if (_route != RouteEnum.HISTORIA.value && _historia['isComentario']) {
       _historiaClass.adicionar(_historia);
       // _modalClass.abrirModal(context, const ComentarioModal());
     }

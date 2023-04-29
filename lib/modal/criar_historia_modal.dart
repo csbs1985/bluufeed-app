@@ -120,7 +120,7 @@ class _CreatePageState extends State<CriarHistoriaModal> {
           'categorias': _categorias,
           'idUsuario': currentUsuario.value.idUsuario,
           'nomeUsuario': currentUsuario.value.nomeUsuario,
-          'bookmarks': currentHistoria.value.favoritos,
+          'favoritos': currentHistoria.value.favoritos,
         };
       } else {
         _history = {
@@ -136,7 +136,7 @@ class _CreatePageState extends State<CriarHistoriaModal> {
           'categorias': _categorias,
           'idUsuario': currentUsuario.value.idUsuario,
           'nomeUsuario': currentUsuario.value.nomeUsuario,
-          'bookmarks': [],
+          'favoritos': [],
         };
       }
 

@@ -48,7 +48,7 @@ class DataText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       children: [
-        LegendaText(legenda: _dataClass.dataFormatar(_item['date'])),
+        LegendaText(legenda: _dataClass.dataFormatar(_item['dataCriacao'])),
 
         // if (_type == DataEnum.HISTORY.value && _item['isAuthorized'])
         //   SvgPicture.asset(UiIcon.authorized),

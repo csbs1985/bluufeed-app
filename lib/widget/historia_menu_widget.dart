@@ -53,9 +53,9 @@ class _HistoriaMenuWidgetState extends State<HistoriaMenuWidget> {
               ),
               child: Row(
                 children: [
-                  if (widget._historia['qtyComment'] > 0)
+                  if (widget._historia['qtdComentario'] > 0)
                     AnimadoText(
-                      texto: widget._historia['qtyComment'],
+                      texto: widget._historia['qtdComentario'],
                     ),
                   LegendaText(
                     legenda:

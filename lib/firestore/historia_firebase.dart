@@ -36,13 +36,13 @@ class HistoriaFirestore {
   pathQtyCommentHistory(HistoriaModel _history) {
     return historias
         .doc(_history.idHistoria)
-        .update({'qtyComment': _history.qtdComentario});
+        .update({'qtdComentario': _history.qtdComentario});
   }
 
   pathFavorito(Map<String, dynamic> _history) {
     return historias
         .doc(_history['id'])
-        .update({'bookmarks': _history['bookmarks']});
+        .update({'favoritos': _history['favoritos']});
   }
 
   postHistory(Map<String, dynamic> _history) {

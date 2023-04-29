@@ -1,7 +1,7 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/firestore/historia_firebase.dart';
+import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
+import 'package:bluufeed_app/text/fim_conteudo_text.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_item_widget.dart';
 import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
@@ -17,38 +17,13 @@ class HistoriaListaWidget extends StatefulWidget {
 }
 
 class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
-  final HistoriaFirestore _historiaFirestore = HistoriaFirestore();
+  final HistoriaClass _historiaClass = HistoriaClass();
 
   @override
   void initState() {
     super.initState();
 
-    _getContent();
-  }
-
-  _getContent() {
-    String _category = currentCategoria.value.idCategoria!;
-
-    if (_category != CategoriaEnum.ALL.value &&
-        _category != CategoriaEnum.MY.value &&
-        _category != CategoriaEnum.SAVE.value) {
-      return _historiaFirestore.historias
-          .orderBy('date')
-          .where('categories', arrayContainsAny: [_category]);
-    }
-
-    if (_category == CategoriaEnum.MY.value) {
-      return _historiaFirestore.historias
-          .orderBy('date')
-          .where('userId', isEqualTo: currentUsuario.value.idUsuario);
-    }
-
-    if (_category == CategoriaEnum.SAVE.value) {
-      return _historiaFirestore.historias.orderBy('date').where('bookmarks',
-          arrayContainsAny: [currentUsuario.value.idUsuario]);
-    }
-
-    return _historiaFirestore.historias.orderBy('date');
+    _historiaClass.pegarHistoria();
   }
 
   @override
@@ -62,7 +37,7 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
         return Column(
           children: [
             FirestoreListView(
-              query: _getContent(),
+              query: _historiaClass.pegarHistoria(),
               pageSize: 10,
               shrinkWrap: true,
               reverse: true,
@@ -75,7 +50,7 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
                 return HistoriaItemWidget(snapshot: snapshot.data());
               },
             ),
-            SemResultadoWidget(altura: _altura),
+            const FimConteudoText()
           ],
         );
       },
