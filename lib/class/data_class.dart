@@ -5,21 +5,25 @@ class DataClass {
     DateTime dateTime = DateTime.parse(data);
     Duration difference = DateTime.now().difference(dateTime);
 
-    if (difference.inSeconds.abs() <= 60) {
-      return 'agora';
-    } else if (difference.inMinutes.abs() <= 59) {
-      int minutes = difference.inMinutes.abs();
-      return '$minutes min';
-    } else if (difference.inHours.abs() <= 23) {
-      int hours = difference.inHours.abs();
-      return '$hours horas';
-    } else if (difference.inDays.abs() <= 6) {
-      String weekday = DateFormat.EEEE('pt_BR').format(dateTime);
-      return weekday;
-    } else {
-      String formattedDate =
-          DateFormat('dd MMMM yyyy', 'pt_BR').format(dateTime);
-      return formattedDate;
+    if (difference.inSeconds < 59) {
+      return " · agora";
     }
+
+    if (difference.inMinutes < 59) {
+      return " · à ${difference.inMinutes} minutos";
+    }
+
+    if (difference.inHours < 24) {
+      return " · à ${difference.inHours} horas";
+    }
+
+    if (difference.inDays < 7) {
+      DateFormat formatter = DateFormat(" · EEEE 'às' HH'h'mm'm'", 'pt_BR');
+      return formatter.format(dateTime);
+    }
+
+    DateFormat formatter =
+        DateFormat(" · dd 'de' MMM 'de' y 'às' HH'h'mm'm'", 'pt_BR');
+    return formatter.format(dateTime);
   }
 }

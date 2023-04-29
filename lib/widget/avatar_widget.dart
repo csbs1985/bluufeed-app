@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 class AvatarWidget extends StatefulWidget {
   const AvatarWidget({
     super.key,
+    String? avatar,
     double? size = 24,
-  }) : _size = size;
+  })  : _avatar = avatar,
+        _size = size;
 
+  final String? _avatar;
   final double? _size;
 
   @override
@@ -20,13 +23,18 @@ class _AvatarWidgetState extends State<AvatarWidget> {
     return ValueListenableBuilder(
       valueListenable: currentUsuario,
       builder: (BuildContext context, UsuarioModel? usuario, _) {
-        return usuario!.avatar.isNotEmpty
+        return currentUsuario.value.avatarUsuario == ""
             ? CircleAvatar(
                 radius: widget._size,
-                backgroundImage: NetworkImage(usuario.avatar))
+                backgroundImage: const AssetImage(UiImagem.avatar))
             : CircleAvatar(
                 radius: widget._size,
-                backgroundImage: const AssetImage(UiImagem.avatar));
+                backgroundImage: NetworkImage(
+                  widget._avatar != null
+                      ? widget._avatar!
+                      : usuario!.avatarUsuario,
+                ),
+              );
       },
     );
   }

@@ -55,7 +55,7 @@ class _CreatePageState extends State<CriarHistoriaModal> {
       _btnPublicar = true;
       titleController.text = currentHistoria.value.titulo;
       textController.text = currentHistoria.value.texto;
-      _isAssinado = currentHistoria.value.isAssinado;
+      _isAssinado = currentHistoria.value.isAnonimo;
       _isComentario = currentHistoria.value.isComentario;
       _isAutorizado = currentHistoria.value.isAutorizado;
       _categorias = currentHistoria.value.categorias.cast<String>();
@@ -113,13 +113,14 @@ class _CreatePageState extends State<CriarHistoriaModal> {
           'texto': textController.text.trim(),
           'dataCriacao': currentHistoria.value.dataCriacao,
           'isComentario': _isComentario,
-          'isAssinado': _isAssinado,
+          'isAnonimo': _isAssinado,
           'isEdito': true,
           'isAutorizado': _isAutorizado,
           'qtdComentario': currentHistoria.value.qtdComentario,
           'categorias': _categorias,
           'idUsuario': currentUsuario.value.idUsuario,
           'nomeUsuario': currentUsuario.value.nomeUsuario,
+          'avatarUsuario': '',
           'favoritos': currentHistoria.value.favoritos,
         };
       } else {
@@ -129,13 +130,14 @@ class _CreatePageState extends State<CriarHistoriaModal> {
           'texto': textController.text.trim(),
           'date': DateTime.now().toString(),
           'isComentario': _isComentario,
-          'isAssinado': _isAssinado,
+          'isAnonimo': _isAssinado,
           'isEdito': false,
           'isAutorizado': _isAutorizado,
           'qtdComentario': 0,
           'categorias': _categorias,
           'idUsuario': currentUsuario.value.idUsuario,
           'nomeUsuario': currentUsuario.value.nomeUsuario,
+          'avatarUsuario': "",
           'favoritos': [],
         };
       }

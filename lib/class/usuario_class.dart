@@ -8,7 +8,7 @@ import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/hive/usuario_hive.dart';
 
 class UsuarioModel {
-  late String avatar;
+  late String avatarUsuario;
   late String biografia;
   late String email;
   late String idUsuario;
@@ -26,7 +26,7 @@ class UsuarioModel {
   late List<SeguindoModel> seguindo;
 
   UsuarioModel({
-    required this.avatar,
+    required this.avatarUsuario,
     required this.biografia,
     required this.email,
     required this.idUsuario,
@@ -47,7 +47,7 @@ class UsuarioModel {
 
 ValueNotifier<UsuarioModel> currentUsuario =
     ValueNotifier<UsuarioModel>(UsuarioModel(
-  avatar: '',
+  avatarUsuario: '',
   biografia: '',
   email: '',
   idUsuario: '',
@@ -76,7 +76,7 @@ class UsuarioClass {
 
     if (doc.docs.isNotEmpty) {
       currentUsuario.value = UsuarioModel(
-        avatar: doc.docs.first['avatar'],
+        avatarUsuario: doc.docs.first['avatarUsuario'],
         biografia: doc.docs.first['biografia'],
         idUsuario: doc.docs.first['idUsuario'],
         dataRegistro: doc.docs.first['dataRegistro'],
@@ -95,7 +95,7 @@ class UsuarioClass {
       );
     } else {
       currentUsuario.value = UsuarioModel(
-        avatar: usuario['photoUrl'],
+        avatarUsuario: usuario['photoUrl'],
         biografia: '',
         idUsuario: usuario['uid'],
         dataRegistro: '',
@@ -120,7 +120,7 @@ class UsuarioClass {
   definirUsuarioHive() {
     deleteUsuario();
     Map<String, dynamic> usuarioMap = {
-      'avatar': currentUsuario.value.avatar,
+      'avatarUsuario': currentUsuario.value.avatarUsuario,
       'biografia': currentUsuario.value.biografia,
       'idUsuario': currentUsuario.value.idUsuario,
       'dataRegistro': currentUsuario.value.dataRegistro,
@@ -163,7 +163,7 @@ class UsuarioClass {
 
   deletarUsuarioCurrent() {
     currentUsuario.value = UsuarioModel(
-      avatar: '',
+      avatarUsuario: '',
       biografia: '',
       idUsuario: '',
       email: '',

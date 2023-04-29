@@ -1,6 +1,6 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
-import 'package:bluufeed_app/text/data_text.dart';
+import 'package:bluufeed_app/widget/info_widget.dart';
 import 'package:bluufeed_app/text/tag_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
@@ -36,7 +36,7 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
           width: double.infinity,
           padding: const EdgeInsets.fromLTRB(
             UiEspaco.large,
-            UiEspaco.small,
+            UiEspaco.large,
             UiEspaco.large,
             UiEspaco.medium,
           ),
@@ -45,7 +45,7 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               TituloText(title: widget._item['titulo']),
-              DataText(item: widget._item),
+              InfoWidget(item: widget._item),
               GestureDetector(
                 onTap: () => context.push(RouteEnum.HISTORIA.value),
                 child: TextoText(
@@ -59,7 +59,7 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
                     Padding(
                       padding: const EdgeInsets.only(right: UiEspaco.small),
                       child: TagText(
-                        tag: categoriesClass.getCategoryLabel(item),
+                        tag: categoriesClass.pegarTextoCategoria(item),
                       ),
                     ),
                 ],

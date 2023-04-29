@@ -43,7 +43,7 @@ final List<CategoriaModel> listaCategoria = [
   ),
   CategoriaModel(
     idCategoria: CategoriaEnum.DRINK.value,
-    texto: 'babida',
+    texto: 'bebida',
     isDesabilitada: false,
   ),
   CategoriaModel(
@@ -247,7 +247,7 @@ enum CategoriaEnum {
   SCIENCE('sciencie'),
   SPORTS('sports'),
   STUDIES('studies'),
-  TATTOO_PIERCING('tottoo_piercing'),
+  TATTOO_PIERCING('tattoo_piercing'),
   TECHNOLOGY('technology'),
   TRANSPORT('transport'),
   TV_MOVIES_SERIES('tv_movies_series'),
@@ -261,9 +261,11 @@ enum CategoriaEnum {
 }
 
 class CategoriaClass {
-  getCategoryLabel(String _item) {
-    for (var item in listaCategoria) {
-      if (item.idCategoria == _item) return item.texto;
-    }
+  pegarTextoCategoria(String _item) {
+    var categoria = listaCategoria.firstWhere(
+      (element) => element.idCategoria == _item,
+    );
+
+    return categoria.texto;
   }
 }

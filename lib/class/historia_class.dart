@@ -12,8 +12,9 @@ ValueNotifier<HistoriaModel> currentHistoria =
   dataCriacao: '',
   idUsuario: '',
   nomeUsuario: '',
+  avatarUsuario: '',
   isComentario: false,
-  isAssinado: false,
+  isAnonimo: false,
   isEditado: false,
   isAutorizado: false,
   qtdComentario: 0,
@@ -28,8 +29,9 @@ class HistoriaModel {
   late String dataCriacao;
   late String idUsuario;
   late String nomeUsuario;
+  late String avatarUsuario;
   late bool isComentario;
-  late bool isAssinado;
+  late bool isAnonimo;
   late bool isEditado;
   late bool isAutorizado;
   late int qtdComentario;
@@ -43,8 +45,9 @@ class HistoriaModel {
     required this.dataCriacao,
     required this.idUsuario,
     required this.nomeUsuario,
+    required this.avatarUsuario,
     required this.isComentario,
-    required this.isAssinado,
+    required this.isAnonimo,
     required this.isEditado,
     required this.isAutorizado,
     required this.qtdComentario,
@@ -60,11 +63,12 @@ class HistoriaModel {
         texto: json['text'],
         dataCriacao: json['date'],
         isComentario: json['isComentario'],
-        isAssinado: json['isSigned'],
+        isAnonimo: json['isSigned'],
         isEditado: json['isEdit'],
         isAutorizado: json['isAuthorized'],
         idUsuario: json['userId'],
         nomeUsuario: json['userName'],
+        avatarUsuario: json[''],
         qtdComentario: json['qtdComentario'],
         categorias: json['categories'].cast<String>(),
         favoritos: json['categories'].cast<String>(),
@@ -82,8 +86,9 @@ class HistoriaClass {
       dataCriacao: '',
       idUsuario: '',
       nomeUsuario: '',
+      avatarUsuario: '',
       isComentario: false,
-      isAssinado: false,
+      isAnonimo: false,
       isEditado: false,
       isAutorizado: false,
       qtdComentario: 0,

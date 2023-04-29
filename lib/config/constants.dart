@@ -1,3 +1,5 @@
+const String ANONIMO = "anônimo";
+
 const String ASSINATURA = "Assinatura";
 const String ASSINATURA_HABILITAR_1 = "Ligado para assinar como";
 const String ASSINATURA_HABILITAR_2 = "ou desligado para anônimo.";
@@ -11,6 +13,8 @@ const String CRIAR_BOTAO = "Conte sua história";
 const String COMENTARIOS = "Comentários";
 const String COMENTARIOS_HABILITAR =
     "Ligado para habilitar ou desligado para desabilitar os comentários na história.";
+
+const String EDITADO = "editado";
 
 const String ENTRAR_BEM_VINDO = "Seja bem vindo";
 
