@@ -28,6 +28,9 @@ class UiCor {
   static const Color main = Color(0xffffffff);
   static const Color mainEscuro = Color(0xFF1F222A);
 
+  static const Color skeleton = Color(0xFFF8F9F9);
+  static const Color skeletonEscuro = Color(0xFF181A20);
+
   static const Color texto = Color(0xFF000000);
   static const Color textoEscuro = Color(0xffffffff);
 
@@ -56,9 +59,6 @@ class UiCor {
 
   // static const Color main = Color(0xffffffff);
   // static const Color mainEscuro = Color(0xFF1F222A);
-
-  // static const Color skeleton = Color(0xFFF8F9F9);
-  // static const Color skeletonEscuro = Color(0xFF181A20);
 
   // static const Color textEscuro = Color(0xFFffffff);
 

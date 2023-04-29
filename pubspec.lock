@@ -629,6 +629,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  skeleton_animation:
+    dependency: "direct main"
+    description:
+      name: skeleton_animation
+      sha256: ee829687768b52f5ccd288a03674d0b38f988da4b19c0da66012c877b398fe8f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.4"
   sky_engine:
     dependency: transitive
     description: flutter

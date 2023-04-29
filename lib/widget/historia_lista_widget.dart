@@ -1,6 +1,7 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
+import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_item_widget.dart';
 import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
@@ -66,7 +67,7 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
               shrinkWrap: true,
               reverse: true,
               physics: const NeverScrollableScrollPhysics(),
-              // loadingBuilder: (context) => const HistoryItemSkeleton(),
+              loadingBuilder: (context) => const HistoriaItemSkeleton(),
               errorBuilder: (context, error, _) =>
                   SemResultadoWidget(altura: _altura),
               itemBuilder: (BuildContext context,
