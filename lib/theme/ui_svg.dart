@@ -22,4 +22,5 @@ class UiSvg {
   static const String notificacaoAtivo = 'assets/icon/notificacao_ativo.svg';
   static const String opcoes = 'assets/icon/opcoes.svg';
   static const String principalAtivo = 'assets/icon/principal_ativo.svg';
+  static const String semResultado = 'assets/icon/sem_resultado.svg';
 }

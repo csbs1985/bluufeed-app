@@ -3,7 +3,6 @@ class UiTamalho {
   static const double borda = 1;
   static const double appbar = 56;
   static const double iconeBox = 32;
-  static const double menuAltura = 70;
   static const double separador = 8;
   static const double historiaMenuAltura = 36;
   static const double tag = 36;

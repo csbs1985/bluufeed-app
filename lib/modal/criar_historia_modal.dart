@@ -220,20 +220,21 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                     minLines: 1,
                     maxLines: 2,
                     maxLength: 60,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.displayMedium,
                     onChanged: (value) => _canPublish(),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0),
                       counterText: "",
                       fillColor: isDark ? UiCor.mainEscuro : UiCor.main,
-                      hintText: 'Título',
-                      hintStyle: Theme.of(context).textTheme.titleLarge,
+                      hintText: HISTORIA_TITULO,
+                      hintStyle: Theme.of(context).textTheme.displayMedium,
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none),
                       focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none),
                     ),
                   ),
+                  const SizedBox(height: UiEspaco.large),
                   TextField(
                     controller: textController,
                     keyboardType: TextInputType.multiline,
@@ -244,7 +245,7 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0),
                       fillColor: isDark ? UiCor.mainEscuro : UiCor.main,
-                      hintText: 'História',
+                      hintText: HISTORIA_TEXTO,
                       hintStyle: Theme.of(context).textTheme.displayMedium,
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none),
@@ -253,35 +254,33 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                     ),
                   ),
                   const SizedBox(height: UiEspaco.large),
-                  ToggleSelecionarWidget(
-                    titulo: 'Assinatura',
-                    resumo:
-                        'Ligado para assinar como ${currentUsuario.value.nomeUsuario} ou desligado para anônimo.',
-                    value: _isAssinado,
-                    callback: (value) => _setPrivacy(),
-                  ),
-                  const SizedBox(height: UiEspaco.large),
-                  ToggleSelecionarWidget(
-                    titulo: 'Comentários',
-                    resumo:
-                        'Ligado para habilitar ou desligado para desabilitar os comentários na história.',
-                    value: _isComentario,
-                    callback: (value) => _setContent(),
-                  ),
-                  const SizedBox(height: UiEspaco.large),
-                  ToggleSelecionarWidget(
-                    titulo: 'Autorizado',
-                    resumo:
-                        'Ligado para marcar história como de terceiro com autorização para publicar.',
-                    value: _isAutorizado,
-                    callback: (value) => _setAuthorized(),
-                  ),
-                  const SizedBox(height: UiEspaco.large),
                   SelecionatCategoriaWidget(
                     selecionado: currentHistoria.value != ""
                         ? currentHistoria.value.categorias
                         : [],
                     callback: (value) => _setCategory(value),
+                  ),
+                  const SizedBox(height: UiEspaco.large),
+                  ToggleSelecionarWidget(
+                    titulo: ASSINATURA,
+                    resumo:
+                        '$ASSINATURA_HABILITAR_1 ${currentUsuario.value.nomeUsuario} $ASSINATURA_HABILITAR_2',
+                    value: _isAssinado,
+                    callback: (value) => _setPrivacy(),
+                  ),
+                  const SizedBox(height: UiEspaco.large),
+                  ToggleSelecionarWidget(
+                    titulo: COMENTARIOS,
+                    resumo: COMENTARIOS_HABILITAR,
+                    value: _isComentario,
+                    callback: (value) => _setContent(),
+                  ),
+                  const SizedBox(height: UiEspaco.large),
+                  ToggleSelecionarWidget(
+                    titulo: AUTORIZADO,
+                    resumo: AUTORIZADO_HABILITAR,
+                    value: _isAutorizado,
+                    callback: (value) => _setAuthorized(),
                   ),
                 ],
               ),

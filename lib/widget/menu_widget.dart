@@ -38,7 +38,7 @@ class _MenuWidgetState extends State<MenuWidget> {
 
         return Container(
           color: isDark ? UiCor.bordaEscura : UiCor.borda,
-          height: UiTamalho.menuAltura,
+          height: UiTamalho.appbar,
           child: ListView.builder(
             itemCount: listaCategoria.length,
             padding: const EdgeInsets.only(left: UiEspaco.large),

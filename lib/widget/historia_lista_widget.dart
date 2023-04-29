@@ -1,7 +1,9 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
+import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_item_widget.dart';
+import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +52,9 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double _altura =
+        MediaQuery.of(context).size.height - (UiTamalho.appbar * 4);
+
     return ValueListenableBuilder<CategoriaModel>(
       valueListenable: currentCategoria,
       builder: (BuildContext context, value, __) {
@@ -62,13 +67,14 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
               reverse: true,
               physics: const NeverScrollableScrollPhysics(),
               // loadingBuilder: (context) => const HistoryItemSkeleton(),
-              // errorBuilder: (context, error, _) => const HistoryItemSkeleton(),
+              errorBuilder: (context, error, _) =>
+                  SemResultadoWidget(altura: _altura),
               itemBuilder: (BuildContext context,
                   QueryDocumentSnapshot<dynamic> snapshot) {
                 return HistoriaItemWidget(snapshot: snapshot.data());
               },
             ),
-            // const NoResultWidget(text: 'Isso é tudo por enquanto.'),
+            SemResultadoWidget(altura: _altura),
           ],
         );
       },
