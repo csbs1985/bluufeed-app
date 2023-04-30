@@ -229,7 +229,7 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                       counterText: "",
                       fillColor: isDark ? UiCor.mainEscuro : UiCor.main,
                       hintText: HISTORIA_TITULO,
-                      hintStyle: Theme.of(context).textTheme.displayMedium,
+                      hintStyle: Theme.of(context).textTheme.bodySmall,
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none),
                       focusedBorder: const UnderlineInputBorder(
@@ -247,8 +247,8 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(0),
                       fillColor: isDark ? UiCor.mainEscuro : UiCor.main,
-                      hintText: HISTORIA_TEXTO,
-                      hintStyle: Theme.of(context).textTheme.displayMedium,
+                      hintText: HISTORIA,
+                      hintStyle: Theme.of(context).textTheme.bodySmall,
                       enabledBorder: const UnderlineInputBorder(
                           borderSide: BorderSide.none),
                       focusedBorder: const UnderlineInputBorder(

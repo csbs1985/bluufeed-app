@@ -36,7 +36,7 @@ class _HistoriaMenuWidgetState extends State<HistoriaMenuWidget> {
 
     return Container(
       padding: const EdgeInsets.only(right: UiEspaco.medium),
-      height: UiTamalho.historiaMenuAltura,
+      height: UiTamanho.historiaMenuAltura,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Row(

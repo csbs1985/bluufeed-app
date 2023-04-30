@@ -4,6 +4,8 @@ import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
 import 'package:flutter/material.dart';
 
+ValueNotifier<String> currentIdHistoria = ValueNotifier<String>('');
+
 ValueNotifier<HistoriaModel> currentHistoria =
     ValueNotifier<HistoriaModel>(HistoriaModel(
   idHistoria: '',
@@ -73,6 +75,23 @@ class HistoriaModel {
         categorias: json['categories'].cast<String>(),
         favoritos: json['categories'].cast<String>(),
       );
+
+  static Map<String, dynamic> toMap(historia) => {
+        'idHistoria': historia['idHistoria'],
+        'titulo': historia['titulo'],
+        'texto': historia['texto'],
+        'dataCriacao': historia['dataCriacao'],
+        'isComentario': historia['isComentario'],
+        'isAnonimo': historia['isAnonimo'],
+        'isEditado': historia['isEditado'],
+        'isAutorizado': historia['isAutorizado'],
+        'idUsuario': historia['idUsuario'],
+        'nomeUsuario': historia['nomeUsuario'],
+        'avatarUsuario': historia['avatarUsuario'],
+        'qtdComentario': historia['qtdComentario'],
+        'categorias': historia['categorias'].cast<String>(),
+        'favoritos': historia['favoritos'].cast<String>(),
+      };
 }
 
 class HistoriaClass {

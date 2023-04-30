@@ -18,11 +18,8 @@ class _InicioPageState extends State<InicioPage> {
   final ScrollController _scrollController = ScrollController();
 
   void _scrollToTop() {
-    _scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.linear,
-    );
+    _scrollController.animateTo(0,
+        duration: const Duration(milliseconds: 300), curve: Curves.linear);
   }
 
   @override
@@ -41,13 +38,15 @@ class _InicioPageState extends State<InicioPage> {
         controller: _scrollController,
         slivers: [
           SliverAppBar(
-            toolbarHeight: UiTamalho.appbar,
+            actions: [Container()],
+            toolbarHeight: UiTamanho.appbar,
             floating: true,
             snap: true,
             flexibleSpace: FlexibleSpaceBar(
               background: InicioAppbar(
-                callbackAvatar: () => scaffoldKey.currentState!.openDrawer(),
                 callbackLogo: _scrollToTop,
+                callbackAvatar: (value) =>
+                    scaffoldKey.currentState!.openDrawer(),
               ),
             ),
           ),

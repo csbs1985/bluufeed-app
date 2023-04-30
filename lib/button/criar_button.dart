@@ -30,7 +30,7 @@ class CriarBotao extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: UiTamalho.appbar,
+      height: UiTamanho.appbar,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
@@ -55,7 +55,7 @@ class CriarBotao extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 16),
                         child: Text(
                           CRIAR_BOTAO,
-                          style: Theme.of(context).textTheme.displayMedium,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ),
                     );

@@ -6,24 +6,24 @@ class DataClass {
     Duration difference = DateTime.now().difference(dateTime);
 
     if (difference.inSeconds < 59) {
-      return " · agora";
+      return "agora";
     }
 
     if (difference.inMinutes < 59) {
-      return " · à ${difference.inMinutes} minutos";
+      return "à ${difference.inMinutes} minutos";
     }
 
     if (difference.inHours < 24) {
-      return " · à ${difference.inHours} horas";
+      return "à ${difference.inHours} horas";
     }
 
     if (difference.inDays < 7) {
-      DateFormat formatter = DateFormat(" · EEEE 'às' HH'h'mm'm'", 'pt_BR');
+      DateFormat formatter = DateFormat("EEEE 'às' HH'h'mm'm'", 'pt_BR');
       return formatter.format(dateTime);
     }
 
     DateFormat formatter =
-        DateFormat(" · dd 'de' MMM 'de' y 'às' HH'h'mm'm'", 'pt_BR');
+        DateFormat("dd 'de' MMM 'de' y 'às' HH'h'mm'm'", 'pt_BR');
     return formatter.format(dateTime);
   }
 }

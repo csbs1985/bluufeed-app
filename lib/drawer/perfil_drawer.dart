@@ -19,6 +19,7 @@ class _PerfilPageState extends State<PerfilDrawer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(toolbarHeight: 0),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,

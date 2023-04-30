@@ -76,7 +76,7 @@ class _SelecionatCategoriaWidgetState extends State<SelecionatCategoriaWidget> {
                         UiEspaco.medium,
                       ),
                       child: SizedBox(
-                        height: UiTamalho.tag,
+                        height: UiTamanho.tag,
                         child: TextButton(
                           onPressed: () => _setSelected(item.idCategoria!),
                           style: ButtonStyle(

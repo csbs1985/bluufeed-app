@@ -1,13 +1,13 @@
 import 'package:bluufeed_app/class/auth_class.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
-import 'package:bluufeed_app/hive/usuario_hive.dart';
 import 'package:bluufeed_app/page/busca_page.dart';
 import 'package:bluufeed_app/page/entrar_page.dart';
+import 'package:bluufeed_app/page/historia_page.dart';
 import 'package:bluufeed_app/page/inicio_page.dart';
 import 'package:go_router/go_router.dart';
 
 final AuthClass _authClass = AuthClass();
-final UsuarioHive _usuarioHive = UsuarioHive();
+// final UsuarioHive _usuarioHive = UsuarioHive();
 
 final GoRouter routes = GoRouter(
   debugLogDiagnostics: true,
@@ -17,7 +17,7 @@ final GoRouter routes = GoRouter(
     final isAuthenticated = _authClass.isAuthenticated;
     final isLoginRoute = state.subloc == RouteEnum.ENTRAR.value;
 
-    if (_usuarioHive.verificarUsuario()) return RouteEnum.INICIO.value;
+    // if (_usuarioHive.verificarUsuario()) return RouteEnum.INICIO.value;
     if (!isAuthenticated) return isLoginRoute ? null : RouteEnum.ENTRAR.value;
     if (isLoginRoute) return RouteEnum.INICIO.value;
     return null;
@@ -45,6 +45,14 @@ final GoRouter routes = GoRouter(
         context: context,
         state: state,
         child: const InicioPage(),
+      ),
+    ),
+    GoRoute(
+      path: RouteEnum.HISTORIA.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const HistoriaPage(),
       ),
     ),
   ],

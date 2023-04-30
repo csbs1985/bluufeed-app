@@ -15,7 +15,7 @@ class SeparadorWidget extends StatelessWidget {
 
         return Container(
           color: isDark ? UiCor.bordaEscura : UiCor.borda,
-          height: UiTamalho.separador,
+          height: UiTamanho.separador,
         );
       },
     );

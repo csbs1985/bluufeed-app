@@ -15,7 +15,7 @@ class BorderWidget extends StatelessWidget {
 
         return Container(
           color: isDark ? UiCor.bordaEscura : UiCor.borda,
-          height: UiTamalho.borda,
+          height: UiTamanho.borda,
         );
       },
     );

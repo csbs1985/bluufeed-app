@@ -25,8 +25,14 @@ class UiCor {
   static const Color borda = Color(0xFFF8F9F9);
   static const Color bordaEscura = Color(0xFF181A20);
 
+  static const Color botaoBorda = Color(0xFF1a8bd8);
+  static const Color botaoTexto = Color(0xFFffffff);
+
   static const Color main = Color(0xffffffff);
   static const Color mainEscuro = Color(0xFF1F222A);
+
+  static const Color placeholder = Color(0x90000000);
+  static const Color placeholderEscuro = Color(0x90ffffff);
 
   static const Color skeleton = Color(0xFFF8F9F9);
   static const Color skeletonEscuro = Color(0xFF181A20);
@@ -46,7 +52,6 @@ class UiCor {
   // static const Color bottomNavigationEscuro = Color(0xFF1F222A);
 
   // static const Color button = UiCor.primary;
-  // static const Color buttonBorder = UiCor.secondary;
   // static const Color buttonText = Color(0xFFffffff);
 
   // static const Color buttonSecondary = Color(0xFFDBE7F2);

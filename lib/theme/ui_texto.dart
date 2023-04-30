@@ -37,6 +37,16 @@ class UiTexto {
     fontWeight: FontWeight.normal,
     color: UiCor.subtitulo,
   );
+  static const TextStyle texto8 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: UiCor.placeholder,
+  );
+  static const TextStyle botao = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: UiCor.botaoTexto,
+  );
 }
 
 class UiTextoEscuro {
@@ -64,5 +74,10 @@ class UiTextoEscuro {
     fontSize: 48,
     fontWeight: FontWeight.normal,
     color: UiCor.primeiro,
+  );
+  static const TextStyle texto8 = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: UiCor.placeholderEscuro,
   );
 }

@@ -9,9 +9,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class InfoWidget extends StatefulWidget {
   const InfoWidget({
     super.key,
+    bool? avatar = true,
     required Map<String, dynamic> item,
-  }) : _item = item;
+  })  : _avatar = avatar,
+        _item = item;
 
+  final bool? _avatar;
   final Map<String, dynamic> _item;
 
   @override
@@ -23,18 +26,20 @@ class _InfoTextState extends State<InfoWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        widget._item['isAnonimo']
-            ? const LegendaText(legenda: ANONIMO)
-            : Row(
-                children: [
-                  AvatarWidget(
-                    avatar: widget._item['avatarUsuario'],
-                    size: 6,
-                  ),
-                  const SizedBox(width: 4),
-                  LegendaText(legenda: widget._item['nomeUsuario'])
-                ],
-              ),
+        if (widget._avatar!)
+          widget._item['isAnonimo']
+              ? const LegendaText(legenda: ANONIMO)
+              : Row(
+                  children: [
+                    AvatarWidget(
+                      avatar: widget._item['avatarUsuario'],
+                      size: 6,
+                    ),
+                    const SizedBox(width: 4),
+                    LegendaText(legenda: widget._item['nomeUsuario'])
+                  ],
+                ),
+        if (widget._avatar!) const LegendaText(legenda: ' · '),
         DataText(item: widget._item),
         if (widget._item['isEditado'])
           const LegendaText(legenda: ' · $EDITADO'),

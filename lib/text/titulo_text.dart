@@ -1,8 +1,11 @@
+import 'package:bluufeed_app/class/texto_class.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:flutter/material.dart';
 
 class TituloText extends StatelessWidget {
-  const TituloText({super.key, required String title}) : _title = title;
+  TituloText({super.key, required String title}) : _title = title;
+
+  final TextoClass _textoClass = TextoClass();
 
   final String _title;
 
@@ -12,7 +15,7 @@ class TituloText extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(bottom: UiEspaco.small),
       child: Text(
-        _title,
+        _textoClass.capitalize(_title),
         style: Theme.of(context).textTheme.headlineMedium,
       ),
     );

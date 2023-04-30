@@ -23,6 +23,7 @@ const String ENTRAR_ERRO = "Não foi possível concluir o login";
 const String ENTRAR_GOOGLE =
     "\n Cadastre-se ou entre com sua conta Google nativa no dispositivo, selecionando o botão a baixo";
 
+const String HISTORIA = "História";
 const String HISTORIA_ALTERADA = "história alterada";
 const String HISTORIA_DESFAVORITADA = "história removida da lista";
 const String HISTORIA_ERRO_PUBLICAR =
@@ -31,10 +32,64 @@ const String HISTORIA_FAVORITADA =
     "história adicionada à lista para ler mais tarde";
 const String HISTORIA_FIM = "Isso é tudo por enquanto.";
 const String HISTORIA_PUBLICADA = "história publicada";
-const String HISTORIA_TITULO = "Título da história";
-const String HISTORIA_TEXTO = "Texto da história";
+const String HISTORIA_TITULO = "Título";
 
 const String SAIR = "Sair da conta";
 
+const String SEGUIR = "Seguir";
+
+const String SEGUINDO = "Seguindo";
+
 const String SEM_RESULTADO =
     "Sua pesquisa não encontrou nenhum resultado correspondente.";
+
+const String TESTE = "Ouviram do Ipiranga as margens plácidas"
+    "\nDe um povo heróico o brado retumbante,"
+    "\nE o sol da Liberdade, em raios fúlgidos,"
+    "\nBrilhou no céu da Pátria nesse instante."
+    "\nSe o penhor dessa igualdade"
+    "\nConseguimos conquistar com braço forte,"
+    "\nEm teu seio, ó Liberdade,"
+    "\nDesafia o nosso peito a própria morte!"
+    "\nÓ Pátria amada,"
+    "\nIdolatrada,"
+    "\nSalve! Salve!"
+    "\nBrasil, um sonho intenso, um raio vívido"
+    "\nDe amor e de esperança à terra desce,"
+    "\nSe em teu formoso céu, risonho e límpido,"
+    "\nA imagem do Cruzeiro resplandece."
+    "\nGigante pela própria natureza,"
+    "\nÉs belo, és forte, impávido colosso,"
+    "\nE o teu futuro espelha essa grandeza"
+    "\nTerra adorada,"
+    "\nEntre outras mil,"
+    "\nÉs tu, Brasil,"
+    "\nÓ Pátria amada!"
+    "\nDos filhos deste solo és mãe gentil,"
+    "\nPátria amada,"
+    "\nBrasil!"
+    "\nDeitado eternamente em berço esplêndido,"
+    "\nAo som do mar e à luz do céu profundo,"
+    "\nFulguras, ó Brasil, florão da América,"
+    "\nIluminado ao sol do Novo Mundo!"
+    "\nDo que a terra mais garrida"
+    "\nTeus risonhos, lindos campos têm mais flores;"
+    "\nNossos bosques têm mais vida,"
+    "\nNossa vida no teu seio mais amores."
+    "\nÓ Pátria amada,"
+    "\nIdolatrada,"
+    "\nSalve! Salve!"
+    "\nBrasil, de amor eterno seja símbolo"
+    "\nO lábaro que ostentas estrelado,"
+    "\nE diga o verde-louro desta flâmula"
+    "\n- Paz no futuro e glória no passado."
+    "\nMas, se ergues da justiça a clava forte,"
+    "\nVerás que um filho teu não foge à luta,"
+    "\nNem teme, quem te adora, a própria morte."
+    "\nTerra adorada"
+    "\nEntre outras mil,"
+    "\nÉs tu, Brasil,"
+    "\nÓ Pátria amada!"
+    "\nDos filhos deste solo és mãe gentil,"
+    "\nPátria amada,"
+    "\nBrasil!";

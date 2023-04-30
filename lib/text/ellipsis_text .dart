@@ -1,8 +1,8 @@
 import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:flutter/material.dart';
 
-class TextoText extends StatelessWidget {
-  const TextoText({
+class EllipsisText extends StatelessWidget {
+  const EllipsisText({
     super.key,
     required String texto,
   }) : _texto = texto;
@@ -12,12 +12,13 @@ class TextoText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(vertical: UiEspaco.large),
       child: Text(
         _texto,
+        maxLines: 10,
         style: Theme.of(context).textTheme.displayMedium,
-        softWrap: true,
-        overflow: TextOverflow.clip,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:bluufeed_app/class/rotas_class.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,7 @@ class InicioAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: UiTamalho.appbar,
+      height: UiTamanho.appbar,
       padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,7 +27,7 @@ class InicioAppbar extends StatelessWidget {
         children: [
           GestureDetector(
             child: SvgPicture.asset(UiSvg.identidade),
-            onTap: () => _callbackLogo(),
+            onTap: () => _callbackLogo,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -36,30 +35,14 @@ class InicioAppbar extends StatelessWidget {
               IconButton(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
-                icon: Container(
-                  width: UiTamalho.iconeBox,
-                  height: UiTamalho.iconeBox,
-                  decoration: const BoxDecoration(
-                    color: UiCor.iconeFundo,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(child: SvgPicture.asset(UiSvg.buscar)),
-                ),
+                icon: SvgPicture.asset(UiSvg.buscar),
                 onPressed: () => context.push(RouteEnum.BUSCAR.value),
               ),
               IconButton(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
-                icon: Container(
-                  width: UiTamalho.iconeBox,
-                  height: UiTamalho.iconeBox,
-                  decoration: const BoxDecoration(
-                    color: UiCor.iconeFundo,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(child: SvgPicture.asset(UiSvg.mais)),
-                ),
-                onPressed: () => _callbackAvatar(),
+                icon: SvgPicture.asset(UiSvg.mais),
+                onPressed: () => _callbackAvatar,
               ),
             ],
           )

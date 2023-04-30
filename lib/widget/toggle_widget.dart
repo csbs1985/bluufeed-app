@@ -28,14 +28,14 @@ class _ToggleWidgetState extends State<ToggleWidget> {
         bool isDark = theme == Brightness.dark;
 
         return FlutterSwitch(
-          width: UiTamalho.toggleLargura,
-          height: UiTamalho.toggleAltura,
+          width: UiTamanho.toggleLargura,
+          height: UiTamanho.toggleAltura,
           value: widget._value,
           activeColor: UiCor.primeiro,
           inactiveColor: isDark ? UiCor.botaoSegundoEscuro : UiCor.botaoSegundo,
           activeToggleColor: UiCor.segundo,
           inactiveToggleColor: UiCor.primeiro,
-          toggleSize: UiTamalho.toggleTamanho,
+          toggleSize: UiTamanho.toggleTamanho,
           onToggle: (value) => widget._callback(value),
         );
       },
