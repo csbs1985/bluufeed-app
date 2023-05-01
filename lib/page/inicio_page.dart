@@ -1,5 +1,5 @@
 import 'package:bluufeed_app/appbar/inicio_appbar.dart';
-import 'package:bluufeed_app/button/criar_button.dart';
+import 'package:bluufeed_app/button/historia_criar_button.dart';
 import 'package:bluufeed_app/drawer/perfil_drawer.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_lista_widget.dart';
@@ -20,6 +20,10 @@ class _InicioPageState extends State<InicioPage> {
   void _scrollToTop() {
     _scrollController.animateTo(0,
         duration: const Duration(milliseconds: 300), curve: Curves.linear);
+  }
+
+  void _abrirDrawer() {
+    scaffoldKey.currentState!.openEndDrawer();
   }
 
   @override
@@ -45,15 +49,14 @@ class _InicioPageState extends State<InicioPage> {
             flexibleSpace: FlexibleSpaceBar(
               background: InicioAppbar(
                 callbackLogo: _scrollToTop,
-                callbackAvatar: (value) =>
-                    scaffoldKey.currentState!.openDrawer(),
+                callbackMais: () => _abrirDrawer(),
               ),
             ),
           ),
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                CriarBotao(),
+                HistoriaCriarButton(callback: () => _abrirDrawer()),
                 const MenuWidget(),
                 const HistoriaListaWidget(),
               ],

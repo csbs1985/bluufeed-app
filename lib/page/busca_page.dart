@@ -1,3 +1,4 @@
+import 'package:bluufeed_app/appbar/simples_appbar.dart';
 import 'package:flutter/material.dart';
 
 class BuscarPage extends StatefulWidget {
@@ -10,11 +11,12 @@ class BuscarPage extends StatefulWidget {
 class _BuscaPageState extends State<BuscarPage> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        height: 100,
-        width: double.infinity,
-        color: Colors.amber,
+    return Scaffold(
+      appBar: const SimplesAppbar(),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+        ),
       ),
     );
   }

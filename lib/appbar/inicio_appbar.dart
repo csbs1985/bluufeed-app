@@ -8,9 +8,9 @@ import 'package:go_router/go_router.dart';
 class InicioAppbar extends StatelessWidget {
   const InicioAppbar({
     super.key,
-    required Function callbackAvatar,
+    required Function callbackMais,
     required Function callbackLogo,
-  })  : _callbackAvatar = callbackAvatar,
+  })  : _callbackAvatar = callbackMais,
         _callbackLogo = callbackLogo;
 
   final Function _callbackAvatar;
@@ -42,7 +42,7 @@ class InicioAppbar extends StatelessWidget {
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
                 icon: SvgPicture.asset(UiSvg.mais),
-                onPressed: () => _callbackAvatar,
+                onPressed: () => _callbackAvatar(),
               ),
             ],
           )

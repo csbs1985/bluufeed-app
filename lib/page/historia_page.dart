@@ -25,7 +25,6 @@ class _HistoriaPageState extends State<HistoriaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       appBar: const SimplesAppbar(),
       body: StreamBuilder<QuerySnapshot>(
         stream: _historiaFirestore.snapshotsHistoria(currentIdHistoria.value),

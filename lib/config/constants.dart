@@ -43,6 +43,9 @@ const String SEGUINDO = "Seguindo";
 const String SEM_RESULTADO =
     "Sua pesquisa não encontrou nenhum resultado correspondente.";
 
+const String ERRO_RESULTADO =
+    "Nos deparamos com um erro, tente novamente mais tarde.";
+
 const String TESTE = "Ouviram do Ipiranga as margens plácidas"
     "\nDe um povo heróico o brado retumbante,"
     "\nE o sol da Liberdade, em raios fúlgidos,"

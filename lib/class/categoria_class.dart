@@ -22,6 +22,16 @@ final List<CategoriaModel> listaCategoria = [
     isDesabilitada: false,
   ),
   CategoriaModel(
+    idCategoria: CategoriaEnum.MY.value,
+    texto: 'minhas',
+    isDesabilitada: false,
+  ),
+  CategoriaModel(
+    idCategoria: CategoriaEnum.BOOKMARK.value,
+    texto: 'favoritas',
+    isDesabilitada: false,
+  ),
+  CategoriaModel(
     idCategoria: CategoriaEnum.ANIMALS.value,
     texto: 'animais',
     isDesabilitada: false,
@@ -242,7 +252,7 @@ enum CategoriaEnum {
   PHOTOGRAPHY_VIDEO('photagraphy_video'),
   RELIGION('religion'),
   ROMANCE('romance'),
-  SAVE('save'),
+  BOOKMARK('bookmark'),
   SEX('sex'),
   SCIENCE('sciencie'),
   SPORTS('sports'),

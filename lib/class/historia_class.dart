@@ -119,27 +119,20 @@ class HistoriaClass {
   pegarHistoria() {
     String _categoria = currentCategoria.value.idCategoria!;
 
-    if (_categoria != CategoriaEnum.ALL.value &&
-        _categoria != CategoriaEnum.MY.value &&
-        _categoria != CategoriaEnum.SAVE.value) {
-      return _historiaFirestore.historias
-          .orderBy('dataCriacao')
-          .where('categorias', arrayContainsAny: [_categoria]);
-    }
-
-    if (_categoria == CategoriaEnum.MY.value) {
+    if (_categoria == CategoriaEnum.ALL.value)
+      return _historiaFirestore.historias.orderBy('dataCriacao');
+    else if (_categoria == CategoriaEnum.MY.value)
       return _historiaFirestore.historias
           .orderBy('dataCriacao')
           .where('idUsuario', isEqualTo: currentUsuario.value.idUsuario);
-    }
-
-    if (_categoria == CategoriaEnum.SAVE.value) {
+    else if (_categoria == CategoriaEnum.BOOKMARK.value)
       return _historiaFirestore.historias.orderBy('dataCriacao').where(
           'favoritos',
           arrayContainsAny: [currentUsuario.value.idUsuario]);
-    }
-
-    return _historiaFirestore.historias.orderBy('dataCriacao');
+    else
+      return _historiaFirestore.historias
+          .orderBy('dataCriacao')
+          .where('categorias', arrayContainsAny: [_categoria]);
   }
 
   void adicionar(Map<String, dynamic> history) {
