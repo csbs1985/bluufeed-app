@@ -1,9 +1,5 @@
-import 'package:bluufeed_app/class/historia_class.dart';
-import 'package:bluufeed_app/class/modal_class.dart';
-import 'package:bluufeed_app/class/rotas_class.dart';
-import 'package:flutter/material.dart';
-
 class ComentarioModel {
+  late String avatarUsuario;
   late String dataCriacao;
   late String idComentario;
   late String idHistoria;
@@ -13,9 +9,10 @@ class ComentarioModel {
   late String texto;
   late bool isAssinada;
   late bool isDeletada;
-  late bool isEdita;
+  late bool isEditado;
 
   ComentarioModel({
+    required this.avatarUsuario,
     required this.dataCriacao,
     required this.idComentario,
     required this.idHistoria,
@@ -25,19 +22,8 @@ class ComentarioModel {
     required this.texto,
     required this.isAssinada,
     required this.isDeletada,
-    required this.isEdita,
+    required this.isEditado,
   });
 }
 
-final HistoriaClass _historiaClass = HistoriaClass();
-final ModalClass _modalClass = ModalClass();
-
-class ComentarioClass {
-  void abrirComentario(
-      BuildContext context, String _route, Map<String, dynamic> _historia) {
-    if (_route != RouteEnum.HISTORIA.value && _historia['isComentario']) {
-      _historiaClass.adicionar(_historia);
-      // _modalClass.abrirModal(context, const ComentarioModal());
-    }
-  }
-}
+class ComentarioClass {}

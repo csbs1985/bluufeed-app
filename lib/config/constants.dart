@@ -14,8 +14,12 @@ const String AUTORIZADO_HABILITAR =
 const String CRIAR_BOTAO = "Conte sua história";
 
 const String COMENTARIOS = "Comentários";
+const String COMENTARIOS_DESABILITADOS = "comentário desabilitado";
+const String COMENTARIOS_ESCREVER = "Escreva um comentário...";
 const String COMENTARIOS_HABILITAR =
     "Ligado para habilitar ou desligado para desabilitar os comentários na história.";
+const String COMENTARIOS_PLURAL = "comentários";
+const String COMENTARIOS_PRIMEIRO = "seja o primeiro a comentar";
 
 const String EDITADO = "editado";
 

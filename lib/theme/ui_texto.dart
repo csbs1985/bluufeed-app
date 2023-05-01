@@ -17,6 +17,11 @@ class UiTexto {
     fontWeight: FontWeight.normal,
     color: UiCor.textoEscuro,
   );
+  static const TextStyle hint = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: UiCor.placeholder,
+  );
 
   static const TextStyle texto1 = TextStyle(
     fontSize: 16,
@@ -48,11 +53,7 @@ class UiTexto {
     fontWeight: FontWeight.normal,
     color: UiCor.subtitulo,
   );
-  static const TextStyle texto8 = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.normal,
-    color: UiCor.placeholder,
-  );
+
   static const TextStyle botao = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
@@ -61,6 +62,12 @@ class UiTexto {
 }
 
 class UiTextoEscuro {
+  static const TextStyle hintEscuro = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: UiCor.placeholderEscuro,
+  );
+
   static const TextStyle texto1 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
@@ -85,10 +92,5 @@ class UiTextoEscuro {
     fontSize: 48,
     fontWeight: FontWeight.normal,
     color: UiCor.primeiro,
-  );
-  static const TextStyle texto8 = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.normal,
-    color: UiCor.placeholderEscuro,
   );
 }

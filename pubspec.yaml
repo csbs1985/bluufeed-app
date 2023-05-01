@@ -28,6 +28,7 @@ dependencies:
   skeleton_animation: ^0.1.4
   uuid: ^3.0.7
   flutter_button: ^0.0.4
+  flutter_native_text_input: ^2.4.0
 
 dev_dependencies:
   flutter_test:

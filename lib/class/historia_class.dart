@@ -1,6 +1,7 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/favorito_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
+import 'package:bluufeed_app/config/constants.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
 import 'package:flutter/material.dart';
 
@@ -72,8 +73,8 @@ class HistoriaModel {
         nomeUsuario: json['userName'],
         avatarUsuario: json[''],
         qtdComentario: json['qtdComentario'],
-        categorias: json['categories'].cast<String>(),
-        favoritos: json['categories'].cast<String>(),
+        categorias: json['categorias'],
+        favoritos: json['favoritos'],
       );
 
   static Map<String, dynamic> toMap(historia) => {
@@ -141,10 +142,10 @@ class HistoriaClass {
   }
 
   String definirTextoComentario(Map<String, dynamic> _historia) {
-    if (!_historia['isComentario']) return 'comentário desabilitado';
+    if (!_historia['isComentario']) return COMENTARIOS_DESABILITADOS;
     if (_historia['qtdComentario'] == 1) return ' comentário';
-    if (_historia['qtdComentario'] > 1) return ' comentários';
-    return 'seja o primeiro';
+    if (_historia['qtdComentario'] > 1) return ' $COMENTARIOS_PLURAL';
+    return COMENTARIOS_PRIMEIRO;
   }
 
   bool isComentario(String? _route, Map<String, dynamic> _historia) {

@@ -47,7 +47,7 @@ class UiTema {
       headlineMedium: UiTexto.texto4,
       headlineSmall: UiTexto.texto3,
       titleLarge: UiTexto.texto6,
-      bodySmall: UiTexto.texto8,
+      bodySmall: UiTexto.hint,
     ),
   );
 
@@ -69,7 +69,7 @@ class UiTema {
       headlineMedium: UiTextoEscuro.texto4,
       headlineSmall: UiTextoEscuro.texto3,
       titleLarge: UiTextoEscuro.texto6,
-      bodySmall: UiTextoEscuro.texto8,
+      bodySmall: UiTextoEscuro.hintEscuro,
     ),
   );
 }
