@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/appbar/historia_appbar.dart';
+import 'package:bluufeed_app/appbar/simples_appbar.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
 import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
@@ -19,7 +19,6 @@ class HistoriaPage extends StatefulWidget {
 
 class _HistoriaPageState extends State<HistoriaPage> {
   final HistoriaFirestore _historiaFirestore = HistoriaFirestore();
-  final ScrollController _scrollController = ScrollController();
 
   Map<String, dynamic> _historia = {};
 
@@ -27,38 +26,36 @@ class _HistoriaPageState extends State<HistoriaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: HistoriaAppbar(scroll: _scrollController.position.pixels),
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(UiEspaco.large),
-          child: StreamBuilder<QuerySnapshot>(
-            stream:
-                _historiaFirestore.snapshotsHistoria(currentIdHistoria.value),
-            builder: (
-              BuildContext context,
-              AsyncSnapshot<QuerySnapshot> snapshot,
-            ) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                  return const SemResultadoWidget(altura: 300);
-                case ConnectionState.waiting:
-                  return const HistoriaItemSkeleton();
-                case ConnectionState.done:
-                default:
-                  _historia = HistoriaModel.toMap(snapshot.data!.docs[0]);
-                  return Column(
+      appBar: const SimplesAppbar(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _historiaFirestore.snapshotsHistoria(currentIdHistoria.value),
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<QuerySnapshot> snapshot,
+        ) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return const SemResultadoWidget(altura: 300);
+            case ConnectionState.waiting:
+              return const HistoriaItemSkeleton();
+            case ConnectionState.done:
+            default:
+              _historia = HistoriaModel.toMap(snapshot.data!.docs[0]);
+              return SingleChildScrollView(
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(UiEspaco.large),
+                  child: Column(
                     children: [
                       TituloText(title: _historia['titulo']),
                       TextoText(texto: _historia['texto']),
                       HistoriaInteracaoWidget(historia: _historia),
                     ],
-                  );
-              }
-            },
-          ),
-        ),
+                  ),
+                ),
+              );
+          }
+        },
       ),
     );
   }

@@ -17,13 +17,16 @@ class DataClass {
       return "à ${difference.inHours} horas";
     }
 
+    if (difference.inDays < 2) {
+      return "ontem";
+    }
+
     if (difference.inDays < 7) {
-      DateFormat formatter = DateFormat("EEEE 'às' HH'h'mm'm'", 'pt_BR');
+      DateFormat formatter = DateFormat("EEE", 'pt_BR');
       return formatter.format(dateTime);
     }
 
-    DateFormat formatter =
-        DateFormat("dd 'de' MMM 'de' y 'às' HH'h'mm'm'", 'pt_BR');
+    DateFormat formatter = DateFormat("dd 'de' MMM 'de' y", 'pt_BR');
     return formatter.format(dateTime);
   }
 }
