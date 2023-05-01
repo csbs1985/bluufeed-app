@@ -4,6 +4,9 @@ const String ASSINATURA = "Assinatura";
 const String ASSINATURA_HABILITAR_1 = "Ligado para assinar como";
 const String ASSINATURA_HABILITAR_2 = "ou desligado para anônimo.";
 
+const String ASSUNTO = "Assunto";
+const String ASSUNTO_SELECIONE = "Selecione ao menos uma categoria/tema.";
+
 const String AUTORIZADO = "Autorizado";
 const String AUTORIZADO_HABILITAR =
     "Ligado para marcar história como de terceiro com autorização para publicar.";
@@ -24,6 +27,8 @@ const String ENTRAR_GOOGLE =
     "\n Cadastre-se ou entre com sua conta Google nativa no dispositivo, selecionando o botão a baixo";
 
 const String HISTORIA = "História";
+const String HISTORIA_CRIAR = "Criar história";
+const String HISTORIA_EDITAR = "Editar história";
 const String HISTORIA_ALTERADA = "história alterada";
 const String HISTORIA_DESFAVORITADA = "história removida da lista";
 const String HISTORIA_ERRO_PUBLICAR =

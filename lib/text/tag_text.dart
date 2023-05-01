@@ -12,7 +12,7 @@ class TagText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '#$_tag',
-      style: Theme.of(context).textTheme.displaySmall,
+      style: Theme.of(context).textTheme.headlineSmall,
     );
   }
 }

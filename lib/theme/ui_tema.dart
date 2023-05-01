@@ -43,7 +43,7 @@ class UiTema {
     textTheme: const TextTheme(
       displayLarge: UiTexto.texto2,
       displayMedium: UiTexto.texto1,
-      displaySmall: UiTexto.texto5,
+      // displaySmall: UiTexto.texto5,
       headlineMedium: UiTexto.texto4,
       headlineSmall: UiTexto.texto3,
       titleLarge: UiTexto.texto6,
@@ -65,7 +65,7 @@ class UiTema {
     textTheme: const TextTheme(
       displayLarge: UiTextoEscuro.texto2,
       displayMedium: UiTextoEscuro.texto1,
-      displaySmall: UiTexto.texto5,
+      // displaySmall: UiTexto.texto5,
       headlineMedium: UiTextoEscuro.texto4,
       headlineSmall: UiTextoEscuro.texto3,
       titleLarge: UiTextoEscuro.texto6,

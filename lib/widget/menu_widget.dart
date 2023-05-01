@@ -5,6 +5,7 @@ import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
+import 'package:bluufeed_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
 
 class MenuWidget extends StatefulWidget {
@@ -64,8 +65,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                             child: Text(
                               listaCategoria[index].texto!.toLowerCase(),
                               style: _itemSelecionado(listaCategoria[index])
-                                  ? Theme.of(context).textTheme.displayMedium
-                                  : Theme.of(context).textTheme.displayMedium,
+                                  ? UiTexto.tagAtiva
+                                  : isDark
+                                      ? UiTexto.tagEscuro
+                                      : UiTexto.tag,
                             ),
                           ),
                         ),

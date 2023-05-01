@@ -1,9 +1,11 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
+import 'package:bluufeed_app/config/constants.dart';
 import 'package:bluufeed_app/text/subtitulo_reumo_text.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
+import 'package:bluufeed_app/theme/ui_botao.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
+import 'package:bluufeed_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
 
 class SelecionatCategoriaWidget extends StatefulWidget {
@@ -28,18 +30,16 @@ class _SelecionatCategoriaWidgetState extends State<SelecionatCategoriaWidget> {
   @override
   void initState() {
     if (widget._selecionado.isNotEmpty)
-      for (var item in widget._selecionado) {
-        listSelect.add(item.toString());
-      }
+      for (var item in widget._selecionado) listSelect.add(item.toString());
 
     super.initState();
   }
 
-  bool _getSelected(String id) {
+  bool _isCategoriaSelecionada(String id) {
     return listSelect.contains(id) ? true : false;
   }
 
-  void _setSelected(String id) {
+  void _selecionarCategoria(String id) {
     setState(() {
       listSelect.contains(id) ? listSelect.remove(id) : listSelect.add(id);
       if (widget._callback != null) widget._callback!(listSelect);
@@ -60,8 +60,8 @@ class _SelecionatCategoriaWidgetState extends State<SelecionatCategoriaWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SubtituloResumoText(
-              subtitulo: 'Assunto',
-              resumo: 'Selecione ao menos uma categoria/tema.',
+              subtitulo: ASSUNTO,
+              resumo: ASSUNTO_SELECIONE,
             ),
             const SizedBox(height: UiEspaco.medium),
             Wrap(
@@ -78,21 +78,20 @@ class _SelecionatCategoriaWidgetState extends State<SelecionatCategoriaWidget> {
                       child: SizedBox(
                         height: UiTamanho.tag,
                         child: TextButton(
-                          onPressed: () => _setSelected(item.idCategoria!),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              _getSelected(item.idCategoria!)
-                                  ? UiCor.ativo
-                                  : isDark
-                                      ? UiCor.botaoSegundoEscuro
-                                      : UiCor.botaoSegundo,
-                            ),
-                          ),
+                          onPressed: () =>
+                              _selecionarCategoria(item.idCategoria!),
+                          style: _isCategoriaSelecionada(item.idCategoria!)
+                              ? UiBotao.buttonActived
+                              : isDark
+                                  ? UiBotao.buttonDark
+                                  : UiBotao.button,
                           child: Text(
                             item.texto!.toLowerCase(),
-                            style: _getSelected(item.idCategoria!)
-                                ? Theme.of(context).textTheme.displayMedium
-                                : Theme.of(context).textTheme.displayMedium,
+                            style: _isCategoriaSelecionada(item.idCategoria!)
+                                ? UiTexto.tagAtiva
+                                : isDark
+                                    ? UiTexto.tagEscuro
+                                    : UiTexto.tag,
                           ),
                         ),
                       ),

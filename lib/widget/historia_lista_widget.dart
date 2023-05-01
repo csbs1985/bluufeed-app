@@ -5,6 +5,7 @@ import 'package:bluufeed_app/text/fim_conteudo_text.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/erro_resultado_widget.dart';
 import 'package:bluufeed_app/widget/historia_item_widget.dart';
+import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
@@ -44,17 +45,15 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
               loadingBuilder: (context) => const HistoriaItemSkeleton(),
               errorBuilder: (context, error, _) =>
                   ErroResultadoWidget(altura: _altura),
+              emptyBuilder: (context) => SemResultadoWidget(altura: _altura),
               itemBuilder: (BuildContext context,
                   QueryDocumentSnapshot<dynamic> snapshot) {
-                if (snapshot.exists) {
-                  return Column(
-                    children: [
-                      HistoriaItemWidget(snapshot: snapshot.data()),
-                      const FimConteudoText()
-                    ],
-                  );
-                } else
-                  return ErroResultadoWidget(altura: _altura);
+                return Column(
+                  children: [
+                    HistoriaItemWidget(snapshot: snapshot.data()),
+                    const FimConteudoText()
+                  ],
+                );
               },
             ),
           ],
