@@ -8,7 +8,12 @@ import 'package:bluufeed_app/widget/separador_widget.dart';
 import 'package:flutter/material.dart';
 
 class PerfilPage extends StatefulWidget {
-  const PerfilPage({super.key});
+  const PerfilPage({
+    super.key,
+    required String idUsuario,
+  }) : _idUsuario = idUsuario;
+
+  final String _idUsuario;
 
   @override
   State<PerfilPage> createState() => _PerfilPageState();

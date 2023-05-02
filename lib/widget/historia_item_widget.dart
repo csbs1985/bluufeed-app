@@ -1,6 +1,4 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
-import 'package:bluufeed_app/class/historia_class.dart';
-import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/text/ellipsis_text%20.dart';
 import 'package:bluufeed_app/widget/info_widget.dart';
 import 'package:bluufeed_app/text/tag_text.dart';
@@ -26,8 +24,8 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
   final CategoriaClass categoriesClass = CategoriaClass();
 
   _selecionarHistoria() {
-    currentIdHistoria.value = widget._item['idHistoria'];
-    context.push(RouteEnum.HISTORIA.value);
+    context.pushNamed('historia',
+        params: {'idHistoria': widget._item['idHistoria']});
   }
 
   @override

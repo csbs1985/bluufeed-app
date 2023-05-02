@@ -8,7 +8,6 @@ import 'package:bluufeed_app/page/perfil_page.dart';
 import 'package:go_router/go_router.dart';
 
 final AuthClass _authClass = AuthClass();
-// final UsuarioHive _usuarioHive = UsuarioHive();
 
 final GoRouter routes = GoRouter(
   debugLogDiagnostics: true,
@@ -18,7 +17,6 @@ final GoRouter routes = GoRouter(
     final isAuthenticated = _authClass.isAuthenticated;
     final isLoginRoute = state.subloc == RouteEnum.ENTRAR.value;
 
-    // if (_usuarioHive.verificarUsuario()) return RouteEnum.INICIO.value;
     if (!isAuthenticated) return isLoginRoute ? null : RouteEnum.ENTRAR.value;
     if (isLoginRoute) return RouteEnum.INICIO.value;
     return null;
@@ -49,19 +47,21 @@ final GoRouter routes = GoRouter(
       ),
     ),
     GoRoute(
-      path: RouteEnum.HISTORIA.value,
+      name: 'historia',
+      path: '/historia/:idHistoria',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: const HistoriaPage(),
+        child: HistoriaPage(idHistoria: state.params['idHistoria']!),
       ),
     ),
     GoRoute(
-      path: RouteEnum.PERFIL.value,
+      name: 'perfil',
+      path: '/perfil/:idUsuario',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: const PerfilPage(),
+        child: PerfilPage(idUsuario: state.params['idUsuario']!),
       ),
     ),
   ],

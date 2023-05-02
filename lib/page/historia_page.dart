@@ -12,7 +12,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class HistoriaPage extends StatefulWidget {
-  const HistoriaPage({super.key});
+  const HistoriaPage({
+    super.key,
+    required String idHistoria,
+  }) : _idHistoria = idHistoria;
+
+  final String _idHistoria;
 
   @override
   State<HistoriaPage> createState() => _HistoriaPageState();
@@ -32,7 +37,7 @@ class _HistoriaPageState extends State<HistoriaPage> {
           callback: () => scaffoldKey.currentState!.openEndDrawer()),
       endDrawer: const ConfiguracaoDrawer(),
       body: StreamBuilder<QuerySnapshot>(
-        stream: _historiaFirestore.snapshotsHistoria(currentIdHistoria.value),
+        stream: _historiaFirestore.snapshotsHistoria(widget._idHistoria),
         builder: (
           BuildContext context,
           AsyncSnapshot<QuerySnapshot> snapshot,

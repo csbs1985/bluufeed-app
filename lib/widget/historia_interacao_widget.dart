@@ -2,7 +2,6 @@ import 'package:bluufeed_app/button/botao_3d_button.dart';
 import 'package:bluufeed_app/button/icone_button.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
-import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/config/constants.dart';
 import 'package:bluufeed_app/modal/comentario_modal.dart';
 import 'package:bluufeed_app/text/tag_text.dart';
@@ -13,7 +12,6 @@ import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:bluufeed_app/widget/info_widget.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
-import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HistoriaInteracaoWidget extends StatefulWidget {
@@ -55,7 +53,8 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
             children: [
               InkWell(
                 borderRadius: BorderRadius.circular(UiBorda.circulo),
-                onTap: () => context.push(RouteEnum.PERFIL.value),
+                onTap: () => Navigator.pushNamed(
+                    context, "/perfil/$widget._historia['idUsuario']"),
                 child: Row(
                   children: [
                     const AvatarWidget(size: 16),

@@ -5,8 +5,6 @@ import 'package:bluufeed_app/config/constants.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
 import 'package:flutter/material.dart';
 
-ValueNotifier<String> currentIdHistoria = ValueNotifier<String>('');
-
 ValueNotifier<HistoriaModel> currentHistoria =
     ValueNotifier<HistoriaModel>(HistoriaModel(
   idHistoria: '',
