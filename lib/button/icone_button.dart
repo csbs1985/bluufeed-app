@@ -1,6 +1,5 @@
 import 'package:bluufeed_app/text/legenda_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,15 +8,18 @@ class IconeButton extends StatefulWidget {
   const IconeButton({
     super.key,
     required Function callback,
+    required String icone,
+    Color? cor,
     String? texto = "",
-    required String icon,
   })  : _callback = callback,
+        _cor = cor,
         _texto = texto,
-        _icon = icon;
+        _icone = icone;
 
   final Function _callback;
+  final String _icone;
   final String? _texto;
-  final String _icon;
+  final Color? _cor;
 
   @override
   State<IconeButton> createState() => _IconeButtonState();
@@ -37,8 +39,8 @@ class _IconeButtonState extends State<IconeButton> {
                 builder: (BuildContext context, Brightness tema, _) {
                   bool isDark = tema == Brightness.dark;
                   return SvgPicture.asset(
-                    widget._icon,
-                    color: isDark ? UiCor.textoEscuro : UiCor.texto,
+                    widget._icone,
+                    color: widget._cor,
                   );
                 }),
             if (widget._texto != "") const SizedBox(width: 8),
@@ -46,7 +48,7 @@ class _IconeButtonState extends State<IconeButton> {
           ],
         ),
       ),
-      onTap: () => widget._callback(true),
+      onTap: () => widget._callback(),
     );
   }
 }

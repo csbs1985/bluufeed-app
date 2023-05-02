@@ -1,6 +1,6 @@
 import 'package:bluufeed_app/appbar/inicio_appbar.dart';
 import 'package:bluufeed_app/button/historia_criar_button.dart';
-import 'package:bluufeed_app/drawer/perfil_drawer.dart';
+import 'package:bluufeed_app/drawer/configuracao_drawer.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_lista_widget.dart';
 import 'package:bluufeed_app/widget/menu_widget.dart';
@@ -22,10 +22,6 @@ class _InicioPageState extends State<InicioPage> {
         duration: const Duration(milliseconds: 300), curve: Curves.linear);
   }
 
-  void _abrirDrawer() {
-    scaffoldKey.currentState!.openEndDrawer();
-  }
-
   @override
   void dispose() {
     super.dispose();
@@ -37,7 +33,7 @@ class _InicioPageState extends State<InicioPage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(toolbarHeight: 0),
-      endDrawer: const PerfilDrawer(),
+      endDrawer: const ConfiguracaoDrawer(),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
@@ -49,14 +45,14 @@ class _InicioPageState extends State<InicioPage> {
             flexibleSpace: FlexibleSpaceBar(
               background: InicioAppbar(
                 callbackLogo: _scrollToTop,
-                callbackMais: () => _abrirDrawer(),
+                callbackMais: () => scaffoldKey.currentState!.openEndDrawer(),
               ),
             ),
           ),
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                HistoriaCriarButton(callback: () => _abrirDrawer()),
+                HistoriaCriarButton(),
                 const MenuWidget(),
                 const HistoriaListaWidget(),
               ],

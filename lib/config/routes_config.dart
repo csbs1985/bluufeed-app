@@ -4,6 +4,7 @@ import 'package:bluufeed_app/page/busca_page.dart';
 import 'package:bluufeed_app/page/entrar_page.dart';
 import 'package:bluufeed_app/page/historia_page.dart';
 import 'package:bluufeed_app/page/inicio_page.dart';
+import 'package:bluufeed_app/page/perfil_page.dart';
 import 'package:go_router/go_router.dart';
 
 final AuthClass _authClass = AuthClass();
@@ -53,6 +54,14 @@ final GoRouter routes = GoRouter(
         context: context,
         state: state,
         child: const HistoriaPage(),
+      ),
+    ),
+    GoRoute(
+      path: RouteEnum.PERFIL.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const PerfilPage(),
       ),
     ),
   ],

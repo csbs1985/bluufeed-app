@@ -25,7 +25,8 @@ enum RouteEnum {
   BUSCAR('/buscar'),
   ENTRAR('/entrar'),
   INICIO('/inicio'),
-  HISTORIA('/historia');
+  HISTORIA('/historia'),
+  PERFIL('/perfil');
 
   final String value;
   const RouteEnum(this.value);

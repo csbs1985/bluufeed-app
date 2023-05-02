@@ -1,9 +1,16 @@
+import 'package:bluufeed_app/button/icone_button.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
+import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 
 class SimplesAppbar extends StatefulWidget implements PreferredSizeWidget {
-  const SimplesAppbar({super.key});
+  const SimplesAppbar({
+    super.key,
+    required Function callback,
+  }) : _callback = callback;
+
+  final Function _callback;
 
   @override
   State<SimplesAppbar> createState() => _HistoriaAppbarState();
@@ -29,6 +36,12 @@ class _HistoriaAppbarState extends State<SimplesAppbar> {
             }),
         onPressed: () => Navigator.of(context).pop(),
       ),
+      actions: [
+        IconeButton(
+          icone: UiSvg.mais,
+          callback: () => widget._callback(),
+        ),
+      ],
     );
   }
 }

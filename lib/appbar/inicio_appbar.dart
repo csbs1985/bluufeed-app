@@ -1,3 +1,4 @@
+import 'package:bluufeed_app/button/icone_button.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
@@ -32,17 +33,13 @@ class InicioAppbar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              IconButton(
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                icon: SvgPicture.asset(UiSvg.buscar),
-                onPressed: () => context.push(RouteEnum.BUSCAR.value),
+              IconeButton(
+                icone: UiSvg.buscar,
+                callback: () => context.push(RouteEnum.BUSCAR.value),
               ),
-              IconButton(
-                highlightColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                icon: SvgPicture.asset(UiSvg.mais),
-                onPressed: () => _callbackAvatar(),
+              IconeButton(
+                icone: UiSvg.mais,
+                callback: () => _callbackAvatar(),
               ),
             ],
           )

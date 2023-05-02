@@ -29,7 +29,9 @@ class _ComentarioModalState extends State<ComentarioModal> {
     });
   }
 
-  _postComentario(BuildContext context) {}
+  _postComentario(BuildContext context) {
+    //
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class _ComentarioModalState extends State<ComentarioModal> {
       body: Container(
         constraints: const BoxConstraints.expand(),
         width: double.infinity,
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 54),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 48),
         child: const SingleChildScrollView(child: TextoText(texto: TESTE)),
       ),
       bottomSheet: ComentarioInput(

@@ -1,5 +1,6 @@
 import 'package:bluufeed_app/appbar/simples_appbar.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
+import 'package:bluufeed_app/drawer/configuracao_drawer.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
 import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
@@ -18,6 +19,7 @@ class HistoriaPage extends StatefulWidget {
 }
 
 class _HistoriaPageState extends State<HistoriaPage> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final HistoriaFirestore _historiaFirestore = HistoriaFirestore();
 
   Map<String, dynamic> _historia = {};
@@ -25,7 +27,10 @@ class _HistoriaPageState extends State<HistoriaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimplesAppbar(),
+      key: scaffoldKey,
+      appBar: SimplesAppbar(
+          callback: () => scaffoldKey.currentState!.openEndDrawer()),
+      endDrawer: const ConfiguracaoDrawer(),
       body: StreamBuilder<QuerySnapshot>(
         stream: _historiaFirestore.snapshotsHistoria(currentIdHistoria.value),
         builder: (
@@ -45,9 +50,13 @@ class _HistoriaPageState extends State<HistoriaPage> {
                   width: double.infinity,
                   padding: const EdgeInsets.all(UiEspaco.large),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TituloText(title: _historia['titulo']),
-                      TextoText(texto: _historia['texto']),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: TextoText(texto: _historia['texto']),
+                      ),
                       HistoriaInteracaoWidget(historia: _historia),
                     ],
                   ),

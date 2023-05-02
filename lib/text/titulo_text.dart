@@ -12,7 +12,7 @@ class TituloText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      // width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(bottom: UiEspaco.small),
       child: Text(
         _textoClass.capitalize(_title),

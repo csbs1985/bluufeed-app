@@ -1,4 +1,3 @@
-import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:flutter/material.dart';
 
 class TextoText extends StatelessWidget {
@@ -12,7 +11,7 @@ class TextoText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: UiEspaco.large),
+      // padding: const EdgeInsets.symmetric(vertical: UiEspaco.large),
       child: Text(
         _texto,
         style: Theme.of(context).textTheme.displayMedium,
