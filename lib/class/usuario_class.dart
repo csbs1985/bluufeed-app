@@ -14,9 +14,9 @@ class UsuarioModel {
   late String idUsuario;
   late String dataRegistro;
   late String nomeUsuario;
-  late String situacaoConta;
   late String token;
   late String dataAtualizacaoNome;
+  late String situacaoConta;
   late bool notificacao;
   late int qtdFavoritos;
   late int qtdComentarios;
@@ -82,7 +82,7 @@ class UsuarioClass {
         dataRegistro: doc.docs.first['dataRegistro'],
         nomeUsuario: doc.docs.first['nome'],
         email: doc.docs.first['email'],
-        situacaoConta: doc.docs.first['situacaoConta'],
+        situacaoConta: SituacaoUsuarioEnum.ATIVO.value,
         token: doc.docs.first['token'],
         dataAtualizacaoNome: doc.docs.first['dataAtualizacaoNome'],
         notificacao: doc.docs.first['notificacao'],
@@ -98,10 +98,10 @@ class UsuarioClass {
         avatarUsuario: usuario['photoUrl'],
         biografia: '',
         idUsuario: usuario['uid'],
-        dataRegistro: '',
+        dataRegistro: DateTime.now().toString(),
         nomeUsuario: usuario['displayName'],
         email: usuario['email']!,
-        situacaoConta: '',
+        situacaoConta: SituacaoUsuarioEnum.CRIANDO.value,
         token: await _tokenClass.pegarToken(),
         dataAtualizacaoNome: '',
         notificacao: true,
@@ -118,7 +118,6 @@ class UsuarioClass {
   }
 
   definirUsuarioHive() {
-    deleteUsuario();
     Map<String, dynamic> usuarioMap = {
       'avatarUsuario': currentUsuario.value.avatarUsuario,
       'biografia': currentUsuario.value.biografia,
@@ -139,6 +138,7 @@ class UsuarioClass {
     };
 
     _usuarioHive.addUsuario(usuarioMap);
+    _usuarioFirebase.postUsuario(usuarioMap);
   }
 
   deleteUsuario() {
@@ -181,4 +181,14 @@ class UsuarioClass {
       seguindo: [],
     );
   }
+}
+
+enum SituacaoUsuarioEnum {
+  ATIVO('/ativo'),
+  INATIVO('/inativo'),
+  CRIANDO('/criando'),
+  DELETADO('/deletado');
+
+  final String value;
+  const SituacaoUsuarioEnum(this.value);
 }

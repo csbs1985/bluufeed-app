@@ -21,6 +21,10 @@ class UsuarioFirestore {
         .update({"qtyHistory": _usuario.qtdHistorias});
   }
 
+  postUsuario(Map<String, dynamic> _usuario) {
+    return usuarios.doc(_usuario['idUsuario']).set(_usuario);
+  }
+
   // deleteUser() {
   //   return user.doc(currentUsuario.value.id).delete();
   // }
@@ -89,9 +93,5 @@ class UsuarioFirestore {
 
   // pathQtyDenounceUser(UsuarioModel user) {
   //   return user.doc(user.id).update({'qtyDenounce': user.qtyDenounce});
-  // }
-
-  // postUser(Map<String, dynamic> user) {
-  //   return user.doc(user['id']).set(user);
   // }
 }
