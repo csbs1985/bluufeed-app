@@ -8,6 +8,7 @@ import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
+import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HistoriaCriarButton extends StatelessWidget {
@@ -41,8 +42,8 @@ class HistoriaCriarButton extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(
-                context, '/perfil/$currentUsuario.value.idUsuario'),
+            onTap: () => context.pushNamed('perfil',
+                params: {'idUsuario': currentUsuario.value.idUsuario}),
             child: const AvatarWidget(size: 18),
           ),
           const SizedBox(width: 8),

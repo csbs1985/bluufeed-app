@@ -1,6 +1,7 @@
 import 'package:bluufeed_app/appbar/inicio_appbar.dart';
 import 'package:bluufeed_app/button/historia_criar_button.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
+import 'package:bluufeed_app/config/auth_config.dart';
 import 'package:bluufeed_app/drawer/configuracao_drawer.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_lista_widget.dart';
@@ -15,8 +16,13 @@ class InicioPage extends StatefulWidget {
 }
 
 class _InicioPageState extends State<InicioPage> {
+  final AuthConfig _authConfig = AuthConfig();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final ScrollController _scrollController = ScrollController();
+
+  signInWithGoogle(BuildContext context) async {
+    await _authConfig.signIn(context);
+  }
 
   void _scrollToTop() {
     _scrollController.animateTo(0,
@@ -31,6 +37,8 @@ class _InicioPageState extends State<InicioPage> {
 
   @override
   Widget build(BuildContext context) {
+    signInWithGoogle(context);
+
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(toolbarHeight: 0),

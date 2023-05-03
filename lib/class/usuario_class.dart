@@ -90,8 +90,8 @@ class UsuarioClass {
         qtdComentarios: doc.docs.first['qtdComentarios'],
         qtdDenuncias: doc.docs.first['qtdDenuncias'],
         qtdHistorias: doc.docs.first['qtdHistorias'],
-        bloqueados: doc.docs.first['bloqueados'],
-        seguindo: doc.docs.first['seguindo'],
+        bloqueados: doc.docs.first['bloqueados'].cast<BloqueadoModel>(),
+        seguindo: doc.docs.first['seguindo'].cast<SeguindoModel>(),
       );
     } else {
       currentUsuario.value = UsuarioModel(
@@ -184,10 +184,10 @@ class UsuarioClass {
 }
 
 enum SituacaoUsuarioEnum {
-  ATIVO('/ativo'),
-  INATIVO('/inativo'),
-  CRIANDO('/criando'),
-  DELETADO('/deletado');
+  ATIVO('ativo'),
+  INATIVO('inativo'),
+  CRIANDO('criando'),
+  DELETADO('deletado');
 
   final String value;
   const SituacaoUsuarioEnum(this.value);

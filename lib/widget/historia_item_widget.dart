@@ -23,15 +23,11 @@ class HistoriaItemWidget extends StatefulWidget {
 class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
   final CategoriaClass categoriesClass = CategoriaClass();
 
-  _selecionarHistoria() {
-    context.pushNamed('historia',
-        params: {'idHistoria': widget._item['idHistoria']});
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _selecionarHistoria(),
+      onTap: () => context.pushNamed('historia',
+          params: {'idHistoria': widget._item['idHistoria']}),
       child: Column(
         children: [
           Container(
