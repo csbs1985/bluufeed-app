@@ -1,11 +1,11 @@
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/widget/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthClass extends ChangeNotifier {
+class AuthConfig extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ToastWidget _toastWidget = ToastWidget();
@@ -15,7 +15,7 @@ class AuthClass extends ChangeNotifier {
 
   bool isAuthenticated = false;
 
-  AuthClass() {
+  AuthConfig() {
     _authCheck();
   }
 

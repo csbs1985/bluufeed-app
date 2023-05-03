@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/config/constants.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:flutter/material.dart';
 
 class FimConteudoText extends StatelessWidget {

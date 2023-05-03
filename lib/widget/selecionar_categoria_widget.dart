@@ -1,5 +1,5 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
-import 'package:bluufeed_app/config/constants.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/text/subtitulo_reumo_text.dart';
 import 'package:bluufeed_app/theme/ui_botao.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';

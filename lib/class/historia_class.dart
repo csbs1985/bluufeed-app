@@ -1,7 +1,7 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/favorito_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
 import 'package:flutter/material.dart';
 

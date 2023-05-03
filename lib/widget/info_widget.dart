@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/config/constants.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/text/data_text.dart';
 import 'package:bluufeed_app/text/legenda_text.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';

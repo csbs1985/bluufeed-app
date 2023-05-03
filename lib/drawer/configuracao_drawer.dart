@@ -1,6 +1,6 @@
 import 'package:bluufeed_app/button/botao_3d_button.dart';
-import 'package:bluufeed_app/class/auth_class.dart';
-import 'package:bluufeed_app/config/constants.dart';
+import 'package:bluufeed_app/config/auth_config.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
@@ -15,7 +15,7 @@ class ConfiguracaoDrawer extends StatefulWidget {
 }
 
 class _PerfilPageState extends State<ConfiguracaoDrawer> {
-  final AuthClass _authClass = AuthClass();
+  final AuthConfig _authConfig = AuthConfig();
 
   static const _marginPequena = SizedBox(height: 16);
 
@@ -97,7 +97,7 @@ class _PerfilPageState extends State<ConfiguracaoDrawer> {
                 ],
               ),
               GestureDetector(
-                onTap: () => _authClass.signOut(),
+                onTap: () => _authConfig.signOut(),
                 child: Text(
                   SAIR,
                   style: Theme.of(context).textTheme.displayMedium,

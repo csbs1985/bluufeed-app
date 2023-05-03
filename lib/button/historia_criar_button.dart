@@ -1,6 +1,6 @@
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/modal/criar_historia_modal.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';

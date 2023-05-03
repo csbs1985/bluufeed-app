@@ -23,6 +23,7 @@ CustomTransitionPage transicaoPaginas<T>({
 
 enum RouteEnum {
   BUSCAR('/buscar'),
+  EDITAR_PERFIL('/editar_perfil'),
   ENTRAR('/entrar'),
   INICIO('/inicio'),
   HISTORIA('/historia'),
