@@ -21,6 +21,12 @@ class UsuarioFirestore {
         .update({"qtyHistory": _usuario.qtdHistorias});
   }
 
+  pathSeguindo(List<String> _seguindo) {
+    return usuarios
+        .doc(currentUsuario.value.idUsuario)
+        .update({'seguindo': _seguindo});
+  }
+
   postUsuario(Map<String, dynamic> _usuario) {
     return usuarios.doc(_usuario['idUsuario']).set(_usuario);
   }

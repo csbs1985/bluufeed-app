@@ -4,5 +4,6 @@ class HiveConfig {
   static start() async {
     await Hive.initFlutter();
     await Hive.openBox('usuario');
+    await Hive.openBox('busca');
   }
 }

@@ -12,14 +12,16 @@ class Botao3dButton extends StatefulWidget {
     required Function callback,
     required String texto,
     double? largura,
+    double? altura,
   })  : _callback = callback,
         _texto = texto,
-        _largura = largura;
+        _largura = largura,
+        _altura = altura;
 
   final Function _callback;
   final String _texto;
-
   final double? _largura;
+  final double? _altura;
 
   @override
   State<Botao3dButton> createState() => _Botao3dButtonState();
@@ -40,14 +42,14 @@ class _Botao3dButtonState extends State<Botao3dButton> {
         return GestureDetector(
           child: SizedBox(
             width: widget._largura,
-            height: UiTamanho.botao + UiTamanho.bordaBotao,
+            height: (widget._altura ?? UiTamanho.botao) + UiTamanho.bordaBotao,
             child: Stack(
               children: [
                 Positioned(
                   bottom: 0,
                   child: Container(
                     width: widget._largura,
-                    height: UiTamanho.botao,
+                    height: widget._altura ?? UiTamanho.botao,
                     decoration: const BoxDecoration(
                       color: UiCor.botaoBorda,
                       borderRadius: BorderRadius.all(
@@ -61,7 +63,7 @@ class _Botao3dButtonState extends State<Botao3dButton> {
                   duration: const Duration(milliseconds: 10),
                   child: Container(
                     width: widget._largura,
-                    height: UiTamanho.botao,
+                    height: widget._altura ?? UiTamanho.botao,
                     padding: const EdgeInsets.symmetric(
                       horizontal: UiEspaco.medium,
                     ),

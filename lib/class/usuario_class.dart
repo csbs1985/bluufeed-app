@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bluufeed_app/class/bloqueado_class.dart';
-import 'package:bluufeed_app/class/seguindo_class.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/hive/usuario_hive.dart';
 
@@ -23,7 +22,7 @@ class UsuarioModel {
   late int qtdDenuncias;
   late int qtdHistorias;
   late List<BloqueadoModel> bloqueados;
-  late List<SeguindoModel> seguindo;
+  late List<String> seguindo;
 
   UsuarioModel({
     required this.avatarUsuario,
@@ -80,7 +79,7 @@ class UsuarioClass {
         biografia: doc.docs.first['biografia'],
         idUsuario: doc.docs.first['idUsuario'],
         dataRegistro: doc.docs.first['dataRegistro'],
-        nomeUsuario: doc.docs.first['nome'],
+        nomeUsuario: doc.docs.first['nomeUsuario'],
         email: doc.docs.first['email'],
         situacaoConta: SituacaoUsuarioEnum.ATIVO.value,
         token: doc.docs.first['token'],
@@ -91,7 +90,7 @@ class UsuarioClass {
         qtdDenuncias: doc.docs.first['qtdDenuncias'],
         qtdHistorias: doc.docs.first['qtdHistorias'],
         bloqueados: doc.docs.first['bloqueados'].cast<BloqueadoModel>(),
-        seguindo: doc.docs.first['seguindo'].cast<SeguindoModel>(),
+        seguindo: doc.docs.first['seguindo'].cast<String>(),
       );
     } else {
       currentUsuario.value = UsuarioModel(
@@ -123,7 +122,7 @@ class UsuarioClass {
       'biografia': currentUsuario.value.biografia,
       'idUsuario': currentUsuario.value.idUsuario,
       'dataRegistro': currentUsuario.value.dataRegistro,
-      'nome': currentUsuario.value.nomeUsuario,
+      'nomeUsuario': currentUsuario.value.nomeUsuario,
       'email': currentUsuario.value.email,
       'situacaoConta': currentUsuario.value.situacaoConta,
       'token': currentUsuario.value.token,
@@ -180,6 +179,21 @@ class UsuarioClass {
       bloqueados: [],
       seguindo: [],
     );
+  }
+
+  toggleSeguindoUsuario(String _usuario) {
+    List<String> listaSeguindo = currentUsuario.value.seguindo;
+
+    listaSeguindo.contains(_usuario)
+        ? listaSeguindo.remove(_usuario)
+        : listaSeguindo.add(_usuario);
+
+    _usuarioFirebase.pathSeguindo(listaSeguindo);
+  }
+
+  bool isSeguindoUsuario(String _usuario) {
+    List<String> listaSeguindo = currentUsuario.value.seguindo;
+    return listaSeguindo.contains(_usuario) ? true : false;
   }
 }
 

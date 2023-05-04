@@ -1,5 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:algolia/algolia.dart';
+import 'package:bluufeed_app/hive/busca_hive.dart';
 
 class BuscaModel {
   final String texto;
@@ -11,7 +11,7 @@ class BuscaModel {
 
 enum BuscaEnum {
   HISTORIA('historia'),
-  USUARIO('usuario');
+  USUARIO('usuário');
 
   final String value;
   const BuscaEnum(this.value);
@@ -23,29 +23,16 @@ final List<BuscaModel> listaBusca = [
 ];
 
 class BuscaClass {
-  Algolia? algolia;
-  AlgoliaQuery? algoliaQuery;
+  final BuscaHive _buscaHive = BuscaHive();
 
-  List<AlgoliaObjectSnapshot>? _snapshotHistoria;
-  List<AlgoliaObjectSnapshot>? _snapshotUsuario;
+  algoliaToMap(List<AlgoliaObjectSnapshot> algoliaObjects) {
+    Map<String, dynamic> resultMap = {};
 
-  getHistoria(String _historia) async {
-    AlgoliaQuery _queryHistory =
-        algolia!.instance.index('bluufeed_stories').query(_historia);
-
-    AlgoliaQuerySnapshot _snapHistory = await _queryHistory.getObjects();
-
-    if (_snapHistory.hits.isNotEmpty) _snapshotHistoria = _snapHistory.hits;
-    if (_historia.isEmpty) _snapshotHistoria = null;
+    for (AlgoliaObjectSnapshot object in algoliaObjects)
+      return resultMap[object.objectID] = object.data;
   }
 
-  getUsuario(String _usuario) async {
-    AlgoliaQuery _queryUser =
-        algolia!.instance.index('bluufeed_users').query(_usuario);
-
-    AlgoliaQuerySnapshot _snapUser = await _queryUser.getObjects();
-
-    if (_snapUser.hits.isNotEmpty) _snapshotUsuario = _snapUser.hits;
-    if (_usuario.isEmpty) _snapshotUsuario = null;
+  addHive(String value) {
+    _buscaHive.addBusca(value);
   }
 }

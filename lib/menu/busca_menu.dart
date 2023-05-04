@@ -8,7 +8,12 @@ import 'package:bluufeed_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
 
 class BuscaMenu extends StatefulWidget {
-  const BuscaMenu({super.key});
+  const BuscaMenu({
+    super.key,
+    required Function callback,
+  }) : _callback = callback;
+
+  final Function _callback;
 
   @override
   State<BuscaMenu> createState() => _MenuWidgetState();
@@ -23,6 +28,7 @@ class _MenuWidgetState extends State<BuscaMenu> {
 
   void _selecionarItem(BuscaModel item) {
     setState(() => _busca = item.texto);
+    widget._callback(item.texto);
   }
 
   @override
