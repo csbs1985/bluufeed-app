@@ -8,14 +8,14 @@ import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
 
-class MenuWidget extends StatefulWidget {
-  const MenuWidget({super.key});
+class CategoriaMenu extends StatefulWidget {
+  const CategoriaMenu({super.key});
 
   @override
-  State<MenuWidget> createState() => _MenuWidgetState();
+  State<CategoriaMenu> createState() => _MenuWidgetState();
 }
 
-class _MenuWidgetState extends State<MenuWidget> {
+class _MenuWidgetState extends State<CategoriaMenu> {
   @override
   Widget build(BuildContext context) {
     bool podeMostrar(CategoriaModel item) {
@@ -58,10 +58,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                             onPressed: () =>
                                 _selecionarItem(listaCategoria[index]),
                             style: _itemSelecionado(listaCategoria[index])
-                                ? UiBotao.buttonActived
+                                ? UiBotao.tagAtivo
                                 : isDark
-                                    ? UiBotao.buttonDark
-                                    : UiBotao.button,
+                                    ? UiBotao.tagEscuro
+                                    : UiBotao.tag,
                             child: Text(
                               listaCategoria[index].texto!.toLowerCase(),
                               style: _itemSelecionado(listaCategoria[index])

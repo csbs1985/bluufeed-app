@@ -6,6 +6,7 @@ class UiTamanho {
   static const double botao = 32;
   static const double botaoPrincipal = 56;
   static const double iconeBox = 32;
+  static const double inputTamanho = 40;
   static const double separador = 8;
   static const double historiaMenuAltura = 36;
   static const double tag = 36;

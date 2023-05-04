@@ -30,5 +30,6 @@ linter:
     library_private_types_in_public_api: false
     no_leading_underscores_for_local_identifiers: false
     unnecessary_null_comparison: false
+    unused_field: false
     unrelated_type_equality_checks: false
     use_build_context_synchronously: false

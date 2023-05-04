@@ -5,7 +5,7 @@ import 'package:bluufeed_app/config/auth_config.dart';
 import 'package:bluufeed_app/drawer/configuracao_drawer.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_lista_widget.dart';
-import 'package:bluufeed_app/widget/menu_widget.dart';
+import 'package:bluufeed_app/menu/categoria_menu.dart';
 import 'package:flutter/material.dart';
 
 class InicioPage extends StatefulWidget {
@@ -62,7 +62,7 @@ class _InicioPageState extends State<InicioPage> {
             delegate: SliverChildListDelegate(
               [
                 HistoriaCriarButton(usuario: currentUsuario.value.idUsuario),
-                const MenuWidget(),
+                const CategoriaMenu(),
                 const HistoriaListaWidget(),
               ],
             ),

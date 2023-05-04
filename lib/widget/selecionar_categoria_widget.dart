@@ -81,10 +81,10 @@ class _SelecionatCategoriaWidgetState extends State<SelecionatCategoriaWidget> {
                           onPressed: () =>
                               _selecionarCategoria(item.idCategoria!),
                           style: _isCategoriaSelecionada(item.idCategoria!)
-                              ? UiBotao.buttonActived
+                              ? UiBotao.tagAtivo
                               : isDark
-                                  ? UiBotao.buttonDark
-                                  : UiBotao.button,
+                                  ? UiBotao.tagEscuro
+                                  : UiBotao.tag,
                           child: Text(
                             item.texto!.toLowerCase(),
                             style: _isCategoriaSelecionada(item.idCategoria!)

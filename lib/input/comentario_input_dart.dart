@@ -48,7 +48,7 @@ class _ComentarioInputState extends State<ComentarioInput> {
             keyboardType: TextInputType.multiline,
             controller: _commentController,
             onChanged: (value) => widget._callback(value),
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.displayMedium,
             decoration: InputDecoration(
               hintText: COMENTARIOS_ESCREVER,
               filled: true,

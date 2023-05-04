@@ -11,6 +11,8 @@ const String AUTORIZADO = "Autorizado";
 const String AUTORIZADO_HABILITAR =
     "Ligado para marcar história como de terceiro com autorização para publicar.";
 
+const String BUSCA_ESCREVER = "Pesquisar";
+
 const String CRIAR_BOTAO = "Conte sua história";
 
 const String COMENTARIOS = "Comentários";
