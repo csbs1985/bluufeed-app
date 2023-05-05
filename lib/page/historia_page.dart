@@ -62,6 +62,7 @@ class _HistoriaPageState extends State<HistoriaPage> {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         child: TextoText(texto: _historia['texto']),
                       ),
+                      const SizedBox(height: 24),
                       HistoriaInteracaoWidget(historia: _historia),
                     ],
                   ),

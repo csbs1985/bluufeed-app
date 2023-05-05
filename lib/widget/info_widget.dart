@@ -9,12 +9,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class InfoWidget extends StatefulWidget {
   const InfoWidget({
     super.key,
-    bool? avatar = true,
     required Map<String, dynamic> item,
-  })  : _avatar = avatar,
+    required String tipo,
+  })  : _tipo = tipo,
         _item = item;
 
-  final bool? _avatar;
+  final String? _tipo;
   final Map<String, dynamic> _item;
 
   @override
@@ -25,27 +25,31 @@ class _InfoTextState extends State<InfoWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        if (widget._avatar!)
-          widget._item['isAnonimo']
-              ? const LegendaText(legenda: ANONIMO)
-              : Row(
-                  children: [
-                    AvatarWidget(
-                      avatar: widget._item['avatarUsuario'],
-                      size: 6,
-                    ),
-                    const SizedBox(width: 4),
-                    LegendaText(legenda: widget._item['nomeUsuario'])
-                  ],
-                ),
-        if (widget._avatar!) const LegendaText(legenda: ' · '),
+        if (widget._tipo != InfoEnum.HISTORIA.name)
+          Row(
+            children: [
+              AvatarWidget(
+                avatar: widget._item['avatarUsuario'],
+                size: 6,
+              ),
+              const SizedBox(width: 4),
+              LegendaText(legenda: widget._item['nomeUsuario'])
+            ],
+          ),
+        if (widget._tipo != InfoEnum.HISTORIA.name)
+          const LegendaText(legenda: ' · '),
         DataText(item: widget._item),
         if (widget._item['isEditado'])
           const LegendaText(legenda: ' · $EDITADO'),
-        if (widget._item['isAutorizado']) const LegendaText(legenda: ' · '),
-        if (widget._item['isAutorizado']) SvgPicture.asset(UiSvg.autorizado),
+        if (widget._tipo != InfoEnum.COMENTARIO.name)
+          const LegendaText(legenda: ' · '),
+        if (widget._tipo != InfoEnum.COMENTARIO.name)
+          SvgPicture.asset(UiSvg.autorizado),
       ],
     );
   }
 }
+
+enum InfoEnum { HISTORIA, COMENTARIO, INICIO }

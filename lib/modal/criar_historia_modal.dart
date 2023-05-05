@@ -133,7 +133,7 @@ class _CreatePageState extends State<CriarHistoriaModal> {
     });
 
     try {
-      await _historiaFirestore.postHistory(_historia);
+      await _historiaFirestore.postHistoria(_historia);
       _pathQtdHistoriasUsuario();
     } on FirebaseAuthException catch (error) {
       debugPrint('$ERRO_POST_HISTORIA $error');

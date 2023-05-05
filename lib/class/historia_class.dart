@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
+
+ValueNotifier<int> currentQtdHistoria = ValueNotifier<int>(0);
 
 ValueNotifier<HistoriaModel> currentHistoria =
     ValueNotifier<HistoriaModel>(HistoriaModel(
@@ -136,13 +137,6 @@ class HistoriaClass {
   void adicionar(Map<String, dynamic> history) {
     limparCurrentHistoria();
     currentHistoria.value = HistoriaModel.fromMap(history);
-  }
-
-  String definirTextoComentario(Map<String, dynamic> _historia) {
-    if (!_historia['isComentario']) return COMENTARIOS_DESABILITADOS;
-    if (_historia['qtdComentario'] == 1) return ' comentário';
-    if (_historia['qtdComentario'] > 1) return ' $COMENTARIOS_PLURAL';
-    return COMENTARIOS_PRIMEIRO;
   }
 
   bool isComentario(String? _route, Map<String, dynamic> _historia) {

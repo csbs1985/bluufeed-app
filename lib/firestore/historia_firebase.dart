@@ -1,4 +1,3 @@
-import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -27,19 +26,19 @@ class HistoriaFirestore {
         .update({'userName': currentUsuario.value.nomeUsuario});
   }
 
-  pathQtyCommentHistory(HistoriaModel _history) {
+  pathQtdComentarioHistoria(Map<String, dynamic> _historia) {
     return historias
-        .doc(_history.idHistoria)
-        .update({'qtdComentario': _history.qtdComentario});
+        .doc(_historia['idHistoria'])
+        .update({'qtdComentario': _historia['qtdComentario']});
   }
 
-  pathFavorito(Map<String, dynamic> _history) {
+  pathFavorito(Map<String, dynamic> _historia) {
     return historias
-        .doc(_history['id'])
-        .update({'favoritos': _history['favoritos']});
+        .doc(_historia['id'])
+        .update({'favoritos': _historia['favoritos']});
   }
 
-  postHistory(Map<String, dynamic> _history) {
-    return historias.doc(_history['id']).set(_history);
+  postHistoria(Map<String, dynamic> _historia) {
+    return historias.doc(_historia['id']).set(_historia);
   }
 }

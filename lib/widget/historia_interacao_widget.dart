@@ -1,6 +1,7 @@
 import 'package:bluufeed_app/button/icone_button.dart';
 import 'package:bluufeed_app/button/seguir_button.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
+import 'package:bluufeed_app/class/comentario_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/modal/comentario_modal.dart';
 import 'package:bluufeed_app/text/tag_text.dart';
@@ -29,7 +30,13 @@ class HistoriaInteracaoWidget extends StatefulWidget {
 
 class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
   final CategoriaClass categoriesClass = CategoriaClass();
-  final HistoriaClass _historiaClass = HistoriaClass();
+  final ComentarioClass _comentarioClass = ComentarioClass();
+
+  @override
+  void initState() {
+    currentQtdHistoria.value = widget._historia['qtdHistoria'];
+    super.initState();
+  }
 
   void _abrirModal(BuildContext context) {
     showCupertinoModalBottomSheet(
@@ -72,7 +79,7 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
             padding: const EdgeInsets.only(top: 16),
             child: InfoWidget(
               item: widget._historia,
-              avatar: false,
+              tipo: InfoEnum.HISTORIA.name,
             ),
           ),
           Wrap(
@@ -86,6 +93,7 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
                 ),
             ],
           ),
+          const SizedBox(height: 24),
           Row(
             children: [
               IconeButton(
@@ -96,11 +104,18 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
                 callback: () => {},
                 icone: UiSvg.enviar,
               ),
-              IconeButton(
-                callback: () => _abrirModal(context),
-                icone: UiSvg.comentario,
-                texto: _historiaClass.definirTextoComentario(widget._historia),
-              ),
+              if (widget._historia['isComentario'])
+                ValueListenableBuilder(
+                  valueListenable: currentQtdHistoria,
+                  builder: (BuildContext context, int qtdHistoria, _) {
+                    return IconeButton(
+                      callback: () => _abrirModal(context),
+                      icone: UiSvg.comentario,
+                      texto: _comentarioClass
+                          .definirTextoComentario(widget._historia),
+                    );
+                  },
+                ),
             ],
           )
         ],

@@ -38,7 +38,10 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TituloText(title: widget._item['titulo']),
-                InfoWidget(item: widget._item),
+                InfoWidget(
+                  tipo: InfoEnum.INICIO.name,
+                  item: widget._item,
+                ),
                 EllipsisText(texto: widget._item['texto']),
                 Wrap(
                   children: [

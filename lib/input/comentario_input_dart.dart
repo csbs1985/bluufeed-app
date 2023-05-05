@@ -16,13 +16,11 @@ class ComentarioInput extends StatefulWidget {
 }
 
 class _ComentarioInputState extends State<ComentarioInput> {
-  final TextEditingController _commentController = TextEditingController();
-
-  String description = 'My great package';
+  final TextEditingController _comentarioController = TextEditingController();
 
   @override
   void dispose() {
-    _commentController.dispose();
+    _comentarioController.dispose();
     super.dispose();
   }
 
@@ -46,8 +44,8 @@ class _ComentarioInputState extends State<ComentarioInput> {
             autofocus: false,
             maxLines: null,
             keyboardType: TextInputType.multiline,
-            controller: _commentController,
-            onChanged: (value) => widget._callback(value),
+            controller: _comentarioController,
+            onChanged: (value) => setState(() => widget._callback(value)),
             style: Theme.of(context).textTheme.displayMedium,
             decoration: InputDecoration(
               hintText: COMENTARIOS_ESCREVER,

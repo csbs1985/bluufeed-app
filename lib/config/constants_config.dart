@@ -18,6 +18,9 @@ const String BUSCA_VAZIA =
 
 const String CRIAR_BOTAO = "Conte sua história";
 
+const String COMENTARIO = "comentário";
+const String COMENTARIO_DELETADO = "Comentário deletado!";
+const String COMENTARIO_PUBLICADO = "comentário publicado";
 const String COMENTARIOS = "Comentários";
 const String COMENTARIOS_DESABILITADOS = "comentário desabilitado";
 const String COMENTARIOS_ESCREVER = "Escreva um comentário...";
@@ -31,7 +34,8 @@ const String EDITADO = "editado";
 const String ENTRAR_BEM_VINDO = "Seja bem vindo";
 
 const String ERRO_ENTRAR = "Não foi possível concluir o login";
-const String ERRO_POST_HISTORIA = "ERROR => Erro ao tentar postar a hisória: ";
+const String ERRO_POST_COMENTARIO = "ERROR => Erro ao tentar postar hisória: ";
+const String ERRO_POST_HISTORIA = "ERROR => Erro ao tentar postar comentário: ";
 const String ERRO_PUBLICAR_HISTORIA =
     "erro ao publicar história, tente novamente mais tarde";
 
@@ -59,7 +63,7 @@ const String SEM_RESULTADO =
     "Sua pesquisa não encontrou nenhum resultado correspondente.";
 
 const String ERRO_RESULTADO =
-    "Nos deparamos com um erro, tente novamente mais tarde.";
+    "Nos deparamos com um erro, \n tente novamente mais tarde.";
 
 const String TESTE = "Ouviram do Ipiranga as margens plácidas"
     "\nDe um povo heróico o brado retumbante,"

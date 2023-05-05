@@ -28,10 +28,10 @@ class AuthConfig extends ChangeNotifier {
   }
 
   signIn(BuildContext context) async {
-    await signInWithGoogle(context).then((User? user) {
-      Map<String, dynamic> userMap = _usuarioClass.userToMap(user!);
+    await signInWithGoogle(context).then((User user) {
+      Map<String, dynamic> userMap = _usuarioClass.userToMap(user);
       _usuarioClass.definirUsuario(userMap);
-    });
+    } as Future Function(User? value));
   }
 
   Future<User?> signInWithGoogle(BuildContext context) async {
