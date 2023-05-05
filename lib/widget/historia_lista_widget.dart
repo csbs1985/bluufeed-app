@@ -48,14 +48,10 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
               emptyBuilder: (context) => SemResultadoWidget(altura: _altura),
               itemBuilder: (BuildContext context,
                   QueryDocumentSnapshot<dynamic> snapshot) {
-                return Column(
-                  children: [
-                    HistoriaItemWidget(snapshot: snapshot.data()),
-                    const FimConteudoText()
-                  ],
-                );
+                return HistoriaItemWidget(snapshot: snapshot.data());
               },
             ),
+            const FimConteudoText(),
           ],
         );
       },

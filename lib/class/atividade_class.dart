@@ -9,6 +9,7 @@ class AtividadeModel {
   late String idConteudo;
   late String idUsuario;
   late String tipoAtividade;
+  late String avatarUsuario;
 
   AtividadeModel({
     required this.conteudo,
@@ -17,6 +18,7 @@ class AtividadeModel {
     required this.idConteudo,
     required this.idUsuario,
     required this.tipoAtividade,
+    required this.avatarUsuario,
   });
 }
 
@@ -48,18 +50,18 @@ class AtividadeClass {
   final AtividadeFirestore _atividadeFirestore = AtividadeFirestore();
   final Uuid uuid = const Uuid();
 
-  late Map<String, dynamic> _atividade;
-
-  post({required String type, String? content, String? elementId}) async {
-    _atividade = {
+  postAtividade(
+      {required String type, String? content, String? elementId}) async {
+    Map<String, dynamic> _atividade = {
       'conteudo': content?.trim() ?? '',
       'dataAtividade': DateTime.now().toString(),
       'idConteudo': elementId ?? '',
       'idAtividade': uuid.v4(),
       'tipoAtividade': type,
       'idUsuario': currentUsuario.value.idUsuario,
+      'avatarUsuario': currentUsuario.value.avatarUsuario,
     };
 
-    await _atividadeFirestore.postActivity(_atividade);
+    await _atividadeFirestore.postAtividade(_atividade);
   }
 }

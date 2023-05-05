@@ -4,7 +4,7 @@ class AtividadeFirestore {
   CollectionReference atividades =
       FirebaseFirestore.instance.collection('atividades');
 
-  postActivity(Map<String, dynamic> _atividade) async {
+  postAtividade(Map<String, dynamic> _atividade) async {
     return await atividades.doc(_atividade['id']).set(_atividade);
   }
 }

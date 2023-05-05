@@ -1,4 +1,7 @@
+import 'package:bluufeed_app/class/atividade_class.dart';
 import 'package:bluufeed_app/class/token_class.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/widget/toast_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -65,13 +68,15 @@ ValueNotifier<UsuarioModel> currentUsuario =
 ));
 
 class UsuarioClass {
+  final AtividadeClass _atividadeClass = AtividadeClass();
+  final ToastWidget _toastWidget = ToastWidget();
   final TokenClass _tokenClass = TokenClass();
   final UsuarioHive _usuarioHive = UsuarioHive();
-  final UsuarioFirestore _usuarioFirebase = UsuarioFirestore();
+  final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
   definirUsuario(Map<String, dynamic> usuario) async {
     QuerySnapshot doc =
-        await _usuarioFirebase.getUsuarioEmail(usuario['email']!);
+        await _usuarioFirestore.getUsuarioEmail(usuario['email']!);
 
     if (doc.docs.isNotEmpty) {
       currentUsuario.value = UsuarioModel(
@@ -137,7 +142,7 @@ class UsuarioClass {
     };
 
     _usuarioHive.addUsuario(usuarioMap);
-    _usuarioFirebase.postUsuario(usuarioMap);
+    _usuarioFirestore.postUsuario(usuarioMap);
   }
 
   deleteUsuario() {
@@ -188,12 +193,37 @@ class UsuarioClass {
         ? listaSeguindo.remove(_usuario)
         : listaSeguindo.add(_usuario);
 
-    _usuarioFirebase.pathSeguindo(listaSeguindo);
+    _usuarioFirestore.pathSeguindo(listaSeguindo);
+    currentUsuario.value.seguindo = listaSeguindo;
   }
 
-  bool isSeguindoUsuario(String _usuario) {
+  String isSeguindoUsuario(String _usuario) {
     List<String> listaSeguindo = currentUsuario.value.seguindo;
-    return listaSeguindo.contains(_usuario) ? true : false;
+    return listaSeguindo.contains(_usuario) ? SEGUINDO : SEGUIR;
+  }
+
+  pathQtdHistoriasUsuario(
+    BuildContext context,
+    bool _isEditado,
+    String _tituloController,
+    String _idHistoria,
+  ) async {
+    if (!_isEditado)
+      await _usuarioFirestore.pathQtdHistoriasUsuario(currentUsuario.value);
+
+    _atividadeClass.postAtividade(
+      type: _isEditado
+          ? AtividadeEnum.UP_HISTORY.value
+          : AtividadeEnum.NEW_HISTORY.value,
+      content: _tituloController,
+      elementId: _idHistoria,
+    );
+
+    _toastWidget.toast(
+      context,
+      ToastEnum.SUCESSO,
+      _isEditado ? HISTORIA_ALTERADA : HISTORIA_PUBLICADA,
+    );
   }
 }
 

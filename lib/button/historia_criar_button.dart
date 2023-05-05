@@ -8,18 +8,12 @@ import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
-import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HistoriaCriarButton extends StatelessWidget {
   final HistoriaClass _historiaClass = HistoriaClass();
 
-  HistoriaCriarButton({
-    super.key,
-    required String usuario,
-  }) : _usuario = usuario;
-
-  final String _usuario;
+  HistoriaCriarButton({super.key});
 
   void _abrirModal(BuildContext context) {
     _historiaClass.limparCurrentHistoria();
@@ -42,35 +36,36 @@ class HistoriaCriarButton extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.pushNamed('perfil',
-                params: {'idUsuario': currentUsuario.value.idUsuario}),
+            onTap: () => Navigator.pushNamed(
+                context, '/perfil/$currentUsuario.value.idUsuario'),
             child: const AvatarWidget(size: 18),
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: GestureDetector(
-              onTap: () => _abrirModal(context),
-              child: ValueListenableBuilder(
-                  valueListenable: currentTema,
-                  builder: (BuildContext context, Brightness tema, _) {
-                    bool isDark = tema == Brightness.dark;
+            child: ValueListenableBuilder(
+              valueListenable: currentTema,
+              builder: (BuildContext context, Brightness tema, _) {
+                bool isDark = tema == Brightness.dark;
 
-                    return Container(
-                      alignment: Alignment.centerLeft,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: isDark ? UiCor.bordaEscura : UiCor.borda,
-                        borderRadius: BorderRadius.circular(UiBorda.circulo),
+                return GestureDetector(
+                  onTap: () => _abrirModal(context),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: isDark ? UiCor.bordaEscura : UiCor.borda,
+                      borderRadius: BorderRadius.circular(UiBorda.circulo),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Text(
+                        CRIAR_BOTAO,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: Text(
-                          CRIAR_BOTAO,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ),
-                    );
-                  }),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],

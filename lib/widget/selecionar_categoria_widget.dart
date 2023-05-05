@@ -25,28 +25,27 @@ class SelecionatCategoriaWidget extends StatefulWidget {
 }
 
 class _SelecionatCategoriaWidgetState extends State<SelecionatCategoriaWidget> {
-  List<String> listSelect = [];
+  final CategoriaClass _categoriaClass = CategoriaClass();
+
+  List<String> listaSelecionado = [];
 
   @override
   void initState() {
     if (widget._selecionado.isNotEmpty)
-      for (var item in widget._selecionado) listSelect.add(item.toString());
+      for (var item in widget._selecionado)
+        listaSelecionado.add(item.toString());
 
     super.initState();
   }
 
-  bool _isCategoriaSelecionada(String id) {
-    return listSelect.contains(id) ? true : false;
-  }
-
   void _selecionarCategoria(String id) {
     setState(() {
-      listSelect.contains(id) ? listSelect.remove(id) : listSelect.add(id);
-      if (widget._callback != null) widget._callback!(listSelect);
+      listaSelecionado.contains(id)
+          ? listaSelecionado.remove(id)
+          : listaSelecionado.add(id);
+      if (widget._callback != null) widget._callback!(listaSelecionado);
     });
   }
-
-  getTagStyle() {}
 
   @override
   Widget build(BuildContext context) {
@@ -55,39 +54,38 @@ class _SelecionatCategoriaWidgetState extends State<SelecionatCategoriaWidget> {
       builder: (BuildContext context, Brightness theme, _) {
         bool isDark = currentTema.value == Brightness.dark;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SubtituloResumoText(
-              subtitulo: ASSUNTO,
-              resumo: ASSUNTO_SELECIONE,
-            ),
-            const SizedBox(height: UiEspaco.medium),
-            Wrap(
-              children: [
-                for (var item in listaCategoria)
-                  if (!item.isDesabilitada!)
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SubtituloResumoText(
+                subtitulo: ASSUNTO,
+                resumo: ASSUNTO_SELECIONE,
+              ),
+              const SizedBox(height: UiEspaco.medium),
+              Wrap(
+                children: [
+                  for (var item in _categoriaClass.filtrarPorCategoria())
                     Padding(
                       padding: const EdgeInsets.fromLTRB(
-                        0,
-                        0,
-                        UiEspaco.medium,
-                        UiEspaco.medium,
-                      ),
+                          0, 0, UiEspaco.medium, UiEspaco.medium),
                       child: SizedBox(
                         height: UiTamanho.tag,
                         child: TextButton(
                           onPressed: () =>
-                              _selecionarCategoria(item.idCategoria!),
-                          style: _isCategoriaSelecionada(item.idCategoria!)
+                              _selecionarCategoria(item.idCategoria),
+                          style: _categoriaClass.isCategoriaSelecionada(
+                                  listaSelecionado, item.idCategoria)
                               ? UiBotao.tagAtivo
                               : isDark
                                   ? UiBotao.tagEscuro
                                   : UiBotao.tag,
                           child: Text(
-                            item.texto!.toLowerCase(),
-                            style: _isCategoriaSelecionada(item.idCategoria!)
+                            item.texto,
+                            style: _categoriaClass.isCategoriaSelecionada(
+                                    listaSelecionado, item.idCategoria)
                                 ? UiTexto.tagAtiva
                                 : isDark
                                     ? UiTexto.tagEscuro
@@ -96,9 +94,10 @@ class _SelecionatCategoriaWidgetState extends State<SelecionatCategoriaWidget> {
                         ),
                       ),
                     ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         );
       },
     );

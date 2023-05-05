@@ -1,5 +1,4 @@
 import 'package:bluufeed_app/text/subtitulo_reumo_text.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/widget/toggle_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -27,31 +26,27 @@ class ToggleSelecionarWidget extends StatefulWidget {
 class _ToggleSelecionarWidgetState extends State<ToggleSelecionarWidget> {
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => widget._callback(true),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        padding: const EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(UiBorda.quadrada),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width - 80,
-            child: SubtituloResumoText(
-              subtitulo: widget._titulo,
-              resumo: widget._resumo,
+    return InkWell(
+      onTap: () => widget._callback(true),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 80,
+              child: SubtituloResumoText(
+                subtitulo: widget._titulo,
+                resumo: widget._resumo,
+              ),
             ),
-          ),
-          ToggleWidget(
-            value: widget._value,
-            callback: (value) => widget._callback(value),
-          ),
-        ],
+            ToggleWidget(
+              value: widget._value,
+              callback: (value) => widget._callback(value),
+            ),
+          ],
+        ),
       ),
     );
   }

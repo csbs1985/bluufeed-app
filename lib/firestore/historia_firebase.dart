@@ -10,8 +10,6 @@ class HistoriaFirestore {
     return historias.where('idHistoria', isEqualTo: _idHistory).snapshots();
   }
 
-  //////////////////
-
   deleteHistory(String _idHistory) {
     return historias.doc(_idHistory).delete();
   }

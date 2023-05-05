@@ -5,7 +5,8 @@ const String ASSINATURA_HABILITAR_1 = "Ligado para assinar como";
 const String ASSINATURA_HABILITAR_2 = "ou desligado para anônimo.";
 
 const String ASSUNTO = "Assunto";
-const String ASSUNTO_SELECIONE = "Selecione ao menos uma categoria/tema.";
+const String ASSUNTO_SELECIONE =
+    "Selecione ao menos uma assunto para a história.";
 
 const String AUTORIZADO = "Autorizado";
 const String AUTORIZADO_HABILITAR =
@@ -29,7 +30,10 @@ const String EDITADO = "editado";
 
 const String ENTRAR_BEM_VINDO = "Seja bem vindo";
 
-const String ENTRAR_ERRO = "Não foi possível concluir o login";
+const String ERRO_ENTRAR = "Não foi possível concluir o login";
+const String ERRO_POST_HISTORIA = "ERROR => Erro ao tentar postar a hisória: ";
+const String ERRO_PUBLICAR_HISTORIA =
+    "erro ao publicar história, tente novamente mais tarde";
 
 const String ENTRAR_GOOGLE =
     "\n Cadastre-se ou entre com sua conta Google nativa no dispositivo, selecionando o botão a baixo";
@@ -39,8 +43,6 @@ const String HISTORIA_CRIAR = "Criar história";
 const String HISTORIA_EDITAR = "Editar história";
 const String HISTORIA_ALTERADA = "história alterada";
 const String HISTORIA_DESFAVORITADA = "história removida da lista";
-const String HISTORIA_ERRO_PUBLICAR =
-    "erro ao publicar história, tente novamente mais tarde";
 const String HISTORIA_FAVORITADA =
     "história adicionada à lista para ler mais tarde";
 const String HISTORIA_FIM = "Isso é tudo por enquanto.";

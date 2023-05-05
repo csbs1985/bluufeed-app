@@ -53,7 +53,7 @@ class AuthConfig extends ChangeNotifier {
       notifyListeners();
       return usuario;
     } on FirebaseAuthException {
-      _toastWidget.toast(context, ToastEnum.ERRO, ENTRAR_ERRO);
+      _toastWidget.toast(context, ToastEnum.ERRO, ERRO_ENTRAR);
     }
     return null;
   }

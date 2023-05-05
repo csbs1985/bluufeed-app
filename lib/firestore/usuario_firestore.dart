@@ -15,7 +15,7 @@ class UsuarioFirestore {
         .update({'qtyBookmark': _usuario.qtdFavoritos});
   }
 
-  pathQtdHistorias(UsuarioModel _usuario) async {
+  pathQtdHistoriasUsuario(UsuarioModel _usuario) async {
     await usuarios
         .doc(_usuario.idUsuario)
         .update({"qtyHistory": _usuario.qtdHistorias});

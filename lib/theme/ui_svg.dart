@@ -3,6 +3,7 @@ class UiSvg {
   static const String bloquear = 'assets/icon/bloquear.svg';
   static const String buscar = 'assets/icon/buscar.svg';
   static const String comentario = 'assets/icon/comentario.svg';
+  static const String confirmar = 'assets/icon/confirmar.svg';
   static const String copiar = 'assets/icon/copiar.svg';
   static const String criar = 'assets/icon/criar.svg';
   static const String criarAtivo = 'assets/icon/criar_ativo.svg';

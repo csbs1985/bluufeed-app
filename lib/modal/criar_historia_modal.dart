@@ -1,9 +1,7 @@
-import 'package:bluufeed_app/class/atividade_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
-import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
@@ -25,11 +23,10 @@ class CriarHistoriaModal extends StatefulWidget {
 }
 
 class _CreatePageState extends State<CriarHistoriaModal> {
-  final AtividadeClass _atividadeClass = AtividadeClass();
   final HistoriaClass _historiaClass = HistoriaClass();
   final HistoriaFirestore _historiaFirestore = HistoriaFirestore();
   final ToastWidget _toastWidget = ToastWidget();
-  final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
+  final UsuarioClass _usuarioClass = UsuarioClass();
   final Uuid uuid = const Uuid();
 
   final TextEditingController _tituloController = TextEditingController();
@@ -45,12 +42,11 @@ class _CreatePageState extends State<CriarHistoriaModal> {
   bool _isAutorizado = false;
   bool _btnPublicar = false;
 
-  late Map<String, dynamic> _history;
-  late Map<String, dynamic> activity;
+  late Map<String, dynamic> _historia;
 
   @override
   void initState() {
-    if (currentHistoria.value != "") {
+    if (currentHistoria.value.idHistoria != "") {
       _isEditado = true;
       _btnPublicar = true;
       _tituloController.text = currentHistoria.value.titulo;
@@ -97,76 +93,65 @@ class _CreatePageState extends State<CriarHistoriaModal> {
     FocusManager.instance.primaryFocus?.unfocus();
 
     setState(() {
-      if (currentHistoria.value != "") {
-        _history = {
+      if (currentHistoria.value.idHistoria != "") {
+        _historia = {
           'idHistoria': currentHistoria.value.idHistoria,
           'titulo': _tituloController.text.trim(),
           'texto': _textoController.text.trim(),
           'dataCriacao': currentHistoria.value.dataCriacao,
           'isComentario': _isComentario,
           'isAnonimo': _isAssinado,
-          'isEdito': true,
+          'isEditado': true,
           'isAutorizado': _isAutorizado,
           'qtdComentario': currentHistoria.value.qtdComentario,
           'categorias': _categorias,
           'idUsuario': currentUsuario.value.idUsuario,
           'nomeUsuario': currentUsuario.value.nomeUsuario,
-          'avatarUsuario': '',
+          'avatarUsuario': currentUsuario.value.avatarUsuario,
           'favoritos': currentHistoria.value.favoritos,
         };
       } else {
-        _history = {
+        _historia = {
           'idHistoria': uuid.v4(),
           'titulo': _tituloController.text.trim(),
           'texto': _textoController.text.trim(),
-          'date': DateTime.now().toString(),
+          'dataCriacao': DateTime.now().toString(),
           'isComentario': _isComentario,
           'isAnonimo': _isAssinado,
-          'isEdito': false,
+          'isEditado': false,
           'isAutorizado': _isAutorizado,
           'qtdComentario': 0,
           'categorias': _categorias,
           'idUsuario': currentUsuario.value.idUsuario,
           'nomeUsuario': currentUsuario.value.nomeUsuario,
-          'avatarUsuario': "",
+          'avatarUsuario': currentUsuario.value.avatarUsuario,
           'favoritos': [],
         };
       }
 
-      _historiaClass.adicionar(_history);
+      _historiaClass.adicionar(_historia);
     });
 
     try {
-      await _historiaFirestore.postHistory(_history);
-      _pathQtyHistoryUser();
+      await _historiaFirestore.postHistory(_historia);
+      _pathQtdHistoriasUsuario();
     } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => postNewHistory: $error');
-      _toastWidget.toast(context, ToastEnum.ERRO, HISTORIA_ERRO_PUBLICAR);
+      debugPrint('$ERRO_POST_HISTORIA $error');
+      _toastWidget.toast(context, ToastEnum.ERRO, ERRO_PUBLICAR_HISTORIA);
     }
   }
 
-  Future<void> _pathQtyHistoryUser() async {
+  Future<void> _pathQtdHistoriasUsuario() async {
     if (!_isEditado) currentUsuario.value.qtdHistorias++;
 
-    try {
-      await _usuarioFirestore.pathQtdHistorias(currentUsuario.value);
-      _atividadeClass.post(
-        type: _isEditado
-            ? AtividadeEnum.NEW_HISTORY.value
-            : AtividadeEnum.UP_HISTORY.value,
-        content: _tituloController.text,
-        elementId: _history['id'],
-      );
-      if (currentHistoria.value != "") Navigator.of(context).pop();
+    _usuarioClass.pathQtdHistoriasUsuario(
+      context,
+      _isEditado,
+      _tituloController.text,
+      _historia['id'],
+    );
 
-      _toastWidget.toast(
-        context,
-        ToastEnum.SUCESSO,
-        _isEditado ? HISTORIA_ALTERADA : HISTORIA_PUBLICADA,
-      );
-    } on FirebaseAuthException catch (error) {
-      debugPrint('ERROR => pathQtyHistoryUser: $error');
-    }
+    if (currentHistoria.value.idHistoria != "") Navigator.of(context).pop();
   }
 
   @override
@@ -181,23 +166,18 @@ class _CreatePageState extends State<CriarHistoriaModal> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: TextoText(
-              texto: currentHistoria.value == null
+              texto: currentHistoria.value.idHistoria == ''
                   ? HISTORIA_CRIAR
                   : HISTORIA_EDITAR,
             ),
           ),
           body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(
-                UiEspaco.large,
-                0,
-                UiEspaco.large,
-                UiEspaco.medium,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextField(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  child: TextField(
                     controller: _tituloController,
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
@@ -217,7 +197,10 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                           borderSide: BorderSide.none),
                     ),
                   ),
-                  TextField(
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  child: TextField(
                     controller: _textoController,
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
@@ -235,38 +218,38 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                           borderSide: BorderSide.none),
                     ),
                   ),
-                  const SizedBox(height: UiEspaco.large),
-                  SelecionatCategoriaWidget(
-                    selecionado: currentHistoria.value != ""
-                        ? currentHistoria.value.categorias
-                        : [],
-                    callback: (value) => _definirCategoria(value),
-                  ),
-                  const SizedBox(height: UiEspaco.large),
-                  ToggleSelecionarWidget(
-                    titulo: ASSINATURA,
-                    resumo:
-                        '$ASSINATURA_HABILITAR_1 ${currentUsuario.value.nomeUsuario} $ASSINATURA_HABILITAR_2',
-                    value: _isAssinado,
-                    callback: (value) => _definirAssinado(),
-                  ),
-                  const SizedBox(height: UiEspaco.large),
-                  ToggleSelecionarWidget(
-                    titulo: COMENTARIOS,
-                    resumo: COMENTARIOS_HABILITAR,
-                    value: _isComentario,
-                    callback: (value) => _definirComentario(),
-                  ),
-                  const SizedBox(height: UiEspaco.large),
-                  ToggleSelecionarWidget(
-                    titulo: AUTORIZADO,
-                    resumo: AUTORIZADO_HABILITAR,
-                    value: _isAutorizado,
-                    callback: (value) => _definirAutorizado(),
-                  ),
-                  const SizedBox(height: 80),
-                ],
-              ),
+                ),
+                const SizedBox(height: UiEspaco.large),
+                SelecionatCategoriaWidget(
+                  selecionado: currentHistoria.value != ""
+                      ? currentHistoria.value.categorias
+                      : [],
+                  callback: (value) => _definirCategoria(value),
+                ),
+                const SizedBox(height: UiEspaco.large),
+                ToggleSelecionarWidget(
+                  titulo: ASSINATURA,
+                  resumo:
+                      '$ASSINATURA_HABILITAR_1 ${currentUsuario.value.nomeUsuario} $ASSINATURA_HABILITAR_2',
+                  value: _isAssinado,
+                  callback: (value) => _definirAssinado(),
+                ),
+                const SizedBox(height: UiEspaco.large),
+                ToggleSelecionarWidget(
+                  titulo: COMENTARIOS,
+                  resumo: COMENTARIOS_HABILITAR,
+                  value: _isComentario,
+                  callback: (value) => _definirComentario(),
+                ),
+                const SizedBox(height: UiEspaco.large),
+                ToggleSelecionarWidget(
+                  titulo: AUTORIZADO,
+                  resumo: AUTORIZADO_HABILITAR,
+                  value: _isAutorizado,
+                  callback: (value) => _definirAutorizado(),
+                ),
+                const SizedBox(height: 80),
+              ],
             ),
           ),
           floatingActionButton: _btnPublicar
@@ -274,7 +257,7 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                   backgroundColor: UiCor.botao,
                   elevation: 0,
                   onPressed: () => _postHistoria(context),
-                  child: SvgPicture.asset(UiSvg.criar, color: UiCor.icone),
+                  child: SvgPicture.asset(UiSvg.confirmar, color: UiCor.icone),
                 )
               : null,
         );

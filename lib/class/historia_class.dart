@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
-import 'package:bluufeed_app/class/favorito_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
-import 'package:flutter/material.dart';
 
 ValueNotifier<HistoriaModel> currentHistoria =
     ValueNotifier<HistoriaModel>(HistoriaModel(
@@ -37,7 +36,7 @@ class HistoriaModel {
   late bool isAutorizado;
   late int qtdComentario;
   late List<CategoriaModel> categorias;
-  late List<FavoritoModel> favoritos;
+  late List<String> favoritos;
 
   HistoriaModel({
     required this.idHistoria,
@@ -56,25 +55,6 @@ class HistoriaModel {
     required this.favoritos,
   });
 
-  factory HistoriaModel.fromJson(json) => HistoriaModel.fromMap(json);
-
-  factory HistoriaModel.fromMap(json) => HistoriaModel(
-        idHistoria: json['id'],
-        titulo: json['title'],
-        texto: json['text'],
-        dataCriacao: json['date'],
-        isComentario: json['isComentario'],
-        isAnonimo: json['isSigned'],
-        isEditado: json['isEdit'],
-        isAutorizado: json['isAuthorized'],
-        idUsuario: json['userId'],
-        nomeUsuario: json['userName'],
-        avatarUsuario: json[''],
-        qtdComentario: json['qtdComentario'],
-        categorias: json['categorias'],
-        favoritos: json['favoritos'],
-      );
-
   static Map<String, dynamic> toMap(historia) => {
         'idHistoria': historia['idHistoria'],
         'titulo': historia['titulo'],
@@ -91,6 +71,25 @@ class HistoriaModel {
         'categorias': historia['categorias'].cast<String>(),
         'favoritos': historia['favoritos'].cast<String>(),
       };
+
+  static HistoriaModel fromMap(Map<String, dynamic> map) {
+    return HistoriaModel(
+      idHistoria: map['idHistoria'],
+      titulo: map['titulo'],
+      texto: map['texto'],
+      dataCriacao: map['dataCriacao'],
+      idUsuario: map['idUsuario'],
+      nomeUsuario: map['nomeUsuario'],
+      avatarUsuario: map['avatarUsuario'],
+      isComentario: map['isComentario'],
+      isAnonimo: map['isAnonimo'],
+      isEditado: map['isEditado'],
+      isAutorizado: map['isAutorizado'],
+      qtdComentario: map['qtdComentario'],
+      categorias: map['categorias'].cast<CategoriaModel>(),
+      favoritos: map['favoritos'].cast<String>(),
+    );
+  }
 }
 
 class HistoriaClass {
@@ -116,7 +115,7 @@ class HistoriaClass {
   }
 
   pegarHistoria() {
-    String _categoria = currentCategoria.value.idCategoria!;
+    String _categoria = currentCategoria.value.idCategoria;
 
     if (_categoria == CategoriaEnum.ALL.value)
       return _historiaFirestore.historias.orderBy('dataCriacao');
@@ -136,7 +135,7 @@ class HistoriaClass {
 
   void adicionar(Map<String, dynamic> history) {
     limparCurrentHistoria();
-    currentHistoria.value = HistoriaModel.fromJson(history);
+    currentHistoria.value = HistoriaModel.fromMap(history);
   }
 
   String definirTextoComentario(Map<String, dynamic> _historia) {

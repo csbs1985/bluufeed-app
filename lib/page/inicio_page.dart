@@ -1,6 +1,5 @@
 import 'package:bluufeed_app/appbar/inicio_appbar.dart';
 import 'package:bluufeed_app/button/historia_criar_button.dart';
-import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/auth_config.dart';
 import 'package:bluufeed_app/drawer/configuracao_drawer.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
@@ -61,7 +60,7 @@ class _InicioPageState extends State<InicioPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                HistoriaCriarButton(usuario: currentUsuario.value.idUsuario),
+                HistoriaCriarButton(),
                 const CategoriaMenu(),
                 const HistoriaListaWidget(),
               ],
