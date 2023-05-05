@@ -28,7 +28,7 @@ class InicioAppbar extends StatelessWidget {
         children: [
           GestureDetector(
             child: SvgPicture.asset(UiSvg.identidade),
-            onTap: () => _callbackLogo,
+            onTap: () => _callbackLogo(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
