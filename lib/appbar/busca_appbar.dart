@@ -1,8 +1,5 @@
-import 'package:bluufeed_app/config/constants_config.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
+import 'package:bluufeed_app/input/pesquisa_input.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_espaco.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 
@@ -45,40 +42,7 @@ class _HistoriaAppbarState extends State<BuscaAppbar> {
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: SizedBox(
-            height: UiTamanho.inputTamanho,
-            child: TextField(
-              textAlignVertical: TextAlignVertical.center,
-              autofocus: false,
-              maxLines: 1,
-              keyboardType: TextInputType.multiline,
-              controller: _buscaController,
-              onChanged: (value) => widget._callback(value),
-              style: Theme.of(context).textTheme.displayMedium,
-              decoration: InputDecoration(
-                hintText: BUSCA_ESCREVER,
-                filled: true,
-                fillColor: isDark ? UiCor.bordaEscura : UiCor.borda,
-                hintStyle: Theme.of(context).textTheme.bodySmall,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: UiEspaco.large,
-                  vertical: UiEspaco.small,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(UiBorda.arredondada),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(UiBorda.arredondada),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(UiBorda.arredondada),
-                ),
-              ),
-            ),
-          ),
+          title: PesquisaInput(callback: (value) => widget._callback(value)),
         );
       },
     );

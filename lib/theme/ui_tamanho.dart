@@ -5,7 +5,7 @@ class UiTamanho {
   static const double borda = 1;
   static const double bordaBotao = 4;
   static const double botao = 32;
-  static const double botaoPrincipal = 56;
+  static const double botaoPrincipal = 48;
   static const double iconeBox = 32;
   static const double inputTamanho = 40;
   static const double separador = 8;

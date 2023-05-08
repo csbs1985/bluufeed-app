@@ -9,6 +9,12 @@ class UsuarioFirestore {
     return usuarios.where('email', isEqualTo: email).get();
   }
 
+  getSeguindoUsuario(String idUsuario) async {
+    return usuarios
+        .orderBy('nomeUsuario')
+        .where('idUsuario', isEqualTo: idUsuario);
+  }
+
   pathQtdFavoritos(UsuarioModel _usuario) {
     return usuarios
         .doc(_usuario.idUsuario)

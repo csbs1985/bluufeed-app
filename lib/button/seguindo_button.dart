@@ -29,10 +29,9 @@ class _SeguindoButtonState extends State<SeguindoButton> {
     int _quantidade = widget._usuario['seguindo'].length;
 
     _onTap() {
-      if (widget._usuario['seguindo'].length > 0) {
+      if (widget._usuario['seguindo'].length > 0)
         context.pushNamed('seguindo',
             params: {'idUsuario': widget._usuario['idUsuario']});
-      }
     }
 
     return InkWell(
@@ -48,7 +47,8 @@ class _SeguindoButtonState extends State<SeguindoButton> {
             Row(
               children: [
                 SizedBox(
-                  width: _quantidade.toDouble() * _eixo + 18,
+                  width: _quantidade.toDouble() * _eixo +
+                      (_quantidade > 0 ? 18 : 0),
                   height: 32,
                   child: Stack(
                     children: List.generate(

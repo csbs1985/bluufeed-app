@@ -1,4 +1,3 @@
-import 'package:bluufeed_app/appbar/simples_appbar.dart';
 import 'package:bluufeed_app/appbar/voltar_appbar.dart';
 import 'package:bluufeed_app/button/seguindo_button.dart';
 import 'package:bluufeed_app/button/seguir_button.dart';
@@ -74,7 +73,9 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                       ),
                       const SizedBox(height: 24),
                       SeguirButton(
-                          usuario: _seguindoClass.toSeguindo(widget._usuario)),
+                        tamanhoPadrao: false,
+                        usuario: _seguindoClass.toSeguindo(widget._usuario),
+                      ),
                     ],
                   ),
                 ),

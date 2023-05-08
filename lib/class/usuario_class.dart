@@ -212,9 +212,14 @@ class UsuarioClass {
     List<Map<String, dynamic>> listaSeguindo =
         currentUsuario.value.seguindo.cast<Map<String, dynamic>>();
 
-    listaSeguindo.contains(_usuario)
-        ? listaSeguindo.remove(_usuario)
-        : listaSeguindo.add(_usuario);
+    bool encontrou =
+        listaSeguindo.any((map) => map['idUsuario'] == _usuario['idUsuario']);
+    if (encontrou) {
+      listaSeguindo
+          .removeWhere((map) => map['idUsuario'] == _usuario['idUsuario']);
+    } else {
+      listaSeguindo.add(_usuario);
+    }
 
     _usuarioFirestore.pathSeguindo(listaSeguindo);
     currentUsuario.value.seguindo = listaSeguindo.cast<SeguindoModel>();

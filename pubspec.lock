@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  button3d:
+    dependency: "direct main"
+    description:
+      name: button3d
+      sha256: "21fae7a09ea4c5979f8d2f73e31719cebe1ffcf7f6fdccff4bf8faf1698fb8bf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   characters:
     dependency: transitive
     description:
