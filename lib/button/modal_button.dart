@@ -20,16 +20,13 @@ class ModalButton extends StatefulWidget {
 class _ModalButtonState extends State<ModalButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: UiTamanho.appbar,
-      alignment: Alignment.centerLeft,
-      child: Padding(
+    return InkWell(
+      onTap: () => widget._callback(),
+      child: Container(
+        height: UiTamanho.appbar,
+        alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: 16),
-        child: InkWell(
-          child: TextoText(texto: widget._texto),
-          onTap: () => widget._callback(),
-        ),
+        child: TextoText(texto: widget._texto),
       ),
     );
   }

@@ -40,10 +40,8 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
 
   void _abrirModal(BuildContext context) {
     showCupertinoModalBottomSheet(
-      expand: true,
       context: context,
       barrierColor: UiCor.overlay,
-      duration: const Duration(milliseconds: 300),
       builder: (context) => ComentarioModal(historia: widget._historia),
     );
   }

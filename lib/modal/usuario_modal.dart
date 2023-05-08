@@ -17,13 +17,18 @@ class UsuarioModal extends StatefulWidget {
 }
 
 class _UsuarioModalState extends State<UsuarioModal> {
+  denunciarUsuario() {}
+
+  bloquearUsuario() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
             child: Row(
               children: [
                 AvatarWidget(
@@ -32,7 +37,8 @@ class _UsuarioModalState extends State<UsuarioModal> {
                 ),
                 const SizedBox(width: 16),
                 Expanded(
-                    child: TextoText(texto: widget._usuario['nomeUsuario'])),
+                  child: TextoText(texto: widget._usuario['nomeUsuario']),
+                ),
               ],
             ),
           ),
@@ -40,15 +46,15 @@ class _UsuarioModalState extends State<UsuarioModal> {
             children: [
               ModalButton(
                 texto: DENUNCIAR,
-                callback: () => {},
+                callback: () => denunciarUsuario(),
               ),
               ModalButton(
                 texto: BLOQUEAR,
-                callback: () => {},
+                callback: () => bloquearUsuario,
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          // const SizedBox(height: 16),
         ],
       ),
     );

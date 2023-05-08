@@ -1,15 +1,17 @@
-import 'package:bluufeed_app/appbar/voltar_appbar.dart';
+import 'package:bluufeed_app/appbar/opcoes_appbar.dart';
 import 'package:bluufeed_app/button/seguindo_button.dart';
 import 'package:bluufeed_app/button/seguir_button.dart';
 import 'package:bluufeed_app/class/data_class.dart';
 import 'package:bluufeed_app/class/seguindo_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
+import 'package:bluufeed_app/modal/usuario_modal.dart';
 import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
 import 'package:bluufeed_app/text/fim_conteudo_text.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
+import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:bluufeed_app/widget/erro_resultado_widget.dart';
@@ -17,7 +19,8 @@ import 'package:bluufeed_app/widget/historia_item_widget.dart';
 import 'package:bluufeed_app/widget/separador_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class PerfilItemWidget extends StatefulWidget {
   const PerfilItemWidget({
@@ -39,6 +42,15 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
 
   static const _marginPequena = SizedBox(height: 16);
 
+  void _abrirModal(BuildContext context) {
+    showCupertinoModalBottomSheet(
+      expand: false,
+      context: context,
+      barrierColor: UiCor.overlay,
+      builder: (context) => UsuarioModal(usuario: widget._usuario),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double _altura =
@@ -46,7 +58,7 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: const VoltarAppbar(),
+      appBar: OpcoesAppbar(callback: () => _abrirModal(context)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,9 +84,14 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                         texto: widget._usuario['email'],
                       ),
                       const SizedBox(height: 24),
-                      SeguirButton(
-                        tamanhoPadrao: false,
-                        usuario: _seguindoClass.toSeguindo(widget._usuario),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SeguirButton(
+                            tamanhoPadrao: false,
+                            usuario: _seguindoClass.toSeguindo(widget._usuario),
+                          ),
+                        ],
                       ),
                     ],
                   ),

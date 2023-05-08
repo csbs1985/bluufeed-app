@@ -27,7 +27,6 @@ class _SeguindoItemWidgetState extends State<SeguindoItemWidget> {
       expand: true,
       context: context,
       barrierColor: UiCor.overlay,
-      duration: const Duration(milliseconds: 300),
       builder: (context) => UsuarioModal(usuario: widget._seguindo),
     );
   }
