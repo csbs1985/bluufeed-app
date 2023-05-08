@@ -14,6 +14,8 @@ const String AUTORIZADO_HABILITAR =
 
 const String BIOGRAFIA = "Biografia";
 
+const String BLOQUEAR = "Bloquear";
+
 const String BUSCA_ESCREVER = "Pesquisar";
 const String BUSCA_VAZIA =
     "Pesquise pelo título, trecho da história e/ou nome do usuário.";
@@ -30,6 +32,8 @@ const String COMENTARIOS_HABILITAR =
     "Ligado para habilitar ou desligado para desabilitar os comentários na história.";
 const String COMENTARIOS_PLURAL = "comentários";
 const String COMENTARIOS_PRIMEIRO = "seja o primeiro a comentar";
+
+const String DENUNCIAR = "Denunciar";
 
 const String EDITADO = "editado";
 

@@ -26,16 +26,13 @@ class _SeguindoButtonState extends State<SeguindoButton> {
 
   @override
   Widget build(BuildContext context) {
-    int _quantidade = widget._usuario['seguindo'].length;
-
-    _onTap() {
-      if (widget._usuario['seguindo'].length > 0)
-        context.pushNamed('seguindo',
-            params: {'idUsuario': widget._usuario['idUsuario']});
-    }
+    int _quantidade = widget._usuario['seguindo'].length >= 5
+        ? 5
+        : widget._usuario['seguindo'].length;
 
     return InkWell(
-      onTap: () => _onTap(),
+      onTap: () => context.pushNamed('seguindo',
+          params: {'idUsuario': widget._usuario['idUsuario']}),
       child: Container(
         padding: const EdgeInsets.all(16),
         width: double.infinity,
@@ -52,7 +49,7 @@ class _SeguindoButtonState extends State<SeguindoButton> {
                   height: 32,
                   child: Stack(
                     children: List.generate(
-                      widget._usuario['seguindo'].length,
+                      widget._usuario['seguindo'].take(5).length,
                       (index) => Positioned(
                         left: index * _eixo,
                         child: AvatarWidget(

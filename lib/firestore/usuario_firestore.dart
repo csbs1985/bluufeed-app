@@ -9,7 +9,7 @@ class UsuarioFirestore {
     return usuarios.where('email', isEqualTo: email).get();
   }
 
-  getSeguindoUsuario(String idUsuario) async {
+  getAllSeguindo(String idUsuario) {
     return usuarios
         .orderBy('nomeUsuario')
         .where('idUsuario', isEqualTo: idUsuario);

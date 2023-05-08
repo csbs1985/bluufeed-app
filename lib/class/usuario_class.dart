@@ -214,12 +214,10 @@ class UsuarioClass {
 
     bool encontrou =
         listaSeguindo.any((map) => map['idUsuario'] == _usuario['idUsuario']);
-    if (encontrou) {
-      listaSeguindo
-          .removeWhere((map) => map['idUsuario'] == _usuario['idUsuario']);
-    } else {
-      listaSeguindo.add(_usuario);
-    }
+    encontrou
+        ? listaSeguindo
+            .removeWhere((map) => map['idUsuario'] == _usuario['idUsuario'])
+        : listaSeguindo.add(_usuario);
 
     _usuarioFirestore.pathSeguindo(listaSeguindo);
     currentUsuario.value.seguindo = listaSeguindo.cast<SeguindoModel>();
