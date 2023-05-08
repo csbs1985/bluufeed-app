@@ -27,7 +27,8 @@ enum RouteEnum {
   ENTRAR('/entrar'),
   INICIO('/inicio'),
   HISTORIA('/historia'),
-  PERFIL('/perfil');
+  PERFIL('/perfil'),
+  SEM_CONEXAO('/sem_conexao');
 
   final String value;
   const RouteEnum(this.value);

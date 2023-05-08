@@ -1,6 +1,12 @@
 import 'package:intl/intl.dart';
 
 class DataClass {
+  String dataInteira(String data) {
+    DateTime dateTime = DateTime.parse(data);
+    DateFormat formatter = DateFormat("'dia' dd 'de' MMMM 'de' y", 'pt_BR');
+    return formatter.format(dateTime);
+  }
+
   String dataFormatar(String data) {
     DateTime dateTime = DateTime.parse(data);
     Duration difference = DateTime.now().difference(dateTime);

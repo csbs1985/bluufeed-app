@@ -72,7 +72,7 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
                   ],
                 ),
               ),
-              SeguirButton(idUsuario: widget._historia['idUsuario'])
+              SeguirButton(usuario: widget._historia)
             ],
           ),
           Padding(

@@ -87,7 +87,7 @@ class _Botao3dButtonState extends State<Botao3dButton> {
           onTapUp: (_) {
             setState(() {
               _position = UiTamanho.bordaBotao;
-              widget._callback(true);
+              widget._callback();
             });
           },
           onTapDown: (_) {

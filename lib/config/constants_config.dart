@@ -12,6 +12,8 @@ const String AUTORIZADO = "Autorizado";
 const String AUTORIZADO_HABILITAR =
     "Ligado para marcar história como de terceiro com autorização para publicar.";
 
+const String BIOGRAFIA = "Biografia";
+
 const String BUSCA_ESCREVER = "Pesquisar";
 const String BUSCA_VAZIA =
     "Pesquise pelo título, trecho da história e/ou nome do usuário.";
@@ -32,6 +34,8 @@ const String COMENTARIOS_PRIMEIRO = "seja o primeiro a comentar";
 const String EDITADO = "editado";
 
 const String ENTRAR_BEM_VINDO = "Seja bem vindo";
+
+const String ENTROU = "Entrou";
 
 const String ERRO_ENTRAR = "Não foi possível concluir o login";
 const String ERRO_POST_COMENTARIO = "ERROR => Erro ao tentar postar hisória: ";
@@ -58,6 +62,30 @@ const String SAIR = "Sair da conta";
 const String SEGUIR = "Seguir";
 
 const String SEGUINDO = "Seguindo";
+const String SEGUINDO_BUTTON = "perfis";
+const String SEGUINDO_UM = "seguindo apenas";
+const String SEGUINDO_VAZIO = "você ainda não segue outros perfis";
+
+const String SEM_CONEXAO_POEMA = 'Sem a conexão da internet, \n'
+    'o mundo para de girar, \n'
+    'os pixels que nos mostram tudo, \n'
+    'deixam-nos sem nada a explorar. \n\n'
+    'A tela fica em branco, \n'
+    'sem notícias, jogos ou chats, \n'
+    'o tempo passa devagar, \n'
+    'sem ter o que olhar ou ler atrás. \n\n'
+    'A conexão foi interrompida, \n'
+    'um mundo de informação que nos deixou, \n'
+    'com a cabeça sem respostas, \n'
+    'e o coração pesado, sem som. \n\n'
+    'Mas não há de ser o fim, \n'
+    'pois há um jeito de reestabelecer, \n'
+    'a conexão que nos traz de volta, \n'
+    'todo o conteúdo que amamos ter. \n\n'
+    'Então, é hora de consertar, \n'
+    'para que possamos recomeçar, \n'
+    'e nos conectar novamente, \n'
+    'ao vasto mundo digital. \n';
 
 const String SEM_RESULTADO =
     "Sua pesquisa não encontrou nenhum resultado correspondente.";
@@ -65,53 +93,4 @@ const String SEM_RESULTADO =
 const String ERRO_RESULTADO =
     "Nos deparamos com um erro, \n tente novamente mais tarde.";
 
-const String TESTE = "Ouviram do Ipiranga as margens plácidas"
-    "\nDe um povo heróico o brado retumbante,"
-    "\nE o sol da Liberdade, em raios fúlgidos,"
-    "\nBrilhou no céu da Pátria nesse instante."
-    "\nSe o penhor dessa igualdade"
-    "\nConseguimos conquistar com braço forte,"
-    "\nEm teu seio, ó Liberdade,"
-    "\nDesafia o nosso peito a própria morte!"
-    "\nÓ Pátria amada,"
-    "\nIdolatrada,"
-    "\nSalve! Salve!"
-    "\nBrasil, um sonho intenso, um raio vívido"
-    "\nDe amor e de esperança à terra desce,"
-    "\nSe em teu formoso céu, risonho e límpido,"
-    "\nA imagem do Cruzeiro resplandece."
-    "\nGigante pela própria natureza,"
-    "\nÉs belo, és forte, impávido colosso,"
-    "\nE o teu futuro espelha essa grandeza"
-    "\nTerra adorada,"
-    "\nEntre outras mil,"
-    "\nÉs tu, Brasil,"
-    "\nÓ Pátria amada!"
-    "\nDos filhos deste solo és mãe gentil,"
-    "\nPátria amada,"
-    "\nBrasil!"
-    "\nDeitado eternamente em berço esplêndido,"
-    "\nAo som do mar e à luz do céu profundo,"
-    "\nFulguras, ó Brasil, florão da América,"
-    "\nIluminado ao sol do Novo Mundo!"
-    "\nDo que a terra mais garrida"
-    "\nTeus risonhos, lindos campos têm mais flores;"
-    "\nNossos bosques têm mais vida,"
-    "\nNossa vida no teu seio mais amores."
-    "\nÓ Pátria amada,"
-    "\nIdolatrada,"
-    "\nSalve! Salve!"
-    "\nBrasil, de amor eterno seja símbolo"
-    "\nO lábaro que ostentas estrelado,"
-    "\nE diga o verde-louro desta flâmula"
-    "\n- Paz no futuro e glória no passado."
-    "\nMas, se ergues da justiça a clava forte,"
-    "\nVerás que um filho teu não foge à luta,"
-    "\nNem teme, quem te adora, a própria morte."
-    "\nTerra adorada"
-    "\nEntre outras mil,"
-    "\nÉs tu, Brasil,"
-    "\nÓ Pátria amada!"
-    "\nDos filhos deste solo és mãe gentil,"
-    "\nPátria amada,"
-    "\nBrasil!";
+const String PUBLICACOES = "Publicações";

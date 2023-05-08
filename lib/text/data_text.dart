@@ -16,7 +16,9 @@ class DataText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       children: [
-        LegendaText(legenda: _dataClass.dataFormatar(_item['dataCriacao'])),
+        LegendaText(
+            legenda: _dataClass
+                .dataFormatar(_item['dataCriacao'] ?? _item['dataRegistro'])),
       ],
     );
   }

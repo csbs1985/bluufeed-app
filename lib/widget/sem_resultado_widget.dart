@@ -1,4 +1,5 @@
 import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_imagem.dart';
 import 'package:flutter/material.dart';
 
@@ -23,10 +24,9 @@ class SemResultadoWidget extends StatelessWidget {
             image: const AssetImage(UiImagem.semResultado),
             width: MediaQuery.of(context).size.width * 0.5,
           ),
-          Text(
-            SEM_RESULTADO,
+          const TextoText(
+            texto: SEM_RESULTADO,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayMedium,
           ),
         ],
       ),

@@ -60,9 +60,7 @@ class _UsuarioListaWidgetState extends State<UsuarioListaWidget> {
                             ],
                           ),
                         ),
-                        SeguirButton(
-                            idUsuario:
-                                widget._snapshot![index].data['idUsuario']),
+                        SeguirButton(usuario: widget._snapshot![index].data),
                       ],
                     ),
                   ),

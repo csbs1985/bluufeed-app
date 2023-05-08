@@ -1,5 +1,6 @@
 class UiTamanho {
   static const double avatarInicio = 20;
+  static const double avatarButton = 16;
   static const double appbar = 56;
   static const double borda = 1;
   static const double bordaBotao = 4;

@@ -21,7 +21,7 @@ class UsuarioFirestore {
         .update({"qtyHistory": _usuario.qtdHistorias});
   }
 
-  pathSeguindo(List<String> _seguindo) {
+  pathSeguindo(List<Map<String, dynamic>> _seguindo) {
     return usuarios
         .doc(currentUsuario.value.idUsuario)
         .update({'seguindo': _seguindo});
@@ -29,6 +29,10 @@ class UsuarioFirestore {
 
   postUsuario(Map<String, dynamic> _usuario) {
     return usuarios.doc(_usuario['idUsuario']).set(_usuario);
+  }
+
+  snapshotsUsuario(String _idUsuario) {
+    return usuarios.where('idUsuario', isEqualTo: _idUsuario).snapshots();
   }
 
   // deleteUser() {
