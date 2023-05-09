@@ -226,7 +226,10 @@ class UsuarioClass {
   String isSeguindoUsuario(Map<String, dynamic> _usuario) {
     List<Map<String, dynamic>> listaSeguindo =
         currentUsuario.value.seguindo.cast<Map<String, dynamic>>();
-    return listaSeguindo.contains(_usuario) ? SEGUINDO : SEGUIR;
+
+    bool encontrou =
+        listaSeguindo.any((map) => map['idUsuario'] == _usuario['idUsuario']);
+    return encontrou ? SEGUINDO : SEGUIR;
   }
 
   pathQtdHistoriasUsuario(

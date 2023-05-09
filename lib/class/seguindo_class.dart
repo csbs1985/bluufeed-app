@@ -1,4 +1,8 @@
 import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:flutter/material.dart';
+
+ValueNotifier<List<dynamic>> currentSeguindoLista =
+    ValueNotifier<List<dynamic>>([]);
 
 class SeguindoModel {
   late String avatarUsuario;
@@ -32,5 +36,15 @@ class SeguindoClass {
       return "$SEGUINDO_UM $_nomeUsuario";
     } else
       return "$_quantidade $SEGUINDO_BUTTON";
+  }
+
+  pesquisarSeguindo(String value) {
+    if (value.length >= 3) {
+      List<dynamic> resultados = currentSeguindoLista.value
+          .where((usuario) => usuario["nomeUsuario"].contains(value))
+          .toList();
+
+      return resultados;
+    }
   }
 }

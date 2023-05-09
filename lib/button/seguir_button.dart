@@ -46,7 +46,9 @@ class _SeguirButtonState extends State<SeguirButton> {
         _usuarioClass.isSeguindoUsuario(widget._usuario),
         style: UiTexto.botao,
       ),
-      onPressed: () => _usuarioClass.toggleSeguindoUsuario(widget._usuario),
+      onPressed: () => setState(() {
+        _usuarioClass.toggleSeguindoUsuario(widget._usuario);
+      }),
     );
   }
 }

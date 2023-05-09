@@ -1,4 +1,6 @@
+import 'package:algolia/algolia.dart';
 import 'package:bluufeed_app/appbar/voltar_appbar.dart';
+import 'package:bluufeed_app/config/algolia_config.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/input/pesquisa_input.dart';
@@ -27,7 +29,44 @@ class SeguindoPage extends StatefulWidget {
 class _SeguindoPageState extends State<SeguindoPage> {
   final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
-  String? _textoPesquisa;
+  Algolia? algoliaUsuario;
+
+  String _texto = "";
+
+  List<dynamic> _snapshotUsuario = [];
+
+  @override
+  initState() {
+    algoliaUsuario = AlgoliaConfig.algoliaUsuario;
+    super.initState();
+  }
+
+  void keyUp(String value) {
+    setState(() {
+      _texto = value;
+      _snapshotUsuario = [];
+    });
+
+    if (value.length > 2) _getUsuario(value);
+  }
+
+  _getUsuario(String _usuario) async {
+    if (algoliaUsuario != null) {
+      AlgoliaQuery _queryUsuario =
+          algoliaUsuario!.instance.index('usuarios').query(_usuario);
+
+      AlgoliaQuerySnapshot _snapUsuario = await _queryUsuario.getObjects();
+
+      setState(() {
+        if (_usuario.isEmpty) _snapshotUsuario = [];
+        if (_snapUsuario.hits.isNotEmpty) {
+          _snapshotUsuario = _snapUsuario.hits
+              .map((algoliaObject) => algoliaObject.data)
+              .toList();
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,32 +80,44 @@ class _SeguindoPageState extends State<SeguindoPage> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            child: PesquisaInput(callback: (value) => _textoPesquisa = value),
+            child: PesquisaInput(callback: (value) => keyUp(value)),
           ),
-          FirestoreListView(
-            query: _usuarioFirestore.getAllSeguindo(widget._idUsuario),
-            pageSize: 10,
-            shrinkWrap: true,
-            reverse: true,
-            physics: const NeverScrollableScrollPhysics(),
-            loadingBuilder: (context) => const SeguindoSkeleton(),
-            errorBuilder: (context, error, _) =>
-                ErroResultadoWidget(altura: _altura),
-            emptyBuilder: (context) => SemResultadoWidget(altura: _altura),
-            itemBuilder: (BuildContext context,
-                QueryDocumentSnapshot<dynamic> snapshot) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    child: SubtituloText(subtitulo: SEGUINDO),
-                  ),
-                  SeguindoItemWidget(seguindo: snapshot.data()),
-                ],
-              );
-            },
-          ),
+          if (_texto.isNotEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  child: SubtituloText(subtitulo: PESQUISA),
+                ),
+                SeguindoItemWidget(seguindo: _snapshotUsuario),
+              ],
+            ),
+          if (_texto.isEmpty)
+            FirestoreListView(
+              query: _usuarioFirestore.getAllSeguindo(widget._idUsuario),
+              pageSize: 10,
+              shrinkWrap: true,
+              reverse: true,
+              physics: const NeverScrollableScrollPhysics(),
+              loadingBuilder: (context) => const SeguindoSkeleton(),
+              errorBuilder: (context, error, _) =>
+                  ErroResultadoWidget(altura: _altura),
+              emptyBuilder: (context) => SemResultadoWidget(altura: _altura),
+              itemBuilder: (BuildContext context,
+                  QueryDocumentSnapshot<dynamic> snapshot) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      child: SubtituloText(subtitulo: SEGUINDO),
+                    ),
+                    SeguindoItemWidget(seguindo: snapshot.data()['seguindo']),
+                  ],
+                );
+              },
+            ),
         ],
       ),
     );

@@ -21,7 +21,7 @@ class _BuscaPageState extends State<BuscarPage> {
 
   Algolia? algoliaHistoria;
   Algolia? algoliaUsuario;
-  AlgoliaQuery? algoliaQuery;
+
   List<AlgoliaObjectSnapshot> _snapshotHistoria = [];
   List<AlgoliaObjectSnapshot> _snapshotUsuario = [];
 

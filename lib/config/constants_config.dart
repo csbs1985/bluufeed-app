@@ -97,4 +97,6 @@ const String SEM_RESULTADO =
 const String ERRO_RESULTADO =
     "Nos deparamos com um erro, \n tente novamente mais tarde.";
 
+const String PESQUISA = "Pesquisa";
+
 const String PUBLICACOES = "Publicações";

@@ -24,38 +24,40 @@ class _UsuarioModalState extends State<UsuarioModal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-            child: Row(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+              child: Row(
+                children: [
+                  AvatarWidget(
+                    avatar: widget._usuario['avatarUsuario'],
+                    size: 20,
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: TextoText(texto: widget._usuario['nomeUsuario']),
+                  ),
+                ],
+              ),
+            ),
+            Column(
               children: [
-                AvatarWidget(
-                  avatar: widget._usuario['avatarUsuario'],
-                  size: 20,
+                ModalButton(
+                  texto: DENUNCIAR,
+                  callback: () => denunciarUsuario(),
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: TextoText(texto: widget._usuario['nomeUsuario']),
+                ModalButton(
+                  texto: BLOQUEAR,
+                  callback: () => bloquearUsuario,
                 ),
               ],
             ),
-          ),
-          Column(
-            children: [
-              ModalButton(
-                texto: DENUNCIAR,
-                callback: () => denunciarUsuario(),
-              ),
-              ModalButton(
-                texto: BLOQUEAR,
-                callback: () => bloquearUsuario,
-              ),
-            ],
-          ),
-          // const SizedBox(height: 16),
-        ],
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }
