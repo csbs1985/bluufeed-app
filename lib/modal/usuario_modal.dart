@@ -7,6 +7,7 @@ import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class UsuarioModal extends StatefulWidget {
   const UsuarioModal({
@@ -35,6 +36,12 @@ class _UsuarioModalState extends State<UsuarioModal> {
           ? true
           : false;
     });
+  }
+
+  editarPerfil(BuildContext context) {
+    Navigator.of(context).pop();
+    context.pushNamed('editar_perfil',
+        params: {'idUsuario': widget._usuario['idUsuario']});
   }
 
   denunciarUsuario() {
@@ -84,9 +91,7 @@ class _UsuarioModalState extends State<UsuarioModal> {
                   children: [
                     if (isUsuario!)
                       ModalButton(
-                        texto: EDITAR,
-                        callback: () => bloquearUsuario(),
-                      ),
+                          texto: EDITAR, callback: () => editarPerfil(context)),
                     if (!isUsuario!)
                       ModalButton(
                         texto: DENUNCIAR,

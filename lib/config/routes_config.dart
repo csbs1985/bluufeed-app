@@ -39,11 +39,11 @@ final GoRouter routes = GoRouter(
     ),
     GoRoute(
       name: 'editar_perfil',
-      path: '/editar_perfil/:idHistoria',
+      path: '/editar_perfil/:idUsuario',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: EditarPerfilPage(idHistoria: state.params['idHistoria']!),
+        child: EditarPerfilPage(idUsuario: state.params['idUsuario']!),
       ),
     ),
     GoRoute(
