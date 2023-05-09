@@ -17,16 +17,6 @@ class SeguindoModel {
 }
 
 class SeguindoClass {
-  Map<String, dynamic> toSeguindo(Map<String, dynamic> _historia) {
-    Map<String, dynamic> _usuario = {
-      'avatarUsuario': _historia['avatarUsuario'],
-      'idUsuario': _historia['idUsuario'],
-      'nomeUsuario': _historia['nomeUsuario'],
-    };
-
-    return _usuario;
-  }
-
   String textoSeguindoButton(Map<String, dynamic> _usuario) {
     int _quantidade = _usuario['seguindo'].length;
 

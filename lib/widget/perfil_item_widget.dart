@@ -2,7 +2,7 @@ import 'package:bluufeed_app/appbar/opcoes_appbar.dart';
 import 'package:bluufeed_app/button/seguindo_button.dart';
 import 'package:bluufeed_app/button/seguir_button.dart';
 import 'package:bluufeed_app/class/data_class.dart';
-import 'package:bluufeed_app/class/seguindo_class.dart';
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/historia_firebase.dart';
 import 'package:bluufeed_app/modal/usuario_modal.dart';
@@ -20,7 +20,6 @@ import 'package:bluufeed_app/widget/separador_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class PerfilItemWidget extends StatefulWidget {
   const PerfilItemWidget({
@@ -38,15 +37,31 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
   final DataClass _dataClass = DataClass();
   final HistoriaFirestore _historiaFirestore = HistoriaFirestore();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final SeguindoClass _seguindoClass = SeguindoClass();
+  final UsuarioClass _usuarioClass = UsuarioClass();
 
   static const _marginPequena = SizedBox(height: 16);
 
+  bool? isUsuario;
+
+  @override
+  void initState() {
+    super.initState();
+    definirUsuario();
+  }
+
+  definirUsuario() {
+    setState(() {
+      isUsuario = widget._usuario['idUsuario'] == currentUsuario.value.idUsuario
+          ? true
+          : false;
+    });
+  }
+
   void _abrirModal(BuildContext context) {
-    showCupertinoModalBottomSheet(
-      expand: false,
+    showModalBottomSheet(
       context: context,
       barrierColor: UiCor.overlay,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       builder: (context) => UsuarioModal(usuario: widget._usuario),
     );
   }
@@ -70,34 +85,32 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       AvatarWidget(
                         size: 60,
                         avatar: widget._usuario['avatarusuario'],
                       ),
                       _marginPequena,
-                      TituloText(
-                        title: widget._usuario['nomeUsuario'],
-                      ),
+                      if (isUsuario!)
+                        TituloText(
+                          title: widget._usuario['nomeUsuario'],
+                        ),
                       TextoText(
                         texto: widget._usuario['email'],
                       ),
-                      const SizedBox(height: 24),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SeguirButton(
-                            tamanhoPadrao: false,
-                            usuario: _seguindoClass.toSeguindo(widget._usuario),
-                          ),
-                        ],
-                      ),
+                      if (!isUsuario!) const SizedBox(height: 24),
+                      if (!isUsuario!)
+                        SeguirButton(
+                          tamanhoPadrao: false,
+                          usuario: _usuarioClass
+                              .formatarMapUsuarioItem(widget._usuario),
+                        ),
                     ],
                   ),
                 ),
-                const SeparadorWidget(),
-                SeguindoButton(usuario: widget._usuario),
+                if (isUsuario!) const SeparadorWidget(),
+                if (isUsuario!) SeguindoButton(usuario: widget._usuario),
                 const SeparadorWidget(),
                 Container(
                   padding: const EdgeInsets.all(16),

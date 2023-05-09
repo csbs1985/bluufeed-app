@@ -1,6 +1,7 @@
 import 'package:algolia/algolia.dart';
 import 'package:bluufeed_app/appbar/busca_appbar.dart';
 import 'package:bluufeed_app/class/busca_class.dart';
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/algolia_config.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/menu/busca_menu.dart';
@@ -18,6 +19,7 @@ class BuscarPage extends StatefulWidget {
 
 class _BuscaPageState extends State<BuscarPage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final UsuarioClass _usuarioClass = UsuarioClass();
 
   Algolia? algoliaHistoria;
   Algolia? algoliaUsuario;
@@ -94,7 +96,8 @@ class _BuscaPageState extends State<BuscarPage> {
               BuscaMenu(callback: (value) => setState(() => _busca = value)),
             if (_texto.isEmpty) const BuscaListaWidget(),
             if (_busca == BuscaEnum.USUARIO.value)
-              UsuarioListaWidget(snapshot: _snapshotUsuario),
+              UsuarioListaWidget(
+                  usuario: _usuarioClass.algoliaToMap(_snapshotUsuario)),
             if (_busca == BuscaEnum.HISTORIA.value)
               HistoriaListaBuscaWidget(snapshot: _snapshotHistoria),
           ],

@@ -1,3 +1,4 @@
+import 'package:algolia/algolia.dart';
 import 'package:bluufeed_app/class/atividade_class.dart';
 import 'package:bluufeed_app/class/token_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
@@ -95,6 +96,32 @@ class UsuarioClass {
   final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
   Map<String, dynamic>? _usuarioMap;
+
+  List<Map<String, dynamic>> algoliaToMap(
+      List<AlgoliaObjectSnapshot> _snapshot) {
+    List<Map<String, dynamic>> _usuario =
+        _snapshot.map((snapshot) => snapshot.data).toList();
+    return _usuario;
+  }
+
+  List<Map<String, dynamic>> listToMap(List<dynamic> _snapshot) {
+    List<Map<String, dynamic>> _usuario = [];
+
+    for (var item in _snapshot) {
+      _usuario.add(Map<String, dynamic>.from(item));
+    }
+    return _usuario;
+  }
+
+  Map<String, dynamic> formatarMapUsuarioItem(Map<String, dynamic> _historia) {
+    Map<String, dynamic> _usuario = {
+      'avatarUsuario': _historia['avatarUsuario'],
+      'idUsuario': _historia['idUsuario'],
+      'nomeUsuario': _historia['nomeUsuario'],
+    };
+
+    return _usuario;
+  }
 
   definirUsuario(Map<String, dynamic> usuario) async {
     QuerySnapshot doc =

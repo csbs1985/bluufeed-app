@@ -1,6 +1,10 @@
 import 'package:bluufeed_app/button/modal_button.dart';
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
+import 'package:bluufeed_app/theme/ui_borda.dart';
+import 'package:bluufeed_app/theme/ui_cor.dart';
+import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -17,48 +21,89 @@ class UsuarioModal extends StatefulWidget {
 }
 
 class _UsuarioModalState extends State<UsuarioModal> {
-  denunciarUsuario() {}
+  bool? isUsuario;
 
-  bloquearUsuario() {}
+  @override
+  void initState() {
+    super.initState();
+    definirUsuario();
+  }
+
+  definirUsuario() {
+    setState(() {
+      isUsuario = widget._usuario['idUsuario'] == currentUsuario.value.idUsuario
+          ? true
+          : false;
+    });
+  }
+
+  denunciarUsuario() {
+    print('deunciar');
+  }
+
+  bloquearUsuario() {
+    print('bloquear');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-              child: Row(
-                children: [
-                  AvatarWidget(
-                    avatar: widget._usuario['avatarUsuario'],
-                    size: 20,
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: TextoText(texto: widget._usuario['nomeUsuario']),
-                  ),
-                ],
+    return ValueListenableBuilder(
+      valueListenable: currentTema,
+      builder: (BuildContext context, Brightness tema, _) {
+        bool isDark = tema == Brightness.dark;
+
+        return Container(
+          decoration: BoxDecoration(
+            color: isDark ? UiCor.mainEscuro : UiCor.main,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(UiBorda.arredondada),
+              topRight: Radius.circular(UiBorda.arredondada),
+            ),
+          ),
+          child: Wrap(
+            direction: Axis.horizontal,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+                child: Row(
+                  children: [
+                    AvatarWidget(
+                      avatar: widget._usuario['avatarUsuario'],
+                      size: 20,
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: TextoText(texto: widget._usuario['nomeUsuario']),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Column(
-              children: [
-                ModalButton(
-                  texto: DENUNCIAR,
-                  callback: () => denunciarUsuario(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Column(
+                  children: [
+                    if (isUsuario!)
+                      ModalButton(
+                        texto: EDITAR,
+                        callback: () => bloquearUsuario(),
+                      ),
+                    if (!isUsuario!)
+                      ModalButton(
+                        texto: DENUNCIAR,
+                        callback: () => denunciarUsuario(),
+                      ),
+                    if (!isUsuario!)
+                      ModalButton(
+                        texto: BLOQUEAR,
+                        callback: () => bloquearUsuario(),
+                      ),
+                  ],
                 ),
-                ModalButton(
-                  texto: BLOQUEAR,
-                  callback: () => bloquearUsuario,
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

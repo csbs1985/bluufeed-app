@@ -1,5 +1,6 @@
 import 'package:algolia/algolia.dart';
 import 'package:bluufeed_app/appbar/voltar_appbar.dart';
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/algolia_config.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
@@ -8,8 +9,8 @@ import 'package:bluufeed_app/skeleton/seguindo_skeleton.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/erro_resultado_widget.dart';
-import 'package:bluufeed_app/widget/seguindo_item.dart';
 import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
+import 'package:bluufeed_app/widget/usuario_lista_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +28,14 @@ class SeguindoPage extends StatefulWidget {
 }
 
 class _SeguindoPageState extends State<SeguindoPage> {
+  final UsuarioClass _usuarioClass = UsuarioClass();
   final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
   Algolia? algoliaUsuario;
 
   String _texto = "";
 
-  List<dynamic> _snapshotUsuario = [];
+  List<Map<String, dynamic>> _snapshotUsuario = [];
 
   @override
   initState() {
@@ -90,7 +92,8 @@ class _SeguindoPageState extends State<SeguindoPage> {
                   padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
                   child: SubtituloText(subtitulo: PESQUISA),
                 ),
-                SeguindoItemWidget(seguindo: _snapshotUsuario),
+                if (_snapshotUsuario.isNotEmpty)
+                  UsuarioListaWidget(usuario: _snapshotUsuario),
               ],
             ),
           if (_texto.isEmpty)
@@ -113,7 +116,8 @@ class _SeguindoPageState extends State<SeguindoPage> {
                       padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
                       child: SubtituloText(subtitulo: SEGUINDO),
                     ),
-                    SeguindoItemWidget(seguindo: snapshot.data()['seguindo']),
+                    UsuarioListaWidget(
+                        usuario: _usuarioClass.listToMap(snapshot['seguindo'])),
                   ],
                 );
               },

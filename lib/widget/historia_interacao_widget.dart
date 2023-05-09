@@ -1,18 +1,13 @@
 import 'package:bluufeed_app/button/icone_button.dart';
-import 'package:bluufeed_app/button/seguir_button.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/comentario_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
+import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/modal/comentario_modal.dart';
-import 'package:bluufeed_app/text/tag_text.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
-import 'package:bluufeed_app/widget/avatar_widget.dart';
-import 'package:bluufeed_app/widget/info_widget.dart';
+import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
-import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HistoriaInteracaoWidget extends StatefulWidget {
@@ -39,85 +34,55 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
   }
 
   void _abrirModal(BuildContext context) {
-    showCupertinoModalBottomSheet(
-      context: context,
-      barrierColor: UiCor.overlay,
-      builder: (context) => ComentarioModal(historia: widget._historia),
-    );
+    if (widget._historia['isComentario'])
+      showCupertinoModalBottomSheet(
+        context: context,
+        barrierColor: UiCor.overlay,
+        builder: (context) => ComentarioModal(historia: widget._historia),
+      );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return ValueListenableBuilder(
+      valueListenable: currentTema,
+      builder: (BuildContext context, Brightness tema, _) {
+        bool isDark = tema == Brightness.dark;
+
+        return Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              InkWell(
-                borderRadius: BorderRadius.circular(UiBorda.circulo),
-                onTap: () => context.pushNamed('perfil',
-                    params: {'idUsuario': widget._historia['idUsuario']}),
-                child: Row(
-                  children: [
-                    const AvatarWidget(size: 16),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 24, 8),
-                      child: TextoText(texto: widget._historia['nomeUsuario']),
-                    ),
-                  ],
-                ),
+              ValueListenableBuilder(
+                valueListenable: currentQtdHistoria,
+                builder: (BuildContext context, int qtdHistoria, _) {
+                  return IconeButton(
+                    callback: () => _abrirModal(context),
+                    icone: UiSvg.comentario,
+                    cor: isDark ? UiCor.textoEscuro : UiCor.texto,
+                    texto: _comentarioClass
+                        .definirTextoComentario(widget._historia),
+                  );
+                },
               ),
-              SeguirButton(usuario: widget._historia)
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: InfoWidget(
-              item: widget._historia,
-              tipo: InfoEnum.HISTORIA.name,
-            ),
-          ),
-          Wrap(
-            children: [
-              for (var item in widget._historia['categorias'])
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 8, 4, 0),
-                  child: TagText(
-                    tag: categoriesClass.pegarTextoCategoria(item),
-                  ),
-                ),
-            ],
-          ),
-          const SizedBox(height: 24),
-          Row(
-            children: [
               IconeButton(
                 callback: () => {},
                 icone: UiSvg.favorito,
+                cor: isDark ? UiCor.textoEscuro : UiCor.texto,
+                texto: SALVAR,
               ),
               IconeButton(
                 callback: () => {},
                 icone: UiSvg.enviar,
+                cor: isDark ? UiCor.textoEscuro : UiCor.texto,
+                texto: ENVIAR,
               ),
-              if (widget._historia['isComentario'])
-                ValueListenableBuilder(
-                  valueListenable: currentQtdHistoria,
-                  builder: (BuildContext context, int qtdHistoria, _) {
-                    return IconeButton(
-                      callback: () => _abrirModal(context),
-                      icone: UiSvg.comentario,
-                      texto: _comentarioClass
-                          .definirTextoComentario(widget._historia),
-                    );
-                  },
-                ),
             ],
-          )
-        ],
-      ),
+          ),
+        );
+      },
     );
   }
 }

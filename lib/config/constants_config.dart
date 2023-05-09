@@ -8,6 +8,8 @@ const String ASSUNTO = "Assunto";
 const String ASSUNTO_SELECIONE =
     "Selecione ao menos uma assunto para a história.";
 
+const String AUTOR = "Autor";
+
 const String AUTORIZADO = "Autorizado";
 const String AUTORIZADO_HABILITAR =
     "Ligado para marcar história como de terceiro com autorização para publicar.";
@@ -37,6 +39,8 @@ const String DENUNCIAR = "Denunciar";
 
 const String EDITADO = "editado";
 
+const String EDITAR = "Editar perfil";
+
 const String ENTRAR_BEM_VINDO = "Seja bem vindo";
 
 const String ENTROU = "Entrou";
@@ -50,6 +54,8 @@ const String ERRO_PUBLICAR_HISTORIA =
 const String ENTRAR_GOOGLE =
     "\n Cadastre-se ou entre com sua conta Google nativa no dispositivo, selecionando o botão a baixo";
 
+const String ENVIAR = "Enviar";
+
 const String HISTORIA = "História";
 const String HISTORIA_CRIAR = "Criar história";
 const String HISTORIA_EDITAR = "Editar história";
@@ -60,6 +66,8 @@ const String HISTORIA_FAVORITADA =
 const String HISTORIA_FIM = "Isso é tudo por enquanto.";
 const String HISTORIA_PUBLICADA = "história publicada";
 const String HISTORIA_TITULO = "Título";
+
+const String SALVAR = "Salvar";
 
 const String SAIR = "Sair da conta";
 
