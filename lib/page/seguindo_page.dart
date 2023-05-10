@@ -4,7 +4,7 @@ import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/algolia_config.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
-import 'package:bluufeed_app/input/pesquisa_input.dart';
+import 'package:bluufeed_app/input/padrao_input.dart';
 import 'package:bluufeed_app/skeleton/seguindo_skeleton.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
@@ -82,7 +82,7 @@ class _SeguindoPageState extends State<SeguindoPage> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            child: PesquisaInput(callback: (value) => keyUp(value)),
+            child: PadraoInput(callback: (value) => keyUp(value)),
           ),
           if (_texto.isNotEmpty)
             Column(

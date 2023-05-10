@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/input/pesquisa_input.dart';
+import 'package:bluufeed_app/input/padrao_input.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +42,7 @@ class _HistoriaAppbarState extends State<BuscaAppbar> {
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: PesquisaInput(callback: (value) => widget._callback(value)),
+          title: PadraoInput(callback: (value) => widget._callback(value)),
         );
       },
     );

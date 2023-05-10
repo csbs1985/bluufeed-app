@@ -167,31 +167,31 @@ class UsuarioClass {
       };
     }
 
-    definirUsuarioHive();
+    definirUsuarioHive(_usuarioMap!);
   }
 
-  definirUsuarioHive() {
+  definirUsuarioHive(Map<String, dynamic> _usuarioMap) {
     currentUsuario.value = UsuarioModel(
-      avatarUsuario: _usuarioMap!['avatarUsuario'],
-      biografia: _usuarioMap!['biografia'],
-      idUsuario: _usuarioMap!['idUsuario'],
-      dataRegistro: _usuarioMap!['dataRegistro'],
-      nomeUsuario: _usuarioMap!['nomeUsuario'],
-      email: _usuarioMap!['email'],
+      avatarUsuario: _usuarioMap['avatarUsuario'],
+      biografia: _usuarioMap['biografia'],
+      idUsuario: _usuarioMap['idUsuario'],
+      dataRegistro: _usuarioMap['dataRegistro'],
+      nomeUsuario: _usuarioMap['nomeUsuario'],
+      email: _usuarioMap['email'],
       situacaoConta: SituacaoUsuarioEnum.ATIVO.value,
-      token: _usuarioMap!['token'],
-      dataAtualizacaoNome: _usuarioMap!['dataAtualizacaoNome'],
-      notificacao: _usuarioMap!['notificacao'],
-      qtdFavoritos: _usuarioMap!['qtdFavoritos'],
-      qtdComentarios: _usuarioMap!['qtdComentarios'],
-      qtdDenuncias: _usuarioMap!['qtdDenuncias'],
-      qtdHistorias: _usuarioMap!['qtdHistorias'],
-      bloqueados: _usuarioMap!['bloqueados'].cast<BloqueadoModel>(),
-      seguindo: _usuarioMap!['seguindo'].cast<SeguindoModel>(),
+      token: _usuarioMap['token'],
+      dataAtualizacaoNome: _usuarioMap['dataAtualizacaoNome'],
+      notificacao: _usuarioMap['notificacao'],
+      qtdFavoritos: _usuarioMap['qtdFavoritos'],
+      qtdComentarios: _usuarioMap['qtdComentarios'],
+      qtdDenuncias: _usuarioMap['qtdDenuncias'],
+      qtdHistorias: _usuarioMap['qtdHistorias'],
+      bloqueados: _usuarioMap['bloqueados'].cast<BloqueadoModel>(),
+      seguindo: _usuarioMap['seguindo'].cast<SeguindoModel>(),
     );
 
-    _usuarioHive.addUsuario(_usuarioMap!);
-    _usuarioFirestore.postUsuario(_usuarioMap!);
+    _usuarioHive.addUsuario(_usuarioMap);
+    _usuarioFirestore.postUsuario(_usuarioMap);
   }
 
   deleteUsuario() {
