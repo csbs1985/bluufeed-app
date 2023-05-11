@@ -8,6 +8,9 @@ const String ASSUNTO = "Assunto";
 const String ASSUNTO_SELECIONE =
     "Selecione ao menos uma assunto para a história.";
 
+const String ATIVIDADE = "Atividades";
+const String ATIVIDADE_DESCICAO = "Acompanhe todas suas atividade no Bluufeed";
+
 const String AUTOR = "Autor";
 
 const String AUTORIZADO = "Autorizado";
@@ -34,6 +37,12 @@ const String COMENTARIOS_HABILITAR =
     "Ligado para habilitar ou desligado para desabilitar os comentários na história.";
 const String COMENTARIOS_PLURAL = "comentários";
 const String COMENTARIOS_PRIMEIRO = "seja o primeiro a comentar";
+
+const String CONTA = "Conta";
+
+const String DELETAR = "Deletar conta";
+const String DELETAR_DESCRICAO =
+    "Estou saindo do Bluufeed e não pretendo voltar";
 
 const String DENUNCIAR = "Denunciar";
 
@@ -64,11 +73,15 @@ const String ERRO_POST_COMENTARIO = "ERROR => Erro ao tentar postar hisória: ";
 const String ERRO_POST_HISTORIA = "ERROR => Erro ao tentar postar comentário: ";
 const String ERRO_PUBLICAR_HISTORIA =
     "erro ao publicar história, tente novamente mais tarde";
+const String ERRO_RESULTADO =
+    "Nos deparamos com um erro, \n tente novamente mais tarde.";
 
 const String ENTRAR_GOOGLE =
     "\n Cadastre-se ou entre com sua conta Google nativa no dispositivo, selecionando o botão a baixo";
 
 const String ENVIAR = "Enviar";
+
+const String FINALIZAR = "Finalizar";
 
 const String HISTORIA = "História";
 const String HISTORIA_CRIAR = "Criar história";
@@ -81,9 +94,33 @@ const String HISTORIA_FIM = "Isso é tudo por enquanto.";
 const String HISTORIA_PUBLICADA = "história publicada";
 const String HISTORIA_TITULO = "Título";
 
+const String INFORMACOES = "Informações";
+
+const String MENU = "Menu";
+
+const String NOTIFICACAO = "Notificações";
+const String NOTIFICACAO_DESCRICAO = "Monitore e configure as notificações";
+
+const String PERFIL = "Perfil";
+const String PERFIL_DESCRICAO = "Consulte e mantenha seus dados atualizados";
+
+const String PESQUISA = "Pesquisa";
+
+const String PUBLICACOES = "Publicações";
+
+const String PERGUNTAS = "Perguntas frequentes";
+const String PERGUNTAS_DESCRICAO =
+    "Todas aquelas perguntas que sempre fez em um só lugar";
+
+const String POLITICA = "Politica de privacidade";
+const String POLITICA_DESCRICAO =
+    "É o documento que descreve como uma organização coleta, usa e protege as informações pessoais dos seus usuários";
+
 const String SALVAR = "Salvar";
 
 const String SAIR = "Sair da conta";
+const String SAIR_DESCRICAO =
+    "Estou temporariamente saindo do Bluufeed, mas tenho planos de voltar em breve";
 
 const String SEGUIR = "Seguir";
 
@@ -116,11 +153,11 @@ const String SEM_CONEXAO_POEMA = 'Sem a conexão da internet, \n'
 const String SEM_RESULTADO =
     "Sua pesquisa não encontrou nenhum resultado correspondente.";
 
-const String ERRO_RESULTADO =
-    "Nos deparamos com um erro, \n tente novamente mais tarde.";
+const String SOBRE = "Sobre o Blufeed";
+const String SOBRE_DESCRICAO = "Onde fornecemos informações sobre a Bluufeed";
 
-const String PESQUISA = "Pesquisa";
-
-const String PUBLICACOES = "Publicações";
+const String TERMO = "Termo de uso";
+const String TERMO_DESCRICAO =
+    "Onde estabelecemos as regras, direitos e responsabilidades de uso de nosso serviço";
 
 const String USUARIO_NOME = "Nome de usuario";

@@ -28,6 +28,9 @@ class UiCor {
   static const Color botaoBorda = Color(0xFF1a8bd8);
   static const Color botaoTexto = Color(0xFFffffff);
 
+  static const Color elemento = Color(0xFFeaeded);
+  static const Color elementoEscura = Color(0xFF292c36);
+
   static const Color main = Color(0xffffffff);
   static const Color mainEscuro = Color(0xFF1F222A);
 

@@ -1,5 +1,6 @@
 import 'package:bluufeed_app/config/auth_config.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
+import 'package:bluufeed_app/page/menu_page.dart';
 import 'package:bluufeed_app/page/busca_page.dart';
 import 'package:bluufeed_app/page/editar_perfil_page.dart';
 import 'package:bluufeed_app/page/entrar_page.dart';
@@ -71,6 +72,15 @@ final GoRouter routes = GoRouter(
         context: context,
         state: state,
         child: HistoriaPage(idHistoria: state.params['idHistoria']!),
+      ),
+    ),
+    GoRoute(
+      name: 'menu',
+      path: '/menu/:idUsuario',
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: MenuPage(idUsuario: state.params['idUsuario']!),
       ),
     ),
     GoRoute(

@@ -1,11 +1,12 @@
 import 'package:bluufeed_app/appbar/inicio_appbar.dart';
 import 'package:bluufeed_app/button/historia_criar_button.dart';
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/auth_config.dart';
-import 'package:bluufeed_app/drawer/configuracao_drawer.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_lista_widget.dart';
 import 'package:bluufeed_app/menu/categoria_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class InicioPage extends StatefulWidget {
   const InicioPage({super.key});
@@ -41,7 +42,6 @@ class _InicioPageState extends State<InicioPage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(toolbarHeight: 0),
-      endDrawer: const ConfiguracaoDrawer(),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
@@ -53,7 +53,8 @@ class _InicioPageState extends State<InicioPage> {
             flexibleSpace: FlexibleSpaceBar(
               background: InicioAppbar(
                 callbackLogo: _scrollToTop,
-                callbackMais: () => scaffoldKey.currentState!.openEndDrawer(),
+                callbackMais: () => context.pushNamed('menu',
+                    params: {'idUsuario': currentUsuario.value.idUsuario}),
               ),
             ),
           ),

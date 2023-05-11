@@ -20,6 +20,7 @@ class SubtituloResumoText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SubtituloText(subtitulo: _subtitulo),
+        const SizedBox(height: 8),
         ResumoText(resumo: _resumo),
       ],
     );
