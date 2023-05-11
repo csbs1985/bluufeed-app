@@ -19,6 +19,7 @@ class BuscaAppbar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _HistoriaAppbarState extends State<BuscaAppbar> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _buscaController = TextEditingController();
 
   @override

@@ -28,6 +28,7 @@ class SeguindoPage extends StatefulWidget {
 }
 
 class _SeguindoPageState extends State<SeguindoPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final UsuarioClass _usuarioClass = UsuarioClass();
   final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
@@ -82,7 +83,9 @@ class _SeguindoPageState extends State<SeguindoPage> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            child: PadraoInput(callback: (value) => keyUp(value)),
+            child: PadraoInput(
+              callback: (value) => keyUp(value),
+            ),
           ),
           if (_texto.isNotEmpty)
             Column(

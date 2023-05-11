@@ -1,80 +1,69 @@
+import 'package:flutter/material.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
-import 'package:flutter/material.dart';
 
-class PadraoInput extends StatefulWidget {
+class PadraoInput extends StatelessWidget {
+  final bool? autoFocus;
+  final TextEditingController? controller;
+  final Function? callback;
+  final bool? expands;
+  final FocusNode? focusNode;
+  final String? hintText;
+  final TextInputType? keyboardType;
+  final Function(String?)? onSaved;
+  final int? maxLength;
+  final int? minLines;
+  final int? maxLines;
+  final String? Function(String?)? validator;
+
   const PadraoInput({
-    super.key,
-    bool? autoFocus = false,
-    Function? callback,
-    TextEditingController? controller,
-    bool? expands = false,
-    FocusNode? focusNode,
-    String? hintText,
-    TextInputType? keyboardType = TextInputType.text,
-    int? maxLength,
-    int? maxLines = 1,
-    int? minLines = 1,
-  })  : _autoFocus = autoFocus,
-        _callback = callback,
-        _controller = controller,
-        _expands = expands,
-        _focusNode = focusNode,
-        _hintText = hintText,
-        _keyboardType = keyboardType,
-        _maxLength = maxLength,
-        _maxLines = maxLines,
-        _minLines = minLines;
-
-  final bool? _autoFocus;
-  final TextEditingController? _controller;
-  final Function? _callback;
-  final bool? _expands;
-  final FocusNode? _focusNode;
-  final String? _hintText;
-  final TextInputType? _keyboardType;
-  final int? _maxLength;
-  final int? _minLines;
-  final int? _maxLines;
-
-  @override
-  State<PadraoInput> createState() => _PadraoInputState();
-}
-
-class _PadraoInputState extends State<PadraoInput> {
-  final TextEditingController _inputController = TextEditingController();
-
-  @override
-  void dispose() {
-    _inputController.dispose();
-    super.dispose();
-  }
+    Key? key,
+    this.autoFocus = false,
+    this.controller,
+    this.callback,
+    this.expands = false,
+    this.focusNode,
+    this.hintText,
+    this.keyboardType = TextInputType.text,
+    this.onSaved,
+    this.maxLength,
+    this.minLines = 1,
+    this.maxLines = 1,
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+
+    String _fieldValue;
+
     return ValueListenableBuilder(
       valueListenable: currentTema,
       builder: (BuildContext context, Brightness tema, _) {
         bool isDark = tema == Brightness.dark;
 
         return SizedBox(
-          child: TextField(
-            autofocus: widget._autoFocus!,
-            controller: widget._controller,
-            expands: widget._expands!,
-            focusNode: widget._focusNode,
-            keyboardType: widget._keyboardType,
-            onChanged: (value) => widget._callback!(value),
-            maxLength: widget._maxLength,
-            minLines: widget._minLines,
-            maxLines: widget._maxLines,
+          child: TextFormField(
+            autofocus: autoFocus!,
+            controller: controller,
+            expands: expands!,
+            focusNode: focusNode,
+            key: _formKey,
+            keyboardType: keyboardType,
+            onChanged: (value) => callback!(value),
+            onSaved: onSaved,
+            maxLength: maxLength,
+            minLines: minLines,
+            maxLines: maxLines,
             style: Theme.of(context).textTheme.displayMedium,
             textAlignVertical: TextAlignVertical.center,
+            validator: validator,
             decoration: InputDecoration(
               counterStyle: Theme.of(context).textTheme.headlineSmall,
-              hintText: widget._hintText,
+              hintText: hintText,
               filled: true,
               fillColor: isDark ? UiCor.bordaEscura : UiCor.borda,
               hintStyle: Theme.of(context).textTheme.bodySmall,

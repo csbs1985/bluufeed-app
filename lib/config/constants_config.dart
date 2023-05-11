@@ -40,8 +40,16 @@ const String DENUNCIAR = "Denunciar";
 const String EDITADO = "editado";
 
 const String EDITAR = "Editar perfil";
+
 const String EDITAR_BIOGRAFIA =
-    "A biografia é uma breve descrição que apresenta informações relevantes sobre a vida de uma pessoa. Normalmente, escrita em terceira pessoa e pode incluir detalhes sobre sua formação acadêmica, experiências profissionais, interesses e conquistas ao longo da vida.\nLimite-se à 300 caracteres.";
+    "A biografia é uma breve descrição que apresenta informações relevantes sobre a vida de uma pessoa. Normalmente, escrita em terceira pessoa e pode incluir detalhes sobre sua formação acadêmica, experiências profissionais, interesses e conquistas ao longo da vida.";
+const String EDITAR_ERRO_INDISPONIVEL =
+    "nome de usuário informado indisponivél";
+const String EDITAR_ERRO_CARACTERES =
+    "o nome de usuário deve ter entre 6 e 20 caracteres.";
+const String EDITAR_ERRO_INVALIDO = "nome de usuário inválido";
+const String EDITAR_ERRO_VAZIO = "informe um nome de usuário";
+const String EDITAR_ERRO_BIOGRAFIA = "a biografia deve ter até 501 caracteres.";
 const String EDITAR_NOME =
     "Os nomes de usuário devem atender a alguns requisitos: eles só podem conter letras, números, sublinhados e ponto final. Além disso, devem ser exclusivos e ter entre 6 e 20 caracteres.";
 

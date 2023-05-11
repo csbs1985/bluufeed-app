@@ -22,6 +22,11 @@ class UiTexto {
     fontWeight: FontWeight.normal,
     color: UiCor.placeholder,
   );
+  static const TextStyle erro = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: UiCor.alerta,
+  );
 
   static const TextStyle texto1 = TextStyle(
     fontSize: 16,

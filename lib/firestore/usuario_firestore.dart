@@ -5,6 +5,10 @@ class UsuarioFirestore {
   CollectionReference usuarios =
       FirebaseFirestore.instance.collection('usuarios');
 
+  getNomeUsuario(String nomeUsuario) {
+    return usuarios.where('nomeUsuario', isEqualTo: nomeUsuario).get();
+  }
+
   getUsuarioEmail(String email) async {
     return usuarios.where('email', isEqualTo: email).get();
   }
@@ -51,10 +55,6 @@ class UsuarioFirestore {
 
   // getTokenOwner(String user) {
   //   return user.where('id', isEqualTo: user).get();
-  // }
-
-  // getName(String nickname) {
-  //   return user.where('name', isEqualTo: nickname).get();
   // }
 
   // getUserId(String? id) {
