@@ -1,5 +1,5 @@
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/firestore/atividade_firebase.dart';
+import 'package:bluufeed_app/firestore/atividade_firestore.dart';
 import 'package:uuid/uuid.dart';
 
 class AtividadeModel {
@@ -37,7 +37,7 @@ enum AtividadeEnum {
   TEMPORARILY_DISABLED('temporarily_disabled'),
   UP_COMMENT('up_comment'),
   UP_HISTORY('up_history'),
-  UP_NICKNAME('up_nickname'),
+  UP_PERFIL('UP_PERFIL'),
   UP_NOTIFICATION('up_notification'),
   UP_BIOGRAPHY('up_biography'),
   UNBLOCK_USER('unblock_user');

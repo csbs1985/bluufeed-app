@@ -23,6 +23,11 @@ class UsuarioFirestore {
         .where('idUsuario', isEqualTo: idUsuario);
   }
 
+  pathTodosUsuarioComentario() {
+    return usuarios.where('idUsuario',
+        isEqualTo: currentUsuario.value.idUsuario);
+  }
+
   pathQtdFavoritos(UsuarioModel _usuario) {
     return usuarios
         .doc(_usuario.idUsuario)
@@ -39,6 +44,14 @@ class UsuarioFirestore {
     return usuarios
         .doc(currentUsuario.value.idUsuario)
         .update({'seguindo': _seguindo});
+  }
+
+  pathPerfil(String nomeUsuario, String biografia, String dataAtualizacaoNome) {
+    return usuarios.doc(currentUsuario.value.idUsuario).update({
+      'biografia': biografia,
+      'nomeUsuario': nomeUsuario,
+      'dataAtualizacaoNome': dataAtualizacaoNome,
+    });
   }
 
   postUsuario(Map<String, dynamic> _usuario) {
@@ -83,13 +96,6 @@ class UsuarioFirestore {
   //   return user
   //       .doc(currentUsuario.value.id)
   //       .update({'qtyDenounce': currentUsuario.value.qtyDenounce});
-  // }
-
-  // pathName(String name, String now) {
-  //   return user.doc(currentUsuario.value.id).update({
-  //     'name': name,
-  //     'upDateName': now,
-  //   });
   // }
 
   // pathLoginLogout(String status) {

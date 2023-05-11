@@ -1,7 +1,7 @@
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
-import 'package:bluufeed_app/firestore/historia_firebase.dart';
+import 'package:bluufeed_app/firestore/historia_firestore.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
@@ -135,8 +135,7 @@ class _CreatePageState extends State<CriarHistoriaModal> {
     try {
       await _historiaFirestore.postHistoria(_historia);
       _pathQtdHistoriasUsuario();
-    } on FirebaseAuthException catch (error) {
-      debugPrint('$ERRO_POST_HISTORIA $error');
+    } on FirebaseAuthException {
       _toastWidget.toast(context, ToastEnum.ERRO, ERRO_PUBLICAR_HISTORIA);
     }
   }

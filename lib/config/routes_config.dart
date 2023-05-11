@@ -1,6 +1,5 @@
 import 'package:bluufeed_app/config/auth_config.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
-import 'package:bluufeed_app/config/conection_config.dart';
 import 'package:bluufeed_app/page/busca_page.dart';
 import 'package:bluufeed_app/page/editar_perfil_page.dart';
 import 'package:bluufeed_app/page/entrar_page.dart';
@@ -12,20 +11,23 @@ import 'package:bluufeed_app/page/sem_conexao_page.dart';
 import 'package:go_router/go_router.dart';
 
 final AuthConfig _authConfig = AuthConfig();
-final ConnectionConfig _connectionConfig = ConnectionConfig();
 
 final GoRouter routes = GoRouter(
   debugLogDiagnostics: true,
   initialLocation: RouteEnum.INICIO.value,
   refreshListenable: _authConfig,
   redirect: (context, state) {
-    final isConnected = _connectionConfig.isConnected;
     final isAuthenticated = _authConfig.isAuthenticated;
     final isLoginRoute = state.subloc == RouteEnum.ENTRAR.value;
 
-    // if (!isConnected) return RouteEnum.SEM_CONEXAO.value;
+    // if (currentUsuario.value.situacaoConta ==
+    //     SituacaoUsuarioEnum.CRIANDO.value) {
+    //   return context.pushNamed('editar_perfil',
+    //       params: {'idUsuario': currentUsuario.value.idUsuario});
+    // }
     if (!isAuthenticated) return isLoginRoute ? null : RouteEnum.ENTRAR.value;
     if (isLoginRoute) return RouteEnum.INICIO.value;
+
     return null;
   },
   routes: [

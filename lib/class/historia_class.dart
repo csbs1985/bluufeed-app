@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/firestore/historia_firebase.dart';
+import 'package:bluufeed_app/firestore/historia_firestore.dart';
 
 ValueNotifier<int> currentQtdHistoria = ValueNotifier<int>(0);
 
@@ -143,5 +143,15 @@ class HistoriaClass {
     // if (_route == RouteEnum.historia.value) return false;
     if (_historia['isComentario']) return true;
     return false;
+  }
+
+  Future<void> pathTodosUsuarioHistoria(String _nomeUsuario) async {
+    final query = _historiaFirestore.pathTodosUsuarioHistoria();
+
+    query.get().then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        doc.reference.update({'nomeUsuario': _nomeUsuario});
+      });
+    });
   }
 }

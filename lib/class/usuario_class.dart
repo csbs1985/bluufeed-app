@@ -282,6 +282,16 @@ class UsuarioClass {
       _isEditado ? HISTORIA_ALTERADA : HISTORIA_PUBLICADA,
     );
   }
+
+  Future<void> pathTodosUsuarioComentario(String _nomeUsuario) async {
+    final query = _usuarioFirestore.pathTodosUsuarioComentario();
+
+    query.get().then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        doc.reference.update({'nomeUsuario': _nomeUsuario});
+      });
+    });
+  }
 }
 
 enum SituacaoUsuarioEnum {

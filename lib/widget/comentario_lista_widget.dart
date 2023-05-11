@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/firestore/comentario_firebase.dart';
+import 'package:bluufeed_app/firestore/comentario_firestore.dart';
 import 'package:bluufeed_app/skeleton/comentario_skeleton.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/comentario_item_widget.dart';

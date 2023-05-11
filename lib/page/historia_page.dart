@@ -1,7 +1,7 @@
 import 'package:bluufeed_app/appbar/opcoes_appbar.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
-import 'package:bluufeed_app/firestore/historia_firebase.dart';
+import 'package:bluufeed_app/firestore/historia_firestore.dart';
 import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
 import 'package:bluufeed_app/text/tag_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';

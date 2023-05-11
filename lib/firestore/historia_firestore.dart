@@ -13,17 +13,15 @@ class HistoriaFirestore {
     return historias.doc(_idHistory).delete();
   }
 
-  getAllHistoryUser() {
-    return historias
-        .orderBy('date')
-        .where('userId', isEqualTo: currentUsuario.value.idUsuario)
-        .get();
+  pathTodosUsuarioHistoria() {
+    return historias.where('idUsuario',
+        isEqualTo: currentUsuario.value.idUsuario);
   }
 
   pathNameUserHistory(String _id) {
     return historias
         .doc(_id)
-        .update({'userName': currentUsuario.value.nomeUsuario});
+        .update({'nomeUsuario': currentUsuario.value.nomeUsuario});
   }
 
   pathQtdComentarioHistoria(Map<String, dynamic> _historia) {
@@ -34,11 +32,11 @@ class HistoriaFirestore {
 
   pathFavorito(Map<String, dynamic> _historia) {
     return historias
-        .doc(_historia['id'])
+        .doc(_historia['idHistoria'])
         .update({'favoritos': _historia['favoritos']});
   }
 
   postHistoria(Map<String, dynamic> _historia) {
-    return historias.doc(_historia['id']).set(_historia);
+    return historias.doc(_historia['idHistoria']).set(_historia);
   }
 }

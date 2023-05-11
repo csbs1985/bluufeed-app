@@ -45,19 +45,21 @@ const String EDITAR_BIOGRAFIA =
     "A biografia é uma breve descrição que apresenta informações relevantes sobre a vida de uma pessoa. Normalmente, escrita em terceira pessoa e pode incluir detalhes sobre sua formação acadêmica, experiências profissionais, interesses e conquistas ao longo da vida.";
 const String EDITAR_ERRO_INDISPONIVEL =
     "nome de usuário informado indisponivél";
-const String EDITAR_ERRO_CARACTERES =
-    "o nome de usuário deve ter entre 6 e 20 caracteres.";
+const String EDITAR_ERRO_BIOGRAFIA = "deve ter até 501 caracteres";
+const String EDITAR_ERRO_CARACTERES = "deve ter entre 6 e 20 caracteres";
+const String EDITAR_ERRO_DATA = "espere até o dia";
 const String EDITAR_ERRO_INVALIDO = "nome de usuário inválido";
 const String EDITAR_ERRO_VAZIO = "informe um nome de usuário";
-const String EDITAR_ERRO_BIOGRAFIA = "a biografia deve ter até 501 caracteres.";
 const String EDITAR_NOME =
-    "Os nomes de usuário devem atender a alguns requisitos: eles só podem conter letras, números, sublinhados e ponto final. Além disso, devem ser exclusivos e ter entre 6 e 20 caracteres.";
+    "Os nomes de usuário devem atender a alguns requisitos: eles só podem conter letras, números, sublinhados e ponto final. Além disso, devem ser exclusivos e ter entre 6 e 20 caracteres. Uma vez alterado só poderá alterar novamente depois de 7 dias.";
+const String EDITAR_SUCESSO = "perfil editado com sucesso";
 
 const String ENTRAR_BEM_VINDO = "Seja bem vindo";
 
 const String ENTROU = "Entrou";
 
 const String ERRO_ENTRAR = "Não foi possível concluir o login";
+const String ERRO_PERFIL_EDITAR = "Não foi possível concluir a edição";
 const String ERRO_POST_COMENTARIO = "ERROR => Erro ao tentar postar hisória: ";
 const String ERRO_POST_HISTORIA = "ERROR => Erro ao tentar postar comentário: ";
 const String ERRO_PUBLICAR_HISTORIA =

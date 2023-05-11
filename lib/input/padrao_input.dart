@@ -1,3 +1,4 @@
+import 'package:bluufeed_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
@@ -36,10 +37,6 @@ class PadraoInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
-
-    String _fieldValue;
-
     return ValueListenableBuilder(
       valueListenable: currentTema,
       builder: (BuildContext context, Brightness tema, _) {
@@ -51,7 +48,6 @@ class PadraoInput extends StatelessWidget {
             controller: controller,
             expands: expands!,
             focusNode: focusNode,
-            key: _formKey,
             keyboardType: keyboardType,
             onChanged: (value) => callback!(value),
             onSaved: onSaved,
@@ -67,6 +63,7 @@ class PadraoInput extends StatelessWidget {
               filled: true,
               fillColor: isDark ? UiCor.bordaEscura : UiCor.borda,
               hintStyle: Theme.of(context).textTheme.bodySmall,
+              errorStyle: UiTexto.erro,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: UiEspaco.medium,
                 vertical: UiEspaco.small,

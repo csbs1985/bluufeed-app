@@ -4,7 +4,7 @@ import 'package:bluufeed_app/button/seguir_button.dart';
 import 'package:bluufeed_app/class/data_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
-import 'package:bluufeed_app/firestore/historia_firebase.dart';
+import 'package:bluufeed_app/firestore/historia_firestore.dart';
 import 'package:bluufeed_app/modal/usuario_modal.dart';
 import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
 import 'package:bluufeed_app/text/fim_conteudo_text.dart';
