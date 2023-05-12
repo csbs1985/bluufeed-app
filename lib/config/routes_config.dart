@@ -6,6 +6,7 @@ import 'package:bluufeed_app/page/editar_perfil_page.dart';
 import 'package:bluufeed_app/page/entrar_page.dart';
 import 'package:bluufeed_app/page/historia_page.dart';
 import 'package:bluufeed_app/page/inicio_page.dart';
+import 'package:bluufeed_app/page/notificacao_page.dart';
 import 'package:bluufeed_app/page/perfil_page.dart';
 import 'package:bluufeed_app/page/seguindo_page.dart';
 import 'package:bluufeed_app/page/sem_conexao_page.dart';
@@ -81,6 +82,15 @@ final GoRouter routes = GoRouter(
         context: context,
         state: state,
         child: MenuPage(idUsuario: state.params['idUsuario']!),
+      ),
+    ),
+    GoRoute(
+      name: 'notificacao',
+      path: '/notificacao/:idUsuario',
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: NotificacaoPage(idUsuario: state.params['idUsuario']!),
       ),
     ),
     GoRoute(

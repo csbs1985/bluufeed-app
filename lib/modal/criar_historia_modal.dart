@@ -9,7 +9,7 @@ import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/selecionar_categoria_widget.dart';
 import 'package:bluufeed_app/widget/toast_widget.dart';
-import 'package:bluufeed_app/widget/toggle_selecionar_widget.dart';
+import 'package:bluufeed_app/button/toggle_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -225,29 +225,27 @@ class _CreatePageState extends State<CriarHistoriaModal> {
                       : [],
                   callback: (value) => _definirCategoria(value),
                 ),
-                const SizedBox(height: UiEspaco.large),
-                ToggleSelecionarWidget(
-                  titulo: ASSINATURA,
+                const SizedBox(height: UiEspaco.small),
+                ToggleButton(
+                  subtitulo: ASSINATURA,
                   resumo:
                       '$ASSINATURA_HABILITAR_1 ${currentUsuario.value.nomeUsuario} $ASSINATURA_HABILITAR_2',
                   value: _isAssinado,
                   callback: (value) => _definirAssinado(),
                 ),
-                const SizedBox(height: UiEspaco.large),
-                ToggleSelecionarWidget(
-                  titulo: COMENTARIOS,
+                ToggleButton(
+                  subtitulo: COMENTARIOS,
                   resumo: COMENTARIOS_HABILITAR,
                   value: _isComentario,
                   callback: (value) => _definirComentario(),
                 ),
-                const SizedBox(height: UiEspaco.large),
-                ToggleSelecionarWidget(
-                  titulo: AUTORIZADO,
+                ToggleButton(
+                  subtitulo: AUTORIZADO,
                   resumo: AUTORIZADO_HABILITAR,
                   value: _isAutorizado,
                   callback: (value) => _definirAutorizado(),
                 ),
-                const SizedBox(height: 80),
+                const SizedBox(height: 96),
               ],
             ),
           ),

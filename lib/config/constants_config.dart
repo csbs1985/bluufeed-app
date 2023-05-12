@@ -100,6 +100,8 @@ const String MENU = "Menu";
 
 const String NOTIFICACAO = "Notificações";
 const String NOTIFICACAO_DESCRICAO = "Monitore e configure as notificações";
+const String NOTIFICACAO_TOGGLE =
+    "Habilitado para receber as notificações e desabilitado para não receber";
 
 const String PERFIL = "Perfil";
 const String PERFIL_DESCRICAO = "Consulte e mantenha seus dados atualizados";

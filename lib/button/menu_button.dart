@@ -2,24 +2,19 @@ import 'package:bluufeed_app/text/subtitulo_reumo_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
-import 'package:bluufeed_app/widget/toggle_widget.dart';
 import 'package:flutter/material.dart';
 
 class MenuButton extends StatefulWidget {
-  final Function callback;
-  final String? subtitulo;
-  final String? resumo;
-  final bool? toogle;
-  final bool? value;
-
   const MenuButton({
     super.key,
     required this.callback,
     this.resumo,
     this.subtitulo,
-    this.toogle = false,
-    this.value = false,
   });
+
+  final Function callback;
+  final String? subtitulo;
+  final String? resumo;
 
   @override
   State<MenuButton> createState() => _MenuButtonState();
@@ -51,12 +46,6 @@ class _MenuButtonState extends State<MenuButton> {
                     resumo: widget.resumo!,
                   ),
                 ),
-                if (widget.toogle!) const SizedBox(width: 16),
-                if (widget.toogle!)
-                  ToggleWidget(
-                    value: widget.value!,
-                    callback: (value) => widget.callback(value),
-                  ),
               ],
             ),
           ),

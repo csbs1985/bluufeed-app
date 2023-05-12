@@ -46,6 +46,12 @@ class UsuarioFirestore {
         .update({'seguindo': _seguindo});
   }
 
+  pathNotificacao() {
+    return usuarios
+        .doc(currentUsuario.value.idUsuario)
+        .update({'isNotificacao': currentUsuario.value.isNotificacao});
+  }
+
   pathPerfil(String nomeUsuario, String biografia, String dataAtualizacaoNome) {
     return usuarios.doc(currentUsuario.value.idUsuario).update({
       'biografia': biografia,
@@ -84,12 +90,6 @@ class UsuarioFirestore {
 
   // pathFallowing(List<dynamic> following) {
   //   return user.doc(currentUsuario.value.id).update({'following': following});
-  // }
-
-  // pathNotification() {
-  //   return user
-  //       .doc(currentUsuario.value.id)
-  //       .update({'isNotification': currentUsuario.value.isNotification});
   // }
 
   // pathDenounce() {

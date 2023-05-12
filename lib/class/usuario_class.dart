@@ -21,7 +21,7 @@ class UsuarioModel {
   late String token;
   late String dataAtualizacaoNome;
   late String situacaoConta;
-  late bool notificacao;
+  late bool isNotificacao;
   late int qtdFavoritos;
   late int qtdComentarios;
   late int qtdDenuncias;
@@ -39,7 +39,7 @@ class UsuarioModel {
     required this.situacaoConta,
     required this.token,
     required this.dataAtualizacaoNome,
-    required this.notificacao,
+    required this.isNotificacao,
     required this.qtdFavoritos,
     required this.qtdComentarios,
     required this.qtdDenuncias,
@@ -58,7 +58,7 @@ class UsuarioModel {
         'token': usuario['token'],
         'dataAtualizacaoNome': usuario['dataAtualizacaoNome'],
         'situacaoConta': usuario['situacaoConta'],
-        'notificacao': usuario['notificacao'],
+        'isNotificacao': usuario['isNotificacao'],
         'qtdFavoritos': usuario['qtdFavoritos'],
         'qtdComentarios': usuario['qtdComentarios'],
         'qtdDenuncias': usuario['qtdDenuncias'],
@@ -79,7 +79,7 @@ ValueNotifier<UsuarioModel> currentUsuario =
   situacaoConta: '',
   token: '',
   dataAtualizacaoNome: '',
-  notificacao: false,
+  isNotificacao: false,
   qtdFavoritos: 0,
   qtdComentarios: 0,
   qtdDenuncias: 0,
@@ -138,7 +138,7 @@ class UsuarioClass {
         'situacaoConta': SituacaoUsuarioEnum.ATIVO.value,
         'token': doc.docs.first['token'],
         'dataAtualizacaoNome': doc.docs.first['dataAtualizacaoNome'],
-        'notificacao': doc.docs.first['notificacao'],
+        'isNotificacao': doc.docs.first['isNotificacao'],
         'qtdFavoritos': doc.docs.first['qtdFavoritos'],
         'qtdComentarios': doc.docs.first['qtdComentarios'],
         'qtdDenuncias': doc.docs.first['qtdDenuncias'],
@@ -157,7 +157,7 @@ class UsuarioClass {
         'situacaoConta': SituacaoUsuarioEnum.CRIANDO.value,
         'token': await _tokenClass.pegarToken(),
         'dataAtualizacaoNome': '',
-        'notificacao': true,
+        'isNotificacao': true,
         'qtdFavoritos': 0,
         'qtdComentarios': 0,
         'qtdDenuncias': 0,
@@ -181,7 +181,7 @@ class UsuarioClass {
       situacaoConta: SituacaoUsuarioEnum.ATIVO.value,
       token: _usuarioMap['token'],
       dataAtualizacaoNome: _usuarioMap['dataAtualizacaoNome'],
-      notificacao: _usuarioMap['notificacao'],
+      isNotificacao: _usuarioMap['isNotificacao'],
       qtdFavoritos: _usuarioMap['qtdFavoritos'],
       qtdComentarios: _usuarioMap['qtdComentarios'],
       qtdDenuncias: _usuarioMap['qtdDenuncias'],
@@ -225,7 +225,7 @@ class UsuarioClass {
       situacaoConta: '',
       token: '',
       dataAtualizacaoNome: '',
-      notificacao: false,
+      isNotificacao: true,
       qtdFavoritos: 0,
       qtdComentarios: 0,
       qtdDenuncias: 0,
@@ -291,6 +291,11 @@ class UsuarioClass {
         doc.reference.update({'nomeUsuario': _nomeUsuario});
       });
     });
+  }
+
+  pathNotificacao(bool _isNotificacao) {
+    currentUsuario.value.isNotificacao = _isNotificacao;
+    _usuarioFirestore.pathNotificacao();
   }
 }
 

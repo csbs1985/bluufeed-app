@@ -42,7 +42,8 @@ class _PerfilPageState extends State<MenuPage> {
               ),
               const SizedBox(height: 8),
               MenuButton(
-                callback: () => {},
+                callback: () => context.pushNamed('notificacao',
+                    params: {'idUsuario': widget._idUsuario}),
                 subtitulo: NOTIFICACAO,
                 resumo: NOTIFICACAO_DESCRICAO,
               ),
@@ -94,7 +95,7 @@ class _PerfilPageState extends State<MenuPage> {
                 subtitulo: DELETAR,
                 resumo: DELETAR_DESCRICAO,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
             ],
           ),
         ),
