@@ -9,6 +9,7 @@ import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HistoriaListaWidget extends StatefulWidget {
   const HistoriaListaWidget({super.key});
@@ -19,6 +20,8 @@ class HistoriaListaWidget extends StatefulWidget {
 
 class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
   final HistoriaClass _historiaClass = HistoriaClass();
+
+  int index = 1;
 
   @override
   void initState() {
@@ -46,9 +49,20 @@ class _HistoriaListaWidgetState extends State<HistoriaListaWidget> {
               errorBuilder: (context, error, _) =>
                   ErroResultadoWidget(altura: _altura),
               emptyBuilder: (context) => SemResultadoWidget(altura: _altura),
-              itemBuilder: (BuildContext context,
-                  QueryDocumentSnapshot<dynamic> snapshot) {
-                return HistoriaItemWidget(snapshot: snapshot.data());
+              itemBuilder: (
+                BuildContext context,
+                QueryDocumentSnapshot<dynamic> snapshot,
+              ) {
+                return AnimationConfiguration.staggeredList(
+                  position: index++,
+                  duration: const Duration(milliseconds: 375),
+                  child: SlideAnimation(
+                    verticalOffset: 50,
+                    child: FadeInAnimation(
+                      child: HistoriaItemWidget(snapshot: snapshot.data()),
+                    ),
+                  ),
+                );
               },
             ),
             const FimConteudoText(),

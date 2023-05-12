@@ -14,7 +14,7 @@ class NotificacaoFirestore {
     return notificacao.doc(idNotificacao).update({'isVisualizado': true});
   }
 
-  postNotification(Map<String, dynamic> _notificacao) {
+  postNotificacao(Map<String, dynamic> _notificacao) {
     return notificacao.doc(_notificacao['idNotificacao']).set(_notificacao);
   }
 }

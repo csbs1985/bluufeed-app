@@ -1,4 +1,5 @@
 import 'package:bluufeed_app/appbar/opcoes_appbar.dart';
+import 'package:bluufeed_app/class/notificacao_class.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/notificacao_firestore.dart';
 import 'package:bluufeed_app/modal/notificacao_modal.dart';
@@ -12,6 +13,7 @@ import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class NotificacaoPage extends StatefulWidget {
   const NotificacaoPage({
@@ -27,6 +29,14 @@ class NotificacaoPage extends StatefulWidget {
 
 class _NotificacaoPageState extends State<NotificacaoPage> {
   final NotificacaoFirestore _notificacaoFirestore = NotificacaoFirestore();
+
+  int index = 1;
+
+  @override
+  void initState() {
+    currentNotificacao.value = false;
+    super.initState();
+  }
 
   void _abrirModal(BuildContext context) {
     showModalBottomSheet(
@@ -68,11 +78,20 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
                 BuildContext context,
                 QueryDocumentSnapshot<dynamic> snapshot,
               ) {
-                return Column(
-                  children: [
-                    NotificacaoItemWidget(notificacao: snapshot.data()),
-                    const SizedBox(height: 4),
-                  ],
+                return AnimationConfiguration.staggeredList(
+                  position: index++,
+                  duration: const Duration(milliseconds: 100),
+                  child: SlideAnimation(
+                    verticalOffset: 50,
+                    child: FadeInAnimation(
+                      child: Column(
+                        children: [
+                          NotificacaoItemWidget(notificacao: snapshot.data()),
+                          const SizedBox(height: 4),
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             ),

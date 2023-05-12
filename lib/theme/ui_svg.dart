@@ -20,7 +20,6 @@ class UiSvg {
   static const String logo = 'assets/icon/logo.svg';
   static const String mais = 'assets/icon/mais.svg';
   static const String notificacao = 'assets/icon/notificacao.svg';
-  static const String notificacaoAtivo = 'assets/icon/notificacao_ativo.svg';
   static const String opcoes = 'assets/icon/opcoes.svg';
   static const String principalAtivo = 'assets/icon/principal_ativo.svg';
 }

@@ -34,51 +34,51 @@ class _NotificacaoItemWidgetState extends State<NotificacaoItemWidget> {
     return InkWell(
       onTap: () => pathVizualizarNotificacao(),
       child: ValueListenableBuilder(
-          valueListenable: currentTema,
-          builder: (BuildContext context, Brightness tema, _) {
-            bool isDark = tema == Brightness.dark;
+        valueListenable: currentTema,
+        builder: (BuildContext context, Brightness tema, _) {
+          bool isDark = tema == Brightness.dark;
 
-            return Container(
-              color: _notificacaoClass.definirCor(
-                  isDark, widget._notificacao['isVisualizado']),
-              padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    child: AvatarWidget(
-                        avatar: widget._notificacao['avatarUsuario']),
-                    onTap: () => context.pushNamed('perfil', params: {
-                      'idUsuario': widget._notificacao['idRementente']
-                    }),
+          return Container(
+            color: _notificacaoClass.definirCor(
+                isDark, widget._notificacao['isVisualizado']),
+            padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  child: AvatarWidget(
+                      avatar: widget._notificacao['avatarUsuario']),
+                  onTap: () => context.pushNamed('perfil', params: {
+                    'idUsuario': widget._notificacao['idRementente']
+                  }),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      StyledText(
+                        text: _notificacaoClass
+                            .definirConteudo(widget._notificacao),
+                        style: Theme.of(context).textTheme.displayMedium,
+                        softWrap: true,
+                        overflow: TextOverflow.clip,
+                        tags: {
+                          'bold': StyledTextTag(
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        },
+                      ),
+                      DataText(item: widget._notificacao),
+                    ],
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        StyledText(
-                          text: _notificacaoClass
-                              .definirConteudo(widget._notificacao),
-                          style: Theme.of(context).textTheme.displayMedium,
-                          softWrap: true,
-                          overflow: TextOverflow.clip,
-                          tags: {
-                            'bold': StyledTextTag(
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          },
-                        ),
-                        DataText(item: widget._notificacao),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
