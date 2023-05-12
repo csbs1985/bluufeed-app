@@ -6,8 +6,8 @@ import 'package:bluufeed_app/skeleton/notificacao_item_skeleton.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/widget/comentario_item_widget.dart';
 import 'package:bluufeed_app/widget/erro_resultado_widget.dart';
+import 'package:bluufeed_app/widget/notificacao_item_widget.dart';
 import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
@@ -45,12 +45,14 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
     return Scaffold(
       appBar: OpcoesAppbar(callback: () => _abrirModal(context)),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TituloText(title: NOTIFICACAO),
-            const SizedBox(height: 24),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+              child: TituloText(title: NOTIFICACAO),
+            ),
+            const SizedBox(height: 8),
             FirestoreListView(
               query: _notificacaoFirestore
                   .getAllNotificacaoUser(widget._idUsuario),
@@ -60,13 +62,18 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
               physics: const NeverScrollableScrollPhysics(),
               loadingBuilder: (context) => const NotificacaoItemSkeleton(),
               errorBuilder: (context, error, _) =>
-                  const NotificacaoItemSkeleton(),
-              emptyBuilder: (context) => const NotificacaoItemSkeleton(),
+                  ErroResultadoWidget(altura: _altura),
+              emptyBuilder: (context) => SemResultadoWidget(altura: _altura),
               itemBuilder: (
                 BuildContext context,
                 QueryDocumentSnapshot<dynamic> snapshot,
               ) {
-                return const NotificacaoItemSkeleton();
+                return Column(
+                  children: [
+                    NotificacaoItemWidget(notificacao: snapshot.data()),
+                    const SizedBox(height: 4),
+                  ],
+                );
               },
             ),
           ],

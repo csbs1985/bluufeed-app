@@ -10,7 +10,7 @@ class NotificacaoFirestore {
         .where('idDestinatario', isEqualTo: _idUsuario);
   }
 
-  pathNotificationView(String idNotificacao) {
+  pathVizualizarNotificacao(String idNotificacao) {
     return notificacao.doc(idNotificacao).update({'isVisualizado': true});
   }
 

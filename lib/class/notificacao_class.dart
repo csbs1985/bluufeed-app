@@ -1,3 +1,7 @@
+import 'package:bluufeed_app/firestore/notificacao_firestore.dart';
+import 'package:bluufeed_app/theme/ui_cor.dart';
+import 'package:flutter/material.dart';
+
 class NotificacaoModel {
   late bool isVisualizado;
   late String avatarRemetente;
@@ -22,4 +26,31 @@ class NotificacaoModel {
     required this.tipoNotificacao,
     required this.idDestinatario,
   });
+}
+
+class NotificacaoClass {
+  final NotificacaoFirestore _notificacaoFirestore = NotificacaoFirestore();
+
+  String definirConteudo(Map<String, dynamic> _notificacao) {
+    return _notificacao['tipoNotificacao'] == NotificacaoEnum.COMMENT.value
+        ? '<bold>${_notificacao['nomeRemetente']}</bold> fez um comentou na história <bold>${_notificacao['conteudo']}.</bold>'
+        : '<bold>${_notificacao['nomeRemetente']}</bold> compartilhou a história <bold>${_notificacao['conteudo']}</bold> com você.';
+  }
+
+  Color definirCor(bool tema, bool _isVisualizado) {
+    if (_isVisualizado) return tema ? UiCor.mainEscuro : UiCor.main;
+    return tema ? UiCor.elementoEscura : UiCor.elemento;
+  }
+
+  Future<void> pathVizualizarNotificacao(String _idNotificacao) async {
+    await _notificacaoFirestore.pathVizualizarNotificacao(_idNotificacao);
+  }
+}
+
+enum NotificacaoEnum {
+  COMMENT('comment'),
+  SEND('send');
+
+  final String value;
+  const NotificacaoEnum(this.value);
 }

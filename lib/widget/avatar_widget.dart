@@ -6,7 +6,7 @@ class AvatarWidget extends StatefulWidget {
   const AvatarWidget({
     super.key,
     String? avatar,
-    double? size = 24,
+    double? size = 20,
   })  : _avatar = avatar,
         _size = size;
 
