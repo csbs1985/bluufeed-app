@@ -5,8 +5,8 @@ import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:skeleton_animation/skeleton_animation.dart';
 
-class SeguindoSkeleton extends StatelessWidget {
-  const SeguindoSkeleton({Key? key}) : super(key: key);
+class UsuarioItemSkeleton extends StatelessWidget {
+  const UsuarioItemSkeleton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

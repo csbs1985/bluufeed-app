@@ -5,7 +5,7 @@ import 'package:bluufeed_app/config/algolia_config.dart';
 import 'package:bluufeed_app/config/constants_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/input/padrao_input.dart';
-import 'package:bluufeed_app/skeleton/seguindo_skeleton.dart';
+import 'package:bluufeed_app/skeleton/usuario_item_skeleton.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/erro_resultado_widget.dart';
@@ -106,7 +106,7 @@ class _SeguindoPageState extends State<SeguindoPage> {
               shrinkWrap: true,
               reverse: true,
               physics: const NeverScrollableScrollPhysics(),
-              loadingBuilder: (context) => const SeguindoSkeleton(),
+              loadingBuilder: (context) => const UsuarioItemSkeleton(),
               errorBuilder: (context, error, _) =>
                   ErroResultadoWidget(altura: _altura),
               emptyBuilder: (context) => SemResultadoWidget(altura: _altura),

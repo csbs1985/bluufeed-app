@@ -4,6 +4,12 @@ class NotificacaoFirestore {
   CollectionReference notificacao =
       FirebaseFirestore.instance.collection('notificacao');
 
+  getAllNotificacaoUser(String _idUsuario) {
+    return notificacao
+        .orderBy('dataNotificacao')
+        .where('idDestinatario', isEqualTo: _idUsuario);
+  }
+
   pathNotificationView(String idNotificacao) {
     return notificacao.doc(idNotificacao).update({'isVisualizado': true});
   }
