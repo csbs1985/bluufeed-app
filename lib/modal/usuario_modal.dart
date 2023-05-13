@@ -1,6 +1,7 @@
 import 'package:bluufeed_app/button/modal_button.dart';
+import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
@@ -40,7 +41,7 @@ class _UsuarioModalState extends State<UsuarioModal> {
 
   editarPerfil(BuildContext context) {
     Navigator.of(context).pop();
-    context.pushNamed('editar_perfil',
+    context.pushNamed(RouteEnum.EDITAR_PERFIL.value,
         params: {'idUsuario': widget._usuario['idUsuario']});
   }
 

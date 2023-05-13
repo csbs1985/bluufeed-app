@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_imagem.dart';
 import 'package:flutter/material.dart';

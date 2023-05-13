@@ -1,7 +1,7 @@
 import 'package:bluufeed_app/class/comentario_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/input/comentario_input_dart.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';

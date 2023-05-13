@@ -23,12 +23,18 @@ CustomTransitionPage transicaoPaginas<T>({
 
 enum RouteEnum {
   BUSCAR('/buscar'),
-  EDITAR_PERFIL('/editar_perfil'),
+  EDITAR_PERFIL('editar_perfil'),
   ENTRAR('/entrar'),
   INICIO('/inicio'),
-  HISTORIA('/historia'),
-  PERFIL('/perfil'),
-  SEM_CONEXAO('/sem_conexao');
+  HISTORIA('historia'),
+  MENU('menu'),
+  NOTIFICACAO('notificacao'),
+  PERFIL('perfil'),
+  POLITICA('/politica'),
+  SEGUINDO('seguindo'),
+  SEM_CONEXAO('/sem_conexao'),
+  SOBRE('/sobre'),
+  TERMO('/termo');
 
   final String value;
   const RouteEnum(this.value);

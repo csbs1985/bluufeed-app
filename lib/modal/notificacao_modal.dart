@@ -1,6 +1,6 @@
 import 'package:bluufeed_app/button/toggle_button.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
@@ -47,7 +47,7 @@ class _NotificacaoModalState extends State<NotificacaoModal> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                    child: TituloText(title: NOTIFICACAO),
+                    child: TituloText(titulo: NOTIFICACAO),
                   ),
                   ToggleButton(
                     callback: (value) => _definirNotificacao(),

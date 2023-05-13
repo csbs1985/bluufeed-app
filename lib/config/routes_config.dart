@@ -8,8 +8,11 @@ import 'package:bluufeed_app/page/historia_page.dart';
 import 'package:bluufeed_app/page/inicio_page.dart';
 import 'package:bluufeed_app/page/notificacao_page.dart';
 import 'package:bluufeed_app/page/perfil_page.dart';
+import 'package:bluufeed_app/page/politica_page.dart';
 import 'package:bluufeed_app/page/seguindo_page.dart';
 import 'package:bluufeed_app/page/sem_conexao_page.dart';
+import 'package:bluufeed_app/page/sobre_page.dart';
+import 'package:bluufeed_app/page/termo_page.dart';
 import 'package:go_router/go_router.dart';
 
 final AuthConfig _authConfig = AuthConfig();
@@ -42,7 +45,7 @@ final GoRouter routes = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'editar_perfil',
+      name: RouteEnum.EDITAR_PERFIL.value,
       path: '/editar_perfil/:idUsuario',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
@@ -67,7 +70,7 @@ final GoRouter routes = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'historia',
+      name: RouteEnum.HISTORIA.value,
       path: '/historia/:idHistoria',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
@@ -76,7 +79,7 @@ final GoRouter routes = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'menu',
+      name: RouteEnum.MENU.value,
       path: '/menu/:idUsuario',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
@@ -85,7 +88,7 @@ final GoRouter routes = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'notificacao',
+      name: RouteEnum.NOTIFICACAO.value,
       path: '/notificacao/:idUsuario',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
@@ -94,7 +97,7 @@ final GoRouter routes = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'perfil',
+      name: RouteEnum.PERFIL.value,
       path: '/perfil/:idUsuario',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
@@ -103,7 +106,15 @@ final GoRouter routes = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'seguindo',
+      path: RouteEnum.POLITICA.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const PoliticaPage(),
+      ),
+    ),
+    GoRoute(
+      name: RouteEnum.SEGUINDO.value,
       path: '/seguindo/:idUsuario',
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
@@ -117,6 +128,22 @@ final GoRouter routes = GoRouter(
         context: context,
         state: state,
         child: const SemConexaoPage(),
+      ),
+    ),
+    GoRoute(
+      path: RouteEnum.SOBRE.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const SobrePage(),
+      ),
+    ),
+    GoRoute(
+      path: RouteEnum.TERMO.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const TermoPage(),
       ),
     ),
   ],

@@ -1,6 +1,5 @@
 import 'package:bluufeed_app/appbar/opcoes_appbar.dart';
-import 'package:bluufeed_app/class/notificacao_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/notificacao_firestore.dart';
 import 'package:bluufeed_app/modal/notificacao_modal.dart';
 import 'package:bluufeed_app/skeleton/notificacao_item_skeleton.dart';
@@ -32,12 +31,6 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
 
   int index = 1;
 
-  @override
-  void initState() {
-    currentNotificacao.value = false;
-    super.initState();
-  }
-
   void _abrirModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -60,7 +53,7 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-              child: TituloText(title: NOTIFICACAO),
+              child: TituloText(titulo: NOTIFICACAO),
             ),
             const SizedBox(height: 8),
             FirestoreListView(

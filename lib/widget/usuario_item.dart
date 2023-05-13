@@ -1,5 +1,6 @@
 import 'package:bluufeed_app/button/icone_button.dart';
 import 'package:bluufeed_app/button/seguir_button.dart';
+import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/modal/usuario_modal.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
@@ -34,7 +35,7 @@ class _UsuarioItemWidgetState extends State<UsuarioItemWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed('perfil',
+      onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
           params: {'idUsuario': widget._usuario['idUsuario']}),
       child: Container(
         height: UiTamanho.appbar,

@@ -1,5 +1,5 @@
 import 'package:bluufeed_app/class/atividade_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/comentario_firestore.dart';
 import 'package:bluufeed_app/firestore/historia_firestore.dart';
 import 'package:bluufeed_app/widget/toast_widget.dart';

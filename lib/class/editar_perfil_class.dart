@@ -1,7 +1,7 @@
 import 'package:bluufeed_app/class/atividade_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/widget/toast_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -2,7 +2,7 @@ import 'package:algolia/algolia.dart';
 import 'package:bluufeed_app/appbar/voltar_appbar.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/algolia_config.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/input/padrao_input.dart';
 import 'package:bluufeed_app/skeleton/usuario_item_skeleton.dart';

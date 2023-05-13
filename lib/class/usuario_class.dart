@@ -1,7 +1,7 @@
 import 'package:algolia/algolia.dart';
 import 'package:bluufeed_app/class/atividade_class.dart';
 import 'package:bluufeed_app/class/token_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/hive/usuario_hive.dart';
 import 'package:bluufeed_app/widget/toast_widget.dart';

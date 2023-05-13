@@ -3,7 +3,7 @@ import 'package:bluufeed_app/button/seguindo_button.dart';
 import 'package:bluufeed_app/button/seguir_button.dart';
 import 'package:bluufeed_app/class/data_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/historia_firestore.dart';
 import 'package:bluufeed_app/modal/usuario_modal.dart';
 import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
@@ -94,7 +94,7 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                       _marginPequena,
                       if (isUsuario!)
                         TituloText(
-                          title: widget._usuario['nomeUsuario'],
+                          titulo: widget._usuario['nomeUsuario'],
                         ),
                       TextoText(
                         texto: widget._usuario['email'],

@@ -1,6 +1,6 @@
 import 'package:bluufeed_app/appbar/voltar_appbar.dart';
 import 'package:bluufeed_app/class/editar_perfil_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/input/padrao_input.dart';
 import 'package:bluufeed_app/text/legenda_text.dart';
@@ -91,7 +91,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TituloText(title: EDITAR),
+                        TituloText(titulo: EDITAR),
                         const SizedBox(height: 24),
                         const SubtituloText(subtitulo: USUARIO_NOME),
                         const Padding(

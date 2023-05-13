@@ -28,8 +28,6 @@ class NotificacaoModel {
   });
 }
 
-ValueNotifier<bool> currentNotificacao = ValueNotifier<bool>(false);
-
 class NotificacaoClass {
   final NotificacaoFirestore _notificacaoFirestore = NotificacaoFirestore();
 

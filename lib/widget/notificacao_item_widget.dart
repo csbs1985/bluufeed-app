@@ -1,4 +1,5 @@
 import 'package:bluufeed_app/class/notificacao_class.dart';
+import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/text/data_text.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
@@ -25,7 +26,7 @@ class _NotificacaoItemWidgetState extends State<NotificacaoItemWidget> {
     _notificacaoClass
         .pathVizualizarNotificacao(widget._notificacao['idNotificacao']);
 
-    context.pushNamed('historia',
+    context.pushNamed(RouteEnum.HISTORIA.value,
         params: {'idHistoria': widget._notificacao['idConteudo']});
   }
 
@@ -48,9 +49,10 @@ class _NotificacaoItemWidgetState extends State<NotificacaoItemWidget> {
                 GestureDetector(
                   child: AvatarWidget(
                       avatar: widget._notificacao['avatarUsuario']),
-                  onTap: () => context.pushNamed('perfil', params: {
-                    'idUsuario': widget._notificacao['idRementente']
-                  }),
+                  onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
+                      params: {
+                        'idUsuario': widget._notificacao['idRementente']
+                      }),
                 ),
                 const SizedBox(width: 8),
                 Expanded(

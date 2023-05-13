@@ -1,6 +1,7 @@
 import 'package:bluufeed_app/appbar/voltar_appbar.dart';
 import 'package:bluufeed_app/button/menu_button.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/class/rotas_class.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
 import 'package:flutter/material.dart';
@@ -29,20 +30,20 @@ class _PerfilPageState extends State<MenuPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TituloText(title: MENU),
+              TituloText(titulo: MENU),
               const Padding(
                 padding: EdgeInsets.fromLTRB(0, 24, 0, 16),
                 child: TextoText(texto: CONTA),
               ),
               MenuButton(
-                callback: () => context.pushNamed('perfil',
+                callback: () => context.pushNamed(RouteEnum.PERFIL.value,
                     params: {'idUsuario': widget._idUsuario}),
                 subtitulo: PERFIL,
                 resumo: PERFIL_DESCRICAO,
               ),
               const SizedBox(height: 8),
               MenuButton(
-                callback: () => context.pushNamed('notificacao',
+                callback: () => context.pushNamed(RouteEnum.NOTIFICACAO.value,
                     params: {'idUsuario': widget._idUsuario}),
                 subtitulo: NOTIFICACAO,
                 resumo: NOTIFICACAO_DESCRICAO,
@@ -64,19 +65,19 @@ class _PerfilPageState extends State<MenuPage> {
               ),
               const SizedBox(height: 8),
               MenuButton(
-                callback: () => {},
+                callback: () => context.push(RouteEnum.TERMO.value),
                 subtitulo: TERMO,
                 resumo: TERMO_DESCRICAO,
               ),
               const SizedBox(height: 8),
               MenuButton(
-                callback: () => {},
+                callback: () => context.push(RouteEnum.POLITICA.value),
                 subtitulo: POLITICA,
                 resumo: POLITICA_DESCRICAO,
               ),
               const SizedBox(height: 8),
               MenuButton(
-                callback: () => {},
+                callback: () => context.push(RouteEnum.SOBRE.value),
                 subtitulo: SOBRE,
                 resumo: SOBRE_DESCRICAO,
               ),

@@ -1,6 +1,7 @@
 import 'package:bluufeed_app/class/historia_class.dart';
+import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/modal/criar_historia_modal.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
@@ -37,7 +38,7 @@ class HistoriaCriarButton extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.pushNamed('perfil',
+            onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
                 params: {'idUsuario': currentUsuario.value.idUsuario}),
             child: const AvatarWidget(size: 18),
           ),

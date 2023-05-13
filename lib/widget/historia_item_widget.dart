@@ -1,4 +1,5 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
+import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/text/ellipsis_text%20.dart';
 import 'package:bluufeed_app/widget/info_widget.dart';
 import 'package:bluufeed_app/text/tag_text.dart';
@@ -26,7 +27,7 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed('historia',
+      onTap: () => context.pushNamed(RouteEnum.HISTORIA.value,
           params: {'idHistoria': widget._item['idHistoria']}),
       child: Column(
         children: [
@@ -37,7 +38,7 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                TituloText(title: widget._item['titulo']),
+                TituloText(titulo: widget._item['titulo']),
                 InfoWidget(
                   tipo: InfoEnum.INICIO.name,
                   item: widget._item,

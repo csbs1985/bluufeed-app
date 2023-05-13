@@ -1,5 +1,6 @@
+import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/class/seguindo_class.dart';
-import 'package:bluufeed_app/config/constants_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
@@ -31,7 +32,7 @@ class _SeguindoButtonState extends State<SeguindoButton> {
         : widget._usuario['seguindo'].length;
 
     return InkWell(
-      onTap: () => context.pushNamed('seguindo',
+      onTap: () => context.pushNamed(RouteEnum.SEGUINDO.value,
           params: {'idUsuario': widget._usuario['idUsuario']}),
       child: Container(
         padding: const EdgeInsets.all(16),

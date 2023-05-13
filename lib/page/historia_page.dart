@@ -64,7 +64,7 @@ class _HistoriaPageState extends State<HistoriaPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TituloText(title: _historia['titulo']),
+                            TituloText(titulo: _historia['titulo']),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               child: TextoText(texto: _historia['texto']),
