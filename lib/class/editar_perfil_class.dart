@@ -67,9 +67,9 @@ class EditarPerfilClass {
       await _historiaClass.pathTodosUsuarioHistoria(_nomeUsuario);
       await _usuarioClass.pathTodosUsuarioComentario(_idUsuario);
       await _atividadeClass.postAtividade(
-        type: AtividadeEnum.UP_PERFIL.value,
-        content: _nomeUsuario,
-        elementId: _idUsuario,
+        tipoAtividade: AtividadeEnum.UP_PERFIL.value,
+        conteudo: _nomeUsuario,
+        idConteudo: _idUsuario,
       );
       _toastWidget.toast(context, ToastEnum.SUCESSO, EDITAR_SUCESSO);
     } on FirebaseAuthException {

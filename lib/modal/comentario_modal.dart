@@ -36,7 +36,7 @@ class _ComentarioModalState extends State<ComentarioModal> {
         'avatarUsuario': currentUsuario.value.avatarUsuario,
         'idUsuario': currentUsuario.value.idUsuario,
         'nomeUsuario': currentUsuario.value.nomeUsuario,
-        'dataCriacao': DateTime.now().toString(),
+        'dataRegistro': DateTime.now().toString(),
         'idHistoria': widget._historia['idHistoria'],
         'idComentario': uuid.v4(),
         'isEditado': false,

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class ComentarioModel {
   late String avatarUsuario;
-  late String dataCriacao;
+  late String dataRegistro;
   late String idComentario;
   late String idHistoria;
   late String idUsuario;
@@ -19,7 +19,7 @@ class ComentarioModel {
 
   ComentarioModel({
     required this.avatarUsuario,
-    required this.dataCriacao,
+    required this.dataRegistro,
     required this.idComentario,
     required this.idHistoria,
     required this.idUsuario,
@@ -54,9 +54,9 @@ class ComentarioClass {
     await _comentarioFirestore.postComentario(_comentario);
     pathQtdComentarioHistoria(_historia);
     _atividadeClass.postAtividade(
-      type: AtividadeEnum.NEW_COMMENT.value,
-      content: _comentario['texto'],
-      elementId: _historia['idHistoria'],
+      tipoAtividade: AtividadeEnum.NEW_COMMENT.value,
+      conteudo: _comentario['texto'],
+      idConteudo: _historia['idHistoria'],
     );
     _toastWidget.toast(context, ToastEnum.SUCESSO, COMENTARIO_PUBLICADO);
   }

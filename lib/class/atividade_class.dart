@@ -1,10 +1,12 @@
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/firestore/atividade_firestore.dart';
+import 'package:bluufeed_app/firestore/usuario_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 
 class AtividadeModel {
   late String conteudo;
-  late String dataAtividade;
+  late String dataRegistro;
   late String idAtividade;
   late String idConteudo;
   late String idUsuario;
@@ -13,7 +15,7 @@ class AtividadeModel {
 
   AtividadeModel({
     required this.conteudo,
-    required this.dataAtividade,
+    required this.dataRegistro,
     required this.idAtividade,
     required this.idConteudo,
     required this.idUsuario,
@@ -48,20 +50,34 @@ enum AtividadeEnum {
 
 class AtividadeClass {
   final AtividadeFirestore _atividadeFirestore = AtividadeFirestore();
+  final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
   final Uuid uuid = const Uuid();
 
-  postAtividade(
-      {required String type, String? content, String? elementId}) async {
+  postAtividade({
+    required String tipoAtividade,
+    required String conteudo,
+    required String idConteudo,
+  }) async {
     Map<String, dynamic> _atividade = {
-      'conteudo': content?.trim() ?? '',
-      'dataAtividade': DateTime.now().toString(),
-      'idConteudo': elementId ?? '',
+      'conteudo': conteudo.trim(),
+      'dataRegistro': DateTime.now().toString(),
+      'idConteudo': idConteudo,
       'idAtividade': uuid.v4(),
-      'tipoAtividade': type,
+      'tipoAtividade': tipoAtividade,
       'idUsuario': currentUsuario.value.idUsuario,
-      'avatarUsuario': currentUsuario.value.avatarUsuario,
     };
 
     await _atividadeFirestore.postAtividade(_atividade);
+  }
+
+  Future<String> formatarAtividade(Map<String, dynamic> _atividade) async {
+    QuerySnapshot _usuario =
+        await _usuarioFirestore.getUsuarioId(_atividade['idUsuario']);
+
+    String _tipo = _atividade['tipoAtividade'];
+
+    if (_tipo == AtividadeEnum.BLOCK_USER.value)
+      return '<bold>${_usuario.docs.first['nomeUsuario']}</bold>';
+    return 'Avividade';
   }
 }

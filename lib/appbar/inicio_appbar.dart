@@ -28,7 +28,7 @@ class _InicioAppbarState extends State<InicioAppbar> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _notificacaoFirestore.notificacao.snapshots(),
+      stream: _notificacaoFirestore.notificacoes.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>? snapshot) {
         return Container(
           height: UiTamanho.appbar,

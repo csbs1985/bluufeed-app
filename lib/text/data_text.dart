@@ -17,9 +17,8 @@ class DataText extends StatelessWidget {
     return Wrap(
       children: [
         LegendaText(
-            legenda: _dataClass.dataFormatar(_item['dataCriacao'] ??
-                _item['dataRegistro'] ??
-                _item['dataNotificacao'])),
+          legenda: _dataClass.dataFormatar(_item['dataRegistro']),
+        ),
       ],
     );
   }

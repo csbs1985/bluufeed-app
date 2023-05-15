@@ -1,5 +1,6 @@
 import 'package:bluufeed_app/config/auth_config.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
+import 'package:bluufeed_app/page/atividade_page.dart';
 import 'package:bluufeed_app/page/menu_page.dart';
 import 'package:bluufeed_app/page/busca_page.dart';
 import 'package:bluufeed_app/page/editar_perfil_page.dart';
@@ -36,6 +37,15 @@ final GoRouter routes = GoRouter(
     return null;
   },
   routes: [
+    GoRoute(
+      name: RouteEnum.ATIVIDADE.value,
+      path: '/atividade/:idUsuario',
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: AtividadePage(idUsuario: state.params['idUsuario']!),
+      ),
+    ),
     GoRoute(
       path: RouteEnum.BUSCAR.value,
       pageBuilder: (context, state) => transicaoPaginas(

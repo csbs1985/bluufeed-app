@@ -6,7 +6,7 @@ class ComentarioFirestore {
 
   getAllComentariosHistoria(String _idHistoria) {
     return comentarios
-        .orderBy('dataCriacao')
+        .orderBy('dataRegistro')
         .where('idHistoria', isEqualTo: _idHistoria);
   }
 

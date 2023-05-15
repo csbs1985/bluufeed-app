@@ -10,7 +10,7 @@ ValueNotifier<HistoriaModel> currentHistoria =
   idHistoria: '',
   titulo: '',
   texto: '',
-  dataCriacao: '',
+  dataRegistro: '',
   idUsuario: '',
   nomeUsuario: '',
   avatarUsuario: '',
@@ -27,7 +27,7 @@ class HistoriaModel {
   late String idHistoria;
   late String titulo;
   late String texto;
-  late String dataCriacao;
+  late String dataRegistro;
   late String idUsuario;
   late String nomeUsuario;
   late String avatarUsuario;
@@ -43,7 +43,7 @@ class HistoriaModel {
     required this.idHistoria,
     required this.titulo,
     required this.texto,
-    required this.dataCriacao,
+    required this.dataRegistro,
     required this.idUsuario,
     required this.nomeUsuario,
     required this.avatarUsuario,
@@ -60,7 +60,7 @@ class HistoriaModel {
         'idHistoria': historia['idHistoria'],
         'titulo': historia['titulo'],
         'texto': historia['texto'],
-        'dataCriacao': historia['dataCriacao'],
+        'dataRegistro': historia['dataRegistro'],
         'isComentario': historia['isComentario'],
         'isAnonimo': historia['isAnonimo'],
         'isEditado': historia['isEditado'],
@@ -78,7 +78,7 @@ class HistoriaModel {
       idHistoria: map['idHistoria'],
       titulo: map['titulo'],
       texto: map['texto'],
-      dataCriacao: map['dataCriacao'],
+      dataRegistro: map['dataRegistro'],
       idUsuario: map['idUsuario'],
       nomeUsuario: map['nomeUsuario'],
       avatarUsuario: map['avatarUsuario'],
@@ -101,7 +101,7 @@ class HistoriaClass {
       idHistoria: '',
       titulo: '',
       texto: '',
-      dataCriacao: '',
+      dataRegistro: '',
       idUsuario: '',
       nomeUsuario: '',
       avatarUsuario: '',
@@ -119,18 +119,18 @@ class HistoriaClass {
     String _categoria = currentCategoria.value.idCategoria;
 
     if (_categoria == CategoriaEnum.ALL.value)
-      return _historiaFirestore.historias.orderBy('dataCriacao');
+      return _historiaFirestore.historias.orderBy('dataRegistro');
     else if (_categoria == CategoriaEnum.MY.value)
       return _historiaFirestore.historias
-          .orderBy('dataCriacao')
+          .orderBy('dataRegistro')
           .where('idUsuario', isEqualTo: currentUsuario.value.idUsuario);
     else if (_categoria == CategoriaEnum.BOOKMARK.value)
-      return _historiaFirestore.historias.orderBy('dataCriacao').where(
+      return _historiaFirestore.historias.orderBy('dataRegistro').where(
           'favoritos',
           arrayContainsAny: [currentUsuario.value.idUsuario]);
     else
       return _historiaFirestore.historias
-          .orderBy('dataCriacao')
+          .orderBy('dataRegistro')
           .where('categorias', arrayContainsAny: [_categoria]);
   }
 

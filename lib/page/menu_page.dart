@@ -50,7 +50,8 @@ class _PerfilPageState extends State<MenuPage> {
               ),
               const SizedBox(height: 8),
               MenuButton(
-                callback: () => {},
+                callback: () => context.pushNamed(RouteEnum.ATIVIDADE.value,
+                    params: {'idUsuario': widget._idUsuario}),
                 subtitulo: ATIVIDADE,
                 resumo: ATIVIDADE_DESCICAO,
               ),

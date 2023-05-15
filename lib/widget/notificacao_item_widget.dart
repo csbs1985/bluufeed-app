@@ -1,3 +1,4 @@
+import 'package:bluufeed_app/class/cor_class.dart';
 import 'package:bluufeed_app/class/notificacao_class.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/text/data_text.dart';
@@ -20,6 +21,7 @@ class NotificacaoItemWidget extends StatefulWidget {
 }
 
 class _NotificacaoItemWidgetState extends State<NotificacaoItemWidget> {
+  final CorClass _corClass = CorClass();
   final NotificacaoClass _notificacaoClass = NotificacaoClass();
 
   pathVizualizarNotificacao() {
@@ -40,7 +42,7 @@ class _NotificacaoItemWidgetState extends State<NotificacaoItemWidget> {
           bool isDark = tema == Brightness.dark;
 
           return Container(
-            color: _notificacaoClass.definirCor(
+            color: _corClass.definirCor(
                 isDark, widget._notificacao['isVisualizado']),
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
             child: Row(

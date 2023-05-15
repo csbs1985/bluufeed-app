@@ -269,11 +269,11 @@ class UsuarioClass {
       await _usuarioFirestore.pathQtdHistoriasUsuario(currentUsuario.value);
 
     _atividadeClass.postAtividade(
-      type: _isEditado
+      tipoAtividade: _isEditado
           ? AtividadeEnum.UP_HISTORY.value
           : AtividadeEnum.NEW_HISTORY.value,
-      content: _tituloController,
-      elementId: _idHistoria,
+      conteudo: _tituloController,
+      idConteudo: _idHistoria,
     );
 
     _toastWidget.toast(

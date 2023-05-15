@@ -1,6 +1,4 @@
 import 'package:bluufeed_app/firestore/notificacao_firestore.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:flutter/material.dart';
 
 class NotificacaoModel {
   late bool isVisualizado;
@@ -10,7 +8,7 @@ class NotificacaoModel {
   late String conteudo;
   late String idConteudo;
   late String idNotificacao;
-  late String dataNotificacao;
+  late String dataRegistro;
   late String tipoNotificacao;
   late String idDestinatario;
 
@@ -22,7 +20,7 @@ class NotificacaoModel {
     required this.conteudo,
     required this.idConteudo,
     required this.idNotificacao,
-    required this.dataNotificacao,
+    required this.dataRegistro,
     required this.tipoNotificacao,
     required this.idDestinatario,
   });
@@ -35,11 +33,6 @@ class NotificacaoClass {
     return _notificacao['tipoNotificacao'] == NotificacaoEnum.COMMENT.value
         ? '<bold>${_notificacao['nomeRemetente']}</bold> fez um comentou na história <bold>${_notificacao['conteudo']}.</bold>'
         : '<bold>${_notificacao['nomeRemetente']}</bold> compartilhou a história <bold>${_notificacao['conteudo']}</bold> com você.';
-  }
-
-  Color definirCor(bool tema, bool _isVisualizado) {
-    if (_isVisualizado) return tema ? UiCor.mainEscuro : UiCor.main;
-    return tema ? UiCor.elementoEscura : UiCor.elemento;
   }
 
   Future<void> pathVizualizarNotificacao(String _idNotificacao) async {

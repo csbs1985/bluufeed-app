@@ -151,7 +151,7 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                     ),
                     FirestoreListView(
                       query: _historiaFirestore.historias
-                          .orderBy('dataCriacao')
+                          .orderBy('dataRegistro')
                           .where('idUsuario',
                               isEqualTo: widget._usuario['idUsuario']),
                       pageSize: 10,
