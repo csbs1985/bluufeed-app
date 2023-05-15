@@ -37,17 +37,13 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
   final DataClass _dataClass = DataClass();
   final HistoriaFirestore _historiaFirestore = HistoriaFirestore();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final UsuarioClass _usuarioClass = UsuarioClass();
 
   static const _marginPequena = SizedBox(height: 16);
 
   bool? isUsuario;
 
-  Map<String, dynamic>? _seguindo;
-
   @override
   void initState() {
-    // _usuarioClass.getUsuarioId(widget._usuario);
     super.initState();
     definirUsuario();
   }
@@ -112,7 +108,8 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                   ),
                 ),
                 if (isUsuario!) const SeparadorWidget(),
-                if (isUsuario!) SeguindoButton(usuario: widget._usuario),
+                if (isUsuario!)
+                  SeguindoButton(usuario: widget._usuario['seguindo']),
                 const SeparadorWidget(),
                 Container(
                   padding: const EdgeInsets.all(16),
@@ -152,10 +149,8 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                       child: SubtituloText(subtitulo: PUBLICACOES),
                     ),
                     FirestoreListView(
-                      query: _historiaFirestore.historias
-                          .orderBy('dataRegistro')
-                          .where('idUsuario',
-                              isEqualTo: widget._usuario['idUsuario']),
+                      query: _historiaFirestore.getAllHistoriaIdUsuario(
+                          widget._usuario['idUsuario']),
                       pageSize: 10,
                       shrinkWrap: true,
                       reverse: true,

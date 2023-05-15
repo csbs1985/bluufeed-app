@@ -38,6 +38,8 @@ const String COMENTARIOS_HABILITAR =
 const String COMENTARIOS_PLURAL = "comentários";
 const String COMENTARIOS_PRIMEIRO = "seja o primeiro a comentar";
 
+const String CANCELAR = "Cancelar";
+
 const String CONTA = "Conta";
 
 const String DELETAR = "Deletar conta";
@@ -176,7 +178,8 @@ const String PUBLICACOES = "Publicações";
 
 const String SALVAR = "Salvar";
 
-const String SAIR = "Sair da conta";
+const String SAIR = "Sair";
+const String SAIR_CONTA = "Sair da sua conta?";
 const String SAIR_DESCRICAO =
     "Estou temporariamente saindo do Bluufeed, mas tenho planos de voltar em breve";
 
@@ -184,7 +187,7 @@ const String SEGUIR = "Seguir";
 
 const String SEGUINDO = "Seguindo";
 const String SEGUINDO_BUTTON = "perfis";
-const String SEGUINDO_UM = "seguindo apenas";
+const String SEGUINDO_UM = "seguindo apenas um perfil";
 const String SEGUINDO_VAZIO = "você ainda não segue outros perfis";
 
 const String SEM_CONEXAO_POEMA = 'Sem a conexão da internet, \n'

@@ -2,8 +2,10 @@ import 'package:bluufeed_app/appbar/voltar_appbar.dart';
 import 'package:bluufeed_app/button/menu_button.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:bluufeed_app/modal/sair_modal.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
+import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,6 +22,15 @@ class MenuPage extends StatefulWidget {
 }
 
 class _PerfilPageState extends State<MenuPage> {
+  void _abrirModalSair(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      barrierColor: UiCor.overlay,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      builder: (context) => const SairModal(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +98,7 @@ class _PerfilPageState extends State<MenuPage> {
                 child: TextoText(texto: FINALIZAR),
               ),
               MenuButton(
-                callback: () => {},
+                callback: () => _abrirModalSair(context),
                 subtitulo: SAIR,
                 resumo: SAIR_DESCRICAO,
               ),

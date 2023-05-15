@@ -5,15 +5,11 @@ ValueNotifier<List<dynamic>> currentSeguindoLista =
     ValueNotifier<List<dynamic>>([]);
 
 class SeguindoClass {
-  String textoSeguindoButton(Map<String, dynamic> _usuario) {
-    int _quantidade = _usuario['seguindo'].length;
+  String textoSeguindoButton(List<dynamic> _usuario) {
+    int _quantidade = _usuario.length;
 
     if (_quantidade == 0) return SEGUINDO_VAZIO;
-    if (_quantidade == 1) {
-      String _nomeUsuario = _usuario['seguindo'].first['nomeUsuario'];
-      return "$SEGUINDO_UM $_nomeUsuario";
-    } else
-      return "$_quantidade $SEGUINDO_BUTTON";
+    return _quantidade == 1 ? SEGUINDO_UM : "$_quantidade $SEGUINDO_BUTTON";
   }
 
   pesquisarSeguindo(String value) {

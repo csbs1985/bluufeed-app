@@ -5,6 +5,12 @@ class HistoriaFirestore {
   CollectionReference historias =
       FirebaseFirestore.instance.collection('historias');
 
+  getAllHistoriaIdUsuario(String idUsuario) {
+    return historias
+        .orderBy('dataRegistro')
+        .where('idUsuario', isEqualTo: idUsuario);
+  }
+
   snapshotsHistoria(String _idHistory) {
     return historias.where('idHistoria', isEqualTo: _idHistory).snapshots();
   }

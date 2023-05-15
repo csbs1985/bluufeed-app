@@ -113,8 +113,8 @@ class UsuarioClass {
       'qtdComentarios': _usuario['qtdComentarios'],
       'qtdDenuncias': _usuario['qtdDenuncias'],
       'qtdHistorias': _usuario['qtdHistorias'],
-      'bloqueados': _usuario['bloqueados'].cast<Map<String, dynamic>>(),
-      'seguindo': _usuario['seguindo'].cast<Map<String, dynamic>>(),
+      'bloqueados': _usuario['bloqueados'].cast<String>(),
+      'seguindo': _usuario['seguindo'].cast<String>(),
     };
 
     hiveToValueNotifier(_usuarioMap!);
@@ -166,8 +166,8 @@ class UsuarioClass {
         'qtdComentarios': doc.docs.first['qtdComentarios'],
         'qtdDenuncias': doc.docs.first['qtdDenuncias'],
         'qtdHistorias': doc.docs.first['qtdHistorias'],
-        'bloqueados': doc.docs.first['bloqueados'].cast<Map<String, dynamic>>(),
-        'seguindo': doc.docs.first['seguindo'].cast<Map<String, dynamic>>(),
+        'bloqueados': doc.docs.first['bloqueados'].cast<String>(),
+        'seguindo': doc.docs.first['seguindo'].cast<String>(),
       };
     } else {
       _usuarioMap = {
@@ -324,9 +324,8 @@ class UsuarioClass {
     return _usuario['avatarUsuario'];
   }
 
-  Future<Map<String, dynamic>> getUsuarioId(String _idUsuario) async {
-    Map<String, dynamic> _usuario =
-        await _usuarioFirestore.getUsuarioId(_idUsuario);
+  Map<String, dynamic> getUsuarioId(String _idUsuario) {
+    Map<String, dynamic> _usuario = _usuarioFirestore.getUsuarioId(_idUsuario);
     return _usuario;
   }
 }
