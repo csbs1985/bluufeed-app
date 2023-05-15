@@ -4,18 +4,6 @@ import 'package:flutter/material.dart';
 ValueNotifier<List<dynamic>> currentSeguindoLista =
     ValueNotifier<List<dynamic>>([]);
 
-class SeguindoModel {
-  late String avatarUsuario;
-  late String idUsuario;
-  late String nomeUsuario;
-
-  SeguindoModel({
-    required this.avatarUsuario,
-    required this.idUsuario,
-    required this.nomeUsuario,
-  });
-}
-
 class SeguindoClass {
   String textoSeguindoButton(Map<String, dynamic> _usuario) {
     int _quantidade = _usuario['seguindo'].length;

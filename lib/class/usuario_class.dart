@@ -8,8 +8,6 @@ import 'package:bluufeed_app/widget/toast_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bluufeed_app/class/bloqueado_class.dart';
-import 'package:bluufeed_app/class/seguindo_class.dart';
 
 class UsuarioModel {
   late String avatarUsuario;
@@ -26,8 +24,8 @@ class UsuarioModel {
   late int qtdComentarios;
   late int qtdDenuncias;
   late int qtdHistorias;
-  late List<BloqueadoModel> bloqueados;
-  late List<SeguindoModel> seguindo;
+  late List<String> bloqueados;
+  late List<String> seguindo;
 
   UsuarioModel({
     required this.avatarUsuario,
@@ -178,7 +176,7 @@ class UsuarioClass {
       dataRegistro: _usuarioMap['dataRegistro'],
       nomeUsuario: _usuarioMap['nomeUsuario'],
       email: _usuarioMap['email'],
-      situacaoConta: SituacaoUsuarioEnum.ATIVO.value,
+      situacaoConta: _usuarioMap['situacaoConta'],
       token: _usuarioMap['token'],
       dataAtualizacaoNome: _usuarioMap['dataAtualizacaoNome'],
       isNotificacao: _usuarioMap['isNotificacao'],
@@ -186,8 +184,8 @@ class UsuarioClass {
       qtdComentarios: _usuarioMap['qtdComentarios'],
       qtdDenuncias: _usuarioMap['qtdDenuncias'],
       qtdHistorias: _usuarioMap['qtdHistorias'],
-      bloqueados: _usuarioMap['bloqueados'].cast<BloqueadoModel>(),
-      seguindo: _usuarioMap['seguindo'].cast<SeguindoModel>(),
+      bloqueados: _usuarioMap['bloqueados'].cast<String>(),
+      seguindo: _usuarioMap['seguindo'].cast<String>(),
     );
 
     _usuarioHive.addUsuario(_usuarioMap);
@@ -235,27 +233,22 @@ class UsuarioClass {
     );
   }
 
-  toggleSeguindoUsuario(Map<String, dynamic> _usuario) {
-    List<Map<String, dynamic>> listaSeguindo =
-        currentUsuario.value.seguindo.cast<Map<String, dynamic>>();
+  toggleSeguindoUsuario(String _idUsuario) {
+    List<String> listaSeguindo = currentUsuario.value.seguindo.cast<String>();
 
-    bool encontrou =
-        listaSeguindo.any((map) => map['idUsuario'] == _usuario['idUsuario']);
+    bool encontrou = listaSeguindo.any((map) => map == _idUsuario);
     encontrou
-        ? listaSeguindo
-            .removeWhere((map) => map['idUsuario'] == _usuario['idUsuario'])
-        : listaSeguindo.add(_usuario);
+        ? listaSeguindo.removeWhere((map) => map == _idUsuario)
+        : listaSeguindo.add(_idUsuario);
 
     _usuarioFirestore.pathSeguindo(listaSeguindo);
-    currentUsuario.value.seguindo = listaSeguindo.cast<SeguindoModel>();
+    currentUsuario.value.seguindo = listaSeguindo.cast<String>();
   }
 
-  String isSeguindoUsuario(Map<String, dynamic> _usuario) {
-    List<Map<String, dynamic>> listaSeguindo =
-        currentUsuario.value.seguindo.cast<Map<String, dynamic>>();
+  String isSeguindoUsuario(String _idUsuario) {
+    List<String> listaSeguindo = currentUsuario.value.seguindo.cast<String>();
 
-    bool encontrou =
-        listaSeguindo.any((map) => map['idUsuario'] == _usuario['idUsuario']);
+    bool encontrou = listaSeguindo.any((map) => map == _idUsuario);
     return encontrou ? SEGUINDO : SEGUIR;
   }
 
@@ -296,6 +289,17 @@ class UsuarioClass {
   pathNotificacao(bool _isNotificacao) {
     currentUsuario.value.isNotificacao = _isNotificacao;
     _usuarioFirestore.pathNotificacao();
+  }
+
+  String getAvatarId(String _idUsuario) {
+    Map<String, dynamic> _usuario = _usuarioFirestore.getUsuarioId(_idUsuario);
+    return _usuario['avatarUsuario'];
+  }
+
+  Future<Map<String, dynamic>> getUsuarioId(String _idUsuario) async {
+    Map<String, dynamic> _usuario =
+        await _usuarioFirestore.getUsuarioId(_idUsuario);
+    return _usuario;
   }
 }
 
