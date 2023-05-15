@@ -9,11 +9,11 @@ class UsuarioFirestore {
     return usuarios.where('nomeUsuario', isEqualTo: nomeUsuario).get();
   }
 
-  getUsuarioEmail(String email) async {
+  getUsuarioEmail(String email) {
     return usuarios.where('email', isEqualTo: email).get();
   }
 
-  getUsuarioId(String idUsuario) async {
+  getUsuarioId(String idUsuario) {
     return usuarios.where('idUsuario', isEqualTo: idUsuario).get();
   }
 

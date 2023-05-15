@@ -28,7 +28,6 @@ class SeguindoPage extends StatefulWidget {
 }
 
 class _SeguindoPageState extends State<SeguindoPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final UsuarioClass _usuarioClass = UsuarioClass();
   final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 

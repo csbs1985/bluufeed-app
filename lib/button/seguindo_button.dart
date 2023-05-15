@@ -1,19 +1,24 @@
+import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/class/seguindo_class.dart';
-import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SeguindoButton extends StatefulWidget {
   const SeguindoButton({
     super.key,
-    required List<dynamic> usuario,
-  }) : _usuario = usuario;
+    required String idUsuario,
+    required List<dynamic> listaUsuario,
+  })  : _idUsuario = idUsuario,
+        _listaUsuario = listaUsuario;
 
-  final List<dynamic> _usuario;
+  final String _idUsuario;
+  final List<dynamic> _listaUsuario;
 
   @override
   State<SeguindoButton> createState() => _SeguindoButtonState();
@@ -21,17 +26,37 @@ class SeguindoButton extends StatefulWidget {
 
 class _SeguindoButtonState extends State<SeguindoButton> {
   final SeguindoClass _seguindoClass = SeguindoClass();
-  final UsuarioClass _usuarioClass = UsuarioClass();
+  final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
   final double _eixo = 24.0;
+  late final List<dynamic> _listaAvatar = [];
+
+  int _quantidade = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    iniciarSeguindo();
+  }
+
+  iniciarSeguindo() async {
+    List<dynamic> _usuarios = widget._listaUsuario.take(5).toList();
+    _quantidade = _usuarios.length >= 5 ? 5 : _usuarios.length;
+
+    for (var item in _usuarios) {
+      var _usuario = await _usuarioFirestore.getUsuarioId(item);
+
+      setState(() {
+        _listaAvatar.add(_usuario.docs.first['avatarUsuario']);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    int _quantidade = widget._usuario.length >= 5 ? 5 : widget._usuario.length;
-
     return InkWell(
-      // onTap: () => context.pushNamed(RouteEnum.SEGUINDO.value,
-      //     params: {'idUsuario': widget._usuario['idUsuario']}),
+      onTap: () => context.pushNamed(RouteEnum.SEGUINDO.value,
+          params: {'idUsuario': widget._idUsuario}),
       child: Container(
         padding: const EdgeInsets.all(16),
         width: double.infinity,
@@ -48,15 +73,11 @@ class _SeguindoButtonState extends State<SeguindoButton> {
                   height: 32,
                   child: Stack(
                     children: List.generate(
-                      widget._usuario.take(5).length,
+                      _listaAvatar.length,
                       (index) => Positioned(
                         left: index * _eixo,
-                        // _usuarioClass.getUsuarioId(),
                         child: AvatarWidget(
-                          avatar:
-                              _usuarioClass.getAvatarId(widget._usuario[index]),
-                          // avatar: widget._usuario['seguindo'][index]
-                          //     ["avatarUsuario"],
+                          avatar: _listaAvatar[index],
                           size: UiTamanho.avatarButton,
                         ),
                       ),
@@ -64,7 +85,9 @@ class _SeguindoButtonState extends State<SeguindoButton> {
                   ),
                 ),
                 TextoText(
-                    texto: _seguindoClass.textoSeguindoButton(widget._usuario))
+                  texto:
+                      _seguindoClass.textoSeguindoButton(widget._listaUsuario),
+                )
               ],
             ),
           ],

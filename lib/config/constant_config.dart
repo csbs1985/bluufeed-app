@@ -374,4 +374,4 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'específicas sobre estes Termos, entre em contato conosco em'
     'csbs.conta@outlook.com.';
 
-const String USUARIO_NOME = "Nome de usuario";
+const String USUARIO_NOME = "Nome de usuário";

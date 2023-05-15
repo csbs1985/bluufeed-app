@@ -108,8 +108,11 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                   ),
                 ),
                 if (isUsuario!) const SeparadorWidget(),
-                if (isUsuario!)
-                  SeguindoButton(usuario: widget._usuario['seguindo']),
+                // if (isUsuario!)
+                SeguindoButton(
+                  idUsuario: widget._usuario['idUsuario'],
+                  listaUsuario: widget._usuario['seguindo'],
+                ),
                 const SeparadorWidget(),
                 Container(
                   padding: const EdgeInsets.all(16),
