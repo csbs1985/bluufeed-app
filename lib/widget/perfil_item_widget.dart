@@ -43,8 +43,11 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
 
   bool? isUsuario;
 
+  Map<String, dynamic>? _seguindo;
+
   @override
   void initState() {
+    // _usuarioClass.getUsuarioId(widget._usuario);
     super.initState();
     definirUsuario();
   }
@@ -103,8 +106,7 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                       if (!isUsuario!)
                         SeguirButton(
                           tamanhoPadrao: false,
-                          usuario: _usuarioClass
-                              .formatarMapUsuarioItem(widget._usuario),
+                          idUsuario: widget._usuario['idUsuario'],
                         ),
                     ],
                   ),

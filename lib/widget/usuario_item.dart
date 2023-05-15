@@ -50,7 +50,7 @@ class _UsuarioItemWidgetState extends State<UsuarioItemWidget> {
             const SizedBox(width: 16),
             Expanded(child: TextoText(texto: widget._usuario['nomeUsuario'])),
             const SizedBox(width: 16),
-            SeguirButton(usuario: widget._usuario),
+            SeguirButton(idUsuario: widget._usuario['idUsuario']),
             const SizedBox(width: 0),
             IconeButton(
               callback: () => _abrirModal(context, widget._usuario),

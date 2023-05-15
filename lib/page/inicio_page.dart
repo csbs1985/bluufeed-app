@@ -14,13 +14,9 @@ class InicioPage extends StatefulWidget {
 }
 
 class _InicioPageState extends State<InicioPage> {
-  final AuthConfig _authConfig = AuthConfig();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final ScrollController _scrollController = ScrollController();
-
-  signInWithGoogle(BuildContext context) async {
-    await _authConfig.signIn(context);
-  }
+  final AuthConfig _authConfig = AuthConfig();
 
   void _scrollToTop() {
     _scrollController.animateTo(0,
@@ -35,7 +31,7 @@ class _InicioPageState extends State<InicioPage> {
 
   @override
   Widget build(BuildContext context) {
-    signInWithGoogle(context);
+    _authConfig.verificarHive(context);
 
     return Scaffold(
       key: scaffoldKey,

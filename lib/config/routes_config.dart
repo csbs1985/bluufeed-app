@@ -26,11 +26,6 @@ final GoRouter routes = GoRouter(
     final isAuthenticated = _authConfig.isAuthenticated;
     final isLoginRoute = state.subloc == RouteEnum.ENTRAR.value;
 
-    // if (currentUsuario.value.situacaoConta ==
-    //     SituacaoUsuarioEnum.CRIANDO.value) {
-    //   return context.pushNamed('editar_perfil',
-    //       params: {'idUsuario': currentUsuario.value.idUsuario});
-    // }
     if (!isAuthenticated) return isLoginRoute ? null : RouteEnum.ENTRAR.value;
     if (isLoginRoute) return RouteEnum.INICIO.value;
 

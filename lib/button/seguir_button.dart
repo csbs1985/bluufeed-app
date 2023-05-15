@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 class SeguirButton extends StatefulWidget {
   const SeguirButton({
     super.key,
-    required Map<String, dynamic> usuario,
+    required String idUsuario,
     bool? tamanhoPadrao = true,
-  })  : _usuario = usuario,
+  })  : _idUsuario = idUsuario,
         _tamanhoPadrao = tamanhoPadrao;
 
-  final Map<String, dynamic> _usuario;
+  final String _idUsuario;
   final bool? _tamanhoPadrao;
 
   @override
@@ -43,11 +43,11 @@ class _SeguirButtonState extends State<SeguirButton> {
         z: 4,
       ),
       child: Text(
-        _usuarioClass.isSeguindoUsuario(widget._usuario),
+        _usuarioClass.isSeguindoUsuario(widget._idUsuario),
         style: UiTexto.botao,
       ),
       onPressed: () => setState(() {
-        _usuarioClass.toggleSeguindoUsuario(widget._usuario);
+        _usuarioClass.toggleSeguindoUsuario(widget._idUsuario);
       }),
     );
   }

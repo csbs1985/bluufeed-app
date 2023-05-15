@@ -1,5 +1,6 @@
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/class/seguindo_class.dart';
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
@@ -22,6 +23,7 @@ class SeguindoButton extends StatefulWidget {
 
 class _SeguindoButtonState extends State<SeguindoButton> {
   final SeguindoClass _seguindoClass = SeguindoClass();
+  final UsuarioClass _usuarioClass = UsuarioClass();
 
   final double _eixo = 24.0;
 
@@ -53,13 +55,16 @@ class _SeguindoButtonState extends State<SeguindoButton> {
                       widget._usuario['seguindo'].take(5).length,
                       (index) => Positioned(
                         left: index * _eixo,
+                        // _usuarioClass.getUsuarioId(),
                         child: AvatarWidget(
-                          avatar: widget._usuario['seguindo'][index]
-                              ["avatarUsuario"],
+                          avatar: _usuarioClass
+                              .getAvatarId(widget._usuario['seguindo'][index]),
+                          // avatar: widget._usuario['seguindo'][index]
+                          //     ["avatarUsuario"],
                           size: UiTamanho.avatarButton,
                         ),
                       ),
-                    ).toList().reversed.toList(),
+                    ).reversed.toList(),
                   ),
                 ),
                 TextoText(

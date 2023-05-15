@@ -95,6 +95,31 @@ class UsuarioClass {
 
   Map<String, dynamic>? _usuarioMap;
 
+  verificarHive() {
+    final _usuario = _usuarioHive.readUsuario();
+
+    _usuarioMap = {
+      'avatarUsuario': _usuario['avatarUsuario'],
+      'biografia': _usuario['biografia'],
+      'idUsuario': _usuario['idUsuario'],
+      'dataRegistro': _usuario['dataRegistro'],
+      'nomeUsuario': _usuario['nomeUsuario'],
+      'email': _usuario['email'],
+      'situacaoConta': SituacaoUsuarioEnum.ATIVO.value,
+      'token': _usuario['token'],
+      'dataAtualizacaoNome': _usuario['dataAtualizacaoNome'],
+      'isNotificacao': _usuario['isNotificacao'],
+      'qtdFavoritos': _usuario['qtdFavoritos'],
+      'qtdComentarios': _usuario['qtdComentarios'],
+      'qtdDenuncias': _usuario['qtdDenuncias'],
+      'qtdHistorias': _usuario['qtdHistorias'],
+      'bloqueados': _usuario['bloqueados'].cast<Map<String, dynamic>>(),
+      'seguindo': _usuario['seguindo'].cast<Map<String, dynamic>>(),
+    };
+
+    hiveToValueNotifier(_usuarioMap!);
+  }
+
   List<Map<String, dynamic>> algoliaToMap(
       List<AlgoliaObjectSnapshot> _snapshot) {
     List<Map<String, dynamic>> _usuario =
@@ -169,6 +194,12 @@ class UsuarioClass {
   }
 
   definirUsuarioHive(Map<String, dynamic> _usuarioMap) {
+    hiveToValueNotifier(_usuarioMap);
+    _usuarioHive.addUsuario(_usuarioMap);
+    _usuarioFirestore.postUsuario(_usuarioMap);
+  }
+
+  hiveToValueNotifier(Map<String, dynamic> _usuarioMap) {
     currentUsuario.value = UsuarioModel(
       avatarUsuario: _usuarioMap['avatarUsuario'],
       biografia: _usuarioMap['biografia'],
@@ -187,9 +218,6 @@ class UsuarioClass {
       bloqueados: _usuarioMap['bloqueados'].cast<String>(),
       seguindo: _usuarioMap['seguindo'].cast<String>(),
     );
-
-    _usuarioHive.addUsuario(_usuarioMap);
-    _usuarioFirestore.postUsuario(_usuarioMap);
   }
 
   deleteUsuario() {

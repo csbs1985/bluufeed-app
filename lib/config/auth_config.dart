@@ -1,5 +1,6 @@
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:bluufeed_app/hive/usuario_hive.dart';
 import 'package:bluufeed_app/widget/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +11,7 @@ class AuthConfig extends ChangeNotifier {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ToastWidget _toastWidget = ToastWidget();
   final UsuarioClass _usuarioClass = UsuarioClass();
+  final UsuarioHive _usuarioHive = UsuarioHive();
 
   User? usuario;
 
@@ -25,6 +27,12 @@ class AuthConfig extends ChangeNotifier {
       isAuthenticated = user == null ? false : true;
       notifyListeners();
     });
+  }
+
+  verificarHive(BuildContext context) async {
+    !_usuarioHive.verificarUsuario()
+        ? await signIn(context)
+        : _usuarioClass.verificarHive();
   }
 
   signIn(BuildContext context) async {
