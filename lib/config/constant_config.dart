@@ -186,7 +186,7 @@ const String SAIR_DESCRICAO =
 const String SEGUIR = "Seguir";
 
 const String SEGUINDO = "Seguindo";
-const String SEGUINDO_BUTTON = "perfis";
+const String SEGUINDO_BUTTON = "pessoas";
 const String SEGUINDO_UM = "seguindo apenas um perfil";
 const String SEGUINDO_VAZIO = "você ainda não segue outros perfis";
 

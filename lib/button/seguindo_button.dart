@@ -4,7 +4,8 @@ import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
+import 'package:bluufeed_app/theme/ui_cor.dart';
+import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +29,7 @@ class _SeguindoButtonState extends State<SeguindoButton> {
   final SeguindoClass _seguindoClass = SeguindoClass();
   final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
-  final double _eixo = 24.0;
+  final double _eixo = 32.0;
   late final List<dynamic> _listaAvatar = [];
 
   int _quantidade = 0;
@@ -54,45 +55,55 @@ class _SeguindoButtonState extends State<SeguindoButton> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.pushNamed(RouteEnum.SEGUINDO.value,
-          params: {'idUsuario': widget._idUsuario}),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SubtituloText(subtitulo: SEGUINDO),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                SizedBox(
-                  width: _quantidade.toDouble() * _eixo +
-                      (_quantidade > 0 ? 18 : 0),
-                  height: 32,
-                  child: Stack(
-                    children: List.generate(
-                      _listaAvatar.length,
-                      (index) => Positioned(
-                        left: index * _eixo,
-                        child: AvatarWidget(
-                          avatar: _listaAvatar[index],
-                          size: UiTamanho.avatarButton,
+    return ValueListenableBuilder(
+        valueListenable: currentTema,
+        builder: (BuildContext context, Brightness tema, _) {
+          bool isDark = tema == Brightness.dark;
+
+          return InkWell(
+            onTap: () => context.pushNamed(RouteEnum.SEGUINDO.value,
+                params: {'idUsuario': widget._idUsuario}),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SubtituloText(subtitulo: SEGUINDO),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: _quantidade.toDouble() * _eixo +
+                            (_quantidade > 0 ? 18 : 0),
+                        height: 42,
+                        child: Stack(
+                          children: List.generate(
+                            _listaAvatar.length,
+                            (index) => Positioned(
+                              left: index * _eixo,
+                              child: CircleAvatar(
+                                radius: 22,
+                                backgroundColor:
+                                    isDark ? UiCor.mainEscuro : UiCor.main,
+                                child:
+                                    AvatarWidget(avatar: _listaAvatar[index]),
+                              ),
+                            ),
+                          ).reversed.toList(),
                         ),
                       ),
-                    ).reversed.toList(),
+                      TextoText(
+                        texto: _seguindoClass
+                            .textoSeguindoButton(widget._listaUsuario),
+                      )
+                    ],
                   ),
-                ),
-                TextoText(
-                  texto:
-                      _seguindoClass.textoSeguindoButton(widget._listaUsuario),
-                )
-              ],
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }
