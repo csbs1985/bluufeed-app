@@ -45,6 +45,10 @@ const String CONTA = "Conta";
 const String DELETAR = "Deletar conta";
 const String DELETAR_DESCRICAO =
     "Estou saindo do Bluufeed e não pretendo voltar";
+const String DELETAR_JUSTIFICAR =
+    'Tem certeza que deseja excluir sua conta Bluufeed definitivamente? \n'
+    'Você não poderá mais ler, editar e visualizar suas hitórias e comentar em publicações.'
+    '\n\nEscolha uma das opções a baixo.';
 
 const String DENUNCIAR = "Denunciar";
 
@@ -100,6 +104,11 @@ const String HISTORIA_PUBLICADA = "história publicada";
 const String HISTORIA_TITULO = "Título";
 
 const String INFORMACOES = "Informações";
+
+const String JUSTIFICAR = 'Justificar e deletar';
+const String JUSTIFICAR_DESCRICAO =
+    'Antes me diga o motivo do porque esta deletando sua conta Bluufeed.'
+    '\n\nEscolha uma das opções a baixo.';
 
 const String MENU = "Menu";
 

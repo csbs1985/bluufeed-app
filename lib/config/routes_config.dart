@@ -1,6 +1,8 @@
 import 'package:bluufeed_app/config/auth_config.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/page/atividade_page.dart';
+import 'package:bluufeed_app/page/deletar_conta_page.dart';
+import 'package:bluufeed_app/page/justificar_page.dart';
 import 'package:bluufeed_app/page/menu_page.dart';
 import 'package:bluufeed_app/page/busca_page.dart';
 import 'package:bluufeed_app/page/editar_perfil_page.dart';
@@ -51,6 +53,14 @@ final GoRouter routes = GoRouter(
       ),
     ),
     GoRoute(
+      path: RouteEnum.DELETAR_CONTA.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const DelatarContaPage(),
+      ),
+    ),
+    GoRoute(
       name: RouteEnum.EDITAR_PERFIL.value,
       path: '/editar_perfil/:idUsuario',
       pageBuilder: (context, state) => transicaoPaginas(
@@ -82,6 +92,14 @@ final GoRouter routes = GoRouter(
         context: context,
         state: state,
         child: HistoriaPage(idHistoria: state.params['idHistoria']!),
+      ),
+    ),
+    GoRoute(
+      path: RouteEnum.JUSTIFICAR.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const JustificarPage(),
       ),
     ),
     GoRoute(

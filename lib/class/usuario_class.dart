@@ -127,15 +127,6 @@ class UsuarioClass {
     return _usuario;
   }
 
-  List<Map<String, dynamic>> listToMap(List<dynamic> _snapshot) {
-    List<Map<String, dynamic>> _usuario = [];
-
-    for (var item in _snapshot) {
-      _usuario.add(Map<String, dynamic>.from(item));
-    }
-    return _usuario;
-  }
-
   Map<String, dynamic> formatarMapUsuarioItem(Map<String, dynamic> _historia) {
     Map<String, dynamic> _usuario = {
       'avatarUsuario': _historia['avatarUsuario'],
@@ -223,6 +214,10 @@ class UsuarioClass {
   deleteUsuario() {
     deletarUsuarioCurrent();
     _usuarioHive.deleteUsuario();
+  }
+
+  deletarConta() {
+    _usuarioFirestore.pathSituacaoConta(SituacaoUsuarioEnum.DELETADO.value);
   }
 
   mapDynamicToMapString(Map<dynamic, dynamic> usuario) {
@@ -327,6 +322,22 @@ class UsuarioClass {
   Map<String, dynamic> getUsuarioId(String _idUsuario) {
     Map<String, dynamic> _usuario = _usuarioFirestore.getUsuarioId(_idUsuario);
     return _usuario;
+  }
+
+  Future<List<Map<String, dynamic>>> getListaUsuarios(
+      QueryDocumentSnapshot<dynamic> snapshot) async {
+    List<Map<String, dynamic>> listaUsuarios = [];
+
+    List<dynamic> idUsuarios = snapshot.data()["idUsuario"];
+
+    for (dynamic idUsuario in idUsuarios) {
+      Map<String, dynamic> usuario = getUsuarioId(idUsuario);
+      if (usuario.length < 0) {
+        listaUsuarios.add(usuario);
+      }
+    }
+
+    return listaUsuarios;
   }
 }
 

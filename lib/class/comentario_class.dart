@@ -1,4 +1,5 @@
 import 'package:bluufeed_app/class/atividade_class.dart';
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/comentario_firestore.dart';
 import 'package:bluufeed_app/firestore/historia_firestore.dart';
@@ -63,5 +64,16 @@ class ComentarioClass {
 
   pathQtdComentarioHistoria(Map<String, dynamic> _historia) async {
     await _historiaFirestore.pathQtdComentarioHistoria(_historia);
+  }
+
+  deletarTodosComentarioUsuario() async {
+    await _comentarioFirestore
+        .getTodosComentarioUsuario(currentUsuario.value.idUsuario)
+        .then((result) async => {
+              if (result.size > 0)
+                for (var item in result.docs)
+                  await _comentarioFirestore.upStatusUserComment(item['id']),
+            })
+        .catchError((error) => debugPrint('ERROR:' + error));
   }
 }

@@ -10,14 +10,19 @@ import 'package:bluufeed_app/theme/ui_texto.dart';
 import 'package:button3d/button3d.dart';
 import 'package:flutter/material.dart';
 
-class SairModal extends StatefulWidget {
-  const SairModal({super.key});
+class DeletarContaModal extends StatefulWidget {
+  const DeletarContaModal({
+    super.key,
+    int? idJustificar,
+  }) : _idJustificar = idJustificar;
+
+  final int? _idJustificar;
 
   @override
-  State<SairModal> createState() => _UsuarioModalState();
+  State<DeletarContaModal> createState() => _UsuarioModalState();
 }
 
-class _UsuarioModalState extends State<SairModal> {
+class _UsuarioModalState extends State<DeletarContaModal> {
   final AuthConfig _authConfig = AuthConfig();
 
   bool? isUsuario;
@@ -44,10 +49,11 @@ class _UsuarioModalState extends State<SairModal> {
               const Padding(
                 padding: EdgeInsets.only(bottom: 24),
                 child: SubtituloResumoText(
-                  subtitulo: SAIR,
-                  resumo: SAIR_DESCRICAO,
+                  subtitulo: DELETAR,
+                  resumo: DELETAR_DESCRICAO,
                 ),
               ),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -57,7 +63,7 @@ class _UsuarioModalState extends State<SairModal> {
                   ),
                   const SizedBox(width: 16),
                   Button3d(
-                    width: 80,
+                    width: 130,
                     height: UiTamanho.botaoPrincipal,
                     style: Button3dStyle(
                       topColor: UiCor.botao,
@@ -67,10 +73,11 @@ class _UsuarioModalState extends State<SairModal> {
                       z: 4,
                     ),
                     child: const Text(
-                      SAIR,
+                      DELETAR,
                       style: UiTexto.botao,
                     ),
-                    onPressed: () => _authConfig.signOut(),
+                    onPressed: () =>
+                        _authConfig.deletarConta(widget._idJustificar),
                   ),
                 ],
               ),

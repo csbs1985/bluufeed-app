@@ -24,9 +24,11 @@ CustomTransitionPage transicaoPaginas<T>({
 enum RouteEnum {
   ATIVIDADE('atividade'),
   BUSCAR('/buscar'),
+  DELETAR_CONTA('/deletar_conta'),
   EDITAR_PERFIL('editar_perfil'),
   ENTRAR('/entrar'),
   INICIO('/inicio'),
+  JUSTIFICAR('/justificar'),
   HISTORIA('historia'),
   MENU('menu'),
   NOTIFICACAO('notificacao'),

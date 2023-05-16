@@ -111,7 +111,7 @@ class _PerfilPageState extends State<MenuPage> {
               ),
               const SizedBox(height: 8),
               MenuButton(
-                callback: () => {},
+                callback: () => context.push(RouteEnum.DELETAR_CONTA.value),
                 subtitulo: DELETAR,
                 resumo: DELETAR_DESCRICAO,
               ),

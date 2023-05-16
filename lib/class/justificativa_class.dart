@@ -1,3 +1,7 @@
+import 'package:bluufeed_app/class/usuario_class.dart';
+import 'package:bluufeed_app/firestore/justificar_firestore.dart';
+import 'package:uuid/uuid.dart';
+
 class JustificativaModel {
   late String idJustificativa;
   late String titulo;
@@ -63,4 +67,20 @@ class JustificativaModel {
       texto: 'Não encontrei aqui o motivo.',
     ),
   ];
+}
+
+class JustificarClass {
+  final JustificarFirestore _justificarFirestore = JustificarFirestore();
+  final Uuid uuid = const Uuid();
+
+  postJustificar(int idJustificar) {
+    Map<String, dynamic> _justificar = {
+      'idJustificacao': uuid.v4(),
+      'dataRegistro': DateTime.now().toString(),
+      'idUsuario': currentUsuario.value.idUsuario,
+      'idJustificar': idJustificar,
+    };
+
+    _justificarFirestore.postJustificar(_justificar);
+  }
 }

@@ -40,6 +40,12 @@ class UsuarioFirestore {
         .update({"qtyHistory": _usuario.qtdHistorias});
   }
 
+  pathSituacaoConta(String _situacaoConta) {
+    return usuarios
+        .doc(currentUsuario.value.idUsuario)
+        .update({'situacaoConta': _situacaoConta});
+  }
+
   pathSeguindo(List<String> _seguindo) {
     return usuarios
         .doc(currentUsuario.value.idUsuario)

@@ -1,3 +1,6 @@
+import 'package:bluufeed_app/class/comentario_class.dart';
+import 'package:bluufeed_app/class/historia_class.dart';
+import 'package:bluufeed_app/class/justificativa_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/hive/usuario_hive.dart';
@@ -7,8 +10,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthConfig extends ChangeNotifier {
+  final ComentarioClass _comentarioClass = ComentarioClass();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final HistoriaClass _historiaClass = HistoriaClass();
+  final JustificarClass _justificarClass = JustificarClass();
   final ToastWidget _toastWidget = ToastWidget();
   final UsuarioClass _usuarioClass = UsuarioClass();
   final UsuarioHive _usuarioHive = UsuarioHive();
@@ -72,5 +78,13 @@ class AuthConfig extends ChangeNotifier {
     await _usuarioClass.deleteUsuario();
     isAuthenticated = false;
     notifyListeners();
+  }
+
+  Future<void> deletarConta(int? idJustificar) async {
+    _usuarioClass.deletarConta();
+    _historiaClass.deletarTodasHistoriaUsuario();
+    _comentarioClass.deletarTodosComentarioUsuario();
+    if (idJustificar != null) _justificarClass.postJustificar(idJustificar);
+    signOut();
   }
 }

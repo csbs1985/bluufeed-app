@@ -154,4 +154,15 @@ class HistoriaClass {
       });
     });
   }
+
+  Future<void> deletarTodasHistoriaUsuario() async {
+    await _historiaFirestore
+        .getAllHistoriaIdUsuario(currentUsuario.value.idUsuario)
+        .then((result) async => {
+              if (result.size > 0)
+                for (var item in result.docs)
+                  await _historiaFirestore.deletarHistoriaId(item['idHistory']),
+            })
+        .catchError((error) => debugPrint('ERROR:' + error));
+  }
 }
