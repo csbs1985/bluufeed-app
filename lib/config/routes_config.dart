@@ -9,6 +9,7 @@ import 'package:bluufeed_app/page/historia_page.dart';
 import 'package:bluufeed_app/page/inicio_page.dart';
 import 'package:bluufeed_app/page/notificacao_page.dart';
 import 'package:bluufeed_app/page/perfil_page.dart';
+import 'package:bluufeed_app/page/perguntas_page.dart';
 import 'package:bluufeed_app/page/politica_page.dart';
 import 'package:bluufeed_app/page/seguindo_page.dart';
 import 'package:bluufeed_app/page/sem_conexao_page.dart';
@@ -26,11 +27,6 @@ final GoRouter routes = GoRouter(
     final isAuthenticated = _authConfig.isAuthenticated;
     final isLoginRoute = state.subloc == RouteEnum.ENTRAR.value;
 
-    // if (currentUsuario.value.situacaoConta ==
-    //     SituacaoUsuarioEnum.CRIANDO.value) {
-    //   return context.pushNamed('editar_perfil',
-    //       params: {'idUsuario': currentUsuario.value.idUsuario});
-    // }
     if (!isAuthenticated) return isLoginRoute ? null : RouteEnum.ENTRAR.value;
     if (isLoginRoute) return RouteEnum.INICIO.value;
 
@@ -113,6 +109,14 @@ final GoRouter routes = GoRouter(
         context: context,
         state: state,
         child: PerfilPage(idUsuario: state.params['idUsuario']!),
+      ),
+    ),
+    GoRoute(
+      path: RouteEnum.PERGUNTAS.value,
+      pageBuilder: (context, state) => transicaoPaginas(
+        context: context,
+        state: state,
+        child: const PerguntasPage(),
       ),
     ),
     GoRoute(

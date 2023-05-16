@@ -31,6 +31,7 @@ enum RouteEnum {
   MENU('menu'),
   NOTIFICACAO('notificacao'),
   PERFIL('perfil'),
+  PERGUNTAS('/perguntas'),
   POLITICA('/politica'),
   SEGUINDO('seguindo'),
   SEM_CONEXAO('/sem_conexao'),

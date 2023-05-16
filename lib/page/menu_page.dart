@@ -54,6 +54,13 @@ class _PerfilPageState extends State<MenuPage> {
               ),
               const SizedBox(height: 8),
               MenuButton(
+                callback: () => context.pushNamed(RouteEnum.EDITAR_PERFIL.value,
+                    params: {'idUsuario': widget._idUsuario}),
+                subtitulo: EDITAR,
+                resumo: EDITAR_PERFIL_DESCRICAO,
+              ),
+              const SizedBox(height: 8),
+              MenuButton(
                 callback: () => context.pushNamed(RouteEnum.NOTIFICACAO.value,
                     params: {'idUsuario': widget._idUsuario}),
                 subtitulo: NOTIFICACAO,
@@ -71,7 +78,7 @@ class _PerfilPageState extends State<MenuPage> {
                 child: TextoText(texto: INFORMACOES),
               ),
               MenuButton(
-                callback: () => {},
+                callback: () => context.push(RouteEnum.PERGUNTAS.value),
                 subtitulo: PERGUNTAS,
                 resumo: PERGUNTAS_DESCRICAO,
               ),

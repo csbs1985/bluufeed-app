@@ -97,7 +97,7 @@ class _BuscaPageState extends State<BuscarPage> {
             if (_texto.isEmpty) const BuscaListaWidget(),
             if (_busca == BuscaEnum.USUARIO.value)
               UsuarioListaWidget(
-                  usuario: _usuarioClass.algoliaToMap(_snapshotUsuario)),
+                  usuarios: _usuarioClass.algoliaToMap(_snapshotUsuario)),
             if (_busca == BuscaEnum.HISTORIA.value)
               HistoriaListaBuscaWidget(snapshot: _snapshotHistoria),
           ],

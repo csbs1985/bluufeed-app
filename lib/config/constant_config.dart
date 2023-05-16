@@ -65,6 +65,9 @@ const String EDITAR_NOME =
     "Os nomes de usuário devem atender a alguns requisitos: eles só podem conter letras, números, sublinhados e ponto final. Além disso, devem ser exclusivos e ter entre 6 e 20 caracteres. Uma vez alterado só poderá alterar novamente depois de 7 dias.";
 const String EDITAR_SUCESSO = "perfil editado com sucesso";
 
+const String EDITAR_PERFIL_DESCRICAO =
+    "Consulte e mantenha seus dados atualizados";
+
 const String ENTRAR_BEM_VINDO = "Seja bem vindo";
 
 const String ENTROU = "Entrou";
@@ -106,7 +109,7 @@ const String NOTIFICACAO_TOGGLE =
     "Habilitado para receber as notificações e desabilitado para não receber";
 
 const String PERFIL = "Perfil";
-const String PERFIL_DESCRICAO = "Consulte e mantenha seus dados atualizados";
+const String PERFIL_DESCRICAO = "Veja seu perfil e histórias";
 
 const String PESQUISA = "Pesquisa";
 
