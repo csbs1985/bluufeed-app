@@ -9,7 +9,10 @@ class SeguindoClass {
     int _quantidade = _usuario.length;
 
     if (_quantidade == 0) return SEGUINDO_VAZIO;
-    return _quantidade == 1 ? SEGUINDO_UM : "$_quantidade $SEGUINDO_BUTTON";
+    if (_quantidade == 1) return SEGUINDO_UM;
+    if (_quantidade < 5) return "$_quantidade $SEGUINDO_PESSOAS";
+    int _limite = _quantidade - 5;
+    return "+ $_limite $SEGUINDO_PESSOAS";
   }
 
   pesquisarSeguindo(String value) {

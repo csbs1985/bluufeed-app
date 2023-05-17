@@ -65,7 +65,7 @@ class EditarPerfilClass {
 
       currentUsuario.value.nomeUsuario = _nomeUsuario;
       await _historiaClass.pathTodosUsuarioHistoria(_nomeUsuario);
-      await _usuarioClass.pathTodosUsuarioComentario(_idUsuario);
+      await _usuarioClass.pathTodosUsuarioComentario(_nomeUsuario);
       await _atividadeClass.postAtividade(
         tipoAtividade: AtividadeEnum.UP_PERFIL.value,
         conteudo: _nomeUsuario,

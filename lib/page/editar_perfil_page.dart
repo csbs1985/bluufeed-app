@@ -44,6 +44,17 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
     super.initState();
   }
 
+  openLoading() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+  }
+
   void _iniciarForm() async {
     _usuario = await _usuarioFirestore.getUsuarioId(widget._idUsuario);
     _biografiaController.text = _usuario!.docs.first['biografia'];
@@ -59,7 +70,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
   }
 
   _editarPerfil(BuildContext context) {
-    setState(() => _isLoading = true);
+    openLoading();
 
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -70,6 +81,8 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
         _biografiaController.text,
       );
     }
+
+    Navigator.of(context).pop();
 
     setState(() => _isLoading = false);
   }

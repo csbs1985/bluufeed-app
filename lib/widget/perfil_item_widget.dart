@@ -88,7 +88,7 @@ class _PerfilItemWidgetState extends State<PerfilItemWidget> {
                     children: [
                       AvatarWidget(
                         size: 60,
-                        avatar: widget._usuario['avatarusuario'],
+                        avatar: widget._usuario['avatarUsuario'],
                       ),
                       _marginPequena,
                       if (isUsuario!)

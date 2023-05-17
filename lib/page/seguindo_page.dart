@@ -95,7 +95,7 @@ class _SeguindoPageState extends State<SeguindoPage> {
                   child: SubtituloText(subtitulo: PESQUISA),
                 ),
                 if (_snapshotUsuario.isNotEmpty)
-                  UsuarioListaWidget(usuario: _snapshotUsuario),
+                  UsuarioListaWidget(usuarios: _snapshotUsuario),
               ],
             ),
           if (_texto.isEmpty)
@@ -113,13 +113,14 @@ class _SeguindoPageState extends State<SeguindoPage> {
                   QueryDocumentSnapshot<dynamic> snapshot) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
+                  children: const [
+                    Padding(
                       padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
                       child: SubtituloText(subtitulo: SEGUINDO),
                     ),
-                    UsuarioListaWidget(
-                        usuario: _usuarioClass.listToMap(snapshot['seguindo'])),
+                    // UsuarioListaWidget(
+                    //     usuarios:
+                    //         _usuarioClass.listToMap(snapshot['seguindo'])),
                   ],
                 );
               },
