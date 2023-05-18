@@ -1,7 +1,8 @@
-import 'package:bluufeed_app/button/modal_button.dart';
+import 'package:bluufeed_app/button/menu_button.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
@@ -46,11 +47,11 @@ class _UsuarioModalState extends State<UsuarioModal> {
   }
 
   denunciarUsuario() {
-    print('deunciar');
+    Navigator.of(context).pop();
   }
 
   bloquearUsuario() {
-    print('bloquear');
+    Navigator.of(context).pop();
   }
 
   @override
@@ -87,22 +88,33 @@ class _UsuarioModalState extends State<UsuarioModal> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SubtituloText(subtitulo: USUARIO_OPCOES),
+                    const SizedBox(height: 16),
                     if (isUsuario!)
-                      ModalButton(
-                          texto: EDITAR, callback: () => editarPerfil(context)),
+                      MenuButton(
+                        callback: () => editarPerfil(context),
+                        resumo: HISTORIA_EDITAR_DESCRICAO,
+                        subtitulo: USUARIO_EDITAR,
+                      ),
+                    if (!isUsuario!) const SizedBox(height: 8),
                     if (!isUsuario!)
-                      ModalButton(
-                        texto: DENUNCIAR,
+                      MenuButton(
                         callback: () => denunciarUsuario(),
+                        resumo: USUARIO_DENUNCIAR_DESCRICAO,
+                        subtitulo: USUARIO_DENUNCIAR,
                       ),
+                    if (!isUsuario!) const SizedBox(height: 8),
                     if (!isUsuario!)
-                      ModalButton(
-                        texto: BLOQUEAR,
+                      MenuButton(
                         callback: () => bloquearUsuario(),
+                        resumo: USUARIO_BLOQUEAR_DESCRICAO,
+                        subtitulo: USUARIO_BLOQUEAR,
                       ),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),

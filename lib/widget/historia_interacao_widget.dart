@@ -1,9 +1,12 @@
 import 'package:bluufeed_app/button/icone_button.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/comentario_class.dart';
+import 'package:bluufeed_app/class/favorito_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
+import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/modal/comentario_modal.dart';
+import 'package:bluufeed_app/modal/enviar_modal.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
@@ -26,6 +29,7 @@ class HistoriaInteracaoWidget extends StatefulWidget {
 class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
   final CategoriaClass categoriesClass = CategoriaClass();
   final ComentarioClass _comentarioClass = ComentarioClass();
+  final FavoritoClass _favoritoClass = FavoritoClass();
 
   @override
   void initState() {
@@ -33,13 +37,21 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
     super.initState();
   }
 
-  void _abrirModal(BuildContext context) {
+  void _comentarioModal(BuildContext context) {
     if (widget._historia['isComentario'])
       showCupertinoModalBottomSheet(
         context: context,
         barrierColor: UiCor.overlay,
         builder: (context) => ComentarioModal(historia: widget._historia),
       );
+  }
+
+  void _enviarModal(BuildContext context) {
+    showCupertinoModalBottomSheet(
+      context: context,
+      barrierColor: UiCor.overlay,
+      builder: (context) => EnviarModal(historia: widget._historia),
+    );
   }
 
   @override
@@ -59,7 +71,7 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
                 valueListenable: currentQtdHistoria,
                 builder: (BuildContext context, int qtdHistoria, _) {
                   return IconeButton(
-                    callback: () => _abrirModal(context),
+                    callback: () => _comentarioModal(context),
                     icone: UiSvg.comentario,
                     cor: isDark ? UiCor.textoEscuro : UiCor.texto,
                     texto: _comentarioClass
@@ -67,14 +79,23 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
                   );
                 },
               ),
-              IconeButton(
-                callback: () => {},
-                icone: UiSvg.favorito,
-                cor: isDark ? UiCor.textoEscuro : UiCor.texto,
-                texto: SALVAR,
+              ValueListenableBuilder(
+                valueListenable: currentUsuario,
+                builder: (BuildContext context, UsuarioModel usuario, __) {
+                  return IconeButton(
+                    callback: () => _favoritoClass.toggleFavorito(
+                      context,
+                      widget._historia['idHistoria'],
+                    ),
+                    icone: _favoritoClass
+                        .isFavoritoIcon(widget._historia['idHistoria']),
+                    cor: isDark ? UiCor.textoEscuro : UiCor.texto,
+                    texto: SALVAR,
+                  );
+                },
               ),
               IconeButton(
-                callback: () => {},
+                callback: () => _enviarModal(context),
                 icone: UiSvg.enviar,
                 cor: isDark ? UiCor.textoEscuro : UiCor.texto,
                 texto: ENVIAR,

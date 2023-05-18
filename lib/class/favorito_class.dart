@@ -1,12 +1,10 @@
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/firestore/historia_firestore.dart';
 import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:bluufeed_app/widget/toast_widget.dart';
 import 'package:flutter/material.dart';
 
-final HistoriaFirestore _historiaFirestore = HistoriaFirestore();
 final ToastWidget _toastWidget = ToastWidget();
 final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
@@ -19,28 +17,27 @@ class FavoritoModel {
 }
 
 class FavoritoClass {
-  String isFavorito(Map<String, dynamic> historia) {
-    return historia['favoritos'].contains(currentUsuario.value.idUsuario)
+  String isFavoritoIcon(String _idHistoria) {
+    return currentUsuario.value.favoritos.contains(_idHistoria)
         ? UiSvg.favoritoAtivo
         : UiSvg.favorito;
   }
 
-  void toggleFavorito(BuildContext context, Map<String, dynamic> historia) {
+  void toggleFavorito(BuildContext context, String _idHistoria) {
     try {
-      if (historia['favoritos'].contains(currentUsuario.value.idUsuario)) {
-        historia['favoritos'].remove(currentUsuario.value.idUsuario);
-        currentUsuario.value.qtdFavoritos--;
-        _toastWidget.toast(context, ToastEnum.SUCESSO, HISTORIA_DESFAVORITADA);
+      if (currentUsuario.value.favoritos.contains(_idHistoria)) {
+        currentUsuario.value.favoritos.remove(_idHistoria);
+        if (currentUsuario.value.qtdFavoritos > 0)
+          currentUsuario.value.qtdFavoritos--;
       } else {
-        historia['favoritos'].add(currentUsuario.value.idUsuario);
+        currentUsuario.value.favoritos.add(_idHistoria);
         currentUsuario.value.qtdFavoritos++;
-        _toastWidget.toast(context, ToastEnum.SUCESSO, HISTORIA_FAVORITADA);
       }
 
-      _historiaFirestore.pathFavorito(historia);
+      _usuarioFirestore.pathFavorito(currentUsuario.value.favoritos);
       _usuarioFirestore.pathQtdFavoritos(currentUsuario.value);
-    } on Exception {
-      // TODO:
+    } catch (e) {
+      _toastWidget.toast(context, ToastEnum.ERRO, HISTORIA_ERRO);
     }
   }
 }

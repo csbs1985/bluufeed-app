@@ -104,7 +104,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TituloText(titulo: EDITAR),
+                        TituloText(titulo: USUARIO_EDITAR),
                         const SizedBox(height: 24),
                         const SubtituloText(subtitulo: USUARIO_NOME),
                         const Padding(

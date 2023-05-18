@@ -43,10 +43,8 @@ class _InfoTextState extends State<InfoWidget> {
         DataText(item: widget._item),
         if (widget._item['isEditado'])
           const LegendaText(legenda: ' · $EDITADO'),
-        if (widget._tipo != InfoEnum.COMENTARIO.name)
-          const LegendaText(legenda: ' · '),
-        if (widget._tipo != InfoEnum.COMENTARIO.name)
-          SvgPicture.asset(UiSvg.autorizado),
+        if (widget._item['isAutorizado']) const LegendaText(legenda: ' · '),
+        if (widget._item['isAutorizado']) SvgPicture.asset(UiSvg.autorizado),
       ],
     );
   }

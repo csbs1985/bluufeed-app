@@ -13,14 +13,20 @@ class UsuarioFirestore {
     return usuarios.where('email', isEqualTo: email).get();
   }
 
-  getUsuarioId(String idUsuario) {
-    return usuarios.where('idUsuario', isEqualTo: idUsuario).get();
+  getUsuarioId(String idUsuario) async {
+    return await usuarios.where('idUsuario', isEqualTo: idUsuario).get();
   }
 
   getAllSeguindo(String idUsuario) {
     return usuarios
         .orderBy('nomeUsuario')
         .where('idUsuario', isEqualTo: idUsuario);
+  }
+
+  pathFavorito(List<String> _listaIdHistoria) {
+    return usuarios
+        .doc(currentUsuario.value.idUsuario)
+        .update({'favoritos': _listaIdHistoria});
   }
 
   pathTodosUsuarioComentario() {

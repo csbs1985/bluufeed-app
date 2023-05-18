@@ -1,6 +1,5 @@
 import 'package:bluufeed_app/text/legenda_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -34,15 +33,12 @@ class _IconeButtonState extends State<IconeButton> {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            ValueListenableBuilder(
-                valueListenable: currentTema,
-                builder: (BuildContext context, Brightness tema, _) {
-                  bool isDark = tema == Brightness.dark;
-                  return SvgPicture.asset(
-                    widget._icone,
-                    color: widget._cor,
-                  );
-                }),
+            Builder(builder: (context) {
+              return SvgPicture.asset(
+                widget._icone,
+                color: widget._cor,
+              );
+            }),
             if (widget._texto != "") const SizedBox(width: 8),
             if (widget._texto != "") LegendaText(legenda: widget._texto!)
           ],

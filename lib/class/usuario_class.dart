@@ -25,6 +25,7 @@ class UsuarioModel {
   late int qtdDenuncias;
   late int qtdHistorias;
   late List<String> bloqueados;
+  late List<String> favoritos;
   late List<String> seguindo;
 
   UsuarioModel({
@@ -43,6 +44,7 @@ class UsuarioModel {
     required this.qtdDenuncias,
     required this.qtdHistorias,
     required this.bloqueados,
+    required this.favoritos,
     required this.seguindo,
   });
 
@@ -62,6 +64,7 @@ class UsuarioModel {
         'qtdDenuncias': usuario['qtdDenuncias'],
         'qtdHistorias': usuario['qtdHistorias'],
         'bloqueados': usuario['bloqueados'],
+        'favoritos': usuario['favoritos'].cast<String>(),
         'seguindo': usuario['seguindo'],
       };
 }
@@ -83,6 +86,7 @@ ValueNotifier<UsuarioModel> currentUsuario =
   qtdDenuncias: 0,
   qtdHistorias: 0,
   bloqueados: [],
+  favoritos: [],
   seguindo: [],
 ));
 
@@ -94,6 +98,10 @@ class UsuarioClass {
   final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
   Map<String, dynamic>? _usuarioMap;
+
+  bool isDonoUsuario(String _idUsuario) {
+    return currentUsuario.value.idUsuario == _idUsuario ? true : false;
+  }
 
   verificarHive() {
     final _usuario = _usuarioHive.readUsuario();
@@ -114,6 +122,7 @@ class UsuarioClass {
       'qtdDenuncias': _usuario['qtdDenuncias'],
       'qtdHistorias': _usuario['qtdHistorias'],
       'bloqueados': _usuario['bloqueados'].cast<String>(),
+      'favoritos': _usuario['favoritos'].cast<String>(),
       'seguindo': _usuario['seguindo'].cast<String>(),
     };
 
@@ -158,6 +167,7 @@ class UsuarioClass {
         'qtdDenuncias': doc.docs.first['qtdDenuncias'],
         'qtdHistorias': doc.docs.first['qtdHistorias'],
         'bloqueados': doc.docs.first['bloqueados'].cast<String>(),
+        'favoritos': doc.docs.first['favoritos'].cast<String>(),
         'seguindo': doc.docs.first['seguindo'].cast<String>(),
       };
     } else {
@@ -177,6 +187,7 @@ class UsuarioClass {
         'qtdDenuncias': 0,
         'qtdHistorias': 0,
         'bloqueados': [],
+        'favoritos': [],
         'seguindo': [],
       };
     }
@@ -207,6 +218,7 @@ class UsuarioClass {
       qtdDenuncias: _usuarioMap['qtdDenuncias'],
       qtdHistorias: _usuarioMap['qtdHistorias'],
       bloqueados: _usuarioMap['bloqueados'].cast<String>(),
+      favoritos: _usuarioMap['favoritos'].cast<String>(),
       seguindo: _usuarioMap['seguindo'].cast<String>(),
     );
   }
@@ -252,6 +264,7 @@ class UsuarioClass {
       qtdDenuncias: 0,
       qtdHistorias: 0,
       bloqueados: [],
+      favoritos: [],
       seguindo: [],
     );
   }
@@ -314,30 +327,24 @@ class UsuarioClass {
     _usuarioFirestore.pathNotificacao();
   }
 
-  String getAvatarId(String _idUsuario) {
-    Map<String, dynamic> _usuario = _usuarioFirestore.getUsuarioId(_idUsuario);
-    return _usuario['avatarUsuario'];
-  }
-
   Map<String, dynamic> getUsuarioId(String _idUsuario) {
     Map<String, dynamic> _usuario = _usuarioFirestore.getUsuarioId(_idUsuario);
     return _usuario;
   }
 
-  Future<List<Map<String, dynamic>>> getListaUsuarios(
-      QueryDocumentSnapshot<dynamic> snapshot) async {
-    List<Map<String, dynamic>> listaUsuarios = [];
+  List<Map<String, dynamic>> getListaUsuarios(
+    QueryDocumentSnapshot<dynamic> snapshot,
+  ) {
+    List<dynamic> seguindoList = snapshot['seguindo'];
+    List<Map<String, dynamic>> resultados = [];
 
-    List<dynamic> idUsuarios = snapshot.data()["idUsuario"];
-
-    for (dynamic idUsuario in idUsuarios) {
-      Map<String, dynamic> usuario = getUsuarioId(idUsuario);
-      if (usuario.length < 0) {
-        listaUsuarios.add(usuario);
-      }
+    for (dynamic idUsuario in seguindoList) {
+      // Future<dynamic> futureUsuario = getUsuarioId(idUsuario);
+      // Map<String, dynamic> _usuario = futureUsuario as Map<String, dynamic>;
+      // resultados.add(_usuario);
     }
 
-    return listaUsuarios;
+    return resultados;
   }
 }
 

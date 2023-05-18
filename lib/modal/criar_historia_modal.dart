@@ -108,7 +108,6 @@ class _CreatePageState extends State<CriarHistoriaModal> {
           'idUsuario': currentUsuario.value.idUsuario,
           'nomeUsuario': currentUsuario.value.nomeUsuario,
           'avatarUsuario': currentUsuario.value.avatarUsuario,
-          'favoritos': currentHistoria.value.favoritos,
         };
       } else {
         _historia = {
@@ -125,7 +124,6 @@ class _CreatePageState extends State<CriarHistoriaModal> {
           'idUsuario': currentUsuario.value.idUsuario,
           'nomeUsuario': currentUsuario.value.nomeUsuario,
           'avatarUsuario': currentUsuario.value.avatarUsuario,
-          'favoritos': [],
         };
       }
 

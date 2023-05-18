@@ -35,7 +35,7 @@ class _SeguindoButtonState extends State<SeguindoButton> {
 
   List<dynamic> _listaAvatar = [];
 
-  Future<void>? _definirAvatar() async {
+  Future<void> _definirAvatar() async {
     final elementos = widget._listaUsuario.take(5).toList();
     _quantidade = elementos.length;
     _listaAvatar = [];
@@ -68,35 +68,34 @@ class _SeguindoButtonState extends State<SeguindoButton> {
                   children: [
                     const SubtituloText(subtitulo: SEGUINDO),
                     const SizedBox(height: 16),
-                    if (_listaAvatar.isNotEmpty)
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: _quantidade * _eixo +
-                                (_quantidade > 0 ? (_eixo / 2) : 0),
-                            height: 42,
-                            child: Stack(
-                              children: List.generate(
-                                _listaAvatar.length,
-                                (index) => Positioned(
-                                  left: index * _eixo,
-                                  child: CircleAvatar(
-                                    radius: 22,
-                                    backgroundColor:
-                                        isDark ? UiCor.mainEscuro : UiCor.main,
-                                    child: AvatarWidget(
-                                        avatar: _listaAvatar[index]),
-                                  ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: _quantidade * _eixo +
+                              (_quantidade > 0 ? (_eixo / 2) : 0),
+                          height: 42,
+                          child: Stack(
+                            children: List.generate(
+                              _listaAvatar.length,
+                              (index) => Positioned(
+                                left: index * _eixo,
+                                child: CircleAvatar(
+                                  radius: 22,
+                                  backgroundColor:
+                                      isDark ? UiCor.mainEscuro : UiCor.main,
+                                  child:
+                                      AvatarWidget(avatar: _listaAvatar[index]),
                                 ),
-                              ).reversed.toList(),
-                            ),
+                              ),
+                            ).reversed.toList(),
                           ),
-                          TextoText(
-                            texto: _seguindoClass
-                                .textoSeguindoButton(widget._listaUsuario),
-                          )
-                        ],
-                      ),
+                        ),
+                        TextoText(
+                          texto: _seguindoClass
+                              .textoSeguindoButton(widget._listaUsuario),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),

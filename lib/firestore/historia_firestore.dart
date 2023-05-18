@@ -36,12 +36,6 @@ class HistoriaFirestore {
         .update({'qtdComentario': _historia['qtdComentario']});
   }
 
-  pathFavorito(Map<String, dynamic> _historia) {
-    return historias
-        .doc(_historia['idHistoria'])
-        .update({'favoritos': _historia['favoritos']});
-  }
-
   postHistoria(Map<String, dynamic> _historia) {
     return historias.doc(_historia['idHistoria']).set(_historia);
   }

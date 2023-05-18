@@ -2,10 +2,12 @@ import 'package:bluufeed_app/appbar/opcoes_appbar.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/firestore/historia_firestore.dart';
+import 'package:bluufeed_app/modal/historia_modal.dart';
 import 'package:bluufeed_app/skeleton/historia_item_skeleton.dart';
 import 'package:bluufeed_app/text/tag_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
+import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:bluufeed_app/widget/historia_interacao_widget.dart';
 import 'package:bluufeed_app/widget/info_widget.dart';
@@ -33,11 +35,20 @@ class _HistoriaPageState extends State<HistoriaPage> {
 
   Map<String, dynamic> _historia = {};
 
+  void _abrirModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      barrierColor: UiCor.overlay,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      builder: (context) => HistoriaModal(historia: _historia),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: OpcoesAppbar(callback: () => {}),
+      appBar: OpcoesAppbar(callback: () => _abrirModal(context)),
       body: StreamBuilder<QuerySnapshot>(
         stream: _historiaFirestore.snapshotsHistoria(widget._idHistoria),
         builder: (
@@ -52,10 +63,10 @@ class _HistoriaPageState extends State<HistoriaPage> {
             case ConnectionState.done:
             default:
               _historia = HistoriaModel.toMap(snapshot.data!.docs[0]);
+
               return SingleChildScrollView(
                 child: SizedBox(
                   width: double.infinity,
-                  // padding: const EdgeInsets.all(UiEspaco.large),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

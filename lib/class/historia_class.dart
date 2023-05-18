@@ -20,7 +20,6 @@ ValueNotifier<HistoriaModel> currentHistoria =
   isAutorizado: false,
   qtdComentario: 0,
   categorias: [],
-  favoritos: [],
 ));
 
 class HistoriaModel {
@@ -37,7 +36,6 @@ class HistoriaModel {
   late bool isAutorizado;
   late int qtdComentario;
   late List<CategoriaModel> categorias;
-  late List<String> favoritos;
 
   HistoriaModel({
     required this.idHistoria,
@@ -53,7 +51,6 @@ class HistoriaModel {
     required this.isAutorizado,
     required this.qtdComentario,
     required this.categorias,
-    required this.favoritos,
   });
 
   static Map<String, dynamic> toMap(historia) => {
@@ -70,7 +67,6 @@ class HistoriaModel {
         'avatarUsuario': historia['avatarUsuario'],
         'qtdComentario': historia['qtdComentario'],
         'categorias': historia['categorias'].cast<String>(),
-        'favoritos': historia['favoritos'].cast<String>(),
       };
 
   static HistoriaModel fromMap(Map<String, dynamic> map) {
@@ -88,7 +84,6 @@ class HistoriaModel {
       isAutorizado: map['isAutorizado'],
       qtdComentario: map['qtdComentario'],
       categorias: map['categorias'].cast<CategoriaModel>(),
-      favoritos: map['favoritos'].cast<String>(),
     );
   }
 }
@@ -111,7 +106,6 @@ class HistoriaClass {
       isAutorizado: false,
       qtdComentario: 0,
       categorias: [],
-      favoritos: [],
     );
   }
 

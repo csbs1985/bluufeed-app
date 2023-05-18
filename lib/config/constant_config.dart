@@ -50,11 +50,7 @@ const String DELETAR_JUSTIFICAR =
     'Você não poderá mais ler, editar e visualizar suas hitórias e comentar em publicações.'
     '\n\nEscolha uma das opções a baixo.';
 
-const String DENUNCIAR = "Denunciar";
-
 const String EDITADO = "editado";
-
-const String EDITAR = "Editar perfil";
 
 const String EDITAR_BIOGRAFIA =
     "A biografia é uma breve descrição que apresenta informações relevantes sobre a vida de uma pessoa. Normalmente, escrita em terceira pessoa e pode incluir detalhes sobre sua formação acadêmica, experiências profissionais, interesses e conquistas ao longo da vida.";
@@ -89,18 +85,27 @@ const String ENTRAR_GOOGLE =
     "\n Cadastre-se ou entre com sua conta Google nativa no dispositivo, selecionando o botão a baixo";
 
 const String ENVIAR = "Enviar";
+const String ENVIAR_HISTORIA = "Enviar história";
 
 const String FINALIZAR = "Finalizar";
 
 const String HISTORIA = "História";
-const String HISTORIA_CRIAR = "Criar história";
-const String HISTORIA_EDITAR = "Editar história";
 const String HISTORIA_ALTERADA = "história alterada";
+const String HISTORIA_CRIAR = "Criar história";
+const String HISTORIA_DELETAR = "Deletar história";
+const String HISTORIA_DELETAR_DESCRICAO =
+    "Ao deletar esta história, todos os comentários e interações tambem deixam de existir.";
 const String HISTORIA_DESFAVORITADA = "história removida da lista";
-const String HISTORIA_FAVORITADA =
-    "história adicionada à lista para ler mais tarde";
+const String HISTORIA_EDITAR = "Editar história";
+const String HISTORIA_EDITAR_DESCRICAO =
+    "Editar sua história quando quiser, só não esqueça de manter o contexto.";
+const String HISTORIA_ERRO =
+    "Não foi possivél atender sua solicitação, tente novamente mais tarde.";
+const String HISTORIA_FAVORITADA = "história adicionada à lista";
 const String HISTORIA_FIM = "Isso é tudo por enquanto.";
+const String HISTORIA_OPCOES = "Opções para esta história";
 const String HISTORIA_PUBLICADA = "história publicada";
+const String HISTORIA_OPCAO_SEM = "Não opções para esta história no momento.";
 const String HISTORIA_TITULO = "Título";
 
 const String INFORMACOES = "Informações";
@@ -387,4 +392,13 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'específicas sobre estes Termos, entre em contato conosco em'
     'csbs.conta@outlook.com.';
 
+const String USUARIO_BLOQUEAR = "Bloquear usuário";
+const String USUARIO_BLOQUEAR_DESCRICAO =
+    "Bloqueie um mau usuário, aqueles que fogem às regras.";
 const String USUARIO_NOME = "Nome de usuário";
+const String USUARIO_EDITAR = "Editar perfil";
+const String USUARIO_EDITAR_DESCRICAO = "Editar perfil";
+const String USUARIO_DENUNCIAR = "Denunciar usuário";
+const String USUARIO_DENUNCIAR_DESCRICAO =
+    "Denuncie um comportamento inadequado e atitudes que violem as regras.";
+const String USUARIO_OPCOES = "Opções para este usuário";

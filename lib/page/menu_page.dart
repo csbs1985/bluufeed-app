@@ -56,7 +56,7 @@ class _PerfilPageState extends State<MenuPage> {
               MenuButton(
                 callback: () => context.pushNamed(RouteEnum.EDITAR_PERFIL.value,
                     params: {'idUsuario': widget._idUsuario}),
-                subtitulo: EDITAR,
+                subtitulo: USUARIO_EDITAR,
                 resumo: EDITAR_PERFIL_DESCRICAO,
               ),
               const SizedBox(height: 8),
