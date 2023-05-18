@@ -1,4 +1,5 @@
 import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:bluufeed_app/input/padrao_input.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
@@ -32,30 +33,14 @@ class _ComentarioInputState extends State<ComentarioInput> {
         bool isDark = tema == Brightness.dark;
 
         return Container(
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                width: 0.1,
-                color: isDark ? UiCor.placeholderEscuro : UiCor.placeholder,
-              ),
-            ),
-          ),
-          child: TextField(
-            autofocus: false,
+          color: isDark ? UiCor.mainEscuro : UiCor.main,
+          padding: const EdgeInsets.fromLTRB(4, 0, 4, 8),
+          child: PadraoInput(
             maxLines: null,
             keyboardType: TextInputType.multiline,
             controller: _comentarioController,
-            onChanged: (value) => setState(() => widget._callback(value)),
-            style: Theme.of(context).textTheme.displayMedium,
-            decoration: InputDecoration(
-              hintText: COMENTARIOS_ESCREVER,
-              filled: true,
-              fillColor: isDark ? UiCor.mainEscuro : UiCor.main,
-              hintStyle: Theme.of(context).textTheme.bodySmall,
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-            ),
+            callback: (value) => setState(() => widget._callback(value)),
+            hintText: COMENTARIOS_ESCREVER,
           ),
         );
       },
