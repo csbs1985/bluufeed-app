@@ -30,11 +30,12 @@ class _SeguindoButtonState extends State<SeguindoButton> {
   final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
 
   final double _eixo = 32.0;
+
   int _quantidade = 0;
 
   List<dynamic> _listaAvatar = [];
 
-  Future<void>? _iniciarSeguindo() async {
+  Future<void>? _definirAvatar() async {
     final elementos = widget._listaUsuario.take(5).toList();
     _quantidade = elementos.length;
     _listaAvatar = [];
@@ -48,7 +49,7 @@ class _SeguindoButtonState extends State<SeguindoButton> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-      future: _iniciarSeguindo(),
+      future: _definirAvatar(),
       builder: (BuildContext context, _) {
         return ValueListenableBuilder(
           valueListenable: currentTema,
