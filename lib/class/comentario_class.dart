@@ -15,6 +15,7 @@ class ComentarioModel {
   late String nomeUsuario;
   late String situacaoUsuario;
   late String texto;
+  late bool isAnonimo;
   late bool isDeletado;
   late bool isEditado;
 
@@ -27,6 +28,7 @@ class ComentarioModel {
     required this.nomeUsuario,
     required this.situacaoUsuario,
     required this.texto,
+    required this.isAnonimo,
     required this.isDeletado,
     required this.isEditado,
   });
@@ -40,10 +42,8 @@ class ComentarioClass {
 
   String definirTextoComentario(Map<String, dynamic> _historia) {
     if (!_historia['isComentario']) return COMENTARIOS_DESABILITADOS;
-    if (_historia['qtdComentario'] == 1)
-      return '${_historia['qtdComentario']} $COMENTARIO';
-    if (_historia['qtdComentario'] > 1)
-      return '${_historia['qtdComentario']} $COMENTARIOS_PLURAL';
+    if (_historia['qtdComentario'] == 1) return COMENTARIO;
+    if (_historia['qtdComentario'] > 1) return COMENTARIOS_PLURAL;
     return COMENTARIOS_PRIMEIRO;
   }
 

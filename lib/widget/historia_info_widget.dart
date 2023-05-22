@@ -6,40 +6,35 @@ import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class InfoWidget extends StatefulWidget {
-  const InfoWidget({
+class HistoriaInfoWidget extends StatefulWidget {
+  const HistoriaInfoWidget({
     super.key,
     required Map<String, dynamic> item,
-    required String tipo,
-  })  : _tipo = tipo,
-        _item = item;
+  }) : _item = item;
 
-  final String? _tipo;
   final Map<String, dynamic> _item;
 
   @override
-  State<InfoWidget> createState() => _InfoTextState();
+  State<HistoriaInfoWidget> createState() => _InfoTextState();
 }
 
-class _InfoTextState extends State<InfoWidget> {
+class _InfoTextState extends State<HistoriaInfoWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (widget._tipo != InfoEnum.HISTORIA.name)
-          Row(
-            children: [
-              AvatarWidget(
-                avatar: widget._item['avatarUsuario'],
-                size: 6,
-              ),
-              const SizedBox(width: 4),
-              LegendaText(legenda: widget._item['nomeUsuario'])
-            ],
-          ),
-        if (widget._tipo != InfoEnum.HISTORIA.name)
-          const LegendaText(legenda: ' · '),
+        Row(
+          children: [
+            AvatarWidget(
+              avatar: widget._item['avatarUsuario'],
+              size: 6,
+            ),
+            const SizedBox(width: 4),
+            LegendaText(legenda: widget._item['nomeUsuario'])
+          ],
+        ),
+        const LegendaText(legenda: ' · '),
         DataText(item: widget._item),
         if (widget._item['isEditado'])
           const LegendaText(legenda: ' · $EDITADO'),
@@ -49,5 +44,3 @@ class _InfoTextState extends State<InfoWidget> {
     );
   }
 }
-
-enum InfoEnum { HISTORIA, COMENTARIO, INICIO }

@@ -1,12 +1,13 @@
 import 'package:bluufeed_app/button/icone_button.dart';
 import 'package:bluufeed_app/class/categoria_class.dart';
-import 'package:bluufeed_app/class/comentario_class.dart';
 import 'package:bluufeed_app/class/favorito_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/modal/comentario_modal.dart';
 import 'package:bluufeed_app/modal/enviar_modal.dart';
+import 'package:bluufeed_app/text/animado_text.dart';
+import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
@@ -28,7 +29,6 @@ class HistoriaInteracaoWidget extends StatefulWidget {
 
 class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
   final CategoriaClass categoriesClass = CategoriaClass();
-  final ComentarioClass _comentarioClass = ComentarioClass();
   final FavoritoClass _favoritoClass = FavoritoClass();
 
   @override
@@ -70,12 +70,13 @@ class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
               ValueListenableBuilder(
                 valueListenable: currentQtdHistoria,
                 builder: (BuildContext context, int qtdHistoria, _) {
-                  return IconeButton(
-                    callback: () => _comentarioModal(context),
-                    icone: UiSvg.comentario,
-                    cor: isDark ? UiCor.textoEscuro : UiCor.texto,
-                    texto: _comentarioClass
-                        .definirTextoComentario(widget._historia),
+                  return InkWell(
+                    borderRadius: BorderRadius.circular(UiBorda.circulo),
+                    child: AnimadoText(
+                      item: widget._historia,
+                      isBotao: true,
+                    ),
+                    onTap: () => _comentarioModal(context),
                   );
                 },
               ),

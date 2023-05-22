@@ -29,23 +29,26 @@ class _ComentarioListaWidgetState extends State<ComentarioListaWidget> {
         MediaQuery.of(context).size.height - (UiTamanho.appbar * 4);
 
     return SingleChildScrollView(
-      child: FirestoreListView(
-        query:
-            _comentarioFirestore.getAllComentariosHistoria(widget._idHistoria),
-        pageSize: 25,
-        shrinkWrap: true,
-        reverse: true,
-        physics: const NeverScrollableScrollPhysics(),
-        loadingBuilder: (context) => const ComentarioSkeleton(),
-        errorBuilder: (context, error, _) =>
-            ErroResultadoWidget(altura: _altura),
-        emptyBuilder: (context) => SemResultadoWidget(altura: _altura),
-        itemBuilder: (
-          BuildContext context,
-          QueryDocumentSnapshot<dynamic> snapshot,
-        ) {
-          return CommentItemWidget(comentario: snapshot.data());
-        },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: FirestoreListView(
+          query: _comentarioFirestore
+              .getAllComentariosHistoria(widget._idHistoria),
+          pageSize: 25,
+          shrinkWrap: true,
+          reverse: true,
+          physics: const NeverScrollableScrollPhysics(),
+          loadingBuilder: (context) => const ComentarioSkeleton(),
+          errorBuilder: (context, error, _) =>
+              ErroResultadoWidget(altura: _altura),
+          emptyBuilder: (context) => SemResultadoWidget(altura: _altura),
+          itemBuilder: (
+            BuildContext context,
+            QueryDocumentSnapshot<dynamic> snapshot,
+          ) {
+            return CommentItemWidget(comentario: snapshot.data());
+          },
+        ),
       ),
     );
   }

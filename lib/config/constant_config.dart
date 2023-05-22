@@ -126,6 +126,7 @@ const String PERFIL = "Perfil";
 const String PERFIL_DESCRICAO = "Veja seu perfil e histórias";
 
 const String PESQUISA = "Pesquisa";
+const String PESQUISA_INICIAR = "Viva histórias incríveis com outros usuários.";
 
 const String PERGUNTAS = "Perguntas frequentes";
 const String PERGUNTAS_DESCRICAO =

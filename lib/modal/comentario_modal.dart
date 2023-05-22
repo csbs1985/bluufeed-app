@@ -2,11 +2,12 @@ import 'package:bluufeed_app/class/comentario_class.dart';
 import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/input/comentario_input_dart.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
+import 'package:bluufeed_app/input/padrao_input.dart';
+import 'package:bluufeed_app/text/animado_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
+import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/comentario_lista_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,14 @@ class ComentarioModal extends StatefulWidget {
 
 class _ComentarioModalState extends State<ComentarioModal> {
   final ComentarioClass _comentarioClass = ComentarioClass();
-  final TextEditingController _commentController = TextEditingController();
+  final TextEditingController _comentarioController = TextEditingController();
   final Uuid uuid = const Uuid();
+
+  String _texto = "";
+
+  void _definirTexto(String value) {
+    setState(() => _texto = value);
+  }
 
   _postComentario(BuildContext context) {
     try {
@@ -41,18 +48,26 @@ class _ComentarioModalState extends State<ComentarioModal> {
         'idComentario': uuid.v4(),
         'isEditado': false,
         'isDeletado': false,
-        'texto': _commentController.text.trim(),
+        'isAnonimo': false,
+        'texto': _texto.trim(),
         'situacaoUsuario': currentUsuario.value.situacaoConta
       };
 
       setState(() {
         widget._historia['qtdComentario']++;
         _comentarioClass.postComentario(context, _comentario, widget._historia);
-        Navigator.of(context).pop();
+        _comentarioController.clear();
+        _texto = "";
       });
     } on FirebaseAuthException catch (error) {
       debugPrint('$ERRO_POST_COMENTARIO $error');
     }
+  }
+
+  @override
+  void dispose() {
+    _comentarioController.dispose();
+    super.dispose();
   }
 
   @override
@@ -63,9 +78,7 @@ class _ComentarioModalState extends State<ComentarioModal> {
         title: ValueListenableBuilder(
           valueListenable: currentQtdHistoria,
           builder: (BuildContext context, int qtdHistoria, _) {
-            return TextoText(
-                texto:
-                    _comentarioClass.definirTextoComentario(widget._historia));
+            return AnimadoText(item: widget._historia);
           },
         ),
       ),
@@ -76,9 +89,25 @@ class _ComentarioModalState extends State<ComentarioModal> {
         child:
             ComentarioListaWidget(idHistoria: widget._historia['idHistoria']),
       ),
-      bottomSheet: ComentarioInput(
-          callback: (value) => setState(() => _commentController.text = value)),
-      floatingActionButton: _commentController.text.isNotEmpty
+      bottomSheet: ValueListenableBuilder(
+        valueListenable: currentTema,
+        builder: (BuildContext context, Brightness tema, _) {
+          bool isDark = tema == Brightness.dark;
+
+          return Container(
+            color: isDark ? UiCor.mainEscuro : UiCor.main,
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+            child: PadraoInput(
+              callback: (value) => _definirTexto(value),
+              controller: _comentarioController,
+              hintText: COMENTARIOS_ESCREVER,
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+            ),
+          );
+        },
+      ),
+      floatingActionButton: _comentarioController.text.isNotEmpty
           ? FloatingActionButton(
               backgroundColor: UiCor.botao,
               elevation: 0,

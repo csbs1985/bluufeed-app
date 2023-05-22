@@ -9,8 +9,8 @@ import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
+import 'package:bluufeed_app/widget/historia_info_widget.dart';
 import 'package:bluufeed_app/widget/historia_interacao_widget.dart';
-import 'package:bluufeed_app/widget/info_widget.dart';
 import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
 import 'package:bluufeed_app/widget/usuario_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -98,10 +98,7 @@ class _HistoriaPageState extends State<HistoriaPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                        child: InfoWidget(
-                          item: _historia,
-                          tipo: InfoEnum.HISTORIA.name,
-                        ),
+                        child: HistoriaInfoWidget(item: _historia),
                       ),
                       HistoriaInteracaoWidget(historia: _historia),
                       Column(

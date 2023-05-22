@@ -1,12 +1,14 @@
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
-import 'package:bluufeed_app/widget/info_widget.dart';
+import 'package:bluufeed_app/widget/comentario_info_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class CommentItemWidget extends StatefulWidget {
   const CommentItemWidget({
@@ -21,48 +23,88 @@ class CommentItemWidget extends StatefulWidget {
 }
 
 class _CommentItemWidgetState extends State<CommentItemWidget> {
+  final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
+
+  Map<String, dynamic> _cometarioMap = {};
+
+  int index = 1;
+
+  Future<void> _definirUsuario() async {
+    try {
+      final _usuario =
+          await _usuarioFirestore.getUsuarioId(widget._comentario['idUsuario']);
+
+      _cometarioMap = {
+        ...widget._comentario,
+        'avatarUsuario': _usuario.docs.first['avatarUsuario'],
+        'nomeUsuario': _usuario.docs.first['nomeUsuario'],
+      };
+    } catch (e) {}
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: currentTema,
-      builder: (BuildContext context, Brightness tema, _) {
-        bool isDark = tema == Brightness.dark;
+    return FutureBuilder<void>(
+      future: _definirUsuario(),
+      builder: (BuildContext context, _) {
+        return ValueListenableBuilder(
+          valueListenable: currentTema,
+          builder: (BuildContext context, Brightness tema, _) {
+            bool isDark = tema == Brightness.dark;
 
-        return GestureDetector(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: UiEspaco.large),
-            child: Column(
-              crossAxisAlignment: widget._comentario['idUsuario'] ==
-                      currentUsuario.value.idUsuario
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
-              children: [
-                Card(
-                  elevation: 0,
-                  color: isDark ? UiCor.botaoSegundoEscuro : UiCor.botaoSegundo,
-                  margin: const EdgeInsets.all(0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(UiBorda.arredondada),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(UiEspaco.medium),
-                    child: TextoText(
-                      texto: widget._comentario['isDeletado']
-                          ? COMENTARIO_DELETADO
-                          : widget._comentario['texto'],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 4, 0, UiEspaco.large),
-                  child: InfoWidget(
-                    item: widget._comentario,
-                    tipo: InfoEnum.COMENTARIO.name,
-                  ),
-                )
-              ],
-            ),
-          ),
+            return InkWell(
+              onTap: () => {},
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                child: !_cometarioMap.isNotEmpty
+                    ? null
+                    : AnimationConfiguration.staggeredList(
+                        position: index++,
+                        duration: const Duration(milliseconds: 100),
+                        child: SlideAnimation(
+                          verticalOffset: 50,
+                          child: FadeInAnimation(
+                            child: Column(
+                              crossAxisAlignment:
+                                  widget._comentario['idUsuario'] ==
+                                          currentUsuario.value.idUsuario
+                                      ? CrossAxisAlignment.end
+                                      : CrossAxisAlignment.start,
+                              children: [
+                                Card(
+                                  elevation: 0,
+                                  color: isDark
+                                      ? UiCor.botaoSegundoEscuro
+                                      : UiCor.botaoSegundo,
+                                  margin: const EdgeInsets.all(0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        UiBorda.arredondada),
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.all(UiEspaco.medium),
+                                    child: TextoText(
+                                      texto: widget._comentario['isDeletado']
+                                          ? COMENTARIO_DELETADO
+                                          : widget._comentario['texto'],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 4, 0, 8),
+                                  child:
+                                      ComentarioInfoWidget(item: _cometarioMap),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+              ),
+            );
+          },
         );
       },
     );

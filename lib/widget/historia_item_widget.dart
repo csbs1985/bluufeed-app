@@ -1,7 +1,7 @@
 import 'package:bluufeed_app/class/categoria_class.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
 import 'package:bluufeed_app/text/ellipsis_text%20.dart';
-import 'package:bluufeed_app/widget/info_widget.dart';
+import 'package:bluufeed_app/widget/historia_info_widget.dart';
 import 'package:bluufeed_app/text/tag_text.dart';
 import 'package:bluufeed_app/text/titulo_text.dart';
 import 'package:bluufeed_app/theme/ui_espaco.dart';
@@ -39,10 +39,7 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TituloText(titulo: widget._item['titulo']),
-                InfoWidget(
-                  tipo: InfoEnum.INICIO.name,
-                  item: widget._item,
-                ),
+                HistoriaInfoWidget(item: widget._item),
                 EllipsisText(texto: widget._item['texto']),
                 Wrap(
                   children: [
