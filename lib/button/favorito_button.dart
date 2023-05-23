@@ -66,7 +66,11 @@ class _FavoritoButtonState extends State<FavoritoButton> {
                       _usuario.favoritos.contains(widget._idHistoria)
                           ? UiSvg.favoritoAtivo
                           : UiSvg.favorito,
-                      color: isDark ? UiCor.textoEscuro : UiCor.texto,
+                      color: _usuario.favoritos.contains(widget._idHistoria)
+                          ? null
+                          : isDark
+                              ? UiCor.textoEscuro
+                              : UiCor.texto,
                     ),
                     const SizedBox(width: 8),
                     LegendaText(
