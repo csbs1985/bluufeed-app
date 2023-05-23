@@ -1,5 +1,4 @@
 import 'package:bluufeed_app/class/comentario_class.dart';
-import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/input/padrao_input.dart';
@@ -75,12 +74,7 @@ class _ComentarioModalState extends State<ComentarioModal> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: ValueListenableBuilder(
-          valueListenable: currentQtdHistoria,
-          builder: (BuildContext context, int qtdHistoria, _) {
-            return AnimadoText(item: widget._historia);
-          },
-        ),
+        title: AnimadoText(item: widget._historia),
       ),
       body: Container(
         constraints: const BoxConstraints.expand(),

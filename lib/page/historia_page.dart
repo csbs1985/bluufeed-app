@@ -12,7 +12,7 @@ import 'package:bluufeed_app/theme/ui_espaco.dart';
 import 'package:bluufeed_app/widget/historia_info_widget.dart';
 import 'package:bluufeed_app/widget/historia_interacao_widget.dart';
 import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
-import 'package:bluufeed_app/widget/usuario_item.dart';
+import 'package:bluufeed_app/widget/usuario_item_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

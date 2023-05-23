@@ -6,6 +6,7 @@ import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_svg.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
+import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -52,9 +53,17 @@ class _UsuarioItemWidgetState extends State<UsuarioItemWidget> {
             const SizedBox(width: 16),
             SeguirButton(idUsuario: widget._usuario['idUsuario']),
             const SizedBox(width: 0),
-            IconeButton(
-              callback: () => _abrirModal(context, widget._usuario),
-              icone: UiSvg.opcoes,
+            ValueListenableBuilder(
+              valueListenable: currentTema,
+              builder: (BuildContext context, Brightness tema, _) {
+                bool isDark = tema == Brightness.dark;
+
+                return IconeButton(
+                  callback: () => _abrirModal(context, widget._usuario),
+                  cor: isDark ? UiCor.textoEscuro : UiCor.texto,
+                  icone: UiSvg.opcoes,
+                );
+              },
             )
           ],
         ),

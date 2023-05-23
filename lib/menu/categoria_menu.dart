@@ -19,7 +19,7 @@ class _MenuWidgetState extends State<CategoriaMenu> {
   @override
   Widget build(BuildContext context) {
     bool podeMostrar(CategoriaModel item) {
-      return item.isDesabilitada! ? false : true;
+      return item.isDesabilitada ? false : true;
     }
 
     bool _itemSelecionado(CategoriaModel item) {
@@ -63,7 +63,7 @@ class _MenuWidgetState extends State<CategoriaMenu> {
                                     ? UiBotao.tagEscuro
                                     : UiBotao.tag,
                             child: Text(
-                              listaCategoria[index].texto!.toLowerCase(),
+                              listaCategoria[index].texto.toLowerCase(),
                               style: _itemSelecionado(listaCategoria[index])
                                   ? UiTexto.tagAtiva
                                   : isDark

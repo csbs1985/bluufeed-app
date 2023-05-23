@@ -33,12 +33,10 @@ class _IconeButtonState extends State<IconeButton> {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            Builder(builder: (context) {
-              return SvgPicture.asset(
-                widget._icone,
-                color: widget._cor,
-              );
-            }),
+            SvgPicture.asset(
+              widget._icone,
+              color: widget._cor,
+            ),
             if (widget._texto != "") const SizedBox(width: 8),
             if (widget._texto != "") LegendaText(legenda: widget._texto!)
           ],

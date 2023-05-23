@@ -87,6 +87,9 @@ const String ENTRAR_GOOGLE =
 const String ENVIAR = "Enviar";
 const String ENVIAR_HISTORIA = "Enviar história";
 
+const String FAVORITO = "Ler mais tarde";
+const String FAVORITO_DEIXAR = "Remover";
+
 const String FINALIZAR = "Finalizar";
 
 const String HISTORIA = "História";
@@ -193,8 +196,6 @@ const String POLITICA_PRIVACIDADE = 'Política de Privacidade'
     'confirma sua aceitação de nossa Política de Privacidade atualizada.';
 
 const String PUBLICACOES = "Publicações";
-
-const String SALVAR = "Salvar";
 
 const String SAIR = "Sair";
 const String SAIR_CONTA = "Sair da sua conta?";
