@@ -98,15 +98,13 @@ class _HistoriaPageState extends State<HistoriaPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                        child: HistoriaInfoWidget(item: _historia),
+                        child: HistoriaInfoWidget(
+                          item: _historia,
+                          isAvatar: false,
+                        ),
                       ),
                       HistoriaInteracaoWidget(historia: _historia),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          UsuarioItemWidget(usuario: _historia),
-                        ],
-                      ),
+                      UsuarioItemWidget(idUsuario: _historia['idUsuario']),
                     ],
                   ),
                 ),

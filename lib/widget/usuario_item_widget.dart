@@ -1,6 +1,7 @@
 import 'package:bluufeed_app/button/icone_button.dart';
 import 'package:bluufeed_app/button/seguir_button.dart';
 import 'package:bluufeed_app/class/rotas_class.dart';
+import 'package:bluufeed_app/firestore/usuario_firestore.dart';
 import 'package:bluufeed_app/modal/usuario_modal.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
@@ -14,16 +15,29 @@ import 'package:go_router/go_router.dart';
 class UsuarioItemWidget extends StatefulWidget {
   const UsuarioItemWidget({
     super.key,
-    required Map<String, dynamic> usuario,
-  }) : _usuario = usuario;
+    required String idUsuario,
+  }) : _idUsuario = idUsuario;
 
-  final Map<String, dynamic> _usuario;
+  final String _idUsuario;
 
   @override
   State<UsuarioItemWidget> createState() => _UsuarioItemWidgetState();
 }
 
 class _UsuarioItemWidgetState extends State<UsuarioItemWidget> {
+  final UsuarioFirestore _usuarioFirestore = UsuarioFirestore();
+
+  Map<String, dynamic>? _usuario;
+
+  Future<void> _definirUsuario() async {
+    final doc = await _usuarioFirestore.getUsuarioId(widget._idUsuario);
+    _usuario = {
+      'idUsuario': widget._idUsuario,
+      'nomeUsuario': doc.docs.first['nomeUsuario'],
+      'avatarUsuario': doc.docs.first['avatarUsuario'],
+    };
+  }
+
   void _abrirModal(BuildContext context, Map<String, dynamic> _usuario) {
     showModalBottomSheet(
       context: context,
@@ -35,39 +49,45 @@ class _UsuarioItemWidgetState extends State<UsuarioItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
-          params: {'idUsuario': widget._usuario['idUsuario']}),
-      child: Container(
-        height: UiTamanho.appbar,
-        padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            AvatarWidget(
-              avatar: widget._usuario['avatarUsuario'],
-              size: 20,
-            ),
-            const SizedBox(width: 16),
-            Expanded(child: TextoText(texto: widget._usuario['nomeUsuario'])),
-            const SizedBox(width: 16),
-            SeguirButton(idUsuario: widget._usuario['idUsuario']),
-            const SizedBox(width: 0),
-            ValueListenableBuilder(
-              valueListenable: currentTema,
-              builder: (BuildContext context, Brightness tema, _) {
-                bool isDark = tema == Brightness.dark;
+    return FutureBuilder<void>(
+      future: _definirUsuario(),
+      builder: (BuildContext context, _) {
+        return InkWell(
+          onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
+              params: {'idUsuario': _usuario!['idUsuario']}),
+          child: Container(
+            height: UiTamanho.appbar,
+            padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (_usuario != null)
+                  AvatarWidget(avatar: _usuario!['avatarUsuario']),
+                const SizedBox(width: 16),
+                if (_usuario != null)
+                  Expanded(child: TextoText(texto: _usuario!['nomeUsuario'])),
+                const SizedBox(width: 16),
+                if (_usuario != null)
+                  SeguirButton(idUsuario: _usuario!['idUsuario']),
+                const SizedBox(width: 0),
+                if (_usuario != null)
+                  ValueListenableBuilder(
+                    valueListenable: currentTema,
+                    builder: (BuildContext context, Brightness tema, _) {
+                      bool isDark = tema == Brightness.dark;
 
-                return IconeButton(
-                  callback: () => _abrirModal(context, widget._usuario),
-                  cor: isDark ? UiCor.textoEscuro : UiCor.texto,
-                  icone: UiSvg.opcoes,
-                );
-              },
-            )
-          ],
-        ),
-      ),
+                      return IconeButton(
+                        callback: () => _abrirModal(context, _usuario!),
+                        cor: isDark ? UiCor.textoEscuro : UiCor.texto,
+                        icone: UiSvg.opcoes,
+                      );
+                    },
+                  )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

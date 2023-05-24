@@ -33,7 +33,8 @@ class _UsuarioListaWidgetState extends State<UsuarioListaWidget> {
                 itemCount: widget._usuarios.length,
                 separatorBuilder: (context, index) => const SizedBox(height: 4),
                 itemBuilder: (context, index) {
-                  return UsuarioItemWidget(usuario: widget._usuarios[index]);
+                  return UsuarioItemWidget(
+                      idUsuario: widget._usuarios[index]['idUsuario']);
                 },
               ),
             ],

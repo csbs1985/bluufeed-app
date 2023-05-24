@@ -336,7 +336,7 @@ enum CategoriaEnum {
 }
 
 class CategoriaClass {
-  pegarTextoCategoria(String _item) {
+  String pegarTextoCategoria(String _item) {
     var categoria =
         listaCategoria.firstWhere((element) => element.idCategoria == _item);
 

@@ -1,12 +1,15 @@
 import 'package:bluufeed_app/button/menu_button.dart';
+import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:bluufeed_app/modal/criar_historia_modal.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HistoriaModal extends StatefulWidget {
   const HistoriaModal({
@@ -21,7 +24,7 @@ class HistoriaModal extends StatefulWidget {
 }
 
 class _UsuarioModalState extends State<HistoriaModal> {
-  final UsuarioClass _usuarioClass = UsuarioClass();
+  final HistoriaClass _historiaClass = HistoriaClass();
 
   bool? isUsuario;
 
@@ -32,18 +35,24 @@ class _UsuarioModalState extends State<HistoriaModal> {
   }
 
   definirUsuario() {
-    setState(() {
-      isUsuario =
-          widget._historia['idUsuario'] == currentUsuario.value.idUsuario
-              ? true
-              : false;
-    });
+    setState(() => isUsuario =
+        widget._historia['idUsuario'] == currentUsuario.value.idUsuario
+            ? true
+            : false);
   }
 
   editarHistoria(BuildContext context) {
     Navigator.of(context).pop();
-    // context.pushNamed(RouteEnum.EDITAR_PERFIL.value,
-    //     params: {'idUsuario': widget._historia['idUsuario']});
+    _historiaClass.limparCurrentHistoria();
+
+    showCupertinoModalBottomSheet(
+      expand: true,
+      context: context,
+      barrierColor: UiCor.overlay,
+      duration: const Duration(milliseconds: 300),
+      builder: (context) =>
+          CriarHistoriaModal(idHistoria: widget._historia['idHistoria']),
+    );
   }
 
   deletarHistoria() {

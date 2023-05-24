@@ -12,8 +12,6 @@ ValueNotifier<HistoriaModel> currentHistoria =
   texto: '',
   dataRegistro: '',
   idUsuario: '',
-  nomeUsuario: '',
-  avatarUsuario: '',
   isComentario: false,
   isAnonimo: false,
   isEditado: false,
@@ -28,8 +26,6 @@ class HistoriaModel {
   late String texto;
   late String dataRegistro;
   late String idUsuario;
-  late String nomeUsuario;
-  late String avatarUsuario;
   late bool isComentario;
   late bool isAnonimo;
   late bool isEditado;
@@ -43,8 +39,6 @@ class HistoriaModel {
     required this.texto,
     required this.dataRegistro,
     required this.idUsuario,
-    required this.nomeUsuario,
-    required this.avatarUsuario,
     required this.isComentario,
     required this.isAnonimo,
     required this.isEditado,
@@ -63,8 +57,6 @@ class HistoriaModel {
         'isEditado': historia['isEditado'],
         'isAutorizado': historia['isAutorizado'],
         'idUsuario': historia['idUsuario'],
-        'nomeUsuario': historia['nomeUsuario'],
-        'avatarUsuario': historia['avatarUsuario'],
         'qtdComentario': historia['qtdComentario'],
         'categorias': historia['categorias'].cast<String>(),
       };
@@ -76,8 +68,6 @@ class HistoriaModel {
       texto: map['texto'],
       dataRegistro: map['dataRegistro'],
       idUsuario: map['idUsuario'],
-      nomeUsuario: map['nomeUsuario'],
-      avatarUsuario: map['avatarUsuario'],
       isComentario: map['isComentario'],
       isAnonimo: map['isAnonimo'],
       isEditado: map['isEditado'],
@@ -98,8 +88,6 @@ class HistoriaClass {
       texto: '',
       dataRegistro: '',
       idUsuario: '',
-      nomeUsuario: '',
-      avatarUsuario: '',
       isComentario: false,
       isAnonimo: false,
       isEditado: false,

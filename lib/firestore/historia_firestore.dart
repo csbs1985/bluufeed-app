@@ -11,12 +11,16 @@ class HistoriaFirestore {
         .where('idUsuario', isEqualTo: idUsuario);
   }
 
-  snapshotsHistoria(String _idHistory) {
-    return historias.where('idHistoria', isEqualTo: _idHistory).snapshots();
+  getHistoriaId(String _idHistoria) async {
+    return await historias.where('idHistoria', isEqualTo: _idHistoria).get();
   }
 
-  deletarHistoriaId(String _idHistory) {
-    return historias.doc(_idHistory).delete();
+  snapshotsHistoria(String _idHistoria) {
+    return historias.where('idHistoria', isEqualTo: _idHistoria).snapshots();
+  }
+
+  deletarHistoriaId(String _idHistoria) {
+    return historias.doc(_idHistoria).delete();
   }
 
   pathTodosUsuarioHistoria() {
