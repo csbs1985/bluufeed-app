@@ -3,6 +3,7 @@ import 'package:bluufeed_app/class/historia_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/modal/criar_historia_modal.dart';
+import 'package:bluufeed_app/modal/deleter_historia_modal.dart';
 import 'package:bluufeed_app/text/subtitulo_text.dart';
 import 'package:bluufeed_app/text/texto_text.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
@@ -58,7 +59,13 @@ class _UsuarioModalState extends State<HistoriaModal> {
 
   deletarHistoria() {
     Navigator.of(context).pop();
-    print('deunciar');
+
+    showModalBottomSheet(
+      context: context,
+      barrierColor: UiCor.overlay,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      builder: (context) => DeletarHistoriaModal(idHistoria: widget._historia),
+    );
   }
 
   @override

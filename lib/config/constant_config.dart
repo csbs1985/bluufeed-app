@@ -96,8 +96,10 @@ const String HISTORIA = "História";
 const String HISTORIA_ALTERADA = "história alterada";
 const String HISTORIA_CRIAR = "Criar história";
 const String HISTORIA_DELETAR = "Deletar história";
+const String HISTORIA_DELETAR_ERRO = "Não foi possivél deletar a história";
 const String HISTORIA_DELETAR_DESCRICAO =
     "Ao deletar esta história, todos os comentários e interações tambem deixam de existir.";
+const String HISTORIA_DELETAR_SUCESSO = "Sucesso ao deletar a história";
 const String HISTORIA_DESFAVORITADA = "história removida da lista";
 const String HISTORIA_EDITAR = "Editar história";
 const String HISTORIA_EDITAR_DESCRICAO =
