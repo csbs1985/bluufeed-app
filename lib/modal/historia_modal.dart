@@ -44,6 +44,7 @@ class _UsuarioModalState extends State<HistoriaModal> {
   editarHistoria(BuildContext context) {
     Navigator.of(context).pop();
     _historiaClass.limparCurrentHistoria();
+    currentHistoria.value = HistoriaModel.fromMap(widget._historia);
 
     showCupertinoModalBottomSheet(
       expand: true,

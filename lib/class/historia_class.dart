@@ -31,7 +31,7 @@ class HistoriaModel {
   late bool isEditado;
   late bool isAutorizado;
   late int qtdComentario;
-  late List<CategoriaModel> categorias;
+  late List<String> categorias;
 
   HistoriaModel({
     required this.idHistoria,
@@ -73,7 +73,7 @@ class HistoriaModel {
       isEditado: map['isEditado'],
       isAutorizado: map['isAutorizado'],
       qtdComentario: map['qtdComentario'],
-      categorias: map['categorias'].cast<CategoriaModel>(),
+      categorias: map['categorias'].cast<String>(),
     );
   }
 }
