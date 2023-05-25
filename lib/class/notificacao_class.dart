@@ -1,4 +1,5 @@
 import 'package:bluufeed_app/firestore/notificacao_firestore.dart';
+import 'package:flutter/material.dart';
 
 class NotificacaoModel {
   late bool isVisualizado;
@@ -25,6 +26,8 @@ class NotificacaoModel {
     required this.idDestinatario,
   });
 }
+
+ValueNotifier<bool> currentIsNotificacao = ValueNotifier<bool>(true);
 
 class NotificacaoClass {
   final NotificacaoFirestore _notificacaoFirestore = NotificacaoFirestore();
