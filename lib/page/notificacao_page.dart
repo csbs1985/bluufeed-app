@@ -1,5 +1,4 @@
 import 'package:bluufeed_app/appbar/opcoes_appbar.dart';
-import 'package:bluufeed_app/class/notificacao_class.dart';
 import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/firestore/notificacao_firestore.dart';
 import 'package:bluufeed_app/modal/notificacao_modal.dart';
@@ -8,7 +7,6 @@ import 'package:bluufeed_app/text/titulo_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/erro_resultado_widget.dart';
-import 'package:bluufeed_app/widget/notificacao_item_widget.dart';
 import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
@@ -29,14 +27,6 @@ class NotificacaoPage extends StatefulWidget {
 
 class _NotificacaoPageState extends State<NotificacaoPage> {
   final NotificacaoFirestore _notificacaoFirestore = NotificacaoFirestore();
-
-  int index = 1;
-
-  @override
-  void initState() {
-    currentIsNotificacao.value = false;
-    super.initState();
-  }
 
   void _abrirModal(BuildContext context) {
     showModalBottomSheet(
@@ -79,15 +69,14 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
                 QueryDocumentSnapshot<dynamic> snapshot,
               ) {
                 return AnimationConfiguration.staggeredList(
-                  position: index++,
-                  duration: const Duration(milliseconds: 100),
+                  position: 1,
+                  duration: const Duration(milliseconds: 300),
                   child: SlideAnimation(
                     verticalOffset: 50,
                     child: FadeInAnimation(
                       child: Column(
-                        children: [
-                          NotificacaoItemWidget(notificacao: snapshot.data()),
-                          const SizedBox(height: 4),
+                        children: const [
+                          // NotificacaoItemWidget(notificacao: snapshot.data()),
                         ],
                       ),
                     ),

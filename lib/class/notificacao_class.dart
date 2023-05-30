@@ -1,4 +1,5 @@
 import 'package:bluufeed_app/firestore/notificacao_firestore.dart';
+import 'package:bluufeed_app/hive/notificacao_hive.dart';
 import 'package:flutter/material.dart';
 
 class NotificacaoModel {
@@ -31,6 +32,7 @@ ValueNotifier<bool> currentIsNotificacao = ValueNotifier<bool>(true);
 
 class NotificacaoClass {
   final NotificacaoFirestore _notificacaoFirestore = NotificacaoFirestore();
+  final NotificacaoHive _notificacaoHive = NotificacaoHive();
 
   String definirConteudo(Map<String, dynamic> _notificacao) {
     return _notificacao['tipoNotificacao'] == NotificacaoEnum.COMMENT.value
@@ -40,6 +42,14 @@ class NotificacaoClass {
 
   Future<void> pathVizualizarNotificacao(String _idNotificacao) async {
     await _notificacaoFirestore.pathVizualizarNotificacao(_idNotificacao);
+  }
+
+  Future<void> verificarNumeroNotificacao(int _quantidadeStream) async {
+    int _quantidade = await _notificacaoHive.getNotificacao() ?? 0;
+
+    currentIsNotificacao.value =
+        _quantidadeStream != _quantidade ? true : false;
+    _notificacaoHive.putNotificacao(_quantidadeStream);
   }
 }
 

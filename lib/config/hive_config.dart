@@ -5,5 +5,6 @@ class HiveConfig {
     await Hive.initFlutter();
     await Hive.openBox('usuario');
     await Hive.openBox('busca');
+    await Hive.openBox('notificacao');
   }
 }

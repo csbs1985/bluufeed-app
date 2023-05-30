@@ -13,6 +13,8 @@ class UiCor {
   static const Color overlay = Color(0x90000000);
   static const Color subtitulo = Color(0xFF1d9bf0);
 
+  static const Color itemVirgem = Color(0x101d9bf0);
+
   static const Color borda = Color(0xFFF8F9F9);
   static const Color bordaEscura = Color(0xFF181A20);
 

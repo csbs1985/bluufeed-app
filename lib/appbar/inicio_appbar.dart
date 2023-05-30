@@ -25,6 +25,7 @@ class InicioAppbar extends StatefulWidget {
 }
 
 class _InicioAppbarState extends State<InicioAppbar> {
+  final NotificacaoClass _notificacaoClass = NotificacaoClass();
   final NotificacaoFirestore _notificacaoFirestore = NotificacaoFirestore();
 
   Stream<QuerySnapshot>? _collectionStream;
@@ -35,12 +36,19 @@ class _InicioAppbarState extends State<InicioAppbar> {
     _collectionStream = _notificacaoFirestore.notificacoes.snapshots();
   }
 
+  void _rotaNatificacaoPage() {
+    currentIsNotificacao.value = false;
+    context.pushNamed(RouteEnum.NOTIFICACAO.value,
+        params: {'idUsuario': currentUsuario.value.idUsuario});
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: _collectionStream,
       builder: (context, snapshot) {
-        if (snapshot.hasData) currentIsNotificacao.value = true;
+        if (snapshot.hasData)
+          _notificacaoClass.verificarNumeroNotificacao(snapshot.data!.size);
 
         return Container(
           height: UiTamanho.appbar,
@@ -72,12 +80,7 @@ class _InicioAppbarState extends State<InicioAppbar> {
                         duration: const Duration(milliseconds: 1 * 1000),
                         child: IconeButton(
                           icone: UiSvg.notificacao,
-                          callback: () => context.pushNamed(
-                            RouteEnum.NOTIFICACAO.value,
-                            params: {
-                              'idUsuario': currentUsuario.value.idUsuario
-                            },
-                          ),
+                          callback: () => _rotaNatificacaoPage(),
                         ),
                       );
                     },
