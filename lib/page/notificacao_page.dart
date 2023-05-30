@@ -7,6 +7,7 @@ import 'package:bluufeed_app/text/titulo_text.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/erro_resultado_widget.dart';
+import 'package:bluufeed_app/widget/notificacao_item_widget.dart';
 import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
@@ -74,11 +75,8 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
                   child: SlideAnimation(
                     verticalOffset: 50,
                     child: FadeInAnimation(
-                      child: Column(
-                        children: const [
-                          // NotificacaoItemWidget(notificacao: snapshot.data()),
-                        ],
-                      ),
+                      child:
+                          NotificacaoItemWidget(notificacao: snapshot.data()),
                     ),
                   ),
                 );
