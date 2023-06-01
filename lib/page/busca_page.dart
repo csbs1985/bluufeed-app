@@ -3,10 +3,11 @@ import 'package:bluufeed_app/appbar/busca_appbar.dart';
 import 'package:bluufeed_app/class/busca_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/algolia_config.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:bluufeed_app/hive/busca_hive.dart';
 import 'package:bluufeed_app/menu/busca_menu.dart';
-import 'package:bluufeed_app/widget/busca_lista_widget.dart';
+import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_lista_busca_widget.dart';
+import 'package:bluufeed_app/widget/pesquisar_widget.dart';
 import 'package:bluufeed_app/widget/usuario_lista_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class BuscarPage extends StatefulWidget {
 }
 
 class _BuscaPageState extends State<BuscarPage> {
+  final BuscaHive _buscaHive = BuscaHive();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final UsuarioClass _usuarioClass = UsuarioClass();
 
@@ -28,12 +30,14 @@ class _BuscaPageState extends State<BuscarPage> {
   List<AlgoliaObjectSnapshot> _snapshotUsuario = [];
 
   String _texto = "";
-  String _busca = BuscaEnum.HISTORIA.value;
+  final String _busca = BuscaEnum.HISTORIA.value;
+  List<dynamic> _hive = [];
 
   @override
   initState() {
     algoliaHistoria = AlgoliaConfig.algoliaHistoria;
     algoliaUsuario = AlgoliaConfig.algoliaUsuario;
+    _hive = _buscaHive.listaBusca();
     super.initState();
   }
 
@@ -76,25 +80,20 @@ class _BuscaPageState extends State<BuscarPage> {
 
   @override
   Widget build(BuildContext context) {
+    double _altura =
+        MediaQuery.of(context).size.height - (UiTamanho.appbar * 2);
+
     return Scaffold(
       key: scaffoldKey,
       appBar: BuscaAppbar(callback: (value) => keyUp(value)),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            if (_texto.isEmpty)
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                child: Text(
-                  BUSCA_VAZIA,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ),
-            if (_texto.isNotEmpty)
-              BuscaMenu(callback: (value) => setState(() => _busca = value)),
-            if (_texto.isEmpty) const BuscaListaWidget(),
+            if (_texto.isEmpty && _hive.isEmpty)
+              PesquisarWidget(altura: _altura),
+            // if (_texto.isEmpty && _hive.isNotEmpty)
+            //   BuscaMenu(callback: (value) => setState(() => _busca = value)),
+            // if (_texto.isEmpty) const BuscaListaWidget(),
             if (_busca == BuscaEnum.USUARIO.value)
               UsuarioListaWidget(
                   usuarios: _usuarioClass.algoliaToMap(_snapshotUsuario)),

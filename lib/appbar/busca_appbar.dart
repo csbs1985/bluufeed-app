@@ -1,5 +1,6 @@
 import 'package:bluufeed_app/input/padrao_input.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
+import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,6 @@ class BuscaAppbar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _HistoriaAppbarState extends State<BuscaAppbar> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _buscaController = TextEditingController();
 
   @override
@@ -43,7 +43,9 @@ class _HistoriaAppbarState extends State<BuscaAppbar> {
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: PadraoInput(callback: (value) => widget._callback(value)),
+          title: SizedBox(
+              height: UiTamanho.inputTamanho,
+              child: PadraoInput(callback: (value) => widget._callback(value))),
         );
       },
     );
