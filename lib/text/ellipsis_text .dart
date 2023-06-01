@@ -12,7 +12,7 @@ class EllipsisText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.sizeOf(context).width,
       padding: const EdgeInsets.symmetric(vertical: UiEspaco.large),
       child: Text(
         _texto,

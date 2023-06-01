@@ -7,7 +7,7 @@ import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/theme/ui_texto.dart';
-import 'package:button3d/button3d.dart';
+import 'package:bluufeed_app/button/3d_button.dart';
 import 'package:flutter/material.dart';
 
 class DeletarContaModal extends StatefulWidget {

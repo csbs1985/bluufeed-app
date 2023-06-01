@@ -1,9 +1,9 @@
+import 'package:bluufeed_app/button/3d_button.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/theme/ui_borda.dart';
 import 'package:bluufeed_app/theme/ui_cor.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_texto.dart';
-import 'package:button3d/button3d.dart';
 import 'package:flutter/material.dart';
 
 class SeguirButton extends StatefulWidget {

@@ -40,8 +40,7 @@ class _NotificacaoPageState extends State<NotificacaoPage> {
 
   @override
   Widget build(BuildContext context) {
-    double _altura =
-        MediaQuery.of(context).size.height - (UiTamanho.appbar * 4);
+    double _altura = MediaQuery.sizeOf(context).height - (UiTamanho.appbar * 4);
 
     return Scaffold(
       appBar: OpcoesAppbar(callback: () => _abrirModal(context)),

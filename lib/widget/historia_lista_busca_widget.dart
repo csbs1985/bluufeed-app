@@ -23,8 +23,7 @@ class _HistoriaListaBuscaWidgetState extends State<HistoriaListaBuscaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double _altura =
-        MediaQuery.of(context).size.height - (UiTamanho.appbar * 4);
+    double _altura = MediaQuery.sizeOf(context).height - (UiTamanho.appbar * 4);
 
     return widget._snapshot!.isEmpty
         ? SemResultadoWidget(altura: _altura)

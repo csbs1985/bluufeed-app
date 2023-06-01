@@ -28,7 +28,7 @@ class NotificacaoItemSkeleton extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Skeleton(
-                  width: MediaQuery.of(context).size.width - 48 - 16 - 16 - 16,
+                  width: MediaQuery.sizeOf(context).width - 48 - 16 - 16 - 16,
                   height: 24,
                   textColor: isDark ? UiCor.skeletonEscuro : UiCor.skeleton,
                   borderRadius: BorderRadius.circular(UiBorda.arredondada),

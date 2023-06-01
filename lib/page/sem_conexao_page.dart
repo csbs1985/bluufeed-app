@@ -18,10 +18,10 @@ class SemConexaoPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height / 12),
+                SizedBox(height: MediaQuery.sizeOf(context).height / 12),
                 Image(
                   image: const AssetImage(UiImagem.erroResultado),
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery.sizeOf(context).width * 0.5,
                 ),
                 const SizedBox(height: 24),
                 const TextoText(

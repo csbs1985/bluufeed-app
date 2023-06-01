@@ -22,7 +22,7 @@ class ErroResultadoWidget extends StatelessWidget {
         children: [
           Image(
             image: const AssetImage(UiImagem.erroResultado),
-            width: MediaQuery.of(context).size.width * 0.5,
+            width: MediaQuery.sizeOf(context).width * 0.5,
           ),
           const TextoText(
             texto: ERRO_RESULTADO,

@@ -9,7 +9,7 @@ import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/theme/ui_tema.dart';
 import 'package:bluufeed_app/theme/ui_texto.dart';
 import 'package:bluufeed_app/widget/toast_widget.dart';
-import 'package:button3d/button3d.dart';
+import 'package:bluufeed_app/button/3d_button.dart';
 import 'package:flutter/material.dart';
 
 class DeletarHistoriaModal extends StatefulWidget {

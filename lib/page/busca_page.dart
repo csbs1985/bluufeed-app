@@ -80,8 +80,7 @@ class _BuscaPageState extends State<BuscarPage> {
 
   @override
   Widget build(BuildContext context) {
-    double _altura =
-        MediaQuery.of(context).size.height - (UiTamanho.appbar * 2);
+    double _altura = MediaQuery.sizeOf(context).height - (UiTamanho.appbar * 2);
 
     return Scaffold(
       key: scaffoldKey,

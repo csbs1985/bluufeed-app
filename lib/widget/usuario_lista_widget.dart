@@ -18,8 +18,7 @@ class UsuarioListaWidget extends StatefulWidget {
 class _UsuarioListaWidgetState extends State<UsuarioListaWidget> {
   @override
   Widget build(BuildContext context) {
-    double _altura =
-        MediaQuery.of(context).size.height - (UiTamanho.appbar * 4);
+    double _altura = MediaQuery.sizeOf(context).height - (UiTamanho.appbar * 4);
 
     return widget._usuarios.isEmpty
         ? SemResultadoWidget(altura: _altura)

@@ -26,8 +26,7 @@ class _PerfilPageState extends State<PerfilPage> {
 
   @override
   Widget build(BuildContext context) {
-    double _altura =
-        MediaQuery.of(context).size.height - (UiTamanho.appbar * 4);
+    double _altura = MediaQuery.sizeOf(context).height - (UiTamanho.appbar * 4);
 
     return StreamBuilder<QuerySnapshot>(
       stream: _usuarioFirestore.snapshotsUsuario(widget._idUsuario),
