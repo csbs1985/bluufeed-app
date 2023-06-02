@@ -20,7 +20,7 @@ class HistoriaInteracaoWidget extends StatefulWidget {
 class _HistoriaInteracaoWidgetState extends State<HistoriaInteracaoWidget> {
   @override
   void initState() {
-    currentQtdHistoria.value = widget._historia['qtdHistoria'];
+    currentQtdHistoria.value = widget._historia['qtdComentario'];
     super.initState();
   }
 
