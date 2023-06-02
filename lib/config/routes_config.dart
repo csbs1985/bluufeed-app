@@ -27,7 +27,7 @@ final GoRouter routes = GoRouter(
   refreshListenable: _authConfig,
   redirect: (context, state) {
     final isAuthenticated = _authConfig.isAuthenticated;
-    final isLoginRoute = state.subloc == RouteEnum.ENTRAR.value;
+    final isLoginRoute = state.matchedLocation == RouteEnum.ENTRAR.value;
 
     if (!isAuthenticated) return isLoginRoute ? null : RouteEnum.ENTRAR.value;
     if (isLoginRoute) return RouteEnum.INICIO.value;
@@ -41,7 +41,7 @@ final GoRouter routes = GoRouter(
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: AtividadePage(idUsuario: state.params['idUsuario']!),
+        child: AtividadePage(idUsuario: state.pathParameters['idUsuario']!),
       ),
     ),
     GoRoute(
@@ -66,7 +66,7 @@ final GoRouter routes = GoRouter(
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: EditarPerfilPage(idUsuario: state.params['idUsuario']!),
+        child: EditarPerfilPage(idUsuario: state.pathParameters['idUsuario']!),
       ),
     ),
     GoRoute(
@@ -91,7 +91,7 @@ final GoRouter routes = GoRouter(
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: HistoriaPage(idHistoria: state.params['idHistoria']!),
+        child: HistoriaPage(idHistoria: state.pathParameters['idHistoria']!),
       ),
     ),
     GoRoute(
@@ -108,7 +108,7 @@ final GoRouter routes = GoRouter(
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: MenuPage(idUsuario: state.params['idUsuario']!),
+        child: MenuPage(idUsuario: state.pathParameters['idUsuario']!),
       ),
     ),
     GoRoute(
@@ -117,7 +117,7 @@ final GoRouter routes = GoRouter(
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: NotificacaoPage(idUsuario: state.params['idUsuario']!),
+        child: NotificacaoPage(idUsuario: state.pathParameters['idUsuario']!),
       ),
     ),
     GoRoute(
@@ -126,7 +126,7 @@ final GoRouter routes = GoRouter(
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: PerfilPage(idUsuario: state.params['idUsuario']!),
+        child: PerfilPage(idUsuario: state.pathParameters['idUsuario']!),
       ),
     ),
     GoRoute(
@@ -151,7 +151,7 @@ final GoRouter routes = GoRouter(
       pageBuilder: (context, state) => transicaoPaginas(
         context: context,
         state: state,
-        child: SeguindoPage(idUsuario: state.params['idUsuario']!),
+        child: SeguindoPage(idUsuario: state.pathParameters['idUsuario']!),
       ),
     ),
     GoRoute(

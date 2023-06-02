@@ -42,8 +42,8 @@ class _UsuarioModalState extends State<UsuarioModal> {
 
   editarPerfil(BuildContext context) {
     Navigator.of(context).pop();
-    context.pushNamed(RouteEnum.EDITAR_PERFIL.value,
-        params: {'idUsuario': widget._usuario['idUsuario']});
+    context.goNamed(RouteEnum.EDITAR_PERFIL.value,
+        pathParameters: {'idUsuario': widget._usuario['idUsuario']});
   }
 
   denunciarUsuario() {

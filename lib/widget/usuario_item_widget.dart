@@ -53,8 +53,8 @@ class _UsuarioItemWidgetState extends State<UsuarioItemWidget> {
       future: _definirUsuario(),
       builder: (BuildContext context, _) {
         return InkWell(
-          onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
-              params: {'idUsuario': _usuario!['idUsuario']}),
+          onTap: () => context.goNamed(RouteEnum.PERFIL.value,
+              pathParameters: {'idUsuario': _usuario!['idUsuario']}),
           child: Container(
             height: UiTamanho.appbar,
             padding: const EdgeInsets.fromLTRB(16, 0, 4, 0),

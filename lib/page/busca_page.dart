@@ -4,7 +4,6 @@ import 'package:bluufeed_app/class/busca_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/algolia_config.dart';
 import 'package:bluufeed_app/hive/busca_hive.dart';
-import 'package:bluufeed_app/menu/busca_menu.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
 import 'package:bluufeed_app/widget/historia_lista_busca_widget.dart';
 import 'package:bluufeed_app/widget/pesquisar_widget.dart';

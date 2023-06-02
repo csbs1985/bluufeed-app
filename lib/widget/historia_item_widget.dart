@@ -48,8 +48,8 @@ class _HistoriaItemWidgetState extends State<HistoriaItemWidget> {
         return InkWell(
           onTap: () => {
             currentHistoria.value = HistoriaModel.fromMap(_historiaMap),
-            context.pushNamed(RouteEnum.HISTORIA.value,
-                params: {'idHistoria': _historiaMap['idHistoria']})
+            context.goNamed(RouteEnum.HISTORIA.value,
+                pathParameters: {'idHistoria': _historiaMap['idHistoria']})
           },
           child: Column(
             children: [

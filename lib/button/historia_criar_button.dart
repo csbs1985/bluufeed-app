@@ -38,8 +38,8 @@ class HistoriaCriarButton extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
-                params: {'idUsuario': currentUsuario.value.idUsuario}),
+            onTap: () => context.goNamed(RouteEnum.PERFIL.value,
+                pathParameters: {'idUsuario': currentUsuario.value.idUsuario}),
             child: AvatarWidget(
               avatar: currentUsuario.value.avatarUsuario,
               size: 18,

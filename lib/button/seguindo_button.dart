@@ -57,8 +57,8 @@ class _SeguindoButtonState extends State<SeguindoButton> {
             bool isDark = tema == Brightness.dark;
 
             return InkWell(
-              onTap: () => context.pushNamed(RouteEnum.SEGUINDO.value,
-                  params: {'idUsuario': widget._idUsuario}),
+              onTap: () => context.goNamed(RouteEnum.SEGUINDO.value,
+                  pathParameters: {'idUsuario': widget._idUsuario}),
               child: Container(
                 padding: const EdgeInsets.all(16),
                 width: double.infinity,

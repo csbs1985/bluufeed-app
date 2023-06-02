@@ -38,8 +38,8 @@ class _InicioAppbarState extends State<InicioAppbar> {
 
   void _rotaNatificacaoPage() {
     currentIsNotificacao.value = false;
-    context.pushNamed(RouteEnum.NOTIFICACAO.value,
-        params: {'idUsuario': currentUsuario.value.idUsuario});
+    context.goNamed(RouteEnum.NOTIFICACAO.value,
+        pathParameters: {'idUsuario': currentUsuario.value.idUsuario});
   }
 
   @override
@@ -87,8 +87,10 @@ class _InicioAppbarState extends State<InicioAppbar> {
                   ),
                   IconeButton(
                     icone: UiSvg.mais,
-                    callback: () => context.pushNamed(RouteEnum.MENU.value,
-                        params: {'idUsuario': currentUsuario.value.idUsuario}),
+                    callback: () => context.goNamed(RouteEnum.MENU.value,
+                        pathParameters: {
+                          'idUsuario': currentUsuario.value.idUsuario
+                        }),
                   ),
                 ],
               )

@@ -40,8 +40,8 @@ class _AtividadeItemWidgetState extends State<AtividadeItemWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(RouteEnum.HISTORIA.value,
-          params: {'idHistoria': widget._atividade['idConteudo']}),
+      onTap: () => context.goNamed(RouteEnum.HISTORIA.value,
+          pathParameters: {'idHistoria': widget._atividade['idConteudo']}),
       child: Container(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
         child: Row(
@@ -49,8 +49,10 @@ class _AtividadeItemWidgetState extends State<AtividadeItemWidget> {
           children: [
             GestureDetector(
               child: AvatarWidget(avatar: widget._atividade['avatarUsuario']),
-              onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
-                  params: {'idUsuario': widget._atividade['idUsuario']}),
+              onTap: () => context.goNamed(RouteEnum.PERFIL.value,
+                  pathParameters: {
+                    'idUsuario': widget._atividade['idUsuario']
+                  }),
             ),
             const SizedBox(width: 8),
             Expanded(

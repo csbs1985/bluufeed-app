@@ -41,8 +41,8 @@ class _NotificacaoItemWidgetState extends State<NotificacaoItemWidget> {
     _notificacaoClass
         .pathVizualizarNotificacao(widget._notificacao['idNotificacao']);
 
-    context.pushNamed(RouteEnum.HISTORIA.value,
-        params: {'idHistoria': widget._notificacao['idConteudo']});
+    context.goNamed(RouteEnum.HISTORIA.value,
+        pathParameters: {'idHistoria': widget._notificacao['idConteudo']});
   }
 
   @override
@@ -66,8 +66,8 @@ class _NotificacaoItemWidgetState extends State<NotificacaoItemWidget> {
                         GestureDetector(
                           child: AvatarWidget(
                               avatar: _notificacaoMap['avatarRemetente']),
-                          onTap: () => context.pushNamed(RouteEnum.PERFIL.value,
-                              params: {
+                          onTap: () => context.goNamed(RouteEnum.PERFIL.value,
+                              pathParameters: {
                                 'idUsuario': _notificacaoMap['idUsuario']
                               }),
                         ),
