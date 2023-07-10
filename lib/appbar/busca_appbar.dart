@@ -44,8 +44,9 @@ class _HistoriaAppbarState extends State<BuscaAppbar> {
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: SizedBox(
-              height: UiTamanho.inputTamanho,
-              child: PadraoInput(callback: (value) => widget._callback(value))),
+            height: UiTamanho.inputTamanho,
+            child: PadraoInput(callback: (value) => widget._callback(value)),
+          ),
         );
       },
     );

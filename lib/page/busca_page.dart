@@ -1,10 +1,14 @@
 import 'package:algolia/algolia.dart';
-import 'package:bluufeed_app/appbar/busca_appbar.dart';
+import 'package:bluufeed_app/appbar/voltar_appbar.dart';
 import 'package:bluufeed_app/class/busca_class.dart';
 import 'package:bluufeed_app/class/usuario_class.dart';
 import 'package:bluufeed_app/config/algolia_config.dart';
+import 'package:bluufeed_app/config/constant_config.dart';
 import 'package:bluufeed_app/hive/busca_hive.dart';
+import 'package:bluufeed_app/input/padrao_input.dart';
+import 'package:bluufeed_app/menu/busca_menu.dart';
 import 'package:bluufeed_app/theme/ui_tamanho.dart';
+import 'package:bluufeed_app/widget/busca_lista_widget.dart';
 import 'package:bluufeed_app/widget/historia_lista_busca_widget.dart';
 import 'package:bluufeed_app/widget/pesquisar_widget.dart';
 import 'package:bluufeed_app/widget/usuario_lista_widget.dart';
@@ -29,7 +33,7 @@ class _BuscaPageState extends State<BuscarPage> {
   List<AlgoliaObjectSnapshot> _snapshotUsuario = [];
 
   String _texto = "";
-  final String _busca = BuscaEnum.HISTORIA.value;
+  String _busca = BuscaEnum.HISTORIA.value;
   List<dynamic> _hive = [];
 
   @override
@@ -79,26 +83,40 @@ class _BuscaPageState extends State<BuscarPage> {
 
   @override
   Widget build(BuildContext context) {
-    double _altura = MediaQuery.sizeOf(context).height - (UiTamanho.appbar * 2);
+    double _altura = MediaQuery.sizeOf(context).height - (UiTamanho.appbar * 4);
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: BuscaAppbar(callback: (value) => keyUp(value)),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (_texto.isEmpty && _hive.isEmpty)
-              PesquisarWidget(altura: _altura),
-            // if (_texto.isEmpty && _hive.isNotEmpty)
-            //   BuscaMenu(callback: (value) => setState(() => _busca = value)),
-            // if (_texto.isEmpty) const BuscaListaWidget(),
-            if (_busca == BuscaEnum.USUARIO.value)
-              UsuarioListaWidget(
-                  usuarios: _usuarioClass.algoliaToMap(_snapshotUsuario)),
-            if (_busca == BuscaEnum.HISTORIA.value)
-              HistoriaListaBuscaWidget(snapshot: _snapshotHistoria),
-          ],
-        ),
+      appBar: const VoltarAppbar(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+            child: PadraoInput(
+              callback: (value) => keyUp(value),
+              hintText: BUSCA_ESCREVER,
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  if (_texto.isEmpty && _hive.isEmpty)
+                    PesquisarWidget(altura: _altura),
+                  if (_texto.isEmpty && _hive.isNotEmpty)
+                    BuscaMenu(
+                        callback: (value) => setState(() => _busca = value)),
+                  if (_texto.isEmpty) const BuscaListaWidget(),
+                  if (_busca == BuscaEnum.USUARIO.value)
+                    UsuarioListaWidget(
+                        usuarios: _usuarioClass.algoliaToMap(_snapshotUsuario)),
+                  if (_busca == BuscaEnum.HISTORIA.value)
+                    HistoriaListaBuscaWidget(snapshot: _snapshotHistoria),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
