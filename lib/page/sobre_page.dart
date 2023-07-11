@@ -57,11 +57,11 @@ class _SobrePage extends State<SobrePage> {
                     '\n'
                     '${_packageInfo.buildNumber}'
                     '\n\n'
-                    'Bluufeed e os logotipos e logomarcas do Bluufeed são marcas registradas.'
+                    'Eight e os logotipos e logomarcas do Eight são marcas registradas.'
                     '\n\n'
                     'Todos os direitos registrados.'
                     '\n\n'
-                    'Bluufeed foi construído usando software de código aberto e licenciado.',
+                    'Eight foi construído usando software de código aberto e licenciado.',
               ),
             ],
           ),

@@ -31,8 +31,8 @@ class JustificativaModel {
     ),
     JustificativaModel(
       idJustificativa: '3',
-      titulo: 'Não vejo motivo para usar o bluufeed',
-      texto: 'Ainda não encontrei o motivo para utilizar o bluufeed.',
+      titulo: 'Não vejo motivo para usar o Eight',
+      texto: 'Ainda não encontrei o motivo para utilizar o Eight.',
     ),
     JustificativaModel(
       idJustificativa: '4',

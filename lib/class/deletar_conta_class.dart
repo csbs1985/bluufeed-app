@@ -16,7 +16,7 @@ final List<DeletarContaModel> listaDeletarConta = [
   DeletarContaModel(
     idDeletarConta: 0,
     titulo: CANCELAR,
-    texto: 'Cancelar e seguir com sua conta Bluufeed.',
+    texto: 'Cancelar e seguir com sua conta Eight.',
   ),
   DeletarContaModel(
     idDeletarConta: 1,
@@ -26,8 +26,7 @@ final List<DeletarContaModel> listaDeletarConta = [
   DeletarContaModel(
     idDeletarConta: 2,
     titulo: JUSTIFICAR,
-    texto:
-        'Antes me diga o motivo do porque esta deletando sua conta Bluufeed.',
+    texto: 'Antes me diga o motivo do porque esta deletando sua conta Eight.',
   ),
   DeletarContaModel(
     idDeletarConta: 3,

@@ -9,7 +9,7 @@ const String ASSUNTO_SELECIONE =
     "Selecione ao menos uma assunto para a história.";
 
 const String ATIVIDADE = "Atividades";
-const String ATIVIDADE_DESCICAO = "Acompanhe todas suas atividade no Bluufeed";
+const String ATIVIDADE_DESCICAO = "Acompanhe todas suas atividade no Eight";
 
 const String AUTOR = "Autor";
 
@@ -43,10 +43,9 @@ const String CANCELAR = "Cancelar";
 const String CONTA = "Conta";
 
 const String DELETAR = "Deletar conta";
-const String DELETAR_DESCRICAO =
-    "Estou saindo do Bluufeed e não pretendo voltar";
+const String DELETAR_DESCRICAO = "Estou saindo do Eight e não pretendo voltar";
 const String DELETAR_JUSTIFICAR =
-    'Tem certeza que deseja excluir sua conta Bluufeed definitivamente? \n'
+    'Tem certeza que deseja excluir sua conta Eight definitivamente? \n'
     'Você não poderá mais ler, editar e visualizar suas hitórias e comentar em publicações.'
     '\n\nEscolha uma das opções a baixo.';
 
@@ -117,7 +116,7 @@ const String INFORMACOES = "Informações";
 
 const String JUSTIFICAR = 'Justificar e deletar';
 const String JUSTIFICAR_DESCRICAO =
-    'Antes me diga o motivo do porque esta deletando sua conta Bluufeed.'
+    'Antes me diga o motivo do porque esta deletando sua conta Eight.'
     '\n\nEscolha uma das opções a baixo.';
 
 const String MENU = "Menu";
@@ -143,35 +142,35 @@ const String POLITICA_DESCRICAO =
 const String POLITICA_PRIVACIDADE = 'Política de Privacidade'
     '\n\n'
     'Atualizado em 13 de maio de 2023\n\n'
-    'O Bluufeed utiliza segurança de ponta e criptografia ponta a ponta para'
+    'O Eight utiliza segurança de ponta e criptografia ponta a ponta para'
     'fornecer conteúdo privado e seus serviços para usuários em todo o mundo'
     '("Serviços"). Suas mensagens são sempre criptografadas, de modo que nunca'
     'podem ser compartilhadas ou visualizadas por ninguém, exceto você e os'
     'destinatários pretendidos \n\n'
     'Informações que você fornece\n\n'
     'Informação da conta\n\n'
-    'Você registra seu email, nome e apelido ao criar uma conta do Bluufeed. Os'
+    'Você registra seu email, nome e apelido ao criar uma conta do Eight. Os'
     'dados usados ​para fornecer nossos Serviços a você e a outros usuários do'
-    'Bluufeed. Opcionalmente, você pode alterar essas informações à sua conta.'
+    'Eight. Opcionalmente, você pode alterar essas informações à sua conta.'
     'Essas informações são criptografadas de ponta a ponta.'
     '\n\nConteúdo\n\n'
-    'O Bluufeed não pode descriptografar ou acessar de outra forma o conteúdo de'
-    'suas mensagens ou chamadas. O Bluufeed enfileira mensagens criptografadas de'
+    'O Eight não pode descriptografar ou acessar de outra forma o conteúdo de'
+    'suas mensagens ou chamadas. O Eight enfileira mensagens criptografadas de'
     'ponta a ponta em seus servidores para entrega a dispositivos que estão'
     'temporariamente offline (por exemplo, um telefone cuja bateria acabou). Seu'
     'histórico de mensagens é armazenado em seus próprios dispositivos.\n\n'
     'Informações técnicas adicionais são armazenadas em nossos servidores,'
     'incluindo tokens de autenticação gerados aleatoriamente, chaves, tokens push'
     'e outros materiais necessários para estabelecer chamadas e transmitir'
-    'contepudo. O Bluufeed limita essas informações técnicas adicionais ao mínimo'
+    'contepudo. O Eight limita essas informações técnicas adicionais ao mínimo'
     'necessário para operar os Serviços.\n\n'
     'Suporte ao usuário \n\nSe você entrar em contato com o Suporte ao'
-    'Usuário do Bluufeed, quaisquer dados pessoais que você compartilhar conosco'
+    'Usuário do Eight, quaisquer dados pessoais que você compartilhar conosco'
     'serão mantidos apenas para fins de pesquisa do problema e contato com você'
     'sobre o seu caso. \n\n'
     'Gerenciando suas informações\n\n'
     'Você pode gerenciar suas informações pessoais nas configurações do'
-    'aplicativo Bluufeed. Por exemplo, você pode atualizar as informações do seu'
+    'aplicativo Eight. Por exemplo, você pode atualizar as informações do seu'
     'perfil ou optar por habilitar recursos adicionais de privacidade, como uma'
     'senha. \n\n'
     'Informações que podemos compartilhar\n\n'
@@ -184,13 +183,13 @@ const String POLITICA_PRIVACIDADE = 'Política de Privacidade'
     'Spotify, Giphy, etc. em conexão com nossos Serviços, seus Termos e Políticas'
     'de Privacidade regem o uso desses serviços \n\n'
     'Outras instâncias em'
-    'que o Bluufeed pode precisar compartilhar seus dados \n- Para atender a'
+    'que o Eight pode precisar compartilhar seus dados \n- Para atender a'
     'qualquer lei aplicável, regulamento, processo legal ou solicitação'
     'governamental aplicável. \n- Para fazer cumprir os Termos aplicáveis,'
     'incluindo investigação de possíveis violações. \n- Para detectar,'
     'prevenir ou solucionar problemas técnicos, de segurança ou de fraude.'
     '\n- Para proteger contra danos aos direitos, propriedade ou segurança do'
-    'Bluufeed, de nossos usuários ou do público, conforme exigido ou permitido por'
+    'Eight, de nossos usuários ou do público, conforme exigido ou permitido por'
     'lei. \n\n'
     'Atualizações\n\n'
     'Atualizaremos esta política de privacidade conforme necessário para que seja'
@@ -202,7 +201,7 @@ const String PUBLICACOES = "Publicações";
 const String SAIR = "Sair";
 const String SAIR_CONTA = "Sair da sua conta?";
 const String SAIR_DESCRICAO =
-    "Estou temporariamente saindo do Bluufeed, mas tenho planos de voltar em breve";
+    "Estou temporariamente saindo do Eight, mas tenho planos de voltar em breve";
 
 const String SEGUIR = "Seguir";
 
@@ -237,7 +236,7 @@ const String SEM_RESULTADO =
     "Sua pesquisa não encontrou nenhum resultado correspondente.";
 
 const String SOBRE = "Sobre o Blufeed";
-const String SOBRE_DESCRICAO = "Onde fornecemos informações sobre a Bluufeed";
+const String SOBRE_DESCRICAO = "Onde fornecemos informações sobre a Eight";
 
 const String TERMO = "Termo de uso";
 const String TERMO_DESCRICAO =
@@ -245,12 +244,12 @@ const String TERMO_DESCRICAO =
 
 const String TERMO_USO = 'Termo de uso\n\n'
     'Atualizado em 13 de maio de 2023\n\n'
-    'O Bluufeed foi projetado para nunca coletar ou armazenar informações'
-    'confidenciais. Todo o conteúdo no Bluufeed não pode ser acessado por nós ou'
+    'O Eight foi projetado para nunca coletar ou armazenar informações'
+    'confidenciais. Todo o conteúdo no Eight não pode ser acessado por nós ou'
     'terceiros porque são sempre criptografadas de ponta a ponta, privadas e'
     'seguras. Nossos Termos de uso e serviço estão disponíveis abaixo.'
     '\n\nTermos de serviço \n\n'
-    'O Bluufeed utiliza segurança de'
+    'O Eight utiliza segurança de'
     'ponta e criptografia ponta a ponta para fornecer serviços para usuários em'
     'todo o mundo. Você concorda com nossos Termos de Serviço ao instalar ou usar'
     'nossos aplicativos ou serviços. \n\n'
@@ -266,7 +265,7 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'terceirizados) com códigos de verificação para se registrar em nossos'
     'Serviços. \n\n'
     'Privacidade dos dados do usuário \n\n'
-    'O Bluufeed'
+    'O Eight'
     'nunca vende, aluga ou monetiza seus dados pessoais ou conteúdo de nenhuma'
     'forma. \n\n'
     'Leia nossa Política de Privacidade para entender como'
@@ -284,7 +283,7 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'Você é responsável por taxas e impostos de'
     'operadora de dados e celular associados aos dispositivos nos quais você usa'
     'nossos Serviços. \n\n'
-    'Usando o Bluufeed \n\n'
+    'Usando o Eight \n\n'
     'Nossos Termos e'
     'Políticas \n\n'
     'Você deve usar nossos Serviços de acordo com nossos Termos e políticas'
@@ -294,15 +293,15 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'Você concorda em usar nossos Serviços apenas para fins'
     'legais, autorizados e aceitáveis. Você não usará (ou ajudará outros a usar)'
     'nossos Serviços de maneiras que: \n(a) violem ou infrinjam os direitos'
-    'do Bluufeed, de nossos usuários ou de outros, incluindo privacidade,'
+    'do Eight, de nossos usuários ou de outros, incluindo privacidade,'
     'publicidade, propriedade intelectual ou outros direitos de propriedade;'
     '\n(b) envolvem o envio de comunicações ilegais ou inadmissíveis, como'
     'mensagens em massa, mensagens automáticas e discagem automática.'
     '\n\n'
-    'Danos ao Bluufeed\n\n'
+    'Danos ao Eight\n\n'
     'Você não deve (ou ajudar outros a) acessar, usar, modificar, distribuir,'
     'transferir ou explorar nossos Serviços de maneiras não autorizadas ou de'
-    'maneiras que prejudiquem o Bluufeed, nossos Serviços ou sistemas. Por'
+    'maneiras que prejudiquem o Eight, nossos Serviços ou sistemas. Por'
     'exemplo, você não deve: \n(a) obter ou tentar obter acesso não'
     'autorizado aos nossos Serviços ou sistemas; \n(b) interromper a'
     'integridade ou o desempenho dos nossos Serviços; \n(c) criar contas para'
@@ -310,9 +309,9 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'coletar informações sobre nossos usuários de qualquer maneira não'
     'autorizada; ou \n(e) vender, alugar ou cobrar por nossos Serviços.\n\n'
     'Mantendo sua conta segura \n\n'
-    'O Bluufeed adota a privacidade desde o'
+    'O Eight adota a privacidade desde o'
     'design e não tem a capacidade de acessar seu conteúdo. Você é responsável'
-    'por manter seu dispositivo e sua conta Bluufeed seguros e protegidos. Se você'
+    'por manter seu dispositivo e sua conta Eight seguros e protegidos. Se você'
     'perder seu telefone, siga as etapas de recuperação de conta para'
     'registrar-se novamente em nossos Serviços. Quando você se registra em um'
     'novo dispositivo, o dispositivo antigo irá parar de receber todas as'
@@ -330,8 +329,8 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'uso desses serviços. Seus direitos e licença Seus direitos Você é o'
     'proprietário das informações que envia por meio de nossos Serviços. Você'
     'deve ter direitos sobre o as informações que informará para se inscrever em'
-    'sua conta do Bluufeed. \n\n'
-    'Direitos do Bluufeed\n\n'
+    'sua conta do Eight. \n\n'
+    'Direitos do Eight\n\n'
     'Somos proprietários de todos os direitos autorais, marcas registradas,'
     'domínios, logotipos, imagem comercial, segredos comerciais, patentes e'
     'outros direitos de propriedade intelectual associados aos nossos Serviços.'
@@ -340,8 +339,8 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'intelectual, a menos que tenha nossa permissão por escrito. Para denunciar'
     'direitos autorais, marcas registradas ou outra violação de propriedade'
     'intelectual, entre em contato com csbs.conta@outlook.com.'
-    '\n\nLicença do Bluufeed para você\n\n'
-    'O Bluufeed concede a você uma licença limitada, revogável, não exclusiva e'
+    '\n\nLicença do Eight para você\n\n'
+    'O Eight concede a você uma licença limitada, revogável, não exclusiva e'
     'intransferível para usar nossos Serviços de acordo com estes Termos.\n\n'
     'Renúncias e limitações\n\n'
     'Isenções de responsabilidade\n\n'
@@ -349,7 +348,7 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'ISENÇÕES. FORNECEMOS NOSSOS SERVIÇOS "COMO ESTÃO" SEM NENHUMA GARANTIA'
     'EXPRESSA OU IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO A, GARANTIAS DE'
     'COMERCIALIZAÇÃO, ADEQUAÇÃO A UM DETERMINADO FIM, TÍTULO, NÃO VIOLAÇÃO E'
-    'LIBERDADE DE VÍRUS DE COMPUTADOR . O Bluufeed NÃO GARANTE QUE QUALQUER'
+    'LIBERDADE DE VÍRUS DE COMPUTADOR . O Eight NÃO GARANTE QUE QUALQUER'
     'INFORMAÇÃO FORNECIDA POR NÓS É PRECISA, COMPLETA OU ÚTIL, QUE NOSSOS'
     'SERVIÇOS SERÃO OPERACIONAIS, LIVRES DE ERROS, SEGUROS OU SEGUROS, OU QUE'
     'NOSSOS SERVIÇOS FUNCIONARÃO SEM INTERRUPÇÕES, ATRASOS OU IMPERFEIÇÕES. NÃO'
@@ -358,10 +357,10 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'INFORMAÇÕES (INCLUINDO CONTEÚDO) DE NOSSOS USUÁRIOS OU DE OUTROS TERCEIROS.'
     'VOCÊ LIBERA-NOS, AFILIADOS, DIRETORES, DIRETORES, FUNCIONÁRIOS.'
     '\n\nLimitação de responsabilidade\n\n'
-    'AS PARTES DO Bluufeed NÃO SERÃO RESPONSÁVEIS POR QUAISQUER LUCROS PERDIDOS OU'
+    'AS PARTES DO Eight NÃO SERÃO RESPONSÁVEIS POR QUAISQUER LUCROS PERDIDOS OU'
     'CONSEQUENTES, ESPECIAIS, PUNITIVOS, DIRETOS OU INCIDENTAIS RELACIONADOS A,'
     'DECORRENTES DE, OU DE QUALQUER FORMA EM CONEXÃO COM NOSSOS TERMOS, OU NOSSOS'
-    'SERVIÇOS, MESMO SE AS PARTES DO Bluufeed SÃO AVISADAS DA POSSIBILIDADE DE'
+    'SERVIÇOS, MESMO SE AS PARTES DO Eight SÃO AVISADAS DA POSSIBILIDADE DE'
     'TAIS DANOS. NOSSA RESPONSABILIDADE AGREGADA RELACIONADA A, DECORRENTE DE, OU'
     'DE QUALQUER FORMA EM CONEXÃO COM NOSSOS TERMOS, NÓS OU NOSSOS SERVIÇOS NÃO'
     'EXCEDERÁ CEMTAVOS DE DÓLARES AMERICANO OU QUALQUER MOEDA FISICA OU DIGITAL.'
@@ -377,13 +376,13 @@ const String TERMO_USO = 'Termo de uso\n\n'
     'ou todos os nossos Serviços, incluindo determinados recursos e o suporte'
     'para determinados dispositivos e plataformas, a qualquer momento.'
     '\n\nEm geral\n\n'
-    'O Bluufeed pode atualizar os Termos de tempos em tempos. Quando atualizarmos'
+    'O Eight pode atualizar os Termos de tempos em tempos. Quando atualizarmos'
     'nossos Termos, atualizaremos a data da “Última Modificação” associada aos'
     'Termos atualizados. O uso continuado de nossos Serviços confirma sua'
     'aceitação de nossos Termos atualizados e substitui quaisquer Termos'
     'anteriores. Você cumprirá todas as leis de controle de exportação e sanções'
     'comerciais aplicáveis. Nossos Termos cobrem todo o acordo entre você e o'
-    'Bluufeed em relação aos nossos Serviços. Se você não concorda com nossos'
+    'Eight em relação aos nossos Serviços. Se você não concorda com nossos'
     'Termos, você deve parar de utilizar nossos Serviços. \n\n'
     'Se deixarmos de aplicar qualquer um de nossos Termos, isso não significa que'
     'renunciamos ao direito de aplicá-los. Se qualquer cláusula dos Termos for'

@@ -21,13 +21,13 @@ final List<PerguntasModel> listaPerguntas = [
     idPergunta: '1',
     pergunta: 'Por que não podemos curtir o conteúdo?',
     resposta:
-        'R: Quando pensamos em criar o bluufeed uns dos pontos foi de fugir das características de uma rede social comum onde os usuários buscam aceitação e contam o número de curtidPerguntaas. Queremos que seja um lugar onde qualquer um possa contar seus segredos e que seja seguro e discreto.',
+        'R: Quando pensamos em criar o Eight uns dos pontos foi de fugir das características de uma rede social comum onde os usuários buscam aceitação e contam o número de curtidPerguntaas. Queremos que seja um lugar onde qualquer um possa contar seus segredos e que seja seguro e discreto.',
   ),
   PerguntasModel(
     idPergunta: '2',
     pergunta: 'Por que tem a opção de escrever histórias e comentário anônimo?',
     resposta:
-        'R: Porque queremos que o bluufeed seja um lugar onde qualquer um possa contar suas histórias e experiências sem o julgamento público, onde possa se idPerguntaentificar com outras pessoas e compartilhar suas dores, experiências, superações e contar como passou por tudo. E quem sabe ajudar ao proximo.',
+        'R: Porque queremos que o Eight seja um lugar onde qualquer um possa contar suas histórias e experiências sem o julgamento público, onde possa se idPerguntaentificar com outras pessoas e compartilhar suas dores, experiências, superações e contar como passou por tudo. E quem sabe ajudar ao proximo.',
   ),
   PerguntasModel(
     idPergunta: '3',
@@ -39,6 +39,6 @@ final List<PerguntasModel> listaPerguntas = [
     idPergunta: '4',
     pergunta: 'Um usuário não esta cumprindo as regras, o que devo fazer?',
     resposta:
-        'R: Você pode denuncia-ló ou bloquea-ló. Na terceira denuncia o usuário será bloqueado e terá sua conta deletado do bluufeed. Bloqueando, vocês não poderão mais ver o conteúdo um do outro.',
+        'R: Você pode denuncia-ló ou bloquea-ló. Na terceira denuncia o usuário será bloqueado e terá sua conta deletado do Eight. Bloqueando, vocês não poderão mais ver o conteúdo um do outro.',
   ),
 ];
