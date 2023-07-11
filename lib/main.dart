@@ -56,10 +56,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return WillPopScope(
       onWillPop: () => exit(0),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerDelegate: routes.routerDelegate,
         routeInformationParser: routes.routeInformationParser,
         routeInformationProvider: routes.routeInformationProvider,
-        debugShowCheckedModeBanner: false,
         theme: UiTema.tema,
         darkTheme: UiTema.temaEscuro,
       ),

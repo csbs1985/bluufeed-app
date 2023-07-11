@@ -81,7 +81,7 @@ const String ERRO_RESULTADO =
     "Nos deparamos com um erro, \n tente novamente mais tarde.";
 
 const String ENTRAR_GOOGLE =
-    "\n Cadastre-se ou entre com sua conta Google nativa no dispositivo, selecionando o botão a baixo";
+    "\n Faça o seu cadastro ou faça login usando a sua conta Google no dispositivo, selecionando o botão abaixo.";
 
 const String ENVIAR = "Enviar";
 const String ENVIAR_HISTORIA = "Enviar história";

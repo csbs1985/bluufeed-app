@@ -58,7 +58,10 @@ class _InicioAppbarState extends State<InicioAppbar> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               GestureDetector(
-                child: SvgPicture.asset(UiSvg.identidade),
+                child: SvgPicture.asset(
+                  UiSvg.logo,
+                  height: 24,
+                ),
                 onTap: () => widget._callback(),
               ),
               Row(

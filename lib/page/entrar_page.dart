@@ -26,7 +26,11 @@ class _EntrarPageState extends State<EntrarPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(child: SvgPicture.asset(UiSvg.logo)),
+            Expanded(
+                child: SvgPicture.asset(
+              UiSvg.logo,
+              width: MediaQuery.sizeOf(context).width / 2,
+            )),
             Center(
               child: Text(
                 ENTRAR_BEM_VINDO,
