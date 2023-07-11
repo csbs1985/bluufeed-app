@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/text/resumo_text.dart';
-import 'package:bluufeed_app/text/subtitulo_text.dart';
+import 'package:eight_app/text/resumo_text.dart';
+import 'package:eight_app/text/subtitulo_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

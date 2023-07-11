@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/firestore/notificacao_firestore.dart';
-import 'package:bluufeed_app/hive/notificacao_hive.dart';
+import 'package:eight_app/firestore/notificacao_firestore.dart';
+import 'package:eight_app/hive/notificacao_hive.dart';
 import 'package:flutter/material.dart';
 
 class NotificacaoModel {

@@ -1,13 +1,13 @@
-import 'package:bluufeed_app/class/categoria_class.dart';
-import 'package:bluufeed_app/class/historia_class.dart';
-import 'package:bluufeed_app/class/rotas_class.dart';
-import 'package:bluufeed_app/firestore/usuario_firestore.dart';
-import 'package:bluufeed_app/text/ellipsis_text%20.dart';
-import 'package:bluufeed_app/widget/historia_info_widget.dart';
-import 'package:bluufeed_app/text/tag_text.dart';
-import 'package:bluufeed_app/text/titulo_text.dart';
-import 'package:bluufeed_app/theme/ui_espaco.dart';
-import 'package:bluufeed_app/widget/separador_widget.dart';
+import 'package:eight_app/class/categoria_class.dart';
+import 'package:eight_app/class/historia_class.dart';
+import 'package:eight_app/class/rotas_class.dart';
+import 'package:eight_app/firestore/usuario_firestore.dart';
+import 'package:eight_app/text/ellipsis_text%20.dart';
+import 'package:eight_app/widget/historia_info_widget.dart';
+import 'package:eight_app/text/tag_text.dart';
+import 'package:eight_app/text/titulo_text.dart';
+import 'package:eight_app/theme/ui_espaco.dart';
+import 'package:eight_app/widget/separador_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

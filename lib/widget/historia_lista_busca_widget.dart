@@ -1,8 +1,8 @@
 import 'package:algolia/algolia.dart';
-import 'package:bluufeed_app/class/busca_class.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/widget/historia_item_widget.dart';
-import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
+import 'package:eight_app/class/busca_class.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/widget/historia_item_widget.dart';
+import 'package:eight_app/widget/sem_resultado_widget.dart';
 import 'package:flutter/material.dart';
 
 class HistoriaListaBuscaWidget extends StatefulWidget {

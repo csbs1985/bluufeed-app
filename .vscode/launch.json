@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "bluufeed_app",
+      "name": "eight_app",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "bluufeed_app (profile mode)",
+      "name": "eight_app (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "bluufeed_app (release mode)",
+      "name": "eight_app (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"

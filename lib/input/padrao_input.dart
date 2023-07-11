@@ -1,9 +1,9 @@
-import 'package:bluufeed_app/theme/ui_texto.dart';
+import 'package:eight_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_espaco.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
+import 'package:eight_app/theme/ui_borda.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_espaco.dart';
+import 'package:eight_app/theme/ui_tema.dart';
 
 class PadraoInput extends StatelessWidget {
   final bool? autoFocus;

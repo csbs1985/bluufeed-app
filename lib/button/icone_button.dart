@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/text/legenda_text.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
+import 'package:eight_app/text/legenda_text.dart';
+import 'package:eight_app/theme/ui_borda.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

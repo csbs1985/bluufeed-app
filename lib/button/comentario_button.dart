@@ -1,9 +1,9 @@
-import 'package:bluufeed_app/modal/comentario_modal.dart';
-import 'package:bluufeed_app/text/animado_text.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_svg.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
+import 'package:eight_app/modal/comentario_modal.dart';
+import 'package:eight_app/text/animado_text.dart';
+import 'package:eight_app/theme/ui_borda.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_svg.dart';
+import 'package:eight_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

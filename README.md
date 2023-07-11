@@ -1,4 +1,4 @@
-# bluufeed_app
+# eight_app
 
 A new Flutter project.
 

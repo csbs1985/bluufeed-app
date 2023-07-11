@@ -1,6 +1,6 @@
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
-import 'package:bluufeed_app/widget/usuario_item_widget.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/widget/sem_resultado_widget.dart';
+import 'package:eight_app/widget/usuario_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class UsuarioListaWidget extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:bluufeed_app/config/hive_config.dart';
-import 'package:bluufeed_app/config/routes_config.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
+import 'package:eight_app/config/hive_config.dart';
+import 'package:eight_app/config/routes_config.dart';
+import 'package:eight_app/theme/ui_tema.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter/services.dart';
@@ -55,20 +55,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => exit(0),
-      child: ValueListenableBuilder(
-        valueListenable: currentTema,
-        builder: (BuildContext context, Brightness tema, _) {
-          bool isEscuro = tema == Brightness.dark;
-
-          return MaterialApp.router(
-            routerDelegate: routes.routerDelegate,
-            routeInformationParser: routes.routeInformationParser,
-            routeInformationProvider: routes.routeInformationProvider,
-            title: "Bluufeed",
-            debugShowCheckedModeBanner: false,
-            theme: isEscuro ? UiTema.temaEscuro : UiTema.tema,
-          );
-        },
+      child: MaterialApp.router(
+        routerDelegate: routes.routerDelegate,
+        routeInformationParser: routes.routeInformationParser,
+        routeInformationProvider: routes.routeInformationProvider,
+        debugShowCheckedModeBanner: false,
+        theme: UiTema.tema,
+        darkTheme: UiTema.temaEscuro,
       ),
     );
   }

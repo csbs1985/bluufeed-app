@@ -1,17 +1,17 @@
 import 'package:algolia/algolia.dart';
-import 'package:bluufeed_app/appbar/voltar_appbar.dart';
-import 'package:bluufeed_app/class/busca_class.dart';
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/algolia_config.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/hive/busca_hive.dart';
-import 'package:bluufeed_app/input/padrao_input.dart';
-import 'package:bluufeed_app/menu/busca_menu.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/widget/busca_lista_widget.dart';
-import 'package:bluufeed_app/widget/historia_lista_busca_widget.dart';
-import 'package:bluufeed_app/widget/pesquisar_widget.dart';
-import 'package:bluufeed_app/widget/usuario_lista_widget.dart';
+import 'package:eight_app/appbar/voltar_appbar.dart';
+import 'package:eight_app/class/busca_class.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/config/algolia_config.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/hive/busca_hive.dart';
+import 'package:eight_app/input/padrao_input.dart';
+import 'package:eight_app/menu/busca_menu.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/widget/busca_lista_widget.dart';
+import 'package:eight_app/widget/historia_lista_busca_widget.dart';
+import 'package:eight_app/widget/pesquisar_widget.dart';
+import 'package:eight_app/widget/usuario_lista_widget.dart';
 import 'package:flutter/material.dart';
 
 class BuscarPage extends StatefulWidget {

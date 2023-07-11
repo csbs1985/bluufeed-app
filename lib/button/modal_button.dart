@@ -1,7 +1,7 @@
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
+import 'package:eight_app/text/texto_text.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 
 class ModalButton extends StatefulWidget {

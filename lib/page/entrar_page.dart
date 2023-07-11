@@ -1,6 +1,6 @@
-import 'package:bluufeed_app/config/auth_config.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/theme/ui_svg.dart';
+import 'package:eight_app/config/auth_config.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/theme/ui_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

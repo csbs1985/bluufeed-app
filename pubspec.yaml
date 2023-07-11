@@ -1,4 +1,4 @@
-name: bluufeed_app
+name: eight_app
 description: A new Flutter project.
 publish_to: "none"
 version: 1.0.0+1
@@ -42,23 +42,12 @@ dev_dependencies:
 
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.1
-  flutter_native_splash: ^2.3.0
 
-flutter_icons: # flutter pub run flutter_launcher_icons:main
-  min_sdk_android: 21
-  android: "ic_launcher"
-  ios: true
-  remove_alpha_ios: true
-  color: "#FFFFFF"
-  image_path: "assets/app/ic_launcher.png"
-
-flutter_native_splash: # flutter pub run flutter_native_splash:create
-  color: "#FFFFFF"
-  color_dark: "#1F222A"
-  icon_background_color: "#FFFFFF"
-  image: "assets/app/ic_splash.png"
+flutter_launcher_icons: # dart pub run flutter_launcher_icons
   android: true
   ios: true
+  remove_alpha_ios: true
+  image_path: assets/app/ic_launcher.png
 
 flutter:
   uses-material-design: true

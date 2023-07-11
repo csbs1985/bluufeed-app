@@ -1,13 +1,13 @@
-import 'package:bluufeed_app/config/auth_config.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/text/subtitulo_reumo_text.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
-import 'package:bluufeed_app/theme/ui_texto.dart';
-import 'package:bluufeed_app/button/3d_button.dart';
+import 'package:eight_app/config/auth_config.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/text/subtitulo_reumo_text.dart';
+import 'package:eight_app/text/texto_text.dart';
+import 'package:eight_app/theme/ui_borda.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/theme/ui_tema.dart';
+import 'package:eight_app/theme/ui_texto.dart';
+import 'package:eight_app/button/3d_button.dart';
 import 'package:flutter/material.dart';
 
 class SairModal extends StatefulWidget {

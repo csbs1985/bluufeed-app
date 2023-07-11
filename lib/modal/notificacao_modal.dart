@@ -1,10 +1,10 @@
-import 'package:bluufeed_app/button/toggle_button.dart';
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/text/titulo_text.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
+import 'package:eight_app/button/toggle_button.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/text/titulo_text.dart';
+import 'package:eight_app/theme/ui_borda.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 
 class NotificacaoModal extends StatefulWidget {

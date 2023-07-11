@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/text/texto_text.dart';
 import 'package:flutter/material.dart';
 
 class InicarPesquisaWidget extends StatelessWidget {

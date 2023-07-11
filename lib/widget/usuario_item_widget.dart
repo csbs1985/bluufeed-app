@@ -1,14 +1,14 @@
-import 'package:bluufeed_app/button/icone_button.dart';
-import 'package:bluufeed_app/button/seguir_button.dart';
-import 'package:bluufeed_app/class/rotas_class.dart';
-import 'package:bluufeed_app/firestore/usuario_firestore.dart';
-import 'package:bluufeed_app/modal/usuario_modal.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_svg.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
-import 'package:bluufeed_app/widget/avatar_widget.dart';
+import 'package:eight_app/button/icone_button.dart';
+import 'package:eight_app/button/seguir_button.dart';
+import 'package:eight_app/class/rotas_class.dart';
+import 'package:eight_app/firestore/usuario_firestore.dart';
+import 'package:eight_app/modal/usuario_modal.dart';
+import 'package:eight_app/text/texto_text.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_svg.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/theme/ui_tema.dart';
+import 'package:eight_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

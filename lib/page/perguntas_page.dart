@@ -1,8 +1,8 @@
-import 'package:bluufeed_app/appbar/voltar_appbar.dart';
-import 'package:bluufeed_app/button/menu_button.dart';
-import 'package:bluufeed_app/text/titulo_text.dart';
+import 'package:eight_app/appbar/voltar_appbar.dart';
+import 'package:eight_app/button/menu_button.dart';
+import 'package:eight_app/text/titulo_text.dart';
 import 'package:flutter/material.dart';
-import 'package:bluufeed_app/class/perguntas_class.dart';
+import 'package:eight_app/class/perguntas_class.dart';
 
 class PerguntasPage extends StatelessWidget {
   const PerguntasPage({Key? key}) : super(key: key);

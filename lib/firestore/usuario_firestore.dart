@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/class/usuario_class.dart';
+import 'package:eight_app/class/usuario_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UsuarioFirestore {

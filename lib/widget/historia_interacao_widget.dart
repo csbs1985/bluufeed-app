@@ -1,7 +1,7 @@
-import 'package:bluufeed_app/button/comentario_button.dart';
-import 'package:bluufeed_app/button/enviar_button.dart';
-import 'package:bluufeed_app/button/favorito_button.dart';
-import 'package:bluufeed_app/class/historia_class.dart';
+import 'package:eight_app/button/comentario_button.dart';
+import 'package:eight_app/button/enviar_button.dart';
+import 'package:eight_app/button/favorito_button.dart';
+import 'package:eight_app/class/historia_class.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 
 class HistoriaInteracaoWidget extends StatefulWidget {

@@ -1,12 +1,12 @@
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/firestore/usuario_firestore.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_espaco.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
-import 'package:bluufeed_app/widget/comentario_info_widget.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/firestore/usuario_firestore.dart';
+import 'package:eight_app/text/texto_text.dart';
+import 'package:eight_app/theme/ui_borda.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_espaco.dart';
+import 'package:eight_app/theme/ui_tema.dart';
+import 'package:eight_app/widget/comentario_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 

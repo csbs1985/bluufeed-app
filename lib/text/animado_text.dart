@@ -1,7 +1,7 @@
 import 'package:animated_flip_counter/animated_flip_counter.dart';
-import 'package:bluufeed_app/class/comentario_class.dart';
-import 'package:bluufeed_app/class/historia_class.dart';
-import 'package:bluufeed_app/text/legenda_text.dart';
+import 'package:eight_app/class/comentario_class.dart';
+import 'package:eight_app/class/historia_class.dart';
+import 'package:eight_app/text/legenda_text.dart';
 import 'package:flutter/material.dart';
 
 class AnimadoText extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/firestore/token_firestore.dart';
+import 'package:eight_app/firestore/token_firestore.dart';
 
 final TokenFirestore _tokenFirestore = TokenFirestore();
 

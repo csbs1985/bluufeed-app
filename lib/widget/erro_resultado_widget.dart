@@ -1,6 +1,6 @@
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/theme/ui_imagem.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/text/texto_text.dart';
+import 'package:eight_app/theme/ui_imagem.dart';
 import 'package:flutter/material.dart';
 
 class ErroResultadoWidget extends StatelessWidget {

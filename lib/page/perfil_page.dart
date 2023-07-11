@@ -1,9 +1,9 @@
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/firestore/usuario_firestore.dart';
-import 'package:bluufeed_app/skeleton/perfil_skeleton.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/widget/perfil_item_widget.dart';
-import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/firestore/usuario_firestore.dart';
+import 'package:eight_app/skeleton/perfil_skeleton.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/widget/perfil_item_widget.dart';
+import 'package:eight_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

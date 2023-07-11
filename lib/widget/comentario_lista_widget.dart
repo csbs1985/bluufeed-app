@@ -1,9 +1,9 @@
-import 'package:bluufeed_app/firestore/comentario_firestore.dart';
-import 'package:bluufeed_app/skeleton/comentario_skeleton.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/widget/comentario_item_widget.dart';
-import 'package:bluufeed_app/widget/erro_resultado_widget.dart';
-import 'package:bluufeed_app/widget/sem_resultado_widget.dart';
+import 'package:eight_app/firestore/comentario_firestore.dart';
+import 'package:eight_app/skeleton/comentario_skeleton.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/widget/comentario_item_widget.dart';
+import 'package:eight_app/widget/erro_resultado_widget.dart';
+import 'package:eight_app/widget/sem_resultado_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';

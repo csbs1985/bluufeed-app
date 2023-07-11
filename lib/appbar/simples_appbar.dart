@@ -1,7 +1,7 @@
-import 'package:bluufeed_app/button/icone_button.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_svg.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
+import 'package:eight_app/button/icone_button.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_svg.dart';
+import 'package:eight_app/theme/ui_tema.dart';
 import 'package:flutter/material.dart';
 
 class SimplesAppbar extends StatefulWidget implements PreferredSizeWidget {

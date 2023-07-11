@@ -1,8 +1,8 @@
-import 'package:bluufeed_app/text/subtitulo_reumo_text.dart';
-import 'package:bluufeed_app/theme/ui_borda.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
-import 'package:bluufeed_app/widget/toggle_widget.dart';
+import 'package:eight_app/text/subtitulo_reumo_text.dart';
+import 'package:eight_app/theme/ui_borda.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_tema.dart';
+import 'package:eight_app/widget/toggle_widget.dart';
 import 'package:flutter/material.dart';
 
 class ToggleButton extends StatefulWidget {

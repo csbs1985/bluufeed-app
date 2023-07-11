@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/theme/ui_cor.dart';
-import 'package:bluufeed_app/theme/ui_texto.dart';
+import 'package:eight_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

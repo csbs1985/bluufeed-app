@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/appbar/voltar_appbar.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:eight_app/appbar/voltar_appbar.dart';
+import 'package:eight_app/config/constant_config.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_text/styled_text.dart';
 

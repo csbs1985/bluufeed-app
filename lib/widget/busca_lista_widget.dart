@@ -1,8 +1,8 @@
-import 'package:bluufeed_app/button/icone_button.dart';
-import 'package:bluufeed_app/hive/busca_hive.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/theme/ui_svg.dart';
-import 'package:bluufeed_app/widget/separador_widget.dart';
+import 'package:eight_app/button/icone_button.dart';
+import 'package:eight_app/hive/busca_hive.dart';
+import 'package:eight_app/text/texto_text.dart';
+import 'package:eight_app/theme/ui_svg.dart';
+import 'package:eight_app/widget/separador_widget.dart';
 import 'package:flutter/material.dart';
 
 class BuscaListaWidget extends StatefulWidget {

@@ -1,6 +1,6 @@
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/firestore/atividade_firestore.dart';
-import 'package:bluufeed_app/firestore/usuario_firestore.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/firestore/atividade_firestore.dart';
+import 'package:eight_app/firestore/usuario_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 

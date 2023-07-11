@@ -1,11 +1,11 @@
-import 'package:bluufeed_app/class/categoria_class.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/text/subtitulo_reumo_text.dart';
-import 'package:bluufeed_app/theme/ui_botao.dart';
-import 'package:bluufeed_app/theme/ui_espaco.dart';
-import 'package:bluufeed_app/theme/ui_tamanho.dart';
-import 'package:bluufeed_app/theme/ui_tema.dart';
-import 'package:bluufeed_app/theme/ui_texto.dart';
+import 'package:eight_app/class/categoria_class.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/text/subtitulo_reumo_text.dart';
+import 'package:eight_app/theme/ui_botao.dart';
+import 'package:eight_app/theme/ui_espaco.dart';
+import 'package:eight_app/theme/ui_tamanho.dart';
+import 'package:eight_app/theme/ui_tema.dart';
+import 'package:eight_app/theme/ui_texto.dart';
 import 'package:flutter/material.dart';
 
 class SelecionatCategoriaWidget extends StatefulWidget {

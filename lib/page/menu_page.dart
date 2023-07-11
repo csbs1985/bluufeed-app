@@ -1,11 +1,11 @@
-import 'package:bluufeed_app/appbar/voltar_appbar.dart';
-import 'package:bluufeed_app/button/menu_button.dart';
-import 'package:bluufeed_app/class/rotas_class.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/modal/sair_modal.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/text/titulo_text.dart';
-import 'package:bluufeed_app/theme/ui_cor.dart';
+import 'package:eight_app/appbar/voltar_appbar.dart';
+import 'package:eight_app/button/menu_button.dart';
+import 'package:eight_app/class/rotas_class.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/modal/sair_modal.dart';
+import 'package:eight_app/text/texto_text.dart';
+import 'package:eight_app/text/titulo_text.dart';
+import 'package:eight_app/theme/ui_cor.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

@@ -1,9 +1,9 @@
-import 'package:bluufeed_app/class/atividade_class.dart';
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/firestore/comentario_firestore.dart';
-import 'package:bluufeed_app/firestore/historia_firestore.dart';
-import 'package:bluufeed_app/widget/toast_widget.dart';
+import 'package:eight_app/class/atividade_class.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/firestore/comentario_firestore.dart';
+import 'package:eight_app/firestore/historia_firestore.dart';
+import 'package:eight_app/widget/toast_widget.dart';
 import 'package:flutter/material.dart';
 
 class ComentarioModel {

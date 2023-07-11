@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/config/constant_config.dart';
+import 'package:eight_app/config/constant_config.dart';
 
 class DeletarContaModel {
   final int idDeletarConta;

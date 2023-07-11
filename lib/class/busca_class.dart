@@ -1,5 +1,5 @@
 import 'package:algolia/algolia.dart';
-import 'package:bluufeed_app/hive/busca_hive.dart';
+import 'package:eight_app/hive/busca_hive.dart';
 
 class BuscaModel {
   final String texto;

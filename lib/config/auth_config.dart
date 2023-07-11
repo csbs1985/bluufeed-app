@@ -1,10 +1,10 @@
-import 'package:bluufeed_app/class/comentario_class.dart';
-import 'package:bluufeed_app/class/historia_class.dart';
-import 'package:bluufeed_app/class/justificativa_class.dart';
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/hive/usuario_hive.dart';
-import 'package:bluufeed_app/widget/toast_widget.dart';
+import 'package:eight_app/class/comentario_class.dart';
+import 'package:eight_app/class/historia_class.dart';
+import 'package:eight_app/class/justificativa_class.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/hive/usuario_hive.dart';
+import 'package:eight_app/widget/toast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';

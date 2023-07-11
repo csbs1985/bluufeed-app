@@ -1,7 +1,7 @@
-import 'package:bluufeed_app/appbar/voltar_appbar.dart';
-import 'package:bluufeed_app/text/texto_text.dart';
-import 'package:bluufeed_app/text/titulo_text.dart';
-import 'package:bluufeed_app/theme/ui_svg.dart';
+import 'package:eight_app/appbar/voltar_appbar.dart';
+import 'package:eight_app/text/texto_text.dart';
+import 'package:eight_app/text/titulo_text.dart';
+import 'package:eight_app/theme/ui_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:package_info_plus/package_info_plus.dart';

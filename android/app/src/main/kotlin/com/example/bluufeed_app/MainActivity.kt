@@ -1,4 +1,4 @@
-package com.example.bluufeed_app
+package com.example.eight_app
 
 import io.flutter.embedding.android.FlutterActivity
 

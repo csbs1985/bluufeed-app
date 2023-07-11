@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/class/texto_class.dart';
-import 'package:bluufeed_app/theme/ui_espaco.dart';
+import 'package:eight_app/class/texto_class.dart';
+import 'package:eight_app/theme/ui_espaco.dart';
 import 'package:flutter/material.dart';
 
 class TituloText extends StatelessWidget {

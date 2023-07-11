@@ -1,8 +1,8 @@
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/text/data_text.dart';
-import 'package:bluufeed_app/text/legenda_text.dart';
-import 'package:bluufeed_app/widget/avatar_widget.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/text/data_text.dart';
+import 'package:eight_app/text/legenda_text.dart';
+import 'package:eight_app/widget/avatar_widget.dart';
 import 'package:flutter/material.dart';
 
 class ComentarioInfoWidget extends StatefulWidget {

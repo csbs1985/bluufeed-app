@@ -1,10 +1,10 @@
 import 'package:algolia/algolia.dart';
-import 'package:bluufeed_app/class/atividade_class.dart';
-import 'package:bluufeed_app/class/token_class.dart';
-import 'package:bluufeed_app/config/constant_config.dart';
-import 'package:bluufeed_app/firestore/usuario_firestore.dart';
-import 'package:bluufeed_app/hive/usuario_hive.dart';
-import 'package:bluufeed_app/widget/toast_widget.dart';
+import 'package:eight_app/class/atividade_class.dart';
+import 'package:eight_app/class/token_class.dart';
+import 'package:eight_app/config/constant_config.dart';
+import 'package:eight_app/firestore/usuario_firestore.dart';
+import 'package:eight_app/hive/usuario_hive.dart';
+import 'package:eight_app/widget/toast_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

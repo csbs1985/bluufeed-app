@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/firestore/justificar_firestore.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/firestore/justificar_firestore.dart';
 import 'package:uuid/uuid.dart';
 
 class JustificativaModel {

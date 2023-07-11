@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bluufeed_app/class/categoria_class.dart';
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/firestore/historia_firestore.dart';
+import 'package:eight_app/class/categoria_class.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/firestore/historia_firestore.dart';
 
 ValueNotifier<int> currentQtdHistoria = ValueNotifier<int>(0);
 

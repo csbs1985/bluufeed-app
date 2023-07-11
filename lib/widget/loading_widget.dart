@@ -1,4 +1,4 @@
-import 'package:bluufeed_app/theme/ui_cor.dart';
+import 'package:eight_app/theme/ui_cor.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 

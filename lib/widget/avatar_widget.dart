@@ -1,5 +1,5 @@
-import 'package:bluufeed_app/class/usuario_class.dart';
-import 'package:bluufeed_app/theme/ui_imagem.dart';
+import 'package:eight_app/class/usuario_class.dart';
+import 'package:eight_app/theme/ui_imagem.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
